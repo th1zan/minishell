@@ -1,3 +1,9 @@
+# Add manually
+*minishell
+*.DS_Store
+
+# GITIGNORE FILE
+
 # Prerequisites
 *.d
 
