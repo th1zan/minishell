@@ -13,27 +13,27 @@ my_project/
 |── src/
 │   |── main.c
 │   |── minishell.h                             #"main" header file
-	|
-	|── header                                  #header folder
-	|	|- minishel_function_header_1           #header file
-	|	|- minishel_function_header_2           #header file
-	|	|- ...
-	|
-	|── minishel_function_folder_1
-	|	|── other_source_files.c
-	|	|- ...
-	|
-	|── minishel_function_folder_2
-	|	|── other_source_files.c
-	|	|- ...
-	|
-	|──libft/libft_source_files
-	|	|- printf                               #folder
-	|	|- getnextline                          #folder
-	|	|- other libft_fct                      #folders
-	|	|- ...
-	|	|- Makefile                             #for libft
-	|	|- libft.h
+│	|
+│	|── header                                  #header folder
+│	|	|- minishel_function_header_1           #header file
+│	|	|- minishel_function_header_2           #header file
+│	|	|- ...
+│	|
+│	|── minishel_function_folder_1
+│	|	|── other_source_files.c
+│	|	|- ...
+│	|
+│	|── minishel_function_folder_2
+│	|	|── other_source_files.c
+│	|	|- ...
+│	|
+│	|──libft/libft_source_files
+│	|	|- printf                               #folder
+│	|	|- getnextline                          #folder
+│	|	|- other libft_fct                      #folders
+│	|	|- ...
+│	|	|- Makefile                             #for libft
+│	|	|- libft.h
 |
 |
 |── obj/
