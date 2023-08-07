@@ -16,11 +16,11 @@ my_project/
 |-- .gitignore
 |
 |── src/
-│   |── minishell.c                             #file with the main
-│   |── minishell.h                             #"main" header file
+│   |── minishell.c								#file with the main
+│   |── minishell.h								#"main" header file
 │	|
-│	|── header                                  #header folder
-│	|	|- my_header_for_my_function.h          #header file
+│	|── header									#header folder
+│	|	|- my_header_for_my_function.h			#header file
 │	|	|- ...
 │	|
 │	|── my_function_folder
@@ -32,16 +32,16 @@ my_project/
 │	|	|- ...
 │	|
 │	|──libft/libft_source_files
-│	|	|- printf                               #folder
-│	|	|- getnextline                          #folder
-│	|	|- other libft_fct                      #folders
+│	|	|- printf								#folder
+│	|	|- getnextline							#folder
+│	|	|- other libft_fct						#folders
 │	|	|- ...
-│	|	|- Makefile                             #makefile for libft
+│	|	|- Makefile								#makefile for libft
 │	|	|- libft.h
 │	|	|- libft.a
 |
 |
-|-- ressources                                  #folder "dropbox"
+|-- ressources									#folder "dropbox"
 	|-- eval
 	|-- documentation
 	|-- ...
