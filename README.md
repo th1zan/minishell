@@ -3,9 +3,9 @@
 - fichier excel de suivi: https://kdrive.infomaniak.com/app/office/511209/156120
 
 # Ajout d'une fonctionnalité
-1) Créer un nouveau répertoire `ma_fonction`sous `/src` et créer les fichiers `ma_fonction.c` nécessaires
-2) Inscrire le nom et le chemin des nouveaux fichiers `ma_fonction.c` dans le Makefile
-3) Créer un header `header_de_ma_fonction.h`dans `/header` et y inscrire les prototypes des fonctions
+1) Créer un nouveau **répertoire** `ma_fonction`sous `/src` et créer les **fichiers** `ma_fonction.c` nécessaires.
+2) Inscrire le nom **avec le chemin** des nouveaux fichiers `ma_fonction.c` dans le Makefile
+3) Créer un nouveau header `header_de_ma_fonction.h`dans `/header` et y inscrire les prototypes des fonctions
 4) Ajouter le nom du header  `header_de_ma_fonction.h` dans le header principal `minishell.h`
 # Structure du dossier
 
