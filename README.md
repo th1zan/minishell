@@ -1,7 +1,12 @@
 # Liens
 
 - fichier excel de suivi: https://kdrive.infomaniak.com/app/office/511209/156120
-- 
+
+# Ajout d'une fonctionnalité
+1) Créer un nouveau répertoire `ma_fonction`sous `/src` et créer les fichiers `ma_fonction.c` nécessaires
+2) Inscrire le nom et le chemin des nouveaux fichiers `ma_fonction.c` dans le Makefile
+3) Créer un header `header_de_ma_fonction.h`dans `/header` et y inscrire les prototypes des fonctions
+4) Ajouter le nom du header  `header_de_ma_fonction.h` dans le header principal `minishell.h`
 # Structure du dossier
 
 ```
@@ -11,19 +16,18 @@ my_project/
 |-- .gitignore
 |
 |── src/
-│   |── main.c
+│   |── minishell.c                             #file with the main
 │   |── minishell.h                             #"main" header file
 │	|
 │	|── header                                  #header folder
-│	|	|- minishel_function_header_1           #header file
-│	|	|- minishel_function_header_2           #header file
+│	|	|- my_header_for_my_function.h          #header file
 │	|	|- ...
 │	|
-│	|── minishel_function_folder_1
-│	|	|── other_source_files.c
+│	|── my_function_folder
+│	|	|── my_function.c
 │	|	|- ...
 │	|
-│	|── minishel_function_folder_2
+│	|── other_function_folder_2
 │	|	|── other_source_files.c
 │	|	|- ...
 │	|
@@ -32,14 +36,12 @@ my_project/
 │	|	|- getnextline                          #folder
 │	|	|- other libft_fct                      #folders
 │	|	|- ...
-│	|	|- Makefile                             #for libft
+│	|	|- Makefile                             #makefile for libft
 │	|	|- libft.h
+│	|	|- libft.a
 |
 |
-|── obj/
-│   |── all_object_files.c
-|
-|-- ressources                                  #folder 
+|-- ressources                                  #folder "dropbox"
 	|-- eval
 	|-- documentation
 	|-- ...
