@@ -6,7 +6,7 @@
 #    By: thibault <thibault@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/20 17:58:32 by ebennace          #+#    #+#              #
-#    Updated: 2023/08/07 11:45:36 by thibault         ###   ########.fr        #
+#    Updated: 2023/08/08 12:50:59 by thibault         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,7 +44,9 @@ CC              ?= gcc
 FLAGS           = -g3
 FLAGS           += -Wall -Werror -Wextra
 FLAGS           += $(SANITIZE)
-READLINE		= -lreadline
+FLAGS           += -I$(HOME)/.brew/opt/readline/include
+#READLINE		= -lreadline
+READLINE        += -L$(HOME)/.brew/opt/readline/lib
 MAKE            = make -s
 
 # === Convert all .c to .o with flags and header === # 
