@@ -6,7 +6,7 @@
 #    By: thibault <thibault@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/20 17:58:32 by ebennace          #+#    #+#              #
-#    Updated: 2023/08/08 12:50:59 by thibault         ###   ########.fr        #
+#    Updated: 2023/08/08 20:10:46 by thibault         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,13 @@ LIBFT		= $(LIBFT_DIR)/libft.a
 
 # ==== Project's files ==== #
 SRCS       = 		src/minishell.c \
-					src/my_function_folder/my_function.c
+					src/my_function_folder/my_function.c \
+					src/check_fct/check_ctrl_op.c \
+					src/check_fct/check_group_op.c \
+					src/check_fct/check_redir_op.c \
+					src/check_fct/check_quotes.c \
+					src/check_fct/check_op.c \
+					src/check_fct/check_div_op.c \
 #					src/folder_name/file_name.c
 #					...
 
@@ -45,8 +51,7 @@ FLAGS           = -g3
 FLAGS           += -Wall -Werror -Wextra
 FLAGS           += $(SANITIZE)
 FLAGS           += -I$(HOME)/.brew/opt/readline/include
-#READLINE		= -lreadline
-READLINE        += -L$(HOME)/.brew/opt/readline/lib
+READLINE		= -lreadline
 MAKE            = make -s
 
 # === Convert all .c to .o with flags and header === # 
