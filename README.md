@@ -1,6 +1,7 @@
 # Liens
 
 - fichier excel de suivi: https://kdrive.infomaniak.com/app/office/511209/156120
+- lien sur pipex, repo perso: https://github.com/th1zan/pipex/
 
 # Ajout d'une fonctionnalité
 1) Créer un nouveau **répertoire** `ma_fonction`sous `/src` et créer les **fichiers** `ma_fonction.c` nécessaires.
