@@ -31,9 +31,14 @@ int	is_double_quote(char *line, int i);
 int	is_ctrl_op(char *line, int i);
 int	is_redir_op(char *line, int i);
 int	is_group_op(char *line, int i);
+int is_onechar_delim(char *line, int i);
+int	is_twochar_delim(char *line, int i);
 
 /*check_div_op.c*/
 int	is_hashtag(char *line, int i);
 int	is_dollar(char *line, int i);
 int	is_inter_mark(char *line, int i);
+int	is_here_doc(char *line, int i);
+int	iswhitespace(int c);
+
 #endif

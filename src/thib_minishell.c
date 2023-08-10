@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.c                                        :+:      :+:    :+:   */
+/*   thib_minishell.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: thibault <thibault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/06 15:14:08 by thibault          #+#    #+#             */
-/*   Updated: 2023/08/08 20:17:43 by thibault         ###   ########.fr       */
+/*   Updated: 2023/08/09 16:45:07 by thibault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,10 @@ int	main(void)
 		input = readline("minishell> ");
 		if (check_input(input))
 			break;
-		printf("Vous avez entré : %s\n", input);
-		if (is_double_amp(input, 0))
-			printf("Vous avez entré un charactère de type opérateur de controle \n");
+		input_to_word(input);
+		// printf("Vous avez entré : %s\n", input);
+		// if (is_redir_in(input, 0))
+		// 	printf("is < \n");
 		free(input);
 	}
 

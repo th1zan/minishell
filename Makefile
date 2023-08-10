@@ -6,7 +6,7 @@
 #    By: thibault <thibault@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/20 17:58:32 by ebennace          #+#    #+#              #
-#    Updated: 2023/08/08 20:10:46 by thibault         ###   ########.fr        #
+#    Updated: 2023/08/10 10:37:02 by thibault         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ LIBFT_DIR   = ./src/libft/
 LIBFT		= $(LIBFT_DIR)/libft.a
 
 # ==== Project's files ==== #
-SRCS       = 		src/minishell.c \
+SRCS       = 		src/thib_minishell.c \
 					src/my_function_folder/my_function.c \
 					src/check_fct/check_ctrl_op.c \
 					src/check_fct/check_group_op.c \
@@ -26,6 +26,10 @@ SRCS       = 		src/minishell.c \
 					src/check_fct/check_quotes.c \
 					src/check_fct/check_op.c \
 					src/check_fct/check_div_op.c \
+					src/parsing/input_to_word.c \
+					src/utils/handle_tab.c \
+					src/utils/handle_list.c \
+					src/utils/handle_list_add.c \
 #					src/folder_name/file_name.c
 #					...
 

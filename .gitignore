@@ -1,6 +1,7 @@
 # Add manually
 *minishell
 *.DS_Store
+.vscode/
 
 # GITIGNORE FILE
 

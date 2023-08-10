@@ -1,0 +1,64 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   handle_list_add.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: thibault <thibault@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/08/10 09:23:09 by thibault          #+#    #+#             */
+/*   Updated: 2023/08/10 11:01:44 by thibault         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../minishell.h"
+
+t_tk	*ft_lstnew(char *token_str)
+{
+	t_tk	*new_tk;
+
+	new_tk = (t_tk *)malloc(sizeof(t_tk));
+	if (!new_tk)
+		return (NULL);
+	// new_tk->str = str; // Note: This assumes the string is dynamically allocated or won't go out of scope.
+	new_tk->prev = NULL;
+	new_tk->next = NULL;
+	new_tk->tk = token_str;
+	return (new_tk);
+}
+
+void	ft_lstadd_back(t_tk **head_tk_tk, t_tk *new_tk)
+{
+	t_tk	*tk_end;
+
+	tk_end = ft_lstlast(*head_tk_tk);
+	if (tk_end == 0)
+		*head_tk_tk = new_tk;
+	else
+	tk_end->next = new_tk;
+	new_tk->prev = tk_end;
+}
+
+void	ft_lstadd_front(t_tk **lst, t_tk *new)
+{
+	new->next = *lst;
+	*lst = new;
+}
+
+void	ft_lst_add_after(t_tk *current_tk, char *str)
+{
+	t_tk	*new_tk;
+
+	new_tk = ft_lstnew(str);
+	if (!new_tk)
+		return;
+
+	// Link the new token with the current and the next tokens.
+	new_tk->prev = current_tk;
+	new_tk->next = current_tk->next;
+
+	// Update the current and next tokens to point to the new token.
+	if (current_tk)
+		current_tk->next = new_tk;
+	if (new_tk->next)
+		new_tk->next->prev = new_tk;
+}
