@@ -39,6 +39,6 @@ int	is_hashtag(char *line, int i);
 int	is_dollar(char *line, int i);
 int	is_inter_mark(char *line, int i);
 int	is_here_doc(char *line, int i);
-int	iswhitespace(int c);
+int	is_whitespace(int c);
 
 #endif

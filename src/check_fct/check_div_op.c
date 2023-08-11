@@ -6,7 +6,7 @@
 /*   By: thibault <thibault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 19:29:22 by thibault          #+#    #+#             */
-/*   Updated: 2023/08/09 17:24:28 by thibault         ###   ########.fr       */
+/*   Updated: 2023/08/10 11:59:42 by thibault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int	is_here_doc(char *line, int i)
 	return (0);
 }
 
-int	iswhitespace(int c)
+int	is_whitespace(int c)
 {
 	if (c == '\t' || c == '\v' || c == '\n' || c == ' ' || c == '\r' || c == '\f')
 		return (1);

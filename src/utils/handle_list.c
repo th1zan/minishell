@@ -45,8 +45,10 @@ int	print_lst(t_tk *tk)
 	ft_putstr_fd("\n", 1);
 	while (tk != 0)
 	{
-		printf("%s\n",tk->tk);
-		printf("%p\n",tk->next);
+		printf("tk: %s ",tk->tk_str);
+		printf("\t||| tk add: %p ",tk);
+		printf("prev tk : %p ",tk->prev);
+		printf("next tk: %p\n",tk->next);
 		tk = tk->next;
 	}
 	return (0);
@@ -59,13 +61,32 @@ int	free_lst(t_tk *head_list)
 	while (head_list != NULL)
 	{
 		tmp = head_list->next;
-		// free attributs
-		free(head_list->tk);
-		free(head_list->type);
-		free(head_list->str_arg);
-		// free element
-		free(head_list);
+		free_elem(head_list);
 		head_list = tmp;
 	}
 	return (0);
 }
+
+int	free_elem(t_tk *token)
+{
+	// free attributs
+	if(token->tk_str)
+		free(token->tk_str);
+	if(token->type)
+		free(token->type);
+	if(token->tk_arg_str)
+		free(token->tk_arg_str);
+	// free element
+	free(token);
+	return (0);
+}
+
+// typedef struct s_tk
+// {
+// 	char		*tk;
+// 	char		*type;
+// 	char		*tk_arg_str;
+// 	struct s_tk	*tk_arg;
+// 	struct s_tk	*prev;
+// 	struct s_tk	*next;
+// }	t_tk;

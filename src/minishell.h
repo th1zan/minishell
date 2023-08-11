@@ -6,7 +6,7 @@
 /*   By: thibault <thibault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/06 16:13:42 by thibault          #+#    #+#             */
-/*   Updated: 2023/08/10 10:41:28 by thibault         ###   ########.fr       */
+/*   Updated: 2023/08/11 12:03:59 by thibault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,10 @@
 
 
 /*Minishell header files*/
+# include "./header/struct.h"
 # include "./libft/libft.h"
 # include "./header/check_fct.h"
 # include "./header/parsing.h"
-# include "./header/struct.h"
 # include "./header/utils.h"
 # include "./header/my_header_for_my_function.h"
 

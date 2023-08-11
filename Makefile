@@ -6,7 +6,7 @@
 #    By: thibault <thibault@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/20 17:58:32 by ebennace          #+#    #+#              #
-#    Updated: 2023/08/10 10:37:02 by thibault         ###   ########.fr        #
+#    Updated: 2023/08/11 11:48:12 by thibault         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,10 +26,12 @@ SRCS       = 		src/thib_minishell.c \
 					src/check_fct/check_quotes.c \
 					src/check_fct/check_op.c \
 					src/check_fct/check_div_op.c \
-					src/parsing/input_to_word.c \
+					src/parsing/input_to_token.c \
+					src/parsing/parse_token.c \
 					src/utils/handle_tab.c \
 					src/utils/handle_list.c \
 					src/utils/handle_list_add.c \
+					src/utils/handle_list_modif.c \
 #					src/folder_name/file_name.c
 #					...
 
