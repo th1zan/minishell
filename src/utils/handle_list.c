@@ -37,6 +37,7 @@ int	ft_lstsize(t_tk *tk)
 
 int	print_lst(t_tk *tk)
 {
+	printf("\n-----PRINT LST--------\n");
 	if (!tk)
 	{
 		ft_putstr_fd("tk vide\n", 1);
@@ -45,13 +46,14 @@ int	print_lst(t_tk *tk)
 	ft_putstr_fd("\n", 1);
 	while (tk != 0)
 	{
-		printf("tk: %s",tk->tk_str);
-		printf(" || tk add: %p ",tk);
-		printf("type tk : %d ",tk->type);
-		printf("prev tk : %p ",tk->prev);
-		printf("next tk: %p\n",tk->next);
+		printf("%-15s ||", tk->tk_str);
+		printf(" tk_addr: %-15p", tk);
+		printf("tk_type : %-5d", tk->type);
+		printf("prev_tk : %-15p", tk->prev);
+		printf("next_tk: %-15p\n", tk->next);
 		tk = tk->next;
 	}
+	printf("\n--------END PRINT------\n\n");
 	return (0);
 }
 
@@ -91,3 +93,6 @@ int	free_elem(t_tk *token)
 // 	struct s_tk	*prev;
 // 	struct s_tk	*next;
 // }	t_tk;
+
+// TEST Minishell
+// < "file entree.txt" wc -l ||         ls  -l << 'output de sortie'

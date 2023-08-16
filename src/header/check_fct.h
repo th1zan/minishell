@@ -42,4 +42,8 @@ int	is_inter_mark(char *line, int i);
 int	is_here_doc(char *line, int i);
 int	is_whitespace(int c);
 
+/*check_token.c*/
+int	is_name(char c);
+int	is_portable_filename_char(char c);
+
 #endif

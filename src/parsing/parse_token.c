@@ -6,7 +6,7 @@
 /*   By: thibault <thibault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/11 11:49:26 by thibault          #+#    #+#             */
-/*   Updated: 2023/08/16 09:58:31 by thibault         ###   ########.fr       */
+/*   Updated: 2023/08/16 15:54:22 by thibault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,41 +81,6 @@ int	del_whitespace(char **str)
 	printf("str: %s\n", *str);
 	return (0);
 }
-
-// int	del_whitespace(char **str)
-// {
-// 	int		begin;
-// 	int		end;
-// 	int		len;
-// 	char	*temp;
-
-// 	if (!*str || **str == '\0') // Vérifie si la chaîne est NULL ou vide
-// 		return (0);
-
-// 	begin = 0;
-// 	while (is_whitespace((*str)[begin]))
-// 		begin++;
-
-// 	end = ft_strlen(*str) - 1;
-// 	while (end >= 0 && is_whitespace((*str)[end])) // Ajoute une vérification pour s'assurer que end ne devient pas négatif
-// 		end--;
-
-// 	// Si la chaîne est entièrement composée d'espaces blancs
-// 	if (end < begin)
-// 	{
-// 		free(*str);
-// 		*str = ft_strdup(""); // Remplace la chaîne par une chaîne vide
-// 		return (0);
-// 	}
-
-// 	len = end - begin + 1;
-// 	temp = *str;
-// 	*str = ft_substr(temp, begin, len);
-// 	free(temp);
-
-// 	printf("str: %s\n", *str);
-// 	return (0);
-// }
 
 
 /*Redirection
