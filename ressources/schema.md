@@ -3,11 +3,11 @@
 
 https://pubs.opengroup.org/onlinepubs/009695399/utilities/xcu_chap02.html
 
-![General process](image.png)
+![General process](image-4.png)
 
-![Token recognition](image-1.png)
+![Token recognition](image-5.png)
 
-![Parse Token](image-2.png)
+![Parse Token](image-6.png)
 
 
 # Definitions (selection of)
