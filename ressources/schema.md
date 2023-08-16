@@ -5,11 +5,10 @@ https://pubs.opengroup.org/onlinepubs/009695399/utilities/xcu_chap02.html
 
 ![General process](image.png)
 
-
 ![Token recognition](image-1.png)
 
-
 ![Parse Token](image-2.png)
+
 
 # Definitions (selection of)
 Definitions:
