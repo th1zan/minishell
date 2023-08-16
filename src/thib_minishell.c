@@ -6,7 +6,7 @@
 /*   By: thibault <thibault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/06 15:14:08 by thibault          #+#    #+#             */
-/*   Updated: 2023/08/11 12:50:42 by thibault         ###   ########.fr       */
+/*   Updated: 2023/08/15 12:07:55 by thibault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@ int	main(int argc, char **argv, char **envp)
 		input = readline("minishell> ");
 		if (check_input(input))
 			break;
-		input_to_token(input, &tk_head);
+		// get_delimiter(input);
+		input_to_token(input, &tk_head, get_delimiter(input));
 		// print_lst(tk_head);
 		parse_token(&tk_head);
 		// printf("Vous avez entré : %s\n", input);

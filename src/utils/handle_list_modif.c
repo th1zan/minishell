@@ -33,6 +33,17 @@ void	ft_lst_modif_tk_str(t_tk *tk, int (*f)(char **str))
 		tk = tk->next;
 	}
 }
+
+void	ft_lst_modif_tk_type(t_tk *tk, int (*f)(char *str))
+{
+	if (!(tk) || !(f))
+		return ;
+	while (tk)
+	{
+		tk->type = (f)(tk->tk_str);
+		tk = tk->next;
+	}
+}
 /*
 void	ft_lstiter(t_list *lst, void (*f)(void *))
 {

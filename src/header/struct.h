@@ -6,7 +6,7 @@
 /*   By: thibault <thibault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/26 09:31:25 by thibault          #+#    #+#             */
-/*   Updated: 2023/08/11 11:43:31 by thibault         ###   ########.fr       */
+/*   Updated: 2023/08/15 15:00:31 by thibault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 typedef struct s_tk
 {
 	char		*tk_str;
-	char		*type;
+	int			type;
 	char		*tk_arg_str;
 	struct s_tk	*tk_arg;
 	struct s_tk	*prev;

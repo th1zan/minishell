@@ -6,7 +6,7 @@
 /*   By: thibault <thibault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 18:58:01 by thibault          #+#    #+#             */
-/*   Updated: 2023/08/09 15:56:26 by thibault         ###   ########.fr       */
+/*   Updated: 2023/08/15 13:43:31 by thibault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ Opérateurs de Redirection :
 
 int	is_redir_out(char *line, int i)
 {
-	if (line[i] == '<' && (line[i + 1] == '\0' || line[i + 1] != '<'))
+	if (line[i] == '>' && (line[i + 1] == '\0' || line[i + 1] != '>'))
 		return (1);
 	return (0);
 }

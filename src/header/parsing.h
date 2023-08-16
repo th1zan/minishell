@@ -2,11 +2,13 @@
 # define PARSING_H
 
 /*input_to_word.c*/
-int	input_to_token(char *input, t_tk **tk_head);
-int	count_words(char *input);
+int	*get_delimiter(char *input);
+int		input_to_token(char *input, t_tk **tk_head, int *delimiter);
+int		count_words(char *input);
 
 /*parse_token.c*/
-int	parse_token(t_tk **tk);
-int	del_whitespace(char **str);
+int		parse_token(t_tk **tk);
+int		del_whitespace(char **str);
+int		classify_operator(char *str);
 
 #endif

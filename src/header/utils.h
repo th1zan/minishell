@@ -23,5 +23,6 @@ t_tk	*ft_lst_remove(t_tk *current_tk);
 /*handle_list_modif.c*/
 void	ft_lst_modif_tk(t_tk *tk, void (*f)(void *));
 void	ft_lst_modif_tk_str(t_tk *tk, int (*f)(char **str));
+void	ft_lst_modif_tk_type(t_tk *tk, int (*f)(char *str));
 
 #endif

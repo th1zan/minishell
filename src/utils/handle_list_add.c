@@ -6,7 +6,7 @@
 /*   By: thibault <thibault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 09:23:09 by thibault          #+#    #+#             */
-/*   Updated: 2023/08/10 16:03:10 by thibault         ###   ########.fr       */
+/*   Updated: 2023/08/14 17:06:22 by thibault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ t_tk	*ft_lstnew(char *token_str)
 	// new_tk->str = str; // Note: This assumes the string is dynamically allocated or won't go out of scope.
 	// new_tk->prev = NULL;
 	// new_tk->next = NULL;
-	new_tk->tk = token_str;
+	new_tk->tk_str = token_str;
 	// new_tk->tk_arg = NULL;
 	// new_tk->tk_arg_str = NULL;
 	// new_tk->type = NULL;

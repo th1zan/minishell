@@ -45,8 +45,9 @@ int	print_lst(t_tk *tk)
 	ft_putstr_fd("\n", 1);
 	while (tk != 0)
 	{
-		printf("tk: %s ",tk->tk_str);
-		printf("\t||| tk add: %p ",tk);
+		printf("tk: %s",tk->tk_str);
+		printf(" || tk add: %p ",tk);
+		printf("type tk : %d ",tk->type);
 		printf("prev tk : %p ",tk->prev);
 		printf("next tk: %p\n",tk->next);
 		tk = tk->next;
@@ -72,8 +73,8 @@ int	free_elem(t_tk *token)
 	// free attributs
 	if(token->tk_str)
 		free(token->tk_str);
-	if(token->type)
-		free(token->type);
+	// if(token->type)
+	// 	free(token->type);
 	if(token->tk_arg_str)
 		free(token->tk_arg_str);
 	// free element

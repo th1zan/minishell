@@ -23,6 +23,7 @@ int	is_pipe(char *line, int i);
 
 /*check_quotes.c*/
 int	is_quote(char *line, int i);
+int	is_quoted_char(char *line, int i);
 int	is_simple_quote(char *line, int i);
 int	is_back_quote(char *line, int i);
 int	is_double_quote(char *line, int i);
