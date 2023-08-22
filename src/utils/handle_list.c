@@ -37,7 +37,9 @@ int	ft_lstsize(t_tk *tk)
 
 int	print_lst(t_tk *tk)
 {
-	printf("\n-----PRINT LST--------\n");
+	if(tk->prev == NULL)
+		printf("\n-----PRINT LST--------\n");
+	
 	if (!tk)
 	{
 		ft_putstr_fd("tk vide\n", 1);
@@ -51,9 +53,18 @@ int	print_lst(t_tk *tk)
 		printf("tk_type : %-5d", tk->type);
 		printf("prev_tk : %-15p", tk->prev);
 		printf("next_tk: %-15p\n", tk->next);
+		if (tk->tk_arg)
+		{
+			printf("\n%-5s ----->PRINT ARG--------\n", "");
+			print_lst(tk->tk_arg);
+		}
+		if (tk->next == NULL && (tk->type == TOKEN_FILE || tk->type == TOKEN_ARGUMENT))
+			printf("\n%-5s ----->END PRINT ARG------\n\n", "");
+		else if (tk->next == NULL)
+			printf("\n-----END PRINT LST--------\n\n");
 		tk = tk->next;
 	}
-	printf("\n--------END PRINT------\n\n");
+	
 	return (0);
 }
 

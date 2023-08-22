@@ -6,7 +6,7 @@
 /*   By: thibault <thibault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 09:23:09 by thibault          #+#    #+#             */
-/*   Updated: 2023/08/14 17:06:22 by thibault         ###   ########.fr       */
+/*   Updated: 2023/08/21 12:22:16 by thibault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ t_tk	*ft_lst_remove(t_tk *current_tk)
 	// If prev and next token exist
 	if (current_tk->prev && current_tk->next)
 	{
+		tmp = current_tk->next;
 		current_tk->prev->next = current_tk->next;
 		current_tk->next->prev = current_tk->prev;
 	}
