@@ -41,9 +41,11 @@ int	is_dollar(char *line, int i);
 int	is_inter_mark(char *line, int i);
 int	is_here_doc(char *line, int i);
 int	is_whitespace(int c);
+int	del_whitespace(char **str);
 
 /*check_token.c*/
 int	is_name(char c);
 int	is_portable_filename_char(char c);
+int	check_file_operator(int type);
 
 #endif

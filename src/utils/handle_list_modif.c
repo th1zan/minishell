@@ -66,3 +66,27 @@ void	ft_lst_classify_tk_file(t_tk *tk)
 		tk = tk->next;
 	}
 }
+
+int ft_delete_type_token(t_tk **tk, int tk_type)
+{
+	t_tk	*tmp;
+
+	if (!(*tk))
+		return (1);
+	tmp = *tk;
+	while (tmp)
+	{
+		if (tmp->type == tk_type)
+		{
+			// printf("remove token %p\n", tmp);
+			if (tmp->prev == NULL)
+				*tk = tmp->next;
+			tmp = ft_lst_remove(tmp);
+			// printf("token deleted !\n");
+		}
+		else
+			tmp = tmp->next;			
+	}
+
+		return (0);
+}

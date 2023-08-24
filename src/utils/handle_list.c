@@ -35,37 +35,46 @@ int	ft_lstsize(t_tk *tk)
 	return (n);
 }
 
-int	print_lst(t_tk *tk)
+int print_lst(t_tk *tk)
 {
-	if(tk->prev == NULL)
-		printf("\n-----PRINT LST--------\n");
 	
 	if (!tk)
 	{
 		ft_putstr_fd("tk vide\n", 1);
 		return (0);
 	}
-	ft_putstr_fd("\n", 1);
-	while (tk != 0)
+	if (tk->prev == NULL)
+	{
+		printf("\n-----PRINT LST--------\n");
+	}
+	// Print list
+	while (tk != NULL)
 	{
 		printf("%-15s ||", tk->tk_str);
 		printf(" tk_addr: %-15p", tk);
-		printf("tk_type : %-5d", tk->type);
-		printf("prev_tk : %-15p", tk->prev);
-		printf("next_tk: %-15p\n", tk->next);
+		printf(" tk_type: %-5d", tk->type);
+		printf(" prev_tk: %-15p", tk->prev);
+		printf(" next_tk: %-15p\n", tk->next);
+		// Print sublist
 		if (tk->tk_arg)
 		{
 			printf("\n%-5s ----->PRINT ARG--------\n", "");
 			print_lst(tk->tk_arg);
 		}
-		if (tk->next == NULL && (tk->type == TOKEN_FILE || tk->type == TOKEN_ARGUMENT))
-			printf("\n%-5s ----->END PRINT ARG------\n\n", "");
-		else if (tk->next == NULL)
-			printf("\n-----END PRINT LST--------\n\n");
+		if (tk->next == NULL)
+		{
+			if (tk->type == TOKEN_FILE || tk->type == TOKEN_ARGUMENT)
+			{
+				printf("\n%-5s ----->END PRINT ARG------\n\n", "");
+			}
+			else
+			{
+				printf("\n-----END PRINT LST--------\n\n");
+			}
+		}
 		tk = tk->next;
 	}
-	
-	return (0);
+	return (1);
 }
 
 int	free_lst(t_tk *head_list)

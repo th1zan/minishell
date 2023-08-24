@@ -25,4 +25,9 @@ t_tk	*ft_lst_remove(t_tk *current_tk);
 void	ft_lst_modif_tk_str(t_tk *tk, int (*f)(char **str));
 void	ft_lst_modif_tk_type(t_tk *tk, int (*f)(char *str));
 void	ft_lst_classify_tk_file(t_tk *tk);
+int 	ft_delete_type_token(t_tk **tk, int tk_type);
+
+
+/*handle_str.c*/
+int		del_whitespace(char **str);
 #endif

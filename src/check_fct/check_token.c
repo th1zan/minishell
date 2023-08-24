@@ -6,7 +6,7 @@
 /*   By: thibault <thibault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 14:16:59 by thibault          #+#    #+#             */
-/*   Updated: 2023/08/16 15:30:22 by thibault         ###   ########.fr       */
+/*   Updated: 2023/08/24 16:33:40 by thibault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,3 +37,37 @@ int	is_portable_filename_char(char c)
 		return (1);
 	return (0);
 }
+
+int	check_file_operator(int type)
+{
+	if (type == TOKEN_APPEND_CHEVRON)
+		return (1);
+	else if (type == TOKEN_INPUT_CHEVRON)
+		return (1);
+	else if (type == TOKEN_OUTPUT_CHEVRON)
+		return (1);
+	return (0);
+}
+
+int	classify_operator(char *str)
+{
+	if (*str == '\0')
+		return (TOKEN_NULL);
+	if(is_whitespace(*str))
+		return(TOKEN_BLANK);
+	if(is_here_doc(str, 0))
+		return(TOKEN_HERE_DOC);
+	if(is_redir_out_app(str, 0))
+		return(TOKEN_APPEND_CHEVRON);
+	if(is_redir_in(str, 0))
+		return(TOKEN_INPUT_CHEVRON);
+	if(is_redir_out(str, 0))
+		return(TOKEN_OUTPUT_CHEVRON);
+	if(is_pipe(str, 0))
+		return(TOKEN_PIPE);
+	// Error to handle if unhandled token
+	if(is_onechar_delim(str, 0) || is_twochar_delim(str, 0))
+		return(-2);
+	return (TOKEN_UNCLASSIFIED);
+}
+
