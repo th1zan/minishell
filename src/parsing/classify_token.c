@@ -6,7 +6,7 @@
 /*   By: thibault <thibault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 16:26:16 by thibault          #+#    #+#             */
-/*   Updated: 2023/08/25 10:02:32 by thibault         ###   ########.fr       */
+/*   Updated: 2023/08/25 14:48:39 by thibault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ int	ft_handle_arg_tk(t_tk *tk)
 			if(tk)
 				tk = tk->next;
 		}
-	printf("coucou\n");
 	//move token to the sublist
 	tk = tk_cmd;
 	while (tk)

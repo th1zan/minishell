@@ -6,7 +6,7 @@
 /*   By: thibault <thibault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 14:16:59 by thibault          #+#    #+#             */
-/*   Updated: 2023/08/25 10:02:32 by thibault         ###   ########.fr       */
+/*   Updated: 2023/08/25 12:04:08 by thibault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,19 @@ int	is_tk_in_out_app(int type)
 	else if (type == TK_IN_CHEVRON)
 		return (1);
 	else if (type == TK_OUT_CHEVRON)
+		return (1);
+	return (0);
+}
+
+int	is_tk_redir(int type)
+{
+	if (type == TK_APP_CHEVRON)
+		return (1);
+	else if (type == TK_IN_CHEVRON)
+		return (1);
+	else if (type == TK_OUT_CHEVRON)
+		return (1);
+	else if (type == TK_HERE_DOC)
 		return (1);
 	return (0);
 }

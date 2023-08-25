@@ -3,7 +3,7 @@
 
 https://pubs.opengroup.org/onlinepubs/009695399/utilities/xcu_chap02.html
 
-
+![Concept](image-2.png)
 ![Classifiy token](image-1.png)
 
 ![General process](image-4.png)

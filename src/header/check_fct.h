@@ -47,5 +47,6 @@ int	del_whitespace(char **str);
 int	is_name(char c);
 int	is_portable_filename_char(char c);
 int	is_tk_in_out_app(int type);
+int	is_tk_redir(int type);
 
 #endif
