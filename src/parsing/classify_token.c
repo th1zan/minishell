@@ -6,7 +6,7 @@
 /*   By: thibault <thibault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 16:26:16 by thibault          #+#    #+#             */
-/*   Updated: 2023/08/25 09:58:40 by thibault         ###   ########.fr       */
+/*   Updated: 2023/08/25 10:02:32 by thibault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,7 +147,7 @@ int	ft_handle_file_tk(t_tk *tk)
 	while (tk)
 	{
 		
-		if (check_file_operator(tk->type) && tk->next)
+		if (is_tk_in_out_app(tk->type) && tk->next)
 		{
 			tk_file = tk->next;
 			tk_file->type = TK_FILE;

@@ -43,7 +43,7 @@ void	ft_lst_classify_tk_file(t_tk *tk)
 	prev_classified_tk = tk->type;
 	while (tk)
 	{
-		if (check_file_operator(tk->type) || tk->type == TK_PIPE || tk->type == TK_HERE_DOC)
+		if (is_tk_in_out_app(tk->type) || tk->type == TK_PIPE || tk->type == TK_HERE_DOC)
 			prev_classified_tk = tk->type;
 		// printf("IN-> tr:%s type: %d, prev_classified_tk:%d \n", tk->tk_str, tk->type, prev_classified_tk);
 		if (tk->type == TK_UNCLASSIFIED)
@@ -53,11 +53,11 @@ void	ft_lst_classify_tk_file(t_tk *tk)
 				tk->type = TK_CMD;
 			else if (prev_classified_tk == TK_PIPE)
 				tk->type = TK_CMD;
-			else if (tk->prev->type == TK_FILE && check_file_operator(prev_classified_tk))
+			else if (tk->prev->type == TK_FILE && is_tk_in_out_app(prev_classified_tk))
 				tk->type = TK_CMD;
 			else if (tk->prev->type == TK_CMD)
 				tk->type = TK_CMD;
-			else if (check_file_operator(prev_classified_tk))
+			else if (is_tk_in_out_app(prev_classified_tk))
 				tk->type = TK_FILE;	
 			else if (prev_classified_tk == TK_HERE_DOC)
 				tk->type = TK_HD_ARG;

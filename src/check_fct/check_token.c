@@ -6,7 +6,7 @@
 /*   By: thibault <thibault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 14:16:59 by thibault          #+#    #+#             */
-/*   Updated: 2023/08/25 09:57:12 by thibault         ###   ########.fr       */
+/*   Updated: 2023/08/25 10:02:32 by thibault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	is_portable_filename_char(char c)
 	return (0);
 }
 
-int	check_file_operator(int type)
+int	is_tk_in_out_app(int type)
 {
 	if (type == TK_APP_CHEVRON)
 		return (1);

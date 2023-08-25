@@ -6,7 +6,7 @@
 /*   By: thibault <thibault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/11 11:49:26 by thibault          #+#    #+#             */
-/*   Updated: 2023/08/25 09:58:44 by thibault         ###   ########.fr       */
+/*   Updated: 2023/08/25 10:02:32 by thibault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int		check_parsing(t_tk *tk)
 	while (tmp != NULL)
 	{
 		
-		if (is)
+		if (is_tk_in_out_app)
 
 
 	

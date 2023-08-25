@@ -46,6 +46,6 @@ int	del_whitespace(char **str);
 /*check_token.c*/
 int	is_name(char c);
 int	is_portable_filename_char(char c);
-int	check_file_operator(int type);
+int	is_tk_in_out_app(int type);
 
 #endif
