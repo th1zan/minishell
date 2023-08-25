@@ -35,7 +35,7 @@ int	ft_lstsize(t_tk *tk)
 	return (n);
 }
 
-int print_lst(t_tk *tk)
+int	print_lst(t_tk *tk)
 {
 	
 	if (!tk)
@@ -63,7 +63,7 @@ int print_lst(t_tk *tk)
 		}
 		if (tk->next == NULL)
 		{
-			if (tk->type == TOKEN_FILE || tk->type == TOKEN_ARGUMENT)
+			if (tk->type == TK_FILE || tk->type == TK_ARG)
 			{
 				printf("\n%-5s ----->END PRINT ARG------\n\n", "");
 			}

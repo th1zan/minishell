@@ -43,24 +43,24 @@ void	ft_lst_classify_tk_file(t_tk *tk)
 	prev_classified_tk = tk->type;
 	while (tk)
 	{
-		if (check_file_operator(tk->type) || tk->type == TOKEN_PIPE || tk->type == TOKEN_HERE_DOC)
+		if (check_file_operator(tk->type) || tk->type == TK_PIPE || tk->type == TK_HERE_DOC)
 			prev_classified_tk = tk->type;
 		// printf("IN-> tr:%s type: %d, prev_classified_tk:%d \n", tk->tk_str, tk->type, prev_classified_tk);
-		if (tk->type == TOKEN_UNCLASSIFIED)
+		if (tk->type == TK_UNCLASSIFIED)
 		{
 			// printf("INSIDE IF-> %s type: %d\n", tk->tk_str, tk->type);
-			if (tk->prev == NULL || prev_classified_tk == TOKEN_BLANK)
-				tk->type = TOKEN_COMMAND;
-			else if (prev_classified_tk == TOKEN_PIPE)
-				tk->type = TOKEN_COMMAND;
-			else if (tk->prev->type == TOKEN_FILE && check_file_operator(prev_classified_tk))
-				tk->type = TOKEN_COMMAND;
-			else if (tk->prev->type == TOKEN_COMMAND)
-				tk->type = TOKEN_COMMAND;
+			if (tk->prev == NULL || prev_classified_tk == TK_BLANK)
+				tk->type = TK_CMD;
+			else if (prev_classified_tk == TK_PIPE)
+				tk->type = TK_CMD;
+			else if (tk->prev->type == TK_FILE && check_file_operator(prev_classified_tk))
+				tk->type = TK_CMD;
+			else if (tk->prev->type == TK_CMD)
+				tk->type = TK_CMD;
 			else if (check_file_operator(prev_classified_tk))
-				tk->type = TOKEN_FILE;	
-			else if (prev_classified_tk == TOKEN_HERE_DOC)
-				tk->type = TOKEN_HD_ARG;
+				tk->type = TK_FILE;	
+			else if (prev_classified_tk == TK_HERE_DOC)
+				tk->type = TK_HD_ARG;
 		}
 		// printf("OUT-> %s type: %d \n", tk->tk_str, tk->type);
 		tk = tk->next;

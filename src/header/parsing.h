@@ -8,7 +8,7 @@ int		count_words(char *input);
 
 /*parse_token.c*/
 int		parse_token(t_tk **tk);
-
+int		check_parsing(t_tk *tk);
 
 
 

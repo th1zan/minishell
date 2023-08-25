@@ -6,7 +6,7 @@
 /*   By: thibault <thibault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 16:26:16 by thibault          #+#    #+#             */
-/*   Updated: 2023/08/24 16:29:01 by thibault         ###   ########.fr       */
+/*   Updated: 2023/08/25 09:58:40 by thibault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,12 @@ int	ft_handle_arg_tk(t_tk *tk)
 	tk_cmd = tk;
 	while (tk)
 		{
-			if (tk->type == TOKEN_COMMAND && tk->next)
+			if (tk->type == TK_CMD && tk->next)
 			{
 				tk = tk->next;
-				while (tk && tk->type >= TOKEN_COMMAND)
+				while (tk && tk->type >= TK_CMD)
 				{
-					tk->type = TOKEN_ARGUMENT;
+					tk->type = TK_ARG;
 					tk = tk->next;
 				}
 			}
@@ -39,7 +39,7 @@ int	ft_handle_arg_tk(t_tk *tk)
 	tk = tk_cmd;
 	while (tk)
 	{
-		if (tk->type == TOKEN_COMMAND && tk->next && tk->next->type >= TOKEN_COMMAND)
+		if (tk->type == TK_CMD && tk->next && tk->next->type >= TK_CMD)
 		{
 			tk_cmd = tk;
 			tk = tk->next;
@@ -50,7 +50,7 @@ int	ft_handle_arg_tk(t_tk *tk)
 			// if (tk->type == TOKEN_COMMAND)
 				tk_arg_first = tk;
 			
-			while (tk && tk->type == TOKEN_ARGUMENT)
+			while (tk && tk->type == TK_ARG)
 			{
 				tk_arg_last = tk;
 				tk = tk->next;
@@ -83,21 +83,21 @@ int	ft_handle_hd_arg_tk(t_tk *tk)
 
 	while (tk)
 	{	
-		if (tk->type == TOKEN_HERE_DOC)
+		if (tk->type == TK_HERE_DOC)
 		{	
 			tk_hd = tk;
 			tk_entry_delim = tk->next;
 			
-			if (!tk_entry_delim || tk_entry_delim->type != TOKEN_HD_ARG)
+			if (!tk_entry_delim || tk_entry_delim->type != TK_HD_ARG)
 			{
 				printf("HERE-DOC delim error");
 				return (1);
 			}
-			tk_entry_delim->type = TOKEN_HD_DELIM;
+			tk_entry_delim->type = TK_HD_DELIM;
 
 			tk_arg = tk_entry_delim->next;
 
-			while (tk_arg && tk_arg->next && tk_arg->next->type == TOKEN_HD_ARG)
+			while (tk_arg && tk_arg->next && tk_arg->next->type == TK_HD_ARG)
 			{
 				// printf("entry:%s arg:%s\n",tk_entry_delim->tk_str, tk_arg->next->tk_str);
 				if (ft_strncmp(tk_entry_delim->tk_str, tk_arg->next->tk_str, 10) == 0)
@@ -120,7 +120,7 @@ int	ft_handle_hd_arg_tk(t_tk *tk)
 				return (1);
 			}
 			
-			tk_end_delim->type = TOKEN_HD_DELIM;
+			tk_end_delim->type = TK_HD_DELIM;
 
 			tk_hd->tk_arg = tk_entry_delim->next;
 			tk_entry_delim->next = tk_end_delim;
@@ -150,7 +150,7 @@ int	ft_handle_file_tk(t_tk *tk)
 		if (check_file_operator(tk->type) && tk->next)
 		{
 			tk_file = tk->next;
-			tk_file->type = TOKEN_FILE;
+			tk_file->type = TK_FILE;
 			tk->next = tk_file->next;
 			tk->tk_arg = tk_file;
 			if (tk_file->next)
