@@ -6,7 +6,7 @@
 #    By: thibault <thibault@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/20 17:58:32 by ebennace          #+#    #+#              #
-#    Updated: 2023/08/24 16:41:41 by thibault         ###   ########.fr        #
+#    Updated: 2023/08/29 14:46:59 by thibault         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,6 +30,8 @@ SRCS       = 		src/thib_minishell.c \
 					src/parsing/input_to_token.c \
 					src/parsing/parse_token.c \
 					src/parsing/classify_token.c \
+					src/parsing/check_parsing_grammar.c \
+					src/parsing/check_parsing_token.c \
 					src/utils/handle_tab.c \
 					src/utils/handle_list.c \
 					src/utils/handle_list_add.c \

@@ -92,17 +92,25 @@ int	free_lst(t_tk *head_list)
 
 int	free_elem(t_tk *token)
 {
-	// free attributs
+	t_tk	*tmp;
+	// free tk_str
 	if(token->tk_str)
 		free(token->tk_str);
-	// if(token->type)
-	// 	free(token->type);
-	if(token->tk_arg_str)
-		free(token->tk_arg_str);
-	// free element
+	// free tk_arg
+	if(token->tk_arg)
+	{
+		tmp = token->tk_arg;
+		while (tmp != NULL)
+		{
+			t_tk *next_tmp = tmp->next; // save next tk
+			free_elem(tmp); // free current
+			tmp = next_tmp; // current = next tk
+		}
+	}
 	free(token);
 	return (0);
 }
+
 
 // typedef struct s_tk
 // {

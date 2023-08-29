@@ -6,7 +6,7 @@
 /*   By: thibault <thibault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/06 15:14:08 by thibault          #+#    #+#             */
-/*   Updated: 2023/08/16 15:13:06 by thibault         ###   ########.fr       */
+/*   Updated: 2023/08/29 12:08:59 by thibault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,31 +16,61 @@ int	main(int argc, char **argv, char **envp)
 {
 	char	*input;
 	t_tk	*tk_head;
-	int	*tmp;
+	int		*delimiter_tab;
+	char	**path;
 	(void)argc;
 	(void)argv;
-	(void)envp;
+	
 
 	tk_head = NULL;
-	tmp = NULL;
+	delimiter_tab = NULL;
+	path = get_path(envp);
+	// printf("path adress:%p\n", path);
+	// print_strtab(path);
 	while (1)
 	{
 		input = readline("minishell> ");
+
 		if (check_input(input))
-			break;
+		{
+			if (input != NULL)
+				free(input);
+			continue;
+		}
 		// get_delimiter(input);
-		tmp = get_delimiter(input);
-		input_to_token(input, &tk_head, tmp);
-		free(tmp);
+		delimiter_tab = get_delimiter(input);
+		input_to_token(input, path, &tk_head, delimiter_tab);
+		free(delimiter_tab);
 		// print_lst(tk_head);
 		parse_token(&tk_head);
 		// printf("Vous avez entré : %s\n", input);
 		// if (is_redir_in(input, 0))
 		// 	printf("is < \n");
-		// free(input);
+		free(input);
+		
 	}
+	free_strtab(path); //ne pas free dans la boucle while
 	return(0);
 }
+
+char	**get_path(char **envp)
+{
+	char	**path;
+	int		i;
+
+	path = NULL;
+	i = 0;
+	while (envp[i] != 0)
+	{
+		if (ft_strnstr(envp[i], "PATH=", 5) != 0)
+			break;
+		i++;
+	}
+	path = ft_split(envp[i], ':');
+	// printf("IN SPLIT: path adress:%p\n", path);
+	return (path);
+}
+
 
 int	check_input(char *input)
 {
@@ -48,11 +78,5 @@ int	check_input(char *input)
 		return(1);
 	if (*input == 0)
 		return (1);
-	return (0);
-}
-
-int	ft_coucou(void)
-{
-	ft_printf("Coucou depuis le fichier minishell.c !\net ...\n");
 	return (0);
 }

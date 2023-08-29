@@ -6,12 +6,20 @@
 /*   By: thibault <thibault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/09 14:58:05 by thibault          #+#    #+#             */
-/*   Updated: 2023/08/22 16:54:37 by thibault         ###   ########.fr       */
+/*   Updated: 2023/08/29 12:01:45 by thibault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
+/*
+delimiter tab:  tab of int
+lenght of delimiter tab: length of input string
+if tab[i] == 1 -> input[i] == delimiter
+Then 
+
+
+*/
 int	*get_delimiter(char *input)
 {
 	int		i;
@@ -134,7 +142,7 @@ int	*get_delimiter(char *input)
 	return (delimiter);
 }
 
-int	input_to_token(char *input, t_tk **tk_head, int *delimiter)
+int	input_to_token(char *input, char **path, t_tk **tk_head, int *delimiter)
 {
 	int		begin; //delimiter: tab[0] = begin, tab[1] = end
 	int		i;
@@ -156,7 +164,7 @@ int	input_to_token(char *input, t_tk **tk_head, int *delimiter)
 			if (len > 0)
 			{
 				tk_str = ft_substr(input, begin, len);
-				ft_lstadd_back(tk_head, ft_lstnew(tk_str));
+				ft_lstadd_back(tk_head, ft_lstnew(tk_str, path));
 				begin = i;
 			}
 		}
@@ -165,7 +173,7 @@ int	input_to_token(char *input, t_tk **tk_head, int *delimiter)
 	len = i - begin;
 	// printf("%d: begin:%d len:%d\n", i, begin, len);
 	tk_str = ft_substr(input, begin, len);
-	ft_lstadd_back(tk_head, ft_lstnew(tk_str));
+	ft_lstadd_back(tk_head, ft_lstnew(tk_str, path));
 	// print_lst(*tk_head);
 	return (0);
 }

@@ -6,26 +6,23 @@
 /*   By: thibault <thibault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 09:23:09 by thibault          #+#    #+#             */
-/*   Updated: 2023/08/25 14:49:13 by thibault         ###   ########.fr       */
+/*   Updated: 2023/08/29 12:00:28 by thibault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-t_tk	*ft_lstnew(char *token_str)
+t_tk	*ft_lstnew(char *token_str, char **path)
 {
 	t_tk	*new_tk;
 
 	new_tk = (t_tk *)calloc(1, sizeof(t_tk));
 	if (!new_tk)
 		return (NULL);
-	// new_tk->str = str; // Note: This assumes the string is dynamically allocated or won't go out of scope.
-	// new_tk->prev = NULL;
-	// new_tk->next = NULL;
+
 	new_tk->tk_str = token_str;
-	// new_tk->tk_arg = NULL;
-	// new_tk->tk_arg_str = NULL;
-	// new_tk->type = NULL;
+	new_tk->env = path;
+	
 	return (new_tk);
 }
 
@@ -47,11 +44,11 @@ void	ft_lstadd_front(t_tk **lst, t_tk *new)
 	*lst = new;
 }
 
-void	ft_lst_add_after(t_tk *current_tk, char *str)
+void	ft_lst_add_after(t_tk *current_tk, char *str, char **path)
 {
 	t_tk	*new_tk;
 
-	new_tk = ft_lstnew(str);
+	new_tk = ft_lstnew(str, path);
 	if (!new_tk)
 		return;
 

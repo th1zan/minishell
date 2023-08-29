@@ -6,7 +6,7 @@
 /*   By: thibault <thibault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/06 16:13:42 by thibault          #+#    #+#             */
-/*   Updated: 2023/08/15 15:18:50 by thibault         ###   ########.fr       */
+/*   Updated: 2023/08/29 11:58:29 by thibault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,8 @@
 # include "./header/my_header_for_my_function.h"
 
 /* Minishell.c */
-int	check_input(char *input);
-int	ft_coucou(void);
+int		check_input(char *input);
+char	**get_path(char **envp);
 
 
 #endif

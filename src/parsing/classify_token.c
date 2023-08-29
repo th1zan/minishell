@@ -6,7 +6,7 @@
 /*   By: thibault <thibault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 16:26:16 by thibault          #+#    #+#             */
-/*   Updated: 2023/08/25 14:48:39 by thibault         ###   ########.fr       */
+/*   Updated: 2023/08/29 14:42:08 by thibault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,6 @@ int	ft_handle_arg_tk(t_tk *tk)
 				tk_arg_last = tk;
 				tk = tk->next;
 			}
-			
 			tk_cmd->tk_arg = tk_arg_first;
 			if (tk_arg_last)
 			{
