@@ -11,7 +11,11 @@ int		parse_token(t_tk **tk);
 int		check_parsing(t_tk *tk);
 
 /*check_parsing_grammar.c*/
-
+int		check_first_last_token(t_tk *first, t_tk *last);
+int		check_main_list_tokens(t_tk *tk);
+int		check_redir_sublist(t_tk *tk);
+int		check_here_doc_sublist(t_tk *tk);
+int		check_cmd_sublist(t_tk *tk);
 int		check_grammar(t_tk *tk);
 
 /*check_parsing_token.c*/
@@ -19,9 +23,6 @@ int		check_cmd(t_tk *tk);
 int		test_cmd(t_tk *tk);
 int		check_access(char *cmd);
 int		check_input_file(t_tk *tk);
-
-
-
 
 /*check_token.c*/
 int		classify_operator(char *str);
