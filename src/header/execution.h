@@ -6,7 +6,7 @@
 /*   By: thibault <thibault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 12:15:49 by mlachat           #+#    #+#             */
-/*   Updated: 2023/08/31 17:55:41 by thibault         ###   ########.fr       */
+/*   Updated: 2023/09/01 01:14:31 by thibault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@
 // int		empty_fct_err(int cmd);
 
 //exec
-void	execution(t_tk **tk);
+int		execution(t_tk **tk);
+char	*arg_to_str(t_tk *tk);
 // void    bin_execution(t_env *env, t_cmd *cmd);
 // void	execution(t_env *env);
 // int	    execute_cmd(t_env *env, t_token *token);

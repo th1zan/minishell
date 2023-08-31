@@ -6,42 +6,77 @@
 /*   By: thibault <thibault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 17:11:53 by mlachat           #+#    #+#             */
-/*   Updated: 2023/08/31 18:14:42 by thibault         ###   ########.fr       */
+/*   Updated: 2023/09/01 01:11:06 by thibault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
+char	*arg_to_str(t_tk *tk)
+{
+	char	*arg;
+	char	*temp;
 
-void	execution(t_tk **tk)
+	if (!tk) return NULL;
+
+	arg = ft_strdup(tk->tk_str);
+	while(tk)
+	{
+		temp = ft_strjoin(arg, " ");
+		free(arg);
+		arg = ft_strjoin(temp, tk->tk_str);
+		free(temp);
+
+		tk = tk->next;
+	}
+
+	return (arg);
+}
+
+
+int	execution(t_tk **tk)
 {
 	char		*tk_str;	// contenu du token
 	int			type;		// type du token 
-	int			fd_in;
+	int			fd_in;		
 	int			fd_out;
-	char		*arg_tk;
+	char		*arg_tk_str;	//argument du token
 	t_tk		*tmp;
 
-	tmp = *tk;
-
 	
+	tmp = *tk;
+	if (tmp)
+	{
+		tk_str = tmp->tk_str;
+		type = tmp->type;
+		fd_in = tmp->fd_in;
+		fd_out = tmp->fd_out;
+		arg_tk_str = NULL;
+
+	}
+
 	printf("On est dans la fonction execution:\n");
 	print_lst(*tk);
 
-	while(*tk != NULL)
+	// Print list
+	while (tmp != NULL)
 	{
-		tmp = *tk;
-		tk_str = tmp->tk_str;
-		type = tmp->type;				
-		fd_in = tmp->fd_in;
-		fd_out = tmp->fd_out;
-		if(tmp->tk_arg)
-			arg_tk = tmp->tk_arg->tk_str;
-
-		printf("str:%s, type:%d, fd_in:%d, fd_out:%d, arg:%s\n", tk_str, type, fd_in, fd_out, arg_tk);
-
-		*tk = (*tk)->next;
+		if (tmp)
+		{
+			tk_str = tmp->tk_str;
+			type = tmp->type;
+			fd_in = tmp->fd_in;
+			fd_out = tmp->fd_out;
+			arg_tk_str = arg_to_str(tmp);
+		}
+		printf("tk_str:%s, type:%d, fd_in:%d, fd_out:%d, arg_tk_str:%s\n", tk_str, type, fd_in, fd_out, arg_tk_str);
+		// printf("tmp->next:%p\n", tmp->next);
+   		if(tmp->next)
+			tmp = tmp->next;
+		else
+			tmp = NULL;
 	}
+	free (arg_tk_str);
 
 
 	
@@ -54,7 +89,7 @@ void	execution(t_tk **tk)
 	// 3. wait_pid
 
 
-	
+	return (0);
 }
 
 // void	execution(t_env *env)
