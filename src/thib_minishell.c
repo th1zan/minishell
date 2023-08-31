@@ -6,7 +6,7 @@
 /*   By: thibault <thibault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/06 15:14:08 by thibault          #+#    #+#             */
-/*   Updated: 2023/08/29 12:08:59 by thibault         ###   ########.fr       */
+/*   Updated: 2023/08/31 17:53:00 by thibault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ int	main(int argc, char **argv, char **envp)
 		free(delimiter_tab);
 		// print_lst(tk_head);
 		parse_token(&tk_head);
+		execution(&tk_head);
 		// printf("Vous avez entré : %s\n", input);
 		// if (is_redir_in(input, 0))
 		// 	printf("is < \n");

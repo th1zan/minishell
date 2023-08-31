@@ -6,7 +6,7 @@
 /*   By: thibault <thibault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/06 16:13:42 by thibault          #+#    #+#             */
-/*   Updated: 2023/08/29 11:58:29 by thibault         ###   ########.fr       */
+/*   Updated: 2023/08/31 16:45:37 by thibault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@
 # include "./header/check_fct.h"
 # include "./header/parsing.h"
 # include "./header/utils.h"
-# include "./header/my_header_for_my_function.h"
+# include "./header/execution.h"
 
 /* Minishell.c */
 int		check_input(char *input);
