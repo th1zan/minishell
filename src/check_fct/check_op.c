@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_op.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thibault <thibault@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vfinocie <vfinocie@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 19:29:22 by thibault          #+#    #+#             */
-/*   Updated: 2023/08/09 22:22:42 by thibault         ###   ########.fr       */
+/*   Updated: 2023/09/16 12:56:40 by vfinocie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,13 @@ Opérateurs de Contrôle :
 
 int	is_twochar_delim(char *line, int i)
 {
+	// line = "test";
+	// i = 0;
 	int	ctrl;
 
 	ctrl = 0;
+	// Ctrl is used to check if it's 1 or 0; 
+	// proposition : if one of the conditions is met, the others cannot. so using else if instead of if might save execution time.
 	if (is_double_pipe(line, i))
 		ctrl++;
 	if (is_double_amp(line, i))
