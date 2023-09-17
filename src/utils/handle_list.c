@@ -53,7 +53,9 @@ int	print_lst(t_tk *tk)
 		printf("%-15s ||", tk->tk_str);
 		printf(" tk_addr: %-15p", tk);
 		printf(" tk_type: %-5d", tk->type);
-		printf(" prev_tk: %-15p", tk->prev);
+		printf(" fd_in: %-5d", tk->fd_in);
+		printf(" fd_out: %-5d", tk->fd_out);
+		// printf(" prev_tk: %-15p", tk->prev);
 		printf(" next_tk: %-15p\n", tk->next);
 		// Print sublist
 		if (tk->tk_arg)

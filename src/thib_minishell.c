@@ -6,7 +6,7 @@
 /*   By: thibault <thibault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/06 15:14:08 by thibault          #+#    #+#             */
-/*   Updated: 2023/09/01 01:13:53 by thibault         ###   ########.fr       */
+/*   Updated: 2023/09/17 12:54:22 by thibault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,12 @@ int	main(int argc, char **argv, char **envp)
 	// print_strtab(path);
 	while (1)
 	{
+		 // Sauvegarder les descripteurs de fichier originaux
+		 // A SUPPRIMER PAR LA SUITE
+		int original_stdin = dup(STDIN_FILENO);
+		int original_stdout = dup(STDOUT_FILENO);
+		
+		
 		input = readline("minishell> ");
 
 		if (check_input(input))
@@ -41,9 +47,23 @@ int	main(int argc, char **argv, char **envp)
 		delimiter_tab = get_delimiter(input);
 		input_to_token(input, path, &tk_head, delimiter_tab);
 		free(delimiter_tab);
-		// print_lst(tk_head);
 		parse_token(&tk_head);
-		execution(&tk_head);
+		print_lst(tk_head);
+		set_redirection(&tk_head);
+
+
+		// Rétablir les descripteurs de fichier
+		// A SUPPRIMER PAR LA SUITE
+		dup2(original_stdin, STDIN_FILENO);
+   	 	dup2(original_stdout, STDOUT_FILENO);
+
+		// Fermer les descripteurs de fichier sauvegardés et redirigés
+		// A SUPPRIMER PAR LA SUITE
+		close(original_stdin);
+		close(original_stdout);
+	
+		// execution(&tk_head);
+
 		// printf("Vous avez entré : %s\n", input);
 		// if (is_redir_in(input, 0))
 		// 	printf("is < \n");
