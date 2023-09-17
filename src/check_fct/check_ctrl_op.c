@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_ctrl_op.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thibault <thibault@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vfinocie <vfinocie@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 18:58:01 by thibault          #+#    #+#             */
-/*   Updated: 2023/08/09 15:53:48 by thibault         ###   ########.fr       */
+/*   Updated: 2023/09/16 13:03:27 by vfinocie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ Opérateurs de Contrôle :
 
 int	is_semicol(char *line, int i)
 {
+	// semicolon is ; I think
 	if (line[i] == ',')
 		return (1);
 	return (0);
@@ -30,7 +31,7 @@ int	is_semicol(char *line, int i)
 
 int	is_amp(char *line, int i)
 {
-	if (line[i] == '&' && (line[i + 1] == '\0' || line[i + 1] != '&'))
+	if (line[i] == '&' && (line[i + 1] == '\0' || line[i + 1] != '&')) //line[i + 1] != '&' I think is already checked in is_double_amp, if it was true then, it won't be checked here, and if it was wrong then, it will be wrong now.
 			return (1);
 	return (0);
 }

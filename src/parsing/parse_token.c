@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_token.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thibault <thibault@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vfinocie <vfinocie@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/11 11:49:26 by thibault          #+#    #+#             */
-/*   Updated: 2023/08/29 14:48:14 by thibault         ###   ########.fr       */
+/*   Updated: 2023/09/17 15:57:36 by vfinocie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	parse_token(t_tk **head_tk)
 
 	// tmp = *head_tk;
 	// print_lst(*head_tk);
-	ft_lst_modif_tk_str(*head_tk, del_whitespace);
+	ft_lst_modif_tk_str(*head_tk, del_whitespace); //this function, iterrates through the list, applying the del_whitespace function to each node. 
 	// print_lst(*head_tk);
 	ft_lst_modif_tk_type(*head_tk, classify_operator);
 	// print_lst(*head_tk);
@@ -33,7 +33,7 @@ int	parse_token(t_tk **head_tk)
 	// print_lst(*head_tk);
 	ft_handle_hd_arg_tk(*head_tk);
 	ft_delete_type_token(head_tk, TK_HD_DELIM);
-	print_lst(*head_tk);
+	// print_lst(*head_tk);
 	check_parsing(*head_tk);
 	// tmp = tmp->next;
 	// print_strtab(tmp->env);

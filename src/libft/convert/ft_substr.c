@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_substr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thibault <thibault@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vfinocie <vfinocie@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 14:15:38 by tsanglar          #+#    #+#             */
-/*   Updated: 2023/08/07 08:48:25 by thibault         ###   ########.fr       */
+/*   Updated: 2023/09/16 13:46:36 by vfinocie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,26 +14,31 @@
 
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
+	// s = input = "ls | wc"
+	// start = begin = 0
+	// len = len = 3;
 	char	*substr;
 	size_t	i;
-	size_t	slen;	
+	size_t	slen;
 
 	slen = 0;
-	while (s[slen])
+	while (s[slen])// used to set slen to the size of s / input
 		slen++;
-	if (start > slen)
+	// here slen = 7
+	if (start > slen) // 0 > 7
 		len = 0;
-	if (len > slen - start)
+	if (len > slen - start) // 3 > 7 - 0
 		len = slen - start;
 	substr = (char *) malloc(sizeof(char) * (len + 1));
 	if (!substr)
 		return (0);
 	i = 0;
-	while (i < len && start + i < slen)
+	while (i < len && start + i < slen) // 1 < 1 && 0 + i < 7
 	{
 		substr[i] = s[start + i];
 		i++;
 	}
 	substr[i] = 0;
 	return (substr);
+	// return = "ls \0";
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thibault <thibault@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vfinocie <vfinocie@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/26 09:31:25 by thibault          #+#    #+#             */
-/*   Updated: 2023/08/31 18:02:41 by thibault         ###   ########.fr       */
+/*   Updated: 2023/09/16 14:03:55 by vfinocie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 typedef struct s_tk
 {
-	char		*tk_str;	// contenu du token
+	char		*tk_str;	// contenu du token, built in input_to_token, cleaned in parse_token
 	int			type;		// type du token 
 	char		**env;		// environnement
 	int			fd_in;
