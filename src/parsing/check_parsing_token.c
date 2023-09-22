@@ -6,7 +6,7 @@
 /*   By: thibault <thibault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 14:45:21 by thibault          #+#    #+#             */
-/*   Updated: 2023/09/18 17:38:50 by thibault         ###   ########.fr       */
+/*   Updated: 2023/09/22 15:40:48 by thibault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,6 @@ int	test_cmd(t_tk *tk)
 		free(temp);
 		if (check_access(cmd) == 1)
 		{
-			printf("cmd %s exists in the paths\n", tk->tk_str);
 			return (0);
 		}
 		else

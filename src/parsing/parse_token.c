@@ -6,7 +6,7 @@
 /*   By: thibault <thibault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/11 11:49:26 by thibault          #+#    #+#             */
-/*   Updated: 2023/09/18 17:40:00 by thibault         ###   ########.fr       */
+/*   Updated: 2023/09/22 15:32:56 by thibault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,31 +14,15 @@
 
 int	parse_token(t_tk **head_tk)
 {
-	// t_tk	*tmp;
-
-	// tmp = *head_tk;
-	// print_lst(*head_tk);
 	ft_lst_modif_tk_str(*head_tk, del_whitespace); //this function, iterrates through the list, applying the del_whitespace function to each node. 
-	// print_lst(*head_tk);
 	ft_lst_modif_tk_type(*head_tk, classify_operator);
-	// print_lst(*head_tk);
 	ft_delete_type_token(head_tk, TK_BLANK);
-	// print_lst(*head_tk);
 	ft_lst_classify_tk_file(*head_tk);
-	// print_lst(*head_tk);
 	/*TODO: vérification des règles de grammaire ex: deux operateur à la suite-> pas possible*/
 	ft_handle_file_tk(*head_tk);
-	// print_lst(*head_tk);
 	ft_handle_arg_tk(*head_tk);
-	// print_lst(*head_tk);
 	ft_handle_hd_arg_tk(*head_tk);
 	ft_delete_type_token(head_tk, TK_HD_DELIM);
-	// print_lst(*head_tk);
-	
-	// tmp = tmp->next;
-	// print_strtab(tmp->env);
-	printf("fin du parsing\n");
-
 	return (0);
 }
 

@@ -6,7 +6,7 @@
 /*   By: thibault <thibault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/06 15:14:08 by thibault          #+#    #+#             */
-/*   Updated: 2023/09/22 10:33:35 by thibault         ###   ########.fr       */
+/*   Updated: 2023/09/22 15:49:33 by thibault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,15 +61,21 @@ int	main(int argc, char **argv, char **envp)
 		// if ft_calloc called in get_delimiter, return NULL (shit happens), you can't free it, you'll have a memory problem. 
 		free(delimiter_tab);
 		parse_token(&tk_head);
+		fprintf(stderr, "===INFO===: end of parsing\n");
 		if (check_parsing(tk_head) == 0)
 		{
+			fprintf(stderr, "===INFO===: end of parsing check\n");
 			set_redirection(&tk_head);
+			fprintf(stderr, "===INFO===: end of redirection\n");
+			// fprintf(stderr, "===INFO===: print TK list::\n");
 			// print_lst(tk_head);
+			fprintf(stderr, "===INFO===: result of cmd line (if displayed)::\n");
 			execution(&tk_head);
-			// close_all_fd(&tk_head);
+			fprintf(stderr, "===INFO===: end of execution\n");
+			// print_lst(tk_head);
 			restore_std(original_std);
 		}
-		printf("input: %s\n", input);
+		fprintf(stderr, "===INFO===: initial input:: %s\n", input);
 		free(input);
 		
 	}
@@ -126,4 +132,44 @@ int	check_input(char *input)
 	if (*input == 0)
 		return (1);
 	return (0);
+}
+
+int	save_std(int *original_std)
+{
+	original_std[0] = dup(STDIN_FILENO);
+	original_std[1] = dup(STDOUT_FILENO);
+	original_std[2] = dup(STDERR_FILENO);
+	if (original_std[0] == -1 || original_std[1] == -1 || original_std[2] == -1)
+	{
+		perror("dup error: original_std[0] in save_std");
+		fprintf(stderr, "errno: %d\n", errno);
+		return (-1);
+	}
+	return 0;
+}
+
+int	restore_std(int *original_std)
+{
+	if (dup2(original_std[0], STDIN_FILENO) == -1)
+	{
+		perror("dup2 error: original_std[0] in restore_std");
+		fprintf(stderr, "original_std[0]: %d, errno: %d\n", original_std[0], errno);
+		return (-1);
+	}	
+	if (dup2(original_std[1], STDOUT_FILENO) == -1)
+	{
+		perror("dup2 error: original_std[1] in restore_std");
+		fprintf(stderr, "original_std[1]: %d, errno: %d\n", original_std[1], errno);
+		return (-1);
+	}	
+	if (dup2(original_std[2], STDERR_FILENO) == -1)
+	{
+		perror("dup2 error: original_std[2] in restore_std");
+		fprintf(stderr, "original_std[2]: %d, errno: %d\n", original_std[2], errno);
+		return (-1);
+	}
+	close(original_std[0]);
+	close(original_std[1]);
+	close(original_std[2]);
+	return 0;
 }
