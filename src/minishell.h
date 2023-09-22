@@ -6,7 +6,7 @@
 /*   By: thibault <thibault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/06 16:13:42 by thibault          #+#    #+#             */
-/*   Updated: 2023/08/31 16:45:37 by thibault         ###   ########.fr       */
+/*   Updated: 2023/09/18 16:28:36 by thibault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@
 # include <stdlib.h>
 # include <sys/wait.h>
 # include <sys/types.h>
-#include <readline/readline.h>
+# include <readline/readline.h>
+# include <termios.h>
 
 
 /*Minishell header files*/
@@ -35,8 +36,11 @@
 # include "./header/execution.h"
 
 /* Minishell.c */
+char	*get_line(void);
 int		check_input(char *input);
 char	**get_path(char **envp);
+int		save_std(int *original_std);
+int		restore_std(int *original_std);
 
 
 #endif

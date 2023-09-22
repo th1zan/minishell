@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   thib_minishell.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vfinocie <vfinocie@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: thibault <thibault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/06 15:14:08 by thibault          #+#    #+#             */
-/*   Updated: 2023/09/17 15:57:22 by vfinocie         ###   ########.fr       */
+/*   Updated: 2023/09/22 10:33:35 by thibault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,15 @@
 
 #include "minishell.h"
 
+// < IN_file grep a | wc -l > OUT_file
+
 int	main(int argc, char **argv, char **envp)
 {
 	char	*input;
 	t_tk	*tk_head;
 	int		*delimiter_tab;
 	char	**path;
+	int	original_std[3];
 	(void)argc;
 	(void)argv;
 	
@@ -37,13 +40,10 @@ int	main(int argc, char **argv, char **envp)
 	// print_strtab(path);
 	while (1)
 	{
-		 // Sauvegarder les descripteurs de fichier originaux
-		 // A SUPPRIMER PAR LA SUITE
-		int original_stdin = dup(STDIN_FILENO);
-		int original_stdout = dup(STDOUT_FILENO);
+	
+		save_std(original_std);
 		
-		
-		input = readline("minishell> ");
+		input = get_line();
 
 		if (check_input(input)) // return 1 means something is wrong. 
 		{
@@ -61,30 +61,39 @@ int	main(int argc, char **argv, char **envp)
 		// if ft_calloc called in get_delimiter, return NULL (shit happens), you can't free it, you'll have a memory problem. 
 		free(delimiter_tab);
 		parse_token(&tk_head);
-		print_lst(tk_head);
-		set_redirection(&tk_head);
-
-
-		// Rétablir les descripteurs de fichier
-		// A SUPPRIMER PAR LA SUITE
-		dup2(original_stdin, STDIN_FILENO);
-   	 	dup2(original_stdout, STDOUT_FILENO);
-
-		// Fermer les descripteurs de fichier sauvegardés et redirigés
-		// A SUPPRIMER PAR LA SUITE
-		close(original_stdin);
-		close(original_stdout);
-	
-		// execution(&tk_head);
-
-		// printf("Vous avez entré : %s\n", input);
-		// if (is_redir_in(input, 0))
-		// 	printf("is < \n");
+		if (check_parsing(tk_head) == 0)
+		{
+			set_redirection(&tk_head);
+			// print_lst(tk_head);
+			execution(&tk_head);
+			// close_all_fd(&tk_head);
+			restore_std(original_std);
+		}
+		printf("input: %s\n", input);
 		free(input);
 		
 	}
 	free_strtab(path); //ne pas free dans la boucle while
 	return(0);
+}
+
+//fonction à comprendre et commenter
+char	*get_line(void)
+{
+	struct termios	saved;
+	struct termios	attributes;
+	char			*line;
+
+	tcgetattr(STDIN_FILENO, &saved);
+	tcgetattr(STDIN_FILENO, &attributes);
+	attributes.c_lflag &= ~ECHOCTL;
+	tcsetattr(STDIN_FILENO, TCSAFLUSH, &attributes);
+	line = readline("minishell> ");
+	if (check_input(line))
+		return (NULL);
+	// create_history(line);
+	tcsetattr(STDIN_FILENO, TCSAFLUSH, &saved);
+	return (line);
 }
 
 char	**get_path(char **envp)

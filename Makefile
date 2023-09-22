@@ -6,7 +6,7 @@
 #    By: thibault <thibault@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/20 17:58:32 by ebennace          #+#    #+#              #
-#    Updated: 2023/09/16 14:36:47 by thibault         ###   ########.fr        #
+#    Updated: 2023/09/21 17:42:49 by thibault         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,7 +39,6 @@ SRCS       = 		src/thib_minishell.c \
 					src/utils/handle_str.c \
 					src/execution/redirection.c \
 					src/execution/exec.c \
-					src/execution/pipex.c \
 					src/execution/join.c \
 #					src/folder_name/file_name.c
 #					...

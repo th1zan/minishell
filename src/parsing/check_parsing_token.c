@@ -6,7 +6,7 @@
 /*   By: thibault <thibault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 14:45:21 by thibault          #+#    #+#             */
-/*   Updated: 2023/08/29 14:46:13 by thibault         ###   ########.fr       */
+/*   Updated: 2023/09/18 17:38:50 by thibault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,8 @@ int		check_cmd(t_tk *tk)
 	while (tk != NULL)
 	{
 		if (tk->type == TK_CMD)
-			test_cmd(tk);
+			if (test_cmd(tk) == 1)
+				return (1);
 		tk = tk->next;
 	}
 

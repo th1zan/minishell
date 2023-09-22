@@ -50,28 +50,29 @@ int	print_lst(t_tk *tk)
 	// Print list
 	while (tk != NULL)
 	{
-		printf("%-15s ||", tk->tk_str);
-		printf(" tk_addr: %-15p", tk);
-		printf(" tk_type: %-5d", tk->type);
-		printf(" fd_in: %-5d", tk->fd_in);
-		printf(" fd_out: %-5d", tk->fd_out);
-		// printf(" prev_tk: %-15p", tk->prev);
-		printf(" next_tk: %-15p\n", tk->next);
+		
+		fprintf(stderr,"%-15s ||", tk->tk_str);
+		fprintf(stderr," tk_addr: %-15p", tk);
+		fprintf(stderr," tk_type: %-5d", tk->type);
+		fprintf(stderr," fd_in: %-5d", tk->fd_in);
+		fprintf(stderr," fd_out: %-5d", tk->fd_out);
+		// fprintf(stderr," prev_tk: %-15p", tk->prev);
+		fprintf(stderr," next_tk: %-15p\n", tk->next);
 		// Print sublist
 		if (tk->tk_arg)
 		{
-			printf("\n%-5s ----->PRINT ARG--------\n", "");
+			fprintf(stderr,"\n%-5s ----->PRINT ARG--------\n", "");
 			print_lst(tk->tk_arg);
 		}
 		if (tk->next == NULL)
 		{
 			if (tk->type == TK_FILE || tk->type == TK_ARG)
 			{
-				printf("\n%-5s ----->END PRINT ARG------\n\n", "");
+				fprintf(stderr,"\n%-5s ----->END PRINT ARG------\n\n", "");
 			}
 			else
 			{
-				printf("\n-----END PRINT LST--------\n\n");
+				fprintf(stderr,"\n-----END PRINT LST--------\n\n");
 			}
 		}
 		tk = tk->next;

@@ -6,7 +6,7 @@
 /*   By: thibault <thibault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 14:42:49 by thibault          #+#    #+#             */
-/*   Updated: 2023/08/29 16:25:42 by thibault         ###   ########.fr       */
+/*   Updated: 2023/09/18 17:42:24 by thibault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,27 +91,43 @@ int	check_cmd_sublist(t_tk *tk)
 // Fonction principale
 int	check_grammar(t_tk *tk)
 {
-	if (!tk) {
+	t_tk	*tmp;
+
+	if (!tk)
+	{
 		printf("error - no argument\n");
-		return (0);
+		return (1);
 	}
 
-	if (check_first_last_token(tk, tk) != 0) return (1);
-	if (check_main_list_tokens(tk) != 0) return (1);
+	if (check_first_last_token(tk, tk) != 0)
+		return (1);
+	if (check_main_list_tokens(tk) != 0)
+		return (1);
 
-	t_tk *tmp = tk;
+	tmp = tk;
 	while (tmp != NULL) {
-		if (is_tk_in_out_app(tmp->type)) {
-			if (check_redir_sublist(tmp) != 0) return (1);
-		} else if (tmp->type == TK_PIPE) {
-			if (tmp->tk_arg != NULL) {
+		if (is_tk_in_out_app(tmp->type))
+		{
+			if (check_redir_sublist(tmp) != 0)
+				return (1);
+		}
+		else if (tmp->type == TK_PIPE)
+		{
+			if (tmp->tk_arg != NULL)
+			{
 				printf("error: pipe operator has an argument, it should not\n");
 				return (1);
 			}
-		} else if (tmp->type == TK_HERE_DOC) {
-			if (check_here_doc_sublist(tmp) != 0) return (1);
-		} else if (tmp->type == TK_CMD) {
-			if (check_cmd_sublist(tmp) != 0) return (1);
+		}
+		else if (tmp->type == TK_HERE_DOC)
+		{
+			if (check_here_doc_sublist(tmp) != 0)
+				return (1);
+		}
+		else if (tmp->type == TK_CMD)
+		{
+			if (check_cmd_sublist(tmp) != 0)
+				return (1);
 		}
 		tmp = tmp->next;
 	}
