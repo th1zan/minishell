@@ -6,7 +6,7 @@
 /*   By: thibault <thibault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 16:26:16 by thibault          #+#    #+#             */
-/*   Updated: 2023/09/25 10:13:22 by thibault         ###   ########.fr       */
+/*   Updated: 2023/09/25 23:36:54 by thibault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ int	ft_handle_arg_tk(t_tk *tk)
 				while (tk && tk->type >= TK_CMD)
 				{
 					tk->type = TK_ARG;
+					delete_quotes(&(tk->tk_str));
 					tk = tk->next;
 				}
 			}

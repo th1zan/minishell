@@ -10,6 +10,9 @@ int		count_words(char *input);
 int		parse_token(t_tk **tk);
 int		check_parsing(t_tk *tk);
 int		classify_operator(char *str);
+int		delete_quotes(char **str);
+int 	handle_quotes(t_tk *head_tk);
+
 
 /*check_parsing_grammar.c*/
 int		check_first_last_token(t_tk *first, t_tk *last);
