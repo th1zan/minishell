@@ -6,7 +6,7 @@
 /*   By: thibault <thibault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 17:11:53 by mlachat           #+#    #+#             */
-/*   Updated: 2023/09/22 15:36:45 by thibault         ###   ########.fr       */
+/*   Updated: 2023/09/25 11:25:40 by thibault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,41 +21,70 @@ int	execution(t_tk **tk)
 	char	*cmd;
 	
 	tmp = *tk;
-	if (tmp->type != TK_CMD)
-		tmp = get_next_type_tk(tmp, TK_CMD);
+	arg_table = NULL;
+	cmd = NULL;
+	if (tmp->type != TK_CMD && tmp->type != TK_CMD_BUILT_IN)
+		tmp = get_next_cmd(tmp);
 	while(tmp)
 	{
-		arg_table = NULL;
-		cmd = NULL;
-		cmd_arg_list_to_table(tmp, &arg_table, &cmd);
-		
-		// fprintf(stderr, "-----------CMD: %s\n", tmp->tk_str);
-		
-		pid = fork();
-		if (pid == -1)
-			perror("fork error");
-		if (pid == 0)
+		if (tmp->type == TK_CMD)
 		{
-			set_fd_for_cmd(tmp);
-			close_all_fd(tk);
-			if (execve(cmd, arg_table, tmp->env) == -1)
+			arg_table = NULL;
+			cmd = NULL;
+			cmd_arg_list_to_table(tmp, &arg_table, &cmd);
+			
+			// fprintf(stderr, "-----------CMD: %s\n", tmp->tk_str);
+			
+			pid = fork();
+			if (pid == -1)
+				perror("fork error");
+			if (pid == 0)
 			{
-				//si execve s'execute, la mémoire sera libérée automatiquement à la fin du process
-				// sinon il faut la libérer ci-dessous
-				free(cmd);
-				free_strtab(arg_table);
-				perror("error when executing the command");
-				exit(1);
+				set_fd_for_cmd(tmp);
+				close_all_fd(tk);
+				if (execve(cmd, arg_table, tmp->env) == -1)
+				{
+					//si execve s'execute, la mémoire sera libérée automatiquement à la fin du process
+					// sinon il faut la libérer ci-dessous
+					free(cmd);
+					free_strtab(arg_table);
+					perror("error when executing the command");
+					exit(1);
+				}
 			}
+			else
+				tmp->pid = pid;
 		}
-		else
-			tmp->pid = pid;
-		tmp = get_next_type_tk(tmp, TK_CMD);
+		else if (tmp->type == TK_CMD_BUILT_IN)
+		{
+				set_fd_for_cmd(tmp);
+				is_builtin_exec(tmp);
+		}
+
+		tmp = get_next_cmd(tmp);
 	}
 	
 	close_all_fd(tk);
 	wait_all_pid(tk);
 	return (0);
+}
+
+
+t_tk	*get_next_cmd(t_tk *tk)
+{
+	t_tk	*tmp;
+
+	if (tk->next)
+		tmp = tk->next;
+	else
+		return (NULL);
+	while (tmp != NULL)
+	{
+		if (tmp->type == TK_CMD || tmp->type == TK_CMD_BUILT_IN)
+			return (tmp);
+		tmp = tmp->next;
+	}
+	return (NULL);
 }
 
 t_tk	*get_next_type_tk(t_tk *tk, int type)

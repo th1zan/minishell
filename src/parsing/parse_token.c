@@ -6,7 +6,7 @@
 /*   By: thibault <thibault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/11 11:49:26 by thibault          #+#    #+#             */
-/*   Updated: 2023/09/22 15:32:56 by thibault         ###   ########.fr       */
+/*   Updated: 2023/09/25 09:43:09 by thibault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ int	parse_token(t_tk **head_tk)
 	ft_handle_arg_tk(*head_tk);
 	ft_handle_hd_arg_tk(*head_tk);
 	ft_delete_type_token(head_tk, TK_HD_DELIM);
+	ft_handle_built_in(*head_tk);
 	return (0);
 }
 

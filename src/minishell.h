@@ -6,7 +6,7 @@
 /*   By: thibault <thibault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/06 16:13:42 by thibault          #+#    #+#             */
-/*   Updated: 2023/09/18 16:28:36 by thibault         ###   ########.fr       */
+/*   Updated: 2023/09/25 09:14:52 by thibault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@
 # include "./libft/libft.h"
 # include "./header/check_fct.h"
 # include "./header/parsing.h"
+# include "./header/built_in.h"
 # include "./header/utils.h"
 # include "./header/execution.h"
 

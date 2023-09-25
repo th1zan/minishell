@@ -6,7 +6,7 @@
 /*   By: thibault <thibault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 16:26:16 by thibault          #+#    #+#             */
-/*   Updated: 2023/08/29 14:42:08 by thibault         ###   ########.fr       */
+/*   Updated: 2023/09/25 10:13:22 by thibault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -168,5 +168,33 @@ int	ft_handle_file_tk(t_tk *tk)
 	// - operateur de redirecton non suivi par un nom de fichier: syntax error: unexpected end of file
 	// - opérateur suivi par plus de 1 nom de fichier 
 	// - nom de fichier invalide
+	
+}
+
+
+int	ft_handle_built_in(t_tk *tk)
+{
+
+	t_tk *tmp;
+	
+	if (!(tk))
+		return (1);
+	tmp = tk;
+	while (tmp)
+	{
+		
+		if (tmp->type == TK_CMD)
+		{
+			if(is_builtin_exec(tk))
+			{
+				tmp->type = TK_CMD_BUILT_IN;
+				printf("TK %s is a BUILT IN\n", tmp->tk_str);
+			}
+		}
+		tmp = tmp->next;
+	}
+		// printf("OUT-> str:%s type: %d \n", tk->tk_str, tk->type);
+		return (0);
+
 	
 }

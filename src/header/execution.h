@@ -6,7 +6,7 @@
 /*   By: thibault <thibault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 12:15:49 by mlachat           #+#    #+#             */
-/*   Updated: 2023/09/22 15:28:11 by thibault         ###   ########.fr       */
+/*   Updated: 2023/09/25 10:27:01 by thibault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ int		set_cmd_operator_fd(t_tk **tk);
 
 /*exec.c*/
 int		execution(t_tk **tk);
+t_tk	*get_next_cmd(t_tk *tmp);
 t_tk	*get_next_type_tk(t_tk *tmp, int type);
 int		cmd_arg_list_to_table(t_tk *tk, char ***arg_table, char **cmd);
 int		tk_arg_to_table(t_tk *tk, char	***arg_table);

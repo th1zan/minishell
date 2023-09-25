@@ -15,6 +15,7 @@ typedef enum
 	TK_HERE_DOC = 40,
 	// Second level token
 	TK_CMD = 100,
+	TK_CMD_BUILT_IN = 300,
 	TK_FILE = 200,
 	TK_HD_ARG = 400,
 	// Third level token

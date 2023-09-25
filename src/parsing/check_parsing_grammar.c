@@ -6,7 +6,7 @@
 /*   By: thibault <thibault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 14:42:49 by thibault          #+#    #+#             */
-/*   Updated: 2023/09/18 17:42:24 by thibault         ###   ########.fr       */
+/*   Updated: 2023/09/25 10:18:32 by thibault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,14 @@
 // Vérifie le premier et le dernier token de la liste principale
 int	check_first_last_token(t_tk *first, t_tk *last)
 {
-	if (!(is_tk_redir(first->type) || first->type == TK_CMD)) {
-		printf("error: first TK is not redir_operator or CMD");
+	if (!(is_tk_redir(first->type) || first->type == TK_CMD || first->type == TK_CMD_BUILT_IN))
+	{
+		printf("error: first TK is not redir_operator or CMD\n");
 		return (1);
 	}
-	if (!(is_tk_redir(last->type) || last->type == TK_CMD || last->type == TK_PIPE)) {
-		printf("error: last TK is not redir_operator or CMD or PIPE");
+	if (!(is_tk_redir(last->type) || last->type == TK_CMD || first->type == TK_CMD_BUILT_IN || last->type == TK_PIPE))
+	{
+		printf("error: last TK is not redir_operator or CMD or PIPE\n");
 		return (1);
 	}
 	return (0);
@@ -32,11 +34,13 @@ int	check_main_list_tokens(t_tk *tk)
 	t_tk *tmp = tk->next;
 	t_tk *prev = tk;
 	while (tmp != NULL) {
-		if (prev->type == TK_CMD && !(is_tk_redir(tmp->type) || tmp->type == TK_PIPE)) {
+		if ((prev->type == TK_CMD || prev->type == TK_CMD_BUILT_IN) && !(is_tk_redir(tmp->type) || tmp->type == TK_PIPE))
+		{
 			printf("error: prev TK is CMD and current TK is not a redir_operator OR a pipe\n");
 			return (1);
 		}
-		if ((is_tk_redir(prev->type) || prev->type == TK_PIPE) && tmp->type != TK_CMD) {
+		if ((is_tk_redir(prev->type) || prev->type == TK_PIPE) && (tmp->type == TK_CMD || tmp->type == TK_CMD_BUILT_IN))
+		{
 			printf("error: prev TK is a redir_operator OR a pipe and current TK is not CMD\n");
 			return (1);
 		}

@@ -9,6 +9,7 @@ int		count_words(char *input);
 /*parse_token.c*/
 int		parse_token(t_tk **tk);
 int		check_parsing(t_tk *tk);
+int		classify_operator(char *str);
 
 /*check_parsing_grammar.c*/
 int		check_first_last_token(t_tk *first, t_tk *last);
@@ -24,11 +25,12 @@ int		test_cmd(t_tk *tk);
 int		check_access(char *cmd);
 int		check_input_file(t_tk *tk);
 
-/*check_token.c*/
-int		classify_operator(char *str);
+/*classify_token.c*/
 int		classify_token(char *str);
-int		ft_handle_file_tk(t_tk *tk);
 int		ft_handle_hd_arg_tk(t_tk *tk);
 int		ft_handle_arg_tk(t_tk *tk);
+int		ft_handle_file_tk(t_tk *tk);
+int		ft_handle_built_in(t_tk *tk);
+
 
 #endif
