@@ -57,6 +57,8 @@ void	ft_lst_classify_tk_file(t_tk *tk)
 				tk->type = TK_CMD;
 			else if (tk->prev->type == TK_CMD)
 				tk->type = TK_CMD;
+			else if (tk->prev->type == TK_HD_ARG)
+				tk->type = TK_CMD;
 			else if (is_tk_in_out_app(prev_classified_tk))
 				tk->type = TK_FILE;	
 			else if (prev_classified_tk == TK_HERE_DOC)

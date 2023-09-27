@@ -6,7 +6,7 @@
 /*   By: thibault <thibault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 14:34:44 by thibault          #+#    #+#             */
-/*   Updated: 2023/09/22 15:23:42 by thibault         ###   ########.fr       */
+/*   Updated: 2023/09/27 17:31:49 by thibault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,8 +104,12 @@ int	set_operator_fd(t_tk **tk)
 		}
 		else if (tmp->type == TK_HERE_DOC)
 		{
-			//Gestion HERE-DOC à faire
-		}		
+			file = tmp->tk_str;
+			close(tmp->fd_in);
+			tmp->fd_in = open_file_to_fd(file, O_RDONLY);
+			fprintf(stderr,"tmp:%p fd_in:%d fd_out:%d\n", tmp, tmp->fd_in, tmp->fd_out);
+		}
+		
 		tmp = tmp->next;
 	}
 	return (0);
@@ -145,7 +149,12 @@ int	redir_operator_fd(t_tk **tk)
 		}
 		else if (tmp->type == TK_HERE_DOC)
 		{
-			// Cas à traiter
+			if (dup2(tmp->fd_in, STDIN_FILENO) == -1)
+			{
+				perror("dup2 error: fd_in in redir_operator_fd");
+				fprintf(stderr, "d_in: %d, errno: %d\n", tmp->fd_in, errno);
+				return (-1);
+			}
 		}
 		else if (tmp->type == TK_OUT_CHEVRON || tmp->type == TK_APP_CHEVRON)
 		{
@@ -233,12 +242,16 @@ int set_cmd_operator_fd(t_tk **tk)
 		if (tmp->type == TK_CMD)
 		{
 			// Vérification de l'existence de tmp->prev avant de vérifier son type
-			if (tmp->prev && (tmp->prev->type == TK_IN_CHEVRON || tmp->prev->type == TK_HERE_DOC))
+			if (tmp->prev && (tmp->prev->type == TK_IN_CHEVRON))
 				prev_operator = tmp->prev;
 
 			// Vérification de l'existence de tmp->next avant de vérifier son type
 			if (tmp->next && (tmp->next->type == TK_OUT_CHEVRON || tmp->next->type == TK_APP_CHEVRON))
 				next_operator = tmp->next;
+			
+			//Cas du Here-doc spécial. le HD est placé après la fonction mais compte comme une input
+			if (tmp->next && (tmp->next->type == TK_HERE_DOC))
+				prev_operator = tmp->next;
 
 			if (prev_operator)
 				tmp->fd_in = prev_operator->fd_in;

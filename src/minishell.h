@@ -6,7 +6,7 @@
 /*   By: thibault <thibault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/06 16:13:42 by thibault          #+#    #+#             */
-/*   Updated: 2023/09/25 09:14:52 by thibault         ###   ########.fr       */
+/*   Updated: 2023/09/27 17:04:42 by thibault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@
 # include "./header/execution.h"
 
 /* Minishell.c */
-char	*get_line(void);
+char	*get_line(char *prompt);
 int		check_input(char *input);
 char	**get_path(char **envp);
 int		save_std(int *original_std);

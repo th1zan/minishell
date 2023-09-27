@@ -6,7 +6,7 @@
 /*   By: thibault <thibault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/06 15:14:08 by thibault          #+#    #+#             */
-/*   Updated: 2023/09/25 11:02:35 by thibault         ###   ########.fr       */
+/*   Updated: 2023/09/27 17:06:57 by thibault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ int	main(int argc, char **argv, char **envp)
 	int	original_std[3];
 	(void)argc;
 	(void)argv;
-	
 
 	tk_head = NULL;
 	delimiter_tab = NULL;
@@ -43,7 +42,7 @@ int	main(int argc, char **argv, char **envp)
 	
 		save_std(original_std);
 		
-		input = get_line();
+		input = get_line("minishell> ");
 
 		if (check_input(input)) // return 1 means something is wrong. 
 		{
@@ -62,6 +61,8 @@ int	main(int argc, char **argv, char **envp)
 		free(delimiter_tab);
 		parse_token(&tk_head);
 		fprintf(stderr, "===INFO===: end of parsing\n");
+		fprintf(stderr, "===INFO===: print TK list::\n");
+		print_lst(tk_head);
 		// if (check_parsing(tk_head) == 0)
 		{
 			fprintf(stderr, "===INFO===: end of parsing check\n");
@@ -84,7 +85,7 @@ int	main(int argc, char **argv, char **envp)
 }
 
 //fonction à comprendre et commenter
-char	*get_line(void)
+char	*get_line(char *prompt)
 {
 	struct termios	saved;
 	struct termios	attributes;
@@ -94,7 +95,7 @@ char	*get_line(void)
 	tcgetattr(STDIN_FILENO, &attributes);
 	attributes.c_lflag &= ~ECHOCTL;
 	tcsetattr(STDIN_FILENO, TCSAFLUSH, &attributes);
-	line = readline("minishell> ");
+	line = readline(prompt);
 	if (check_input(line))
 		return (NULL);
 	// create_history(line);
