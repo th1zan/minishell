@@ -6,7 +6,7 @@
 /*   By: thibault <thibault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/09 14:58:05 by thibault          #+#    #+#             */
-/*   Updated: 2023/09/25 22:47:11 by thibault         ###   ########.fr       */
+/*   Updated: 2023/09/29 13:01:16 by thibault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,23 +110,23 @@ int	*get_delimiter(char *input) //input = user's command not parsed / input = "t
 			}
 			i--;
 		}
-		else if (is_name(input[i]))
+		else if (is_name(input[i]) || input[i] == '/')
 		{
 			delimiter[i] = 1;
 			i++;
-			while (is_portable_filename_char(input[i]))
+			while (is_portable_filename_char(input[i]) || input[i] == '/') 
 			{	
 				i++;
 			}
 			i--;
-		}				
+		}		
 		else
 		{
 			delimiter[i] = 0;
 		}
 		// PRINT TEST
-		// if (input[i])
-		// 	printf("input[%d]:%c is delimiter[%d]:%d \n", i, input[i], i, delimiter[i]);
+		if (input[i])
+			printf("input[%d]:%c is delimiter[%d]:%d \n", i, input[i], i, delimiter[i]);
 		i++; // if the first if is true,, i++ was already done, so this new i++ might go too far. 
 	}
 

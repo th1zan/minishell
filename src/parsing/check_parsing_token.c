@@ -6,7 +6,7 @@
 /*   By: thibault <thibault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 14:45:21 by thibault          #+#    #+#             */
-/*   Updated: 2023/09/22 15:40:48 by thibault         ###   ########.fr       */
+/*   Updated: 2023/09/29 13:05:26 by thibault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,13 @@ int	test_cmd(t_tk *tk)
 	path = tk->env;
 	cmd = tk->tk_str;
 	temp = NULL;
+	if(cmd[0] == '/')
+	{
+		if (check_access(cmd) == 1)
+		{
+			return (0);
+		}
+	}
 	i = 0;
 	while (path[i] != 0)
 	{

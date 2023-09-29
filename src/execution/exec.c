@@ -6,7 +6,7 @@
 /*   By: thibault <thibault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 17:11:53 by mlachat           #+#    #+#             */
-/*   Updated: 2023/09/29 11:41:43 by thibault         ###   ########.fr       */
+/*   Updated: 2023/09/29 13:21:14 by thibault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ int	execution(t_tk **tk)
 				{
 					//si execve s'execute, la mémoire sera libérée automatiquement à la fin du process
 					// sinon il faut la libérer ci-dessous
+					
 					free(cmd);
 					free_strtab(arg_table);
 					perror("error when executing the command");
@@ -108,13 +109,23 @@ int	cmd_arg_list_to_table(t_tk *tk, char ***arg_table, char **cmd)
 {
 	char	*tmp_str;
 	t_tk	*tmp;
+	char*	tmp_cmd;
 
 	tmp = tk;
 	tk_arg_to_table(tmp, arg_table);
-	get_cmd_path(tmp);
-	tmp_str = ft_strjoin(tmp->path, "/");
-	*cmd = ft_strjoin(tmp_str, tmp->tk_str);
-	free(tmp_str);
+	tmp_cmd = tmp->tk_str;
+	printf("tmp_cmd: %c\n", tmp_cmd[0]);
+	if(tmp_cmd[0] == '/')
+	{
+		*cmd = tmp_cmd;
+	}
+	else
+	{
+		get_cmd_path(tmp);
+		tmp_str = ft_strjoin(tmp->path, "/");
+		*cmd = ft_strjoin(tmp_str, tmp->tk_str);
+		free(tmp_str);
+	}
 	return(0);
 }
 
@@ -162,6 +173,7 @@ int	get_cmd_path(t_tk *tk)
 		temp = ft_strjoin(path[i], "/");
 		cmd = ft_strjoin(temp, tk->tk_str);
 		free(temp);
+	
 		if (check_access(cmd) == 1)
 		{
 			// printf("path[i] %s added to CMD_TK: %s\n", path[i], tk->tk_str);
