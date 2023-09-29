@@ -6,7 +6,7 @@
 /*   By: thibault <thibault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/06 15:14:08 by thibault          #+#    #+#             */
-/*   Updated: 2023/09/27 17:06:57 by thibault         ###   ########.fr       */
+/*   Updated: 2023/09/29 11:27:40 by thibault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ int	main(int argc, char **argv, char **envp)
 		parse_token(&tk_head);
 		fprintf(stderr, "===INFO===: end of parsing\n");
 		fprintf(stderr, "===INFO===: print TK list::\n");
-		print_lst(tk_head);
+		// print_lst(tk_head);
 		// if (check_parsing(tk_head) == 0)
 		{
 			fprintf(stderr, "===INFO===: end of parsing check\n");

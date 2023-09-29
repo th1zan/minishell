@@ -6,7 +6,7 @@
 /*   By: thibault <thibault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 16:26:16 by thibault          #+#    #+#             */
-/*   Updated: 2023/09/27 17:15:18 by thibault         ###   ########.fr       */
+/*   Updated: 2023/09/29 11:07:21 by thibault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,8 @@ int	ft_handle_hd_arg_tk(t_tk *tk)
 	int		fd_tmp;
 
 	tmp_hd_arg_file = "hd_arg.txt";
+	// Supprimer le fichier
+	unlink(tmp_hd_arg_file);
 	fd_tmp = open(tmp_hd_arg_file, O_CREAT | O_APPEND | O_WRONLY, 0777);
 	if (fd_tmp == -1)
 	{
@@ -273,10 +275,10 @@ int	ft_handle_built_in(t_tk *tk)
 		
 		if (tmp->type == TK_CMD)
 		{
-			if(is_builtin_exec(tk))
+			if(is_builtin(tmp) == 1)
 			{
 				tmp->type = TK_CMD_BUILT_IN;
-				printf("TK %s is a BUILT IN\n", tmp->tk_str);
+				printf("%d : TK %s is a BUILT IN\n", is_builtin(tmp), tmp->tk_str);
 			}
 		}
 		tmp = tmp->next;

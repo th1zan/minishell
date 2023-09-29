@@ -6,7 +6,7 @@
 /*   By: thibault <thibault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 09:24:48 by thibault          #+#    #+#             */
-/*   Updated: 2023/09/25 10:56:09 by thibault         ###   ########.fr       */
+/*   Updated: 2023/09/29 10:48:38 by thibault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	is_tk_str(t_tk *tk, char *fct_name)
 
 int	is_echo(t_tk *tk)
 {
-	printf("is_echo status: %d\n", is_tk_str(tk, "echo"));
+	// printf("is_echo status: %d\n", is_tk_str(tk, "echo"));
 	return(is_tk_str(tk, "echo"));
 }
 
@@ -51,6 +51,31 @@ int	is_builtin_exec(t_tk *cmd)
 	// else if (is_exit(cmd))
 	// {
 	// 	status = 0;
+	// 	exit(cmd);
+	// }
+	return (status);
+}
+
+int	is_builtin(t_tk *cmd)
+{
+	int	status;
+
+	status = -1;
+	if (is_echo(cmd))
+		status = 1;
+	// else if (is_cd(cmd))
+	// 	status = 1;
+    // else if (is_pwd(cmd))
+	// 	status = 1;
+	// else if (is_export(cmd))
+	// 	status = 1;
+	// else if (is_unset(cmd))
+	// 	status = 1;
+	// else if (is_env(cmd))
+	// 	status = 1;
+	// else if (is_exit(cmd))
+	// {
+	// 	status = 1;
 	// 	exit(cmd);
 	// }
 	return (status);

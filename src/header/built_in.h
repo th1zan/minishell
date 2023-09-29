@@ -12,6 +12,7 @@ int	env(t_tk *cmd);
 int	exit_cmd(t_tk *cmd);
 
 /*built_in.c*/
+int	is_builtin(t_tk *cmd);
 int	is_builtin_exec(t_tk *cmd);
 int	is_echo(t_tk *tk);
 int	is_tk_str(t_tk *tk, char *fct_name);

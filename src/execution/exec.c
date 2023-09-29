@@ -6,7 +6,7 @@
 /*   By: thibault <thibault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 17:11:53 by mlachat           #+#    #+#             */
-/*   Updated: 2023/09/25 11:25:40 by thibault         ###   ########.fr       */
+/*   Updated: 2023/09/29 11:41:43 by thibault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -197,6 +197,20 @@ int	set_fd_for_cmd(t_tk *tk)
 		}
 	}
 	if (tk->next && tk->next->type == TK_PIPE)
+	{
+		if (fd_is_standard(fd_out) == 0)
+		{
+			
+			if (dup2(fd_out, STDOUT_FILENO) == -1)
+			{
+				perror("dup2 error: fd_out in set_fd_for_cmd");
+				fprintf(stderr, "set_fd_for_cmd :: fd_out: %d, errno: %d\n", fd_out, errno);
+				return (-1);
+			}
+		}
+			// fprintf(stderr, "set_fd_for_cmd :: fd_out dup2 %d : %d\n", fd_out, STDOUT_FILENO);
+	}
+	if (tk->next && tk->next->next && tk->next->type == TK_HERE_DOC && tk->next->next->type == TK_PIPE)
 	{
 		if (fd_is_standard(fd_out) == 0)
 		{
