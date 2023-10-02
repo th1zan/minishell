@@ -6,7 +6,7 @@
 /*   By: thibault <thibault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 17:11:53 by mlachat           #+#    #+#             */
-/*   Updated: 2023/09/29 13:21:14 by thibault         ###   ########.fr       */
+/*   Updated: 2023/10/02 11:58:12 by thibault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,10 +121,12 @@ int	cmd_arg_list_to_table(t_tk *tk, char ***arg_table, char **cmd)
 	}
 	else
 	{
-		get_cmd_path(tmp);
-		tmp_str = ft_strjoin(tmp->path, "/");
-		*cmd = ft_strjoin(tmp_str, tmp->tk_str);
-		free(tmp_str);
+		if (get_cmd_path(tmp) == SUCCESS)
+		{
+			tmp_str = ft_strjoin(tmp->path, "/");
+			*cmd = ft_strjoin(tmp_str, tmp->tk_str);
+			free(tmp_str);
+		}
 	}
 	return(0);
 }
@@ -174,7 +176,7 @@ int	get_cmd_path(t_tk *tk)
 		cmd = ft_strjoin(temp, tk->tk_str);
 		free(temp);
 	
-		if (check_access(cmd) == 1)
+		if (check_access(cmd) == FAILURE)
 		{
 			// printf("path[i] %s added to CMD_TK: %s\n", path[i], tk->tk_str);
 			tk->path = path[i];

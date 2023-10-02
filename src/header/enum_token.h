@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   enum_token.h                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: thibault <thibault@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/10/02 11:56:14 by thibault          #+#    #+#             */
+/*   Updated: 2023/10/02 11:56:15 by thibault         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 
 #ifndef ENUM_TOKEN_H
 # define ENUM_TOKEN_H
@@ -39,8 +51,15 @@ typedef enum
 	TOKEN_ARGUMENT
 	TOKEN_VARIABLE,
 	*/
-} TokenType;
+}
+TokenType;
 
+typedef enum
+{
+	SUCCESS,
+	FAILURE
+} 
+ReturnCode;
 #endif
 
 
