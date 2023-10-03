@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   thib_minishell.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thibault <thibault@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tsanglar <tsanglar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/06 15:14:08 by thibault          #+#    #+#             */
-/*   Updated: 2023/10/02 15:51:52 by thibault         ###   ########.fr       */
+/*   Updated: 2023/10/03 18:40:57 by tsanglar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,14 @@ int	main(int argc, char **argv, char **envp)
 	char	*input;
 	t_tk	*tk_head;
 	int		*delimiter_tab;
-	char	**path;
+	
 	int	original_std[3];
 	(void)argc;
 	(void)argv;
 
 	tk_head = NULL;
 	delimiter_tab = NULL;
-	path = get_path(envp);
+	
 	
 	//envp can be sent empty into the program, check if empty before continuing to avoid wrong dereference (segfault)
 	// tip : there is a bash command that you can run your program with in order to empty the envp that it receives. 
@@ -50,22 +50,28 @@ int	main(int argc, char **argv, char **envp)
 				free(input);
 			continue; // skip the current iteration, and starts a new one, in this case, goes back to reading the input with readline()
 		}
-		replace_env_variables(&input);
-		fprintf(stderr, "===INFO===: New input with variable's content\n");
-		printf("%s\n", input);
+
+		// replace_env_variables(&input);
+		// fprintf(stderr, "===INFO===: New input with variable's content\n");
+		// printf("%s\n", input);
 
 		delimiter_tab = get_delimiter(input);  // This array of ints the size of the input, will be used to mark whether each character in the input is a delimiter (1) or not (0).
 
 		// if delimiter_tab is NULL, sending it in input_to_token might not be safe.
-		input_to_token(input, path, &tk_head, delimiter_tab);
+		input_to_token(input, envp, &tk_head, delimiter_tab);
 		// here we have a linked list, with each node is a part of the input seperated with the delimiter, that was set in the delimiter array of int.
 		
 		// if ft_calloc called in get_delimiter, return NULL (shit happens), you can't free it, you'll have a memory problem. 
 		free(delimiter_tab);
 		parse_token(&tk_head);
 		fprintf(stderr, "===INFO===: end of parsing\n");
+		
+		// fprintf(stderr, "===INFO===: print PATH\n");
+		// print_strtab(tk_head->path_tab);
+		// fprintf(stderr, "===INFO===: print ENV\n");
+		// print_strtab(tk_head->env);
+
 		fprintf(stderr, "===INFO===: print TK list::\n");
-		// print_lst(tk_head);
 		// if (check_parsing(tk_head) == 0)
 		{
 			fprintf(stderr, "===INFO===: end of parsing check\n");
@@ -83,7 +89,6 @@ int	main(int argc, char **argv, char **envp)
 		free(input);
 		
 	}
-	free_strtab(path); //ne pas free dans la boucle while
 	return(0);
 }
 
@@ -116,6 +121,7 @@ char	**get_path(char **envp)
 {
 	char	**path;
 	int		i;
+	char	*tmp;
 
 	path = NULL;
 	i = 0;
@@ -123,13 +129,19 @@ char	**get_path(char **envp)
 	// run minishell with NULL envp, might have a segfault here with the dereferencement.
 	// proposition : while (envp && envp[i] != 0)
 	
-	while (envp[i] != 0)
+	while (envp && envp[i] != 0)
 	{
 		if (ft_strnstr(envp[i], "PATH=", 5) != 0)
 			break;
 		i++;
 	}
 	path = ft_split(envp[i], ':');
+	if (path[0])
+	{
+		tmp = ft_strtrim(path[0], "PATH=");
+		free (path[0]);
+		path[0] = tmp;
+	}
 	// printf("IN SPLIT: path adress:%p\n", path);
 	return (path);
 }
@@ -182,143 +194,4 @@ int	restore_std(int *original_std)
 	close(original_std[1]);
 	close(original_std[2]);
 	return 0;
-}
-
-int	count_variables(char *input)
-{
-	int count = 0;
-	int i = 0;
-
-	while (input[i])
-	{
-		if (input[i] == '$' && check_inside_simple_quote(input, i) != SUCCESS)
-		{
-			count++;
-			i++;
-			while (is_portable_filename_char(input[i]) && input[i] != 0)
-				i++;
-		}
-		else
-			i++;
-	}
-	return (count);
-}
-
-char	**get_variables_values(char *input)
-{
-	int n_variables;
-	char **var_values_tab;;
-	int i;
-	int j;
-	int start;
-
-	n_variables = count_variables(input);
-	var_values_tab = (char **)malloc((n_variables + 1) * sizeof(char *));
-	if (!var_values_tab)
-		return(NULL);
-	i = 0;
-	j = 0;
-	start = 0;
-	while (input[i] && j < n_variables)
-	{
-		if (input[i] == '$' && check_inside_simple_quote(input, i) != SUCCESS)
-		{
-			start = i;
-			i++;
-			while (is_portable_filename_char(input[i]) && input[i] != 0)
-				i++;
-			char *variable_name = ft_substr(input, start + 1, i - start - 1);
-			// var_values_tab[j] = get_env_variable(variable_name);
-			var_values_tab[j] = ft_strdup("VALEUR_VARIABLE"); 
-			free(variable_name);
-			j++;
-		}
-		else
-			i++;
-	}
-	var_values_tab[j] = NULL;
-	return (var_values_tab);
-}
-
-int	replace_with_values(char **input, char **var_values_tab)
-{
-	char *new_input;
-	char *tmp;
-	char *tmp2; 
-	int i;
-	int j;
-	int start;
-	char *input_str;
-
-	input_str = *input;
-	new_input = ft_strdup("");
-	i = 0;
-	j = 0;
-	start = 0;
-	while (input_str[i] && var_values_tab[j])
-	{
-		if (input_str[i] == '$' && check_inside_simple_quote(input_str, i) != SUCCESS)
-		{
-			tmp = ft_substr(input_str, start, i - start);
-			tmp2 = ft_strjoin(tmp, new_input);
-			free(new_input);
-			new_input = ft_strjoin(tmp2, var_values_tab[j]);
-			free(tmp2);
-			free(tmp);
-			i++;
-			while (is_portable_filename_char(input_str[i]))
-			{	
-				i++;
-			}
-			start = start + i;
-			j++;
-		}
-		else
-			i++;
-	}
-	tmp = ft_strjoin(new_input, &input_str[i]);
-	free(new_input);
-	free(input_str);
-	*input = tmp;
-	// printf("new_input FINAL: %s\n", new_input);
-	return (0);
-}
-
-int	replace_env_variables(char **input)
-{
-	char	**var_values_tab;
-	int		i;
-
-	var_values_tab = get_variables_values(*input);
-	replace_with_values(input, var_values_tab);
-	// free (input);
-	// *input = tmp_input;
-	i = 0;
-	while (var_values_tab[i])
-		free(var_values_tab[i++]);
-	free(var_values_tab);
-	return (0);
-}
-
-int	check_inside_simple_quote(char *input, int index)
-{
-	int i = 0;
-	int in_quote = 0;
-
-	while (i < index && input[i])
-	{
-		if (input[i] == '\'')
-		{
-			if (in_quote)
-				in_quote = 0; // Si nous sommes déjà à l'intérieur d'une citation, cela signifie que nous avons trouvé la fin de la citation
-			else
-				in_quote = 1; // Sinon, cela signifie que nous avons trouvé le début d'une citation
-		}
-		i++;
-	}
-
-	if (in_quote)
-		return (SUCCESS); // Le caractère à l'index donné est à l'intérieur de guillemets simples
-	else
-		return (FAILURE); // Le caractère à l'index donné n'est pas à l'intérieur de guillemets simples
 }

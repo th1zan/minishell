@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input_to_token.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thibault <thibault@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tsanglar <tsanglar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/09 14:58:05 by thibault          #+#    #+#             */
-/*   Updated: 2023/10/02 15:55:51 by thibault         ###   ########.fr       */
+/*   Updated: 2023/10/03 16:51:03 by tsanglar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,7 +143,7 @@ int	*get_delimiter(char *input) //input = user's command not parsed / input = "t
 	return (delimiter);
 }
 
-int	input_to_token(char *input, char **path, t_tk **tk_head, int *delimiter)
+int	input_to_token(char *input, char **envp, t_tk **tk_head, int *delimiter)
 {
 	// input = "ls | wc"
 	// delimiter = {0, 0, 0, 1, 0, 0, 0}
@@ -151,11 +151,14 @@ int	input_to_token(char *input, char **path, t_tk **tk_head, int *delimiter)
 	int		i;
 	int		len;
 	char	*tk_str;
+	char	**path;
 
 	*tk_head = NULL;
 	begin = 0;
 	len = 0;
 
+	path = get_path(envp);
+	// print_strtab(path);
 	i = 0;
 	while (input[i] != 0)
 	{
@@ -169,16 +172,16 @@ int	input_to_token(char *input, char **path, t_tk **tk_head, int *delimiter)
 				// begin = 0
 				// len = 3
 				tk_str = ft_substr(input, begin, len);
-				ft_lstadd_back(tk_head, ft_lstnew(tk_str, path)); //add at the end of the list. lst new adds a new element to the list.
+				ft_lstadd_back(tk_head, ft_lstnew(tk_str, path, envp)); //add at the end of the list. lst new adds a new element to the list.
 				begin = i; // = 3
 			}
 		}
 		i++;
 	}
-	len = i - begin; // len = 
+	len = i - begin;
 	// printf("%d: begin:%d len:%d\n", i, begin, len);
 	tk_str = ft_substr(input, begin, len);
-	ft_lstadd_back(tk_head, ft_lstnew(tk_str, path));
+	ft_lstadd_back(tk_head, ft_lstnew(tk_str, path, envp));
 	// print_lst(*tk_head);
 	return (0);
 	// check errors in addback | lstnew, substr for malloc if NULL, it is not handled anywhere yet. 

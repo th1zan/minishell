@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_token.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thibault <thibault@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tsanglar <tsanglar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/11 11:49:26 by thibault          #+#    #+#             */
-/*   Updated: 2023/10/02 15:52:31 by thibault         ###   ########.fr       */
+/*   Updated: 2023/10/03 17:39:06 by tsanglar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,10 @@ int	parse_token(t_tk **head_tk)
 {
 	ft_lst_modif_tk_str(*head_tk, del_whitespace); //this function, iterrates through the list, applying the del_whitespace function to each node. 
 	ft_lst_modif_tk_type(*head_tk, classify_operator);
+	ft_lst_replace_var(*head_tk, replace_with_values);
 	ft_delete_type_token(head_tk, TK_BLANK);
 	ft_lst_classify_tk_file(*head_tk);
+	
 	/*TODO: vérification des règles de grammaire ex: deux operateur à la suite-> pas possible*/
 	ft_handle_file_tk(*head_tk);
 	handle_quotes(*head_tk);

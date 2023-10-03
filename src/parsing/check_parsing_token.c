@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_parsing_token.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thibault <thibault@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tsanglar <tsanglar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 14:45:21 by thibault          #+#    #+#             */
-/*   Updated: 2023/09/29 13:05:26 by thibault         ###   ########.fr       */
+/*   Updated: 2023/10/03 13:52:37 by tsanglar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int	test_cmd(t_tk *tk)
 	int		i;
 
 	// cmd = NULL;
-	path = tk->env;
+	path = tk->path_tab;
 	cmd = tk->tk_str;
 	temp = NULL;
 	if(cmd[0] == '/')

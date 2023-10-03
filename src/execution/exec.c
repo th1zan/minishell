@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thibault <thibault@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tsanglar <tsanglar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 17:11:53 by mlachat           #+#    #+#             */
-/*   Updated: 2023/10/02 11:58:12 by thibault         ###   ########.fr       */
+/*   Updated: 2023/10/03 14:38:35 by tsanglar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int	execution(t_tk **tk)
 			{
 				set_fd_for_cmd(tmp);
 				close_all_fd(tk);
-				if (execve(cmd, arg_table, tmp->env) == -1)
+				if (execve(cmd, arg_table, tmp->path_tab) == -1)
 				{
 					//si execve s'execute, la mémoire sera libérée automatiquement à la fin du process
 					// sinon il faut la libérer ci-dessous
@@ -114,7 +114,7 @@ int	cmd_arg_list_to_table(t_tk *tk, char ***arg_table, char **cmd)
 	tmp = tk;
 	tk_arg_to_table(tmp, arg_table);
 	tmp_cmd = tmp->tk_str;
-	printf("tmp_cmd: %c\n", tmp_cmd[0]);
+	// printf("tmp_cmd: %c\n", tmp_cmd[0]);
 	if(tmp_cmd[0] == '/')
 	{
 		*cmd = tmp_cmd;
@@ -166,7 +166,7 @@ int	get_cmd_path(t_tk *tk)
 	char	*temp;
 	int		i;
 
-	path = tk->env;
+	path = tk->path_tab;
 	cmd = tk->tk_str;
 	temp = NULL;
 	i = 0;

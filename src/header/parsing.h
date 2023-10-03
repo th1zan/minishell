@@ -3,7 +3,7 @@
 
 /*input_to_word.c*/
 int		*get_delimiter(char *input);
-int		input_to_token(char *input, char **path, t_tk **tk_head, int *delimiter);
+int		input_to_token(char *input, char **envp, t_tk **tk_head, int *delimiter);
 int		count_words(char *input);
 
 /*parse_token.c*/
