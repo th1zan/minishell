@@ -6,15 +6,15 @@
 /*   By: tsanglar <tsanglar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 09:23:09 by thibault          #+#    #+#             */
-/*   Updated: 2023/10/03 15:02:51 by tsanglar         ###   ########.fr       */
+/*   Updated: 2023/10/04 14:45:14 by tsanglar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-t_tk	*ft_lstnew(char *token_str, char **path, char **envp)
+t_tk *ft_lstnew(char *token_str, char **path, char ***envp)
 {
-	t_tk	*new_tk;
+	t_tk *new_tk;
 
 	new_tk = (t_tk *)calloc(1, sizeof(t_tk));
 	if (!new_tk)

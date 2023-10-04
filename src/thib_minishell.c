@@ -6,7 +6,7 @@
 /*   By: tsanglar <tsanglar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/06 15:14:08 by thibault          #+#    #+#             */
-/*   Updated: 2023/10/03 18:40:57 by tsanglar         ###   ########.fr       */
+/*   Updated: 2023/10/04 14:48:11 by tsanglar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ int	main(int argc, char **argv, char **envp)
 	char	*input;
 	t_tk	*tk_head;
 	int		*delimiter_tab;
+	char	**env_main;
 	
 	int	original_std[3];
 	(void)argc;
@@ -28,6 +29,8 @@ int	main(int argc, char **argv, char **envp)
 
 	tk_head = NULL;
 	delimiter_tab = NULL;
+	env_main = envp;
+	
 	
 	
 	//envp can be sent empty into the program, check if empty before continuing to avoid wrong dereference (segfault)
@@ -39,7 +42,7 @@ int	main(int argc, char **argv, char **envp)
 	// print_strtab(path);
 	while (1)
 	{
-	
+		printf("main :: env_main: %p\n" ,env_main);
 		save_std(original_std);
 		
 		input = get_line("minishell> ");
@@ -58,7 +61,7 @@ int	main(int argc, char **argv, char **envp)
 		delimiter_tab = get_delimiter(input);  // This array of ints the size of the input, will be used to mark whether each character in the input is a delimiter (1) or not (0).
 
 		// if delimiter_tab is NULL, sending it in input_to_token might not be safe.
-		input_to_token(input, envp, &tk_head, delimiter_tab);
+		input_to_token(input, &env_main, &tk_head, delimiter_tab);
 		// here we have a linked list, with each node is a part of the input seperated with the delimiter, that was set in the delimiter array of int.
 		
 		// if ft_calloc called in get_delimiter, return NULL (shit happens), you can't free it, you'll have a memory problem. 
@@ -117,7 +120,7 @@ char	*get_line(char *prompt)
 }
 
 
-char	**get_path(char **envp)
+char	**get_path(char **env_main)
 {
 	char	**path;
 	int		i;
@@ -129,13 +132,13 @@ char	**get_path(char **envp)
 	// run minishell with NULL envp, might have a segfault here with the dereferencement.
 	// proposition : while (envp && envp[i] != 0)
 	
-	while (envp && envp[i] != 0)
+	while (env_main && env_main[i] != 0)
 	{
-		if (ft_strnstr(envp[i], "PATH=", 5) != 0)
+		if (ft_strnstr(env_main[i], "PATH=", 5) != 0)
 			break;
 		i++;
 	}
-	path = ft_split(envp[i], ':');
+	path = ft_split(env_main[i], ':');
 	if (path[0])
 	{
 		tmp = ft_strtrim(path[0], "PATH=");

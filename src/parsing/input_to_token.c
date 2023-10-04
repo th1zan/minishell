@@ -6,7 +6,7 @@
 /*   By: tsanglar <tsanglar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/09 14:58:05 by thibault          #+#    #+#             */
-/*   Updated: 2023/10/03 16:51:03 by tsanglar         ###   ########.fr       */
+/*   Updated: 2023/10/04 14:45:55 by tsanglar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,7 +143,7 @@ int	*get_delimiter(char *input) //input = user's command not parsed / input = "t
 	return (delimiter);
 }
 
-int	input_to_token(char *input, char **envp, t_tk **tk_head, int *delimiter)
+int	input_to_token(char *input, char ***envp, t_tk **tk_head, int *delimiter)
 {
 	// input = "ls | wc"
 	// delimiter = {0, 0, 0, 1, 0, 0, 0}
@@ -157,7 +157,7 @@ int	input_to_token(char *input, char **envp, t_tk **tk_head, int *delimiter)
 	begin = 0;
 	len = 0;
 
-	path = get_path(envp);
+	path = get_path(*envp);
 	// print_strtab(path);
 	i = 0;
 	while (input[i] != 0)

@@ -34,7 +34,7 @@ void	ft_lst_modif_tk_type(t_tk *tk, int (*f)(char *str))
 	}
 }
 
-void	ft_lst_replace_var(t_tk *tk, int (*f)(char **str, char **env))
+void	ft_lst_replace_var(t_tk *tk, int (*f)(char **str, char ***env))
 {
 	if (!(tk) || !(f))
 		return ;

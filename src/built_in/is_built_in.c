@@ -6,7 +6,7 @@
 /*   By: tsanglar <tsanglar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 09:24:48 by thibault          #+#    #+#             */
-/*   Updated: 2023/10/03 18:07:17 by tsanglar         ###   ########.fr       */
+/*   Updated: 2023/10/04 15:51:49 by tsanglar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,19 @@ int	is_export(t_tk *tk)
 	return(is_tk_str(tk, "export"));
 }
 
+int	is_unset(t_tk *tk)
+{
+	// printf("is_echo status: %d\n", is_tk_str(tk, "echo"));
+	return(is_tk_str(tk, "unset"));
+}
+
+int	is_env(t_tk *tk)
+{
+	// printf("is_echo status: %d\n", is_tk_str(tk, "echo"));
+	return(is_tk_str(tk, "env"));
+}
+
+
 int	is_builtin_exec(t_tk *cmd)
 {
 	int	status;
@@ -49,10 +62,10 @@ int	is_builtin_exec(t_tk *cmd)
 	// 	status = pwd(cmd);
 	else if (is_export(cmd))
 		status = export(cmd);
-	// else if (is_unset(cmd))
-	// 	status = unset(cmd);
-	// else if (is_env(cmd))
-	// 	status = env(cmd);
+	else if (is_unset(cmd))
+		status = unset(cmd);
+	else if (is_env(cmd))
+		status = env_built_in(cmd);
 	// else if (is_exit(cmd))
 	// {
 	// 	status = 0;
@@ -74,10 +87,10 @@ int	is_builtin(t_tk *cmd)
 	// 	status = 1;
 	else if (is_export(cmd))
 		status = 1;
-	// else if (is_unset(cmd))
-	// 	status = 1;
-	// else if (is_env(cmd))
-	// 	status = 1;
+	else if (is_unset(cmd))
+		status = 1;
+	else if (is_env(cmd))
+		status = 1;
 	// else if (is_exit(cmd))
 	// {
 	// 	status = 1;

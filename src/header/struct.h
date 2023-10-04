@@ -6,7 +6,7 @@
 /*   By: tsanglar <tsanglar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/26 09:31:25 by thibault          #+#    #+#             */
-/*   Updated: 2023/10/03 14:53:32 by tsanglar         ###   ########.fr       */
+/*   Updated: 2023/10/04 14:44:48 by tsanglar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ typedef struct s_tk
 {
 	char		*tk_str;	// contenu du token, built in input_to_token, cleaned in parse_token
 	int			type;		// type du token
-	char		**env;		// environnement
+	char		***env;		// environnement
 	int			fd_in;
 	int			fd_out;
 	int			pid;

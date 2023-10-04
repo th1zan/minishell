@@ -6,7 +6,7 @@
 /*   By: tsanglar <tsanglar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 16:31:29 by thibault          #+#    #+#             */
-/*   Updated: 2023/10/03 17:40:21 by tsanglar         ###   ########.fr       */
+/*   Updated: 2023/10/04 14:53:26 by tsanglar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -257,7 +257,7 @@ char *replace_var_in_string(char *input_str, char *new_input, int *i, char **var
 	return new_input;
 }
 
-int	replace_with_values(char **input, char **var_values_tab)
+int	replace_with_values(char **input, char ***var_values_tab)
 {
 	char	*new_input;
 	int		i;
@@ -274,7 +274,7 @@ int	replace_with_values(char **input, char **var_values_tab)
 	{
 		if (input_str[i] == '$' && check_inside_simple_quote(input_str, i) != SUCCESS)
 		{
-			new_input = replace_var_in_string(input_str, new_input, &i, var_values_tab);
+			new_input = replace_var_in_string(input_str, new_input, &i, *var_values_tab);
 			while (is_portable_filename_char(input_str[i])) { i++; }
 			start = i;
 		}
