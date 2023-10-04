@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   is_built_in.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tsanglar <tsanglar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: thibault <thibault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 09:24:48 by thibault          #+#    #+#             */
-/*   Updated: 2023/10/04 15:51:49 by tsanglar         ###   ########.fr       */
+/*   Updated: 2023/10/04 22:57:28 by thibault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,18 @@ int	is_env(t_tk *tk)
 	return(is_tk_str(tk, "env"));
 }
 
+int	is_pwd(t_tk *tk)
+{
+	// printf("is_echo status: %d\n", is_tk_str(tk, "echo"));
+	return(is_tk_str(tk, "pwd"));
+}
+
+int	is_cd(t_tk *tk)
+{
+	// printf("is_echo status: %d\n", is_tk_str(tk, "echo"));
+	return(is_tk_str(tk, "cd"));
+}
+
 
 int	is_builtin_exec(t_tk *cmd)
 {
@@ -56,10 +68,10 @@ int	is_builtin_exec(t_tk *cmd)
 	status = -1;
 	if (is_echo(cmd))
 		status = echo(cmd);
-	// else if (is_cd(cmd))
-	// 	status = cd(cmd);
-    // else if (is_pwd(cmd))
-	// 	status = pwd(cmd);
+	else if (is_cd(cmd))
+		status = cd(cmd);
+    else if (is_pwd(cmd))
+		status = pwd();
 	else if (is_export(cmd))
 		status = export(cmd);
 	else if (is_unset(cmd))
@@ -81,10 +93,10 @@ int	is_builtin(t_tk *cmd)
 	status = -1;
 	if (is_echo(cmd))
 		status = 1;
-	// else if (is_cd(cmd))
-	// 	status = 1;
-    // else if (is_pwd(cmd))
-	// 	status = 1;
+	else if (is_cd(cmd))
+		status = 1;
+    else if (is_pwd(cmd))
+		status = 1;
 	else if (is_export(cmd))
 		status = 1;
 	else if (is_unset(cmd))

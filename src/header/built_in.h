@@ -18,6 +18,8 @@ int		export(t_tk *tk);
 int		env_built_in(t_tk *tk);
 int		find_env_var(char **env, char *var_name);
 int		is_valid_env_argument(char *arg);
+int		pwd(void);
+int		cd(t_tk *tk);
 
 
 int		is_tk_str(t_tk *tk, char *fct_name);
@@ -33,6 +35,8 @@ int		is_unset(t_tk *tk);
 int		is_env(t_tk *tk);
 int		is_builtin_exec(t_tk *cmd);
 int		is_builtin(t_tk *cmd);
+int		is_pwd(t_tk *tk);
+int		is_cd(t_tk *tk);
 
 
 

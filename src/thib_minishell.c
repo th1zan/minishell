@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   thib_minishell.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tsanglar <tsanglar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: thibault <thibault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/06 15:14:08 by thibault          #+#    #+#             */
-/*   Updated: 2023/10/04 14:48:11 by tsanglar         ###   ########.fr       */
+/*   Updated: 2023/10/04 23:00:51 by thibault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int	main(int argc, char **argv, char **envp)
 	// print_strtab(path);
 	while (1)
 	{
-		printf("main :: env_main: %p\n" ,env_main);
+		// printf("main :: env_main: %p\n" ,env_main);
 		save_std(original_std);
 		
 		input = get_line("minishell> ");
