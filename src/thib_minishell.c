@@ -6,7 +6,7 @@
 /*   By: thibault <thibault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/06 15:14:08 by thibault          #+#    #+#             */
-/*   Updated: 2023/10/04 23:00:51 by thibault         ###   ########.fr       */
+/*   Updated: 2023/10/05 16:58:07 by thibault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,7 @@ int	main(int argc, char **argv, char **envp)
 	delimiter_tab = NULL;
 	env_main = envp;
 	
-	
-	
+
 	//envp can be sent empty into the program, check if empty before continuing to avoid wrong dereference (segfault)
 	// tip : there is a bash command that you can run your program with in order to empty the envp that it receives. 
 	// tip : when you run bash with this command, bash still add default env variables in the empty env. So you can do the same here, 
@@ -44,8 +43,14 @@ int	main(int argc, char **argv, char **envp)
 	{
 		// printf("main :: env_main: %p\n" ,env_main);
 		save_std(original_std);
-		
+		handle_signal();
 		input = get_line("minishell> ");
+
+		if (!input) // == gestion de ctrl-D aka EOF
+		{
+			ft_printf("exit\n");
+			break ;
+		}
 
 		if (check_input(input)) // return 1 means something is wrong. 
 		{
@@ -108,17 +113,15 @@ char	*get_line(char *prompt)
 	tcsetattr(STDIN_FILENO, TCSAFLUSH, &attributes);  // Définir les nouveaux attributs pour le terminal.
 
 	line = readline(prompt);  // Lire une ligne de l'utilisateur en utilisant le prompt fourni.
-
-	if (check_input(line))    // Vérifier l'entrée de l'utilisateur (la fonction check_input n'est pas fournie, donc je ne peux pas dire exactement ce qu'elle fait).
+	if (line == NULL) // Vérifier l'entrée de l'utilisateur (la fonction check_input n'est pas fournie, donc je ne peux pas dire exactement ce qu'elle fait).
 		return (NULL);
 
-	// create_history(line);  // (Commenté) Ajouter la ligne à l'historique.
+	create_history(line);  // (Commenté) Ajouter la ligne à l'historique.
 
 	tcsetattr(STDIN_FILENO, TCSAFLUSH, &saved);  // Restaurer les attributs originaux du terminal.
 
 	return (line);  // Renvoyer la ligne lue.
 }
-
 
 char	**get_path(char **env_main)
 {
@@ -197,4 +200,32 @@ int	restore_std(int *original_std)
 	close(original_std[1]);
 	close(original_std[2]);
 	return 0;
+}
+
+
+void	handle_signal(void)
+{
+	signal(SIGQUIT, SIG_IGN); // Ctrl + backslash
+	signal(SIGINT, handle_sigint); //Ctrl + C
+	
+}
+
+void	handle_sigint(int signo) 
+{
+	(void)signo;
+	rl_replace_line("", 0);
+	rl_on_new_line();
+	write(1, "\n", 1);
+	rl_redisplay();
+	// update_variable_status_process(g_env, 130);
+}
+
+void	create_history(char *input)
+{
+	int	fd;
+
+	add_history(input);
+	fd = open("history.log", O_CREAT | O_WRONLY | O_APPEND, 0777);
+	ft_putstr_fd(input, fd);
+	ft_putstr_fd("\n", fd);
 }

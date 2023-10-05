@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tsanglar <tsanglar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: thibault <thibault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/06 16:13:42 by thibault          #+#    #+#             */
-/*   Updated: 2023/10/03 14:23:48 by tsanglar         ###   ########.fr       */
+/*   Updated: 2023/10/05 16:48:44 by thibault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,9 @@
 # include <sys/wait.h>
 # include <sys/types.h>
 # include <readline/readline.h>
+# include <readline/history.h>
 # include <termios.h>
+# include <signal.h>
 
 
 /*Minishell header files*/
@@ -43,7 +45,9 @@ int		check_input(char *input);
 char	**get_path(char **envp);
 int		save_std(int *original_std);
 int		restore_std(int *original_std);
-
+void	handle_signal(void) ;
+void	handle_sigint(int signo);
+void	create_history(char *input);
 
 
 

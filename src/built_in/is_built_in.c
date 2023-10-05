@@ -6,7 +6,7 @@
 /*   By: thibault <thibault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 09:24:48 by thibault          #+#    #+#             */
-/*   Updated: 2023/10/04 22:57:28 by thibault         ###   ########.fr       */
+/*   Updated: 2023/10/05 14:52:32 by thibault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,38 +26,36 @@ int	is_tk_str(t_tk *tk, char *fct_name)
 
 int	is_echo(t_tk *tk)
 {
-	// printf("is_echo status: %d\n", is_tk_str(tk, "echo"));
 	return(is_tk_str(tk, "echo"));
 }
 
 int	is_export(t_tk *tk)
 {
-	// printf("is_echo status: %d\n", is_tk_str(tk, "echo"));
 	return(is_tk_str(tk, "export"));
 }
 
 int	is_unset(t_tk *tk)
 {
-	// printf("is_echo status: %d\n", is_tk_str(tk, "echo"));
 	return(is_tk_str(tk, "unset"));
 }
 
 int	is_env(t_tk *tk)
 {
-	// printf("is_echo status: %d\n", is_tk_str(tk, "echo"));
 	return(is_tk_str(tk, "env"));
 }
 
 int	is_pwd(t_tk *tk)
 {
-	// printf("is_echo status: %d\n", is_tk_str(tk, "echo"));
 	return(is_tk_str(tk, "pwd"));
 }
 
 int	is_cd(t_tk *tk)
 {
-	// printf("is_echo status: %d\n", is_tk_str(tk, "echo"));
 	return(is_tk_str(tk, "cd"));
+}
+int	is_exit(t_tk *tk)
+{
+	return(is_tk_str(tk, "exit"));
 }
 
 
@@ -103,10 +101,10 @@ int	is_builtin(t_tk *cmd)
 		status = 1;
 	else if (is_env(cmd))
 		status = 1;
-	// else if (is_exit(cmd))
-	// {
-	// 	status = 1;
-	// 	exit(cmd);
-	// }
+	else if (is_exit(cmd))
+	{
+		status = 1;
+		exit(status);
+	}
 	return (status);
 }

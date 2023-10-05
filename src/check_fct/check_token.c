@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_token.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vfinocie <vfinocie@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: thibault <thibault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 14:16:59 by thibault          #+#    #+#             */
-/*   Updated: 2023/09/16 14:07:27 by vfinocie         ###   ########.fr       */
+/*   Updated: 2023/10/05 17:48:03 by thibault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ a b c d e f g h i j k l m n o p q r s t u v w x y z
 
 int	is_name(char c)
 {
-	if (is_portable_filename_char(c) && c != '.')
+	if (is_portable_filename_char(c)) //&& c != '.')
 		return (1);
 	return (0);
 }
