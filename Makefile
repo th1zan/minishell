@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: thibault <thibault@student.42.fr>          +#+  +:+       +#+         #
+#    By: tsanglar <tsanglar@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/20 17:58:32 by ebennace          #+#    #+#              #
-#    Updated: 2023/09/25 09:56:23 by thibault         ###   ########.fr        #
+#    Updated: 2023/10/06 16:31:01 by tsanglar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ LIBFT		= $(LIBFT_DIR)/libft.a
 
 # ==== Project's files ==== #
 SRCS       = 		src/thib_minishell.c \
-					src/my_function_folder/my_function.c \
+					src/envir/create_envir.c \
 					src/check_fct/check_ctrl_op.c \
 					src/check_fct/check_group_op.c \
 					src/check_fct/check_redir_op.c \
@@ -68,6 +68,7 @@ FLAGS           += -Wall -Werror -Wextra
 FLAGS           += $(SANITIZE)
 FLAGS           += -I$(HOME)/.brew/opt/readline/include
 READLINE		= -lreadline
+READLINE		+= -L$(HOME)/.brew/opt/readline/lib
 MAKE            = make -s
 
 # === Convert all .c to .o with flags and header === # 

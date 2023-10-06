@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   built_in.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thibault <thibault@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tsanglar <tsanglar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 13:27:26 by mlachat           #+#    #+#             */
-/*   Updated: 2023/10/04 23:07:53 by thibault         ###   ########.fr       */
+/*   Updated: 2023/10/06 16:37:12 by tsanglar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -264,27 +264,34 @@ int	cd(t_tk *tk)
 	char *path;
 
 	// Assurez-vous que tk et tk_arg ne sont pas NULL
-	if (tk == NULL || tk->tk_arg == NULL) 
+	if (tk == NULL) //|| tk->tk_arg == NULL) 
 	{
-		fprintf(stderr, "Erreur interne : tk ou tk->tk_arg est NULL.\n");
+		// fprintf(stderr, "Erreur interne : tk ou tk->tk_arg est NULL.\n");
 		return (-1);
 	}
 
-	path = tk->tk_arg->tk_str;
+	if (tk->tk_arg == NULL || tk->tk_arg->tk_str == NULL)
+	{
+		chdir(getenv("HOME"));
+		return (0);
+	}
+	else
+		path = tk->tk_arg->tk_str;
 	
 	// Si aucun argument n'est fourni, affichez une erreur
-	if (path == NULL) 
-	{
-		fprintf(stderr, "cd: Veuillez fournir un chemin valide\n");
-		return (-1);
-	}
+	// if (path == NULL) 
+	// {
+	// 	// fprintf(stderr, "cd: Veuillez fournir un chemin valide\n");
+	// 	// return (-1);
+	// 	chdir("~");
+	// }
 	printf("path: %s\n", path);
 	if (chdir(path) != 0) 
 	{
 		perror("cd");
 		return (-1);
 	}
-	return 0;
+	return (0);
 }
 
 
