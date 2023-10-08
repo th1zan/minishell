@@ -6,7 +6,7 @@
 /*   By: thibault <thibault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 16:26:16 by thibault          #+#    #+#             */
-/*   Updated: 2023/10/02 12:26:22 by thibault         ###   ########.fr       */
+/*   Updated: 2023/10/07 16:56:21 by thibault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -275,10 +275,10 @@ int	ft_handle_built_in(t_tk *tk)
 		
 		if (tmp->type == TK_CMD)
 		{
-			if(is_builtin(tmp) == 1)
+			if(is_builtin_cmd_tk(tmp) == 1)
 			{
 				tmp->type = TK_CMD_BUILT_IN;
-				printf("%d : TK %s is a BUILT IN\n", is_builtin(tmp), tmp->tk_str);
+				// printf("%d : TK %s is a BUILT IN\n", is_builtin_cmd_tk(tmp), tmp->tk_str);
 			}
 		}
 		tmp = tmp->next;

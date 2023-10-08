@@ -6,7 +6,7 @@
 /*   By: thibault <thibault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 12:15:49 by mlachat           #+#    #+#             */
-/*   Updated: 2023/09/25 10:27:01 by thibault         ###   ########.fr       */
+/*   Updated: 2023/10/08 23:09:17 by thibault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int		set_cmd_operator_fd(t_tk **tk);
 
 
 /*exec.c*/
-int		execution(t_tk **tk);
+int		execution(t_env *env, t_tk **tk);
 t_tk	*get_next_cmd(t_tk *tmp);
 t_tk	*get_next_type_tk(t_tk *tmp, int type);
 int		cmd_arg_list_to_table(t_tk *tk, char ***arg_table, char **cmd);
@@ -40,6 +40,11 @@ int		set_fd_for_cmd(t_tk *tk);
 int		fd_is_standard(int fd);
 int		close_all_fd(t_tk **tk);
 int		wait_all_pid(t_tk **tk);
+int		get_status_info(int status);
+int		save_status_var_in_env(t_env *env_tk);
+int		update_status_variable(t_env *env, int bin_status, int ret_built_in);
+
+
 
 // TO DELETE
 // char	*arg_to_str(t_tk *tk);

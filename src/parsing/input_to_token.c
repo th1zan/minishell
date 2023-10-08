@@ -6,7 +6,7 @@
 /*   By: thibault <thibault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/09 14:58:05 by thibault          #+#    #+#             */
-/*   Updated: 2023/10/05 17:39:41 by thibault         ###   ########.fr       */
+/*   Updated: 2023/10/08 17:17:54 by thibault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,7 @@ int	*get_delimiter(char *input) //input = user's command not parsed / input = "t
 			}
 			i--;
 		}
-		else if (is_name(input[i]) || input[i] == '/')
+		else if (is_name(input[i]) || input[i] == '/' || input[i] == '$')
 		{
 			delimiter[i] = 1;
 			i++;

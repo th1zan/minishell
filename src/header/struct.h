@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tsanglar <tsanglar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: thibault <thibault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/26 09:31:25 by thibault          #+#    #+#             */
-/*   Updated: 2023/10/04 14:44:48 by tsanglar         ###   ########.fr       */
+/*   Updated: 2023/10/07 11:40:30 by thibault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,12 @@ typedef struct s_tk
 	struct s_tk	*next; 		// token précédent
 }	t_tk;
 
-// typedef struct s_env
-// {
-// 	char			*var_name;
-// 	char			**var_values;
-// 	struct s_env	*prev; 		// token suivant
-// 	struct s_env	*next; 		// token précédent
-// }	t_env;
+typedef struct s_env
+{
+	t_tk	*tk_head;
+	char	**env_main;
+	int		error_parsing;
+	int		error_processing;
+	int		status;
+}	t_env;
 #endif

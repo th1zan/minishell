@@ -46,7 +46,7 @@ void	ft_lst_replace_var(t_tk *tk, int (*f)(char **str, char ***env))
 }
 
 
-void	ft_lst_classify_tk_file(t_tk *tk)
+void	ft_lst_classify_tk_unclassified(t_tk *tk)
 {
 	int prev_classified_tk;
 	

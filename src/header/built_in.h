@@ -34,7 +34,7 @@ int		is_valid_env_argument(char *arg);
 int		is_unset(t_tk *tk);
 int		is_env(t_tk *tk);
 int		is_builtin_exec(t_tk *cmd);
-int		is_builtin(t_tk *cmd);
+int		is_builtin_cmd_tk(t_tk *cmd);
 int		is_pwd(t_tk *tk);
 int		is_cd(t_tk *tk);
 

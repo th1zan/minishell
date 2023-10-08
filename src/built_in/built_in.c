@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   built_in.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tsanglar <tsanglar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: thibault <thibault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 13:27:26 by mlachat           #+#    #+#             */
-/*   Updated: 2023/10/06 16:37:12 by tsanglar         ###   ########.fr       */
+/*   Updated: 2023/10/08 23:00:25 by thibault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	echo(t_tk *tk)
 	if (tk->tk_arg)
 		tmp = tk->tk_arg;
 	else
-		return (-1);
+		return (0);
 	if (ft_strncmp(tmp->tk_str, "-n", 2) == 0)
 	{
 		ret = 0;
@@ -64,8 +64,9 @@ int	find_env_var(char **env, char *var_name)
 		while (tmp_env[j] && var_name[j] && tmp_env[j] == var_name[j])
 		{
 			// printf("tmp_env[%d] : %c && var_name[%d] : %c\n",  j,tmp_env[j],j, var_name[j] );
-			if (tmp_env[j + 1] && tmp_env[j + 1] == '=' && (var_name[j + 1] == 0 || var_name[j] == '='))
+			if (tmp_env[j + 1] && tmp_env[j + 1] == '=' && (var_name[j + 1] == 0 || var_name[j + 1] == '='))
 			{
+				// printf("variable env trouvée\n");
 				return (i); // trouvé
 			}
 			j++;
@@ -143,7 +144,7 @@ int	unset(t_tk *tk)
 
 	free(target_var); // N'oubliez pas de libérer la mémoire de target_var
 
-	return (1); // Tout s'est bien passé
+	return (0); // Tout s'est bien passé
 }
 
 int	is_valid_env_argument(char *arg)
@@ -154,11 +155,11 @@ int	is_valid_env_argument(char *arg)
 	equals_found = 0;
 	// Check if the argument is not empty
 	if (!arg || arg[0] == '\0')
-		return 0;  // 0 pour false
+		return (0);  // 0 pour false
 
 	// Check for a valid starting character: either a letter or an underscore
 	if (!(ft_isalpha(arg[0]) || arg[0] == '_'))
-		return 0;  // 0 pour false
+		return (0);  // 0 pour false
 
 	i = 1;
 
@@ -171,15 +172,15 @@ int	is_valid_env_argument(char *arg)
 			break;
 		}
 		else if (!ft_isalnum(arg[i]) && arg[i] != '_')
-			return 0;  // 0 pour false
+			return (0);  // 0 pour false
 		i++;
 	}
 
 	// Check for presence of '='. If '=' is found, there should be valid characters before it.
 	if (!equals_found || i == 0)
-		return 0;  // 0 pour false
+		return (0);  // 0 pour false
 
-	return 1;  // 1 pour true
+	return (1);  // 1 pour true
 }
 
 int export(t_tk *tk)
@@ -202,8 +203,8 @@ int export(t_tk *tk)
 	new_var = concat_args(tk);// Supposons que cette fonction crée la nouvelle variable à partir du token
 
 	printf("retour de is_valid: %d\n", is_valid_env_argument(new_var));
-	if (is_valid_env_argument(new_var) == 0)
-		return (0);
+	if (!is_valid_env_argument(new_var))
+		return (1);
 
 	// 2) et 3) Vérifie si new_var existe et si existe, donne la ligne du tableau
 	index = find_env_var(env, new_var);
@@ -234,7 +235,7 @@ int export(t_tk *tk)
 		*(tk->env) = new_env; // met à jour le pointeur env pour pointer vers le nouveau tableau
 	}
 
-	return (1); // Tout s'est bien passé
+	return (0);
 }
 
 
@@ -243,7 +244,6 @@ int	env_built_in(t_tk *tk)
 {
 	if(*(tk->env) == 0)
 		return(1);
-	printf("env :: *(tk->env): %p\n" ,*(tk->env));
 	print_strtab(*(tk->env));
 	return(0);
 }
@@ -255,7 +255,6 @@ int pwd(void)
 	getcwd(cwd, sizeof(cwd));
 	printf("%s\n", cwd);
 	return(0);
-
 }
 
 
@@ -263,13 +262,10 @@ int	cd(t_tk *tk)
 {
 	char *path;
 
-	// Assurez-vous que tk et tk_arg ne sont pas NULL
-	if (tk == NULL) //|| tk->tk_arg == NULL) 
+	if (tk == NULL)
 	{
-		// fprintf(stderr, "Erreur interne : tk ou tk->tk_arg est NULL.\n");
-		return (-1);
+		return (1);
 	}
-
 	if (tk->tk_arg == NULL || tk->tk_arg->tk_str == NULL)
 	{
 		chdir(getenv("HOME"));
@@ -277,19 +273,10 @@ int	cd(t_tk *tk)
 	}
 	else
 		path = tk->tk_arg->tk_str;
-	
-	// Si aucun argument n'est fourni, affichez une erreur
-	// if (path == NULL) 
-	// {
-	// 	// fprintf(stderr, "cd: Veuillez fournir un chemin valide\n");
-	// 	// return (-1);
-	// 	chdir("~");
-	// }
-	printf("path: %s\n", path);
 	if (chdir(path) != 0) 
 	{
-		perror("cd");
-		return (-1);
+		perror("chdir failed");
+		return (1);
 	}
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: thibault <thibault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 09:24:48 by thibault          #+#    #+#             */
-/*   Updated: 2023/10/05 14:52:32 by thibault         ###   ########.fr       */
+/*   Updated: 2023/10/07 18:03:45 by thibault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,15 +76,17 @@ int	is_builtin_exec(t_tk *cmd)
 		status = unset(cmd);
 	else if (is_env(cmd))
 		status = env_built_in(cmd);
-	// else if (is_exit(cmd))
-	// {
-	// 	status = 0;
-	// 	exit(cmd);
-	// }
+	else if (is_exit(cmd))
+	{
+		status = 0;
+		//free all variable before exit
+		exit(status);
+	}
+	fprintf(stderr, "===INFO===: in :: is_builtin_exec: status = %d\n", status);
 	return (status);
 }
 
-int	is_builtin(t_tk *cmd)
+int	is_builtin_cmd_tk(t_tk *cmd)
 {
 	int	status;
 
@@ -102,9 +104,6 @@ int	is_builtin(t_tk *cmd)
 	else if (is_env(cmd))
 		status = 1;
 	else if (is_exit(cmd))
-	{
 		status = 1;
-		exit(status);
-	}
 	return (status);
 }

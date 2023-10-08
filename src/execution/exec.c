@@ -3,26 +3,30 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tsanglar <tsanglar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: thibault <thibault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 17:11:53 by mlachat           #+#    #+#             */
-/*   Updated: 2023/10/03 14:38:35 by tsanglar         ###   ########.fr       */
+/*   Updated: 2023/10/08 23:49:53 by thibault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
 
-int	execution(t_tk **tk)
+int	execution(t_env *env, t_tk **tk)
 {
 	t_tk	*tmp;
 	int		pid;
 	char	**arg_table;
 	char	*cmd;
+	int		status_built_in;
+	int		status_bin;
 	
 	tmp = *tk;
 	arg_table = NULL;
 	cmd = NULL;
+	status_built_in = 0;
+	status_bin = 0;
 	if (tmp->type != TK_CMD && tmp->type != TK_CMD_BUILT_IN)
 		tmp = get_next_cmd(tmp);
 	while(tmp)
@@ -59,17 +63,140 @@ int	execution(t_tk **tk)
 		else if (tmp->type == TK_CMD_BUILT_IN)
 		{
 				set_fd_for_cmd(tmp);
-				is_builtin_exec(tmp);
+				status_built_in = is_builtin_exec(tmp);
 		}
 
 		tmp = get_next_cmd(tmp);
 	}
 	
 	close_all_fd(tk);
-	wait_all_pid(tk);
+	status_bin = wait_all_pid(tk);
+	
+	update_status_variable(env, status_bin, status_built_in);
+	save_status_var_in_env(env);
+
+
+
+	
+
+	//DEBUG
+		fprintf(stderr, "===INFO===: end of execution\n");
+		
+		// print_lst(tk_head);
 	return (0);
 }
 
+// int	save_status_var_in_env(t_env *env_tk)
+// {
+// 	char	**env;
+// 	char	*new_var;
+// 	int		index;
+// 	int		i;
+// 	char	**new_env;
+
+// 	env = env_tk->env_main;
+	
+// 	new_var = ft_strjoin("?=",ft_itoa(env_tk->status));
+// 	printf("save_status_var_in_env:: $? = %s\n", new_var);
+// 	index = find_env_var(env, new_var);
+// 	// printf("existe index: %d\n", index);
+
+// 	// 4) Si existe alors change la string dans le tableau et libère l'ancienne
+// 	if (index != -1)
+// 	{
+// 		free(env[index]); // libère l'ancienne string
+// 		env[index] = new_var; // remplace par la nouvelle string
+// 	}
+// 	else
+// 	{
+// 		// 5) Si non, dimensionne nouveau tableau et ajoute une ligne pour la nouvelle variable
+// 		i = 0;
+// 		while (env[i] != NULL)
+// 			i++;
+
+// 		new_env = malloc((i + 2) * sizeof(char*)); // +1 pour la nouvelle variable et +1 pour NULL
+		
+// 		for (int j = 0; j < i; j++)
+// 		{
+// 			new_env[j] = env[j];
+// 		}
+// 		new_env[i] = new_var; // ajoute la nouvelle variable
+// 		new_env[i + 1] = NULL;  // termine le tableau avec NULL
+
+// 		// free(env); // libère l'ancien tableau
+// 		env_tk->env_main = new_env; // met à jour le pointeur env pour pointer vers le nouveau tableau
+// 	}
+
+// 	return (0);
+
+	
+// }
+
+int	save_status_var_in_env(t_env *env_tk)
+{
+	char	**env;
+	char	*new_var;
+	int		index;
+	int		i;
+	char	**new_env;
+
+	env = env_tk->env_main;
+	
+	new_var = ft_strjoin("?=",ft_itoa(env_tk->status));
+	printf("save_status_var_in_env:: $? = %s\n", new_var);
+	index = find_env_var(env, new_var);
+
+	// Si la variable existe déjà, libérez l'ancienne valeur et mettez à jour avec la nouvelle
+	if (index != -1)
+	{
+		free(env[index]);
+		env[index] = new_var;
+	}
+	else
+	{
+		i = 0;
+		while (env[i] != NULL)
+			i++;
+
+		new_env = malloc((i + 2) * sizeof(char*)); // +1 pour la nouvelle variable et +1 pour NULL
+
+		// Insérez la nouvelle variable au début
+		new_env[0] = new_var;
+
+		// Copiez les anciennes variables après la nouvelle
+		int j = 0;
+		while (j < i)
+		{
+			new_env[j + 1] = env[j];
+			j++;
+		}
+		new_env[i + 1] = NULL;  // termine le tableau avec NULL
+
+		// free(env); // libère l'ancien tableau
+		env_tk->env_main = new_env; // met à jour le pointeur env pour pointer vers le nouveau tableau
+	}
+
+	return (0);
+}
+
+
+int	update_status_variable(t_env *env, int bin_status, int status_built_in)
+{
+	if (status_built_in != 0)
+	{
+		env->status = status_built_in;
+		fprintf(stderr, "===INFO===: status_built_in = %d\n", env->status);
+		return(status_built_in);
+	}
+	else if (bin_status != 0)
+	{
+		env->status = bin_status;
+		fprintf(stderr, "===INFO===: bin_status = %d\n", env->status);
+		return(bin_status);
+	}
+	
+	return (0);
+}
 
 t_tk	*get_next_cmd(t_tk *tk)
 {
@@ -294,10 +421,22 @@ int	wait_all_pid(t_tk **tk)
 	status = 0;
 	while(tmp)
 	{
-		
 		waitpid(tmp->pid, &status, 0);
+		fprintf(stderr, "===INFO===: in :: wait_all_pid: status = %d\n", status);
+		status = get_status_info(status);
 		tmp = get_next_type_tk(tmp, TK_CMD);
 	}
+	fprintf(stderr, "===INFO===: in :: wait_all_pid: status = %d\n", status);
+	return (status);
+}
+
+int	get_status_info(int status)
+{
+	if (WIFSIGNALED(status))
+		status = WTERMSIG(status) + 128; //convention bash: Si un programme est terminé par un signal, alors le code de sortie sera `128 + numéro du signal`
+	if (WIFEXITED(status))
+		status = WEXITSTATUS(status);
+	fprintf(stderr, "===INFO===: in :: get_status_info: status = %d\n", status);
 	return (status);
 }
 

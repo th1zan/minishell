@@ -6,7 +6,7 @@
 /*   By: thibault <thibault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 14:34:44 by thibault          #+#    #+#             */
-/*   Updated: 2023/09/29 11:34:08 by thibault         ###   ########.fr       */
+/*   Updated: 2023/10/07 12:20:41 by thibault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,10 @@ int	set_redirection(t_tk **tk)
 	set_cmd_pipe_fd(tk);
 	set_cmd_operator_fd(tk);
 	redir_operator_fd(tk);
-	print_lst(*tk); // DEBUG
+
+	// DEBUG
+		fprintf(stderr, "===INFO===: end of redirection\n");
+		print_lst(*tk); 
 	return (0);
 }
 int	set_default_fd(t_tk **tk)

@@ -6,7 +6,7 @@
 /*   By: thibault <thibault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/06 16:13:42 by thibault          #+#    #+#             */
-/*   Updated: 2023/10/05 16:48:44 by thibault         ###   ########.fr       */
+/*   Updated: 2023/10/07 13:02:56 by thibault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,14 +40,19 @@
 # include "./header/execution.h"
 
 /* Minishell.c */
+t_env	*init_env(char **envp);
+int		parse_input(char *input, t_env *env);
+int		input_loop(t_env *env);
 char	*get_line(char *prompt);
-int		check_input(char *input);
 char	**get_path(char **envp);
 int		save_std(int *original_std);
 int		restore_std(int *original_std);
 void	handle_signal(void) ;
 void	handle_sigint(int signo);
 void	create_history(char *input);
+
+void	free_env(t_env *env);
+void	free_tk(t_tk *tk);
 
 
 

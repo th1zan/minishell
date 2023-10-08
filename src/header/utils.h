@@ -25,7 +25,7 @@ t_tk	*ft_lst_remove(t_tk *current_tk);
 void	ft_lst_modif_tk_str(t_tk *tk, int (*f)(char **str));
 void	ft_lst_modif_tk_type(t_tk *tk, int (*f)(char *str));
 void	ft_lst_replace_var(t_tk *tk, int (*f)(char **str, char ***env));
-void	ft_lst_classify_tk_file(t_tk *tk);
+void	ft_lst_classify_tk_unclassified(t_tk *tk);
 int 	ft_delete_type_token(t_tk **tk, int tk_type);
 
 
@@ -37,9 +37,10 @@ int		del_whitespace(char **str);
 // int		replace_with_values(char **input, char **values_tab);
 
 char	*get_var_name_from_input(char *input, int *i);
+int		get_var_name_len_from_input(char *input, int i);
 char	*find_value_in_tab(char *var_name, char **var_values_tab);
 char	*get_value_after_equal(char *var_value);
-char	*replace_var_in_string(char *input_str, char *new_input, int *i, char **var_values_tab);
+char	*replace_var_in_string(char *input_str, int *i, char **var_values_tab);
 int		replace_with_values(char **input, char ***var_values_tab);
 char	*get_var_value(char *input, int *i, char **var_values_tab);
 
