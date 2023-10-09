@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input_to_token.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thibault <thibault@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tsanglar <tsanglar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/09 14:58:05 by thibault          #+#    #+#             */
-/*   Updated: 2023/10/08 17:17:54 by thibault         ###   ########.fr       */
+/*   Updated: 2023/10/09 14:43:57 by tsanglar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int	*get_delimiter(char *input) //input = user's command not parsed / input = "t
 			{	
 				if (input[i] == 0)
 					{
-						//gestion erreur, quote non fermée
+						printf("minishell: error: unclosed quote\n");
 						return (NULL);
 					}	
 				i++;
@@ -69,7 +69,7 @@ int	*get_delimiter(char *input) //input = user's command not parsed / input = "t
 			{	
 				if (input[i] == 0)
 					{
-						//gestion erreur, quote non fermée
+						printf("minishell: error: unclosed double quote\n");
 						return (NULL);
 					}	
 				i++;
@@ -84,7 +84,7 @@ int	*get_delimiter(char *input) //input = user's command not parsed / input = "t
 			{	
 				if (input[i] == 0)
 					{
-						//gestion erreur, quote non fermée
+						printf("minishell: error: unclosed back quote\n");
 						return (NULL);
 					}	
 				i++;
@@ -125,8 +125,8 @@ int	*get_delimiter(char *input) //input = user's command not parsed / input = "t
 			delimiter[i] = 0;
 		}
 		// PRINT TEST
-		if (input[i])
-			printf("input[%d]:%c is delimiter[%d]:%d \n", i, input[i], i, delimiter[i]);
+		// if (input[i])
+		// 	printf("input[%d]:%c is delimiter[%d]:%d \n", i, input[i], i, delimiter[i]);
 		i++; // if the first if is true,, i++ was already done, so this new i++ might go too far. 
 	}
 

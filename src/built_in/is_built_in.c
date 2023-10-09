@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   is_built_in.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thibault <thibault@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tsanglar <tsanglar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 09:24:48 by thibault          #+#    #+#             */
-/*   Updated: 2023/10/07 18:03:45 by thibault         ###   ########.fr       */
+/*   Updated: 2023/10/09 17:13:14 by tsanglar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,10 +79,14 @@ int	is_builtin_exec(t_tk *cmd)
 	else if (is_exit(cmd))
 	{
 		status = 0;
+		printf("exit\n");
+		if (cmd->tk_arg)
+			printf("minishell: exit: exit does not take any arguments\n");
+		
 		//free all variable before exit
 		exit(status);
 	}
-	fprintf(stderr, "===INFO===: in :: is_builtin_exec: status = %d\n", status);
+	// fprintf(stderr, "===INFO===: in :: is_builtin_exec: status = %d\n", status);
 	return (status);
 }
 

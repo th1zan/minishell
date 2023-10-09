@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   built_in.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thibault <thibault@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tsanglar <tsanglar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 13:27:26 by mlachat           #+#    #+#             */
-/*   Updated: 2023/10/08 23:00:25 by thibault         ###   ########.fr       */
+/*   Updated: 2023/10/09 17:25:35 by tsanglar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,10 @@ int	echo(t_tk *tk)
 	if (tk->tk_arg)
 		tmp = tk->tk_arg;
 	else
+	{	
+		printf("\n");
 		return (0);
+	}
 	if (ft_strncmp(tmp->tk_str, "-n", 2) == 0)
 	{
 		ret = 0;
@@ -108,7 +111,7 @@ int	unset(t_tk *tk)
 	env = *(tk->env);
 	target_var = concat_args(tk); // Supposons que cette fonction crée la variable à supprimer à partir du token
 	index = find_env_var(env, target_var);
-	printf("index: %d/n", index);
+	// printf("index: %d/n", index);
 	// Si la variable n'existe pas, on termine la fonction sans rien faire
 	if (index == -1)
 	{
@@ -183,7 +186,7 @@ int	is_valid_env_argument(char *arg)
 	return (1);  // 1 pour true
 }
 
-int export(t_tk *tk)
+int	export(t_tk *tk)
 {
 	char	**env;
 	char	*new_var;
@@ -192,49 +195,33 @@ int export(t_tk *tk)
 	char	**new_env;
 
 	env = *(tk->env);
-	
-	// 1) Si pas d'argument, alors appelle la fonction env.
 	if (tk->tk_arg == 0)
 	{
 		env_built_in(tk);
 		return (0);
 	}
-
-	new_var = concat_args(tk);// Supposons que cette fonction crée la nouvelle variable à partir du token
-
-	printf("retour de is_valid: %d\n", is_valid_env_argument(new_var));
+	new_var = concat_args(tk);
 	if (!is_valid_env_argument(new_var))
 		return (1);
-
-	// 2) et 3) Vérifie si new_var existe et si existe, donne la ligne du tableau
 	index = find_env_var(env, new_var);
-	// printf("existe index: %d\n", index);
-
-	// 4) Si existe alors change la string dans le tableau et libère l'ancienne
 	if (index != -1)
 	{
-		free(env[index]); // libère l'ancienne string
-		env[index] = new_var; // remplace par la nouvelle string
+		free(env[index]);
+		env[index] = new_var;
 	}
 	else
 	{
-		// 5) Si non, dimensionne nouveau tableau et ajoute une ligne pour la nouvelle variable
 		i = 0;
-		while (env[i] != NULL) i++;
-
-		new_env = malloc((i + 2) * sizeof(char*)); // +1 pour la nouvelle variable et +1 pour NULL
-
-		for (int j = 0; j < i; j++)
-		{
-			new_env[j] = env[j];
-		}
-		new_env[i] = new_var; // ajoute la nouvelle variable
-		new_env[i+1] = NULL;  // termine le tableau avec NULL
-
-		// free(env); // libère l'ancien tableau
-		*(tk->env) = new_env; // met à jour le pointeur env pour pointer vers le nouveau tableau
+		while (env[i])
+			i++;
+		new_env = malloc((i + 2) * sizeof(char *));
+		i = -1;
+		while (env[++i])
+			new_env[i] = env[i];
+		new_env[i] = new_var;
+		new_env[i + 1] = NULL;
+		*(tk->env) = new_env;
 	}
-
 	return (0);
 }
 
@@ -275,7 +262,8 @@ int	cd(t_tk *tk)
 		path = tk->tk_arg->tk_str;
 	if (chdir(path) != 0) 
 	{
-		perror("chdir failed");
+		// perror("chdir failed");
+		printf("minishell: cd: %s: No such file or directory\n", path);
 		return (1);
 	}
 	return (0);

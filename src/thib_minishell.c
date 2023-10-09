@@ -3,14 +3,32 @@
 /*                                                        :::      ::::::::   */
 /*   thib_minishell.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thibault <thibault@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tsanglar <tsanglar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/06 15:14:08 by thibault          #+#    #+#             */
-/*   Updated: 2023/10/08 16:51:57 by thibault         ###   ########.fr       */
+/*   Updated: 2023/10/09 17:59:52 by tsanglar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+t_env	*global_env;
+
+int	main(int argc, char **argv, char **envp)
+{
+	
+	(void)argc;
+	(void)argv;
+	t_env	*env;
+	
+	env = init_env(envp);
+	global_env = env;
+	input_loop(env);
+
+	// free_env(env);
+	return(0);
+	
+}
 
 
 t_env	*init_env(char **envp)
@@ -19,7 +37,7 @@ t_env	*init_env(char **envp)
 
 	if (envp == NULL || *envp == NULL)
 	{
-		printf("Environment is NULL.\n");
+		printf("minishell: environment is NULL.\n");
 	}
 	
 	new_env = (t_env *)calloc(1, sizeof(t_env));
@@ -42,7 +60,13 @@ int	parse_input(char *input, t_env *env)
 	delimiter_tab = NULL;
 	delimiter_tab = get_delimiter(input);  // This array of ints the size of the input, will be used to mark whether each character in the input is a delimiter (1) or not (0).
 
-	// if delimiter_tab is NULL, sending it in input_to_token might not be safe.
+	if(!delimiter_tab)
+	{
+		env->error_parsing = 1;
+		return(1);
+	}
+	
+	
 	input_to_token(input, &(env->env_main), &(env->tk_head), delimiter_tab);
 	// here we have a linked list, with each node is a part of the input seperated with the delimiter, that was set in the delimiter array of int.
 	
@@ -79,16 +103,26 @@ int	input_loop(t_env *env)
 			free(input);
 			continue;
 		}
-		parse_input(input, env);
+		if (is_blank_str(input))
+		{
+			free(input);
+			continue;
+		}
+		if (parse_input(input, env))
+		{	
+			free(input);
+			continue;
+		}
 		
 		//DEBUG
 		fprintf(stderr, "===INFO===: print parsed input -> TK list::\n");
 		print_lst(env->tk_head);
-		// if (check_parsing(env->tk_head) == 1)
-		// {
-		// 	env->error_parsing = 1;
-		// printf("parsing error\n");
-		// }
+		if (check_parsing(env->tk_head) == 1)
+		{
+			env->error_parsing = 1;
+			free(input);
+			continue;
+		}
 		
 		set_redirection(&(env->tk_head));
 		
@@ -103,25 +137,10 @@ int	input_loop(t_env *env)
 		//DEBUG
 		fprintf(stderr, "===INFO===: initial input:: %s\n", input);
 		free(input);
-		fprintf(stderr, "===INFO===: $?:: %d\n", env->status);
+		// fprintf(stderr, "===INFO===: $?:: %d\n", env->status);
 	}
 	
 	return(0);
-}
-
-int	main(int argc, char **argv, char **envp)
-{
-	
-	(void)argc;
-	(void)argv;
-	t_env	*env;
-	
-	env = init_env(envp);
-	input_loop(env);
-
-	// free_env(env);
-	return(0);
-	
 }
 
 
@@ -178,90 +197,6 @@ void free_env(t_env *env)
 	free(env);
 }
 
-// int	main(int argc, char **argv, char **envp)
-// {
-// 	char	*input;
-// 	t_tk	*tk_head;
-// 	int		*delimiter_tab;
-// 	char	**env_main;
-	
-// 	int	original_std[3];
-// 	(void)argc;
-// 	(void)argv;
-
-// 	tk_head = NULL;
-// 	delimiter_tab = NULL;
-	
-// 	env_main = envp;
-	
-
-// 	//envp can be sent empty into the program, check if empty before continuing to avoid wrong dereference (segfault)
-// 	// tip : there is a bash command that you can run your program with in order to empty the envp that it receives. 
-// 	// tip : when you run bash with this command, bash still add default env variables in the empty env. So you can do the same here, 
-	
-// 	// when receiving and empty env, to avoid segfault, add what you judge necessary and logic according to bash
-// 	// printf("path adress:%p\n", path);
-// 	// print_strtab(path);
-// 	while (1)
-// 	{
-// 		// printf("main :: env_main: %p\n" ,env_main);
-// 		save_std(original_std);
-// 		handle_signal();
-// 		input = get_line("minishell> ");
-
-// 		if (!input) // == gestion de ctrl-D aka EOF
-// 		{
-// 			ft_printf("exit\n");
-// 			break ;
-// 		}
-
-// 		if (check_input(input)) // return 1 means something is wrong. 
-// 		{
-// 			if (input != NULL)
-// 				free(input);
-// 			continue; // skip the current iteration, and starts a new one, in this case, goes back to reading the input with readline()
-// 		}
-
-// 		// replace_env_variables(&input);
-// 		// fprintf(stderr, "===INFO===: New input with variable's content\n");
-// 		// printf("%s\n", input);
-
-// 		delimiter_tab = get_delimiter(input);  // This array of ints the size of the input, will be used to mark whether each character in the input is a delimiter (1) or not (0).
-
-// 		// if delimiter_tab is NULL, sending it in input_to_token might not be safe.
-// 		input_to_token(input, &env_main, &tk_head, delimiter_tab);
-// 		// here we have a linked list, with each node is a part of the input seperated with the delimiter, that was set in the delimiter array of int.
-		
-// 		// if ft_calloc called in get_delimiter, return NULL (shit happens), you can't free it, you'll have a memory problem. 
-// 		free(delimiter_tab);
-// 		parse_token(&tk_head);
-// 		fprintf(stderr, "===INFO===: end of parsing\n");
-		
-// 		// fprintf(stderr, "===INFO===: print PATH\n");
-// 		// print_strtab(tk_head->path_tab);
-// 		// fprintf(stderr, "===INFO===: print ENV\n");
-// 		// print_strtab(tk_head->env);
-
-// 		fprintf(stderr, "===INFO===: print TK list::\n");
-// 		// if (check_parsing(tk_head) == 0)
-// 		{
-// 			fprintf(stderr, "===INFO===: end of parsing check\n");
-// 			set_redirection(&tk_head);
-// 			fprintf(stderr, "===INFO===: end of redirection\n");
-// 			// fprintf(stderr, "===INFO===: print TK list::\n");
-// 			// print_lst(tk_head);
-// 			fprintf(stderr, "===INFO===: result of cmd line (if displayed)::\n");
-// 			execution(&tk_head);
-// 			fprintf(stderr, "===INFO===: end of execution\n");
-// 			// print_lst(tk_head);
-// 			restore_std(original_std);
-// 		}
-// 		fprintf(stderr, "===INFO===: initial input:: %s\n", input);
-// 		free(input);
-		
-// 	}
-// 	return(0);
-// }
 
 char	*get_line(char *prompt)
 {

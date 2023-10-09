@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thibault <thibault@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tsanglar <tsanglar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 17:11:53 by mlachat           #+#    #+#             */
-/*   Updated: 2023/10/08 23:49:53 by thibault         ###   ########.fr       */
+/*   Updated: 2023/10/09 17:45:39 by tsanglar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,8 @@ int	execution(t_env *env, t_tk **tk)
 			{
 				set_fd_for_cmd(tmp);
 				close_all_fd(tk);
-				if (execve(cmd, arg_table, tmp->path_tab) == -1)
+				// fprintf(stderr, "%s, %s, %s\n", cmd, arg_table[0], env->env_main[0]);
+				if (execve(cmd, arg_table, env->env_main) == -1)
 				{
 					//si execve s'execute, la mémoire sera libérée automatiquement à la fin du process
 					// sinon il faut la libérer ci-dessous
@@ -73,7 +74,7 @@ int	execution(t_env *env, t_tk **tk)
 	status_bin = wait_all_pid(tk);
 	
 	update_status_variable(env, status_bin, status_built_in);
-	save_status_var_in_env(env);
+	// save_status_var_in_env(env);
 
 
 
@@ -86,52 +87,6 @@ int	execution(t_env *env, t_tk **tk)
 	return (0);
 }
 
-// int	save_status_var_in_env(t_env *env_tk)
-// {
-// 	char	**env;
-// 	char	*new_var;
-// 	int		index;
-// 	int		i;
-// 	char	**new_env;
-
-// 	env = env_tk->env_main;
-	
-// 	new_var = ft_strjoin("?=",ft_itoa(env_tk->status));
-// 	printf("save_status_var_in_env:: $? = %s\n", new_var);
-// 	index = find_env_var(env, new_var);
-// 	// printf("existe index: %d\n", index);
-
-// 	// 4) Si existe alors change la string dans le tableau et libère l'ancienne
-// 	if (index != -1)
-// 	{
-// 		free(env[index]); // libère l'ancienne string
-// 		env[index] = new_var; // remplace par la nouvelle string
-// 	}
-// 	else
-// 	{
-// 		// 5) Si non, dimensionne nouveau tableau et ajoute une ligne pour la nouvelle variable
-// 		i = 0;
-// 		while (env[i] != NULL)
-// 			i++;
-
-// 		new_env = malloc((i + 2) * sizeof(char*)); // +1 pour la nouvelle variable et +1 pour NULL
-		
-// 		for (int j = 0; j < i; j++)
-// 		{
-// 			new_env[j] = env[j];
-// 		}
-// 		new_env[i] = new_var; // ajoute la nouvelle variable
-// 		new_env[i + 1] = NULL;  // termine le tableau avec NULL
-
-// 		// free(env); // libère l'ancien tableau
-// 		env_tk->env_main = new_env; // met à jour le pointeur env pour pointer vers le nouveau tableau
-// 	}
-
-// 	return (0);
-
-	
-// }
-
 int	save_status_var_in_env(t_env *env_tk)
 {
 	char	**env;
@@ -143,7 +98,7 @@ int	save_status_var_in_env(t_env *env_tk)
 	env = env_tk->env_main;
 	
 	new_var = ft_strjoin("?=",ft_itoa(env_tk->status));
-	printf("save_status_var_in_env:: $? = %s\n", new_var);
+	// printf("save_status_var_in_env:: $? = %s\n", new_var);
 	index = find_env_var(env, new_var);
 
 	// Si la variable existe déjà, libérez l'ancienne valeur et mettez à jour avec la nouvelle
@@ -185,16 +140,16 @@ int	update_status_variable(t_env *env, int bin_status, int status_built_in)
 	if (status_built_in != 0)
 	{
 		env->status = status_built_in;
-		fprintf(stderr, "===INFO===: status_built_in = %d\n", env->status);
+		// fprintf(stderr, "===INFO===: status_built_in = %d\n", env->status);
 		return(status_built_in);
 	}
 	else if (bin_status != 0)
 	{
 		env->status = bin_status;
-		fprintf(stderr, "===INFO===: bin_status = %d\n", env->status);
+		// fprintf(stderr, "===INFO===: bin_status = %d\n", env->status);
 		return(bin_status);
 	}
-	
+	env->status = 0;
 	return (0);
 }
 
@@ -303,16 +258,15 @@ int	get_cmd_path(t_tk *tk)
 		cmd = ft_strjoin(temp, tk->tk_str);
 		free(temp);
 	
-		if (check_access(cmd) == FAILURE)
+		if (check_access(cmd) == SUCCESS)
 		{
-			// printf("path[i] %s added to CMD_TK: %s\n", path[i], tk->tk_str);
 			tk->path = path[i];
 			return (0);
 		}
 		else
 			i++;
 	}
-	fprintf(stderr,"error fct:: get_cmd_path : cmd %s DON'T EXIST in the paths\n", tk->tk_str);
+	fprintf(stderr,"minishell: %s: command not found\n", tk->tk_str);
 	return (1);
 }
 
@@ -422,11 +376,11 @@ int	wait_all_pid(t_tk **tk)
 	while(tmp)
 	{
 		waitpid(tmp->pid, &status, 0);
-		fprintf(stderr, "===INFO===: in :: wait_all_pid: status = %d\n", status);
+		// fprintf(stderr, "===INFO===: in :: wait_all_pid: status = %d\n", status);
 		status = get_status_info(status);
 		tmp = get_next_type_tk(tmp, TK_CMD);
 	}
-	fprintf(stderr, "===INFO===: in :: wait_all_pid: status = %d\n", status);
+	// fprintf(stderr, "===INFO===: in :: wait_all_pid: status = %d\n", status);
 	return (status);
 }
 
@@ -436,7 +390,7 @@ int	get_status_info(int status)
 		status = WTERMSIG(status) + 128; //convention bash: Si un programme est terminé par un signal, alors le code de sortie sera `128 + numéro du signal`
 	if (WIFEXITED(status))
 		status = WEXITSTATUS(status);
-	fprintf(stderr, "===INFO===: in :: get_status_info: status = %d\n", status);
+	// fprintf(stderr, "===INFO===: in :: get_status_info: status = %d\n", status);
 	return (status);
 }
 

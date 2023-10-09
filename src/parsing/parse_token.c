@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_token.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thibault <thibault@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tsanglar <tsanglar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/11 11:49:26 by thibault          #+#    #+#             */
-/*   Updated: 2023/10/08 23:11:14 by thibault         ###   ########.fr       */
+/*   Updated: 2023/10/09 17:56:44 by tsanglar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,11 @@ int	parse_token(t_tk **head_tk)
 {
 	ft_lst_modif_tk_str(*head_tk, del_whitespace); //this function, iterrates through the list, applying the del_whitespace function to each node. 
 	ft_lst_modif_tk_type(*head_tk, classify_operator);
-	printf("after classifiy operator\n");
-	print_lst(*head_tk);
+	// printf("after classifiy operator\n");
+	// print_lst(*head_tk);
 	ft_lst_replace_var(*head_tk, replace_with_values);
-	printf("after ft_lst_replace_var\n");
-	print_lst(*head_tk);
+	// printf("after ft_lst_replace_var\n");
+	// print_lst(*head_tk);
 	ft_delete_type_token(head_tk, TK_BLANK);
 	ft_lst_classify_tk_unclassified(*head_tk);
 	/*TODO: vérification des règles de grammaire ex: deux operateur à la suite-> pas possible*/
@@ -93,11 +93,11 @@ int 	handle_quotes(t_tk *head_tk)
 	while (tmp)
 	{
 		// printf("tk_type %d\n", tmp->type);
-		if (tmp->type == TK_ARG)
-		{
+		// if (tmp->type == TK_ARG)
+		// {
 			// printf("tk_str %s\n", tmp->tk_str);
 			delete_quotes(&(tmp->tk_str));
-		}
+		// }
 		tmp = tmp->next;
 	}
 	return (0);

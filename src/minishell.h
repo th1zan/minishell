@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thibault <thibault@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tsanglar <tsanglar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/06 16:13:42 by thibault          #+#    #+#             */
-/*   Updated: 2023/10/07 13:02:56 by thibault         ###   ########.fr       */
+/*   Updated: 2023/10/09 15:26:19 by tsanglar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@
 # include "./header/built_in.h"
 # include "./header/utils.h"
 # include "./header/execution.h"
+
+extern t_env	*global_env;
 
 /* Minishell.c */
 t_env	*init_env(char **envp);

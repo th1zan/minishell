@@ -6,7 +6,7 @@
 /*   By: tsanglar <tsanglar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 14:45:21 by thibault          #+#    #+#             */
-/*   Updated: 2023/10/03 13:52:37 by tsanglar         ###   ########.fr       */
+/*   Updated: 2023/10/09 17:36:27 by tsanglar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,12 @@ int		check_input_file(t_tk *tk)
 			if (access(tk->tk_arg->tk_str, R_OK) == 0)
 			{
 				// file exist and can be readed
-				printf("File '%s' exist and can be read\n", tk->tk_arg->tk_str);
+				// printf("file: %s: exist and can be read\n", tk->tk_arg->tk_str);
 				return (0);
 			} 
 			else
 			{
-				printf("File '%s' DOES NOT exist or cannot be read.\n", tk->tk_arg->tk_str);
+				printf("minishell: %s: No such file or directory\n", tk->tk_arg->tk_str);
 				return (1);
 			}
 		}
@@ -42,12 +42,14 @@ int		check_cmd(t_tk *tk)
 	while (tk != NULL)
 	{
 		if (tk->type == TK_CMD)
-			if (test_cmd(tk) == 1)
+			if (test_cmd(tk) == FAILURE)
+			{
 				return (1);
+			}
 		tk = tk->next;
 	}
 
-	return (0);
+	return (SUCCESS);
 }
 
 int	test_cmd(t_tk *tk)
@@ -63,9 +65,9 @@ int	test_cmd(t_tk *tk)
 	temp = NULL;
 	if(cmd[0] == '/')
 	{
-		if (check_access(cmd) == 1)
+		if (check_access(cmd) == SUCCESS)
 		{
-			return (0);
+			return (SUCCESS);
 		}
 	}
 	i = 0;
@@ -75,9 +77,9 @@ int	test_cmd(t_tk *tk)
 		cmd = ft_strjoin(temp, tk->tk_str);
 		// printf("cmd: %s\n", cmd);
 		free(temp);
-		if (check_access(cmd) == 1)
+		if (check_access(cmd) == SUCCESS)
 		{
-			return (0);
+			return (SUCCESS);
 		}
 		else
 		{
@@ -85,23 +87,25 @@ int	test_cmd(t_tk *tk)
 		}
 			
 	}
-	printf("cmd %s DON'T EXIST in the paths\n", tk->tk_str);
-	return (1);
+	if (global_env->status == 127)
+		printf("minishell: %s: Command not found \n", tk->tk_str);
+	if (global_env->status == 126)
+		printf("minishell: %s: Permission denied\n", tk->tk_str);
+	return (FAILURE);
 }
+
 
 int	check_access(char *cmd)
 {
-	int	get_access;
-
-	get_access = 0;
-	if (access(cmd, F_OK) == 0)
+	if (access(cmd, F_OK) == -1)
 	{
-		if (access(cmd, X_OK) == -1)
-		{
-			ft_putstr_fd("pipex: cmd can't be executed by the user: ", 2);
-			return (1);
-		}
-		get_access = 1;
+		global_env->status = 127;
+		return (FAILURE);
 	}
-	return (get_access);
+	else if (access(cmd, X_OK) == -1)
+	{
+		global_env->status = 126;
+		return (FAILURE);
+	}
+	return (SUCCESS);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_str.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thibault <thibault@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tsanglar <tsanglar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 16:31:29 by thibault          #+#    #+#             */
-/*   Updated: 2023/10/08 23:41:19 by thibault         ###   ########.fr       */
+/*   Updated: 2023/10/09 17:27:53 by tsanglar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int get_var_name_len_from_input(char *input, int i)
 {
 	int		len = 0;
 
-	while (is_portable_filename_char(input[i + len]) == 1 || input[i + len] == '?')
+	while (is_portable_filename_char(input[i + len]) == 1)// || input[i + len] == '?')
 		len++;
 	len++;
 	return (len);
@@ -123,7 +123,12 @@ int	replace_with_values(char **input, char ***var_values_tab)
 	{
 		if (input_str[i] == '$' && check_inside_simple_quote(input_str, i) != SUCCESS)
 		{
-			new_input = replace_var_in_string(input_str, &i, *var_values_tab);
+			if (ft_strncmp(&input_str[i], "$?=", 3))
+			{
+				new_input = ft_itoa(global_env->status);
+			}
+			else
+				new_input = replace_var_in_string(input_str, &i, *var_values_tab);
 			if (input_str != new_input)  // Vérifiez si input_str et new_input sont différents avant de libérer
 			{
 				free(input_str);

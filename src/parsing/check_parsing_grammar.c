@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_parsing_grammar.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thibault <thibault@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tsanglar <tsanglar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 14:42:49 by thibault          #+#    #+#             */
-/*   Updated: 2023/09/25 10:18:32 by thibault         ###   ########.fr       */
+/*   Updated: 2023/10/09 15:09:24 by tsanglar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,12 @@ int	check_main_list_tokens(t_tk *tk)
 	while (tmp != NULL) {
 		if ((prev->type == TK_CMD || prev->type == TK_CMD_BUILT_IN) && !(is_tk_redir(tmp->type) || tmp->type == TK_PIPE))
 		{
-			printf("error: prev TK is CMD and current TK is not a redir_operator OR a pipe\n");
+			// printf("error: prev TK is CMD and current TK is not a redir_operator OR a pipe\n");
 			return (1);
 		}
 		if ((is_tk_redir(prev->type) || prev->type == TK_PIPE) && (tmp->type == TK_CMD || tmp->type == TK_CMD_BUILT_IN))
 		{
-			printf("error: prev TK is a redir_operator OR a pipe and current TK is not CMD\n");
+			// printf("error: prev TK is a redir_operator OR a pipe and current TK is not CMD\n");
 			return (1);
 		}
 		prev = tmp;
@@ -54,11 +54,11 @@ int	check_main_list_tokens(t_tk *tk)
 int	check_redir_sublist(t_tk *tk)
 {
 	if (tk->tk_arg == NULL || tk->tk_arg->next != NULL) {
-		printf("error: redirection operator without file\n");
+		printf("minishell: parsing error: any file for redirection operator \n");
 		return (1);
 	}
 	if (tk->tk_arg->type != TK_FILE) {
-		printf("error: redirection operator has a wrong type arg\n");
+		printf("minishell: parsing error: redirection operator has a wrong type arg\n");
 		return (1);
 	}
 	return (0);
@@ -70,7 +70,7 @@ int	check_here_doc_sublist(t_tk *tk)
 	t_tk *arg = tk->tk_arg;
 	while (arg) {
 		if (arg->type != TK_HD_ARG) {
-			printf("error: here-doc operator has a wrong type arg\n");
+			printf("minishell: parsing error: here-doc operator has a wrong type arg\n");
 			return (1);
 		}
 		arg = arg->next;
@@ -82,9 +82,11 @@ int	check_here_doc_sublist(t_tk *tk)
 int	check_cmd_sublist(t_tk *tk)
 {
 	t_tk *arg = tk->tk_arg;
-	while (arg) {
-		if (arg->type != TK_ARG) {
-			printf("error: TK_CMD has a wrong type arg\n");
+	while (arg)
+	{
+		if (arg->type != TK_ARG)
+		{
+			printf("minishell: parsing error: TK_CMD has a wrong type arg\n");
 			return (1);
 		}
 		arg = arg->next;
@@ -119,7 +121,7 @@ int	check_grammar(t_tk *tk)
 		{
 			if (tmp->tk_arg != NULL)
 			{
-				printf("error: pipe operator has an argument, it should not\n");
+				printf("minishell : error: any argument after pipe operator\n");
 				return (1);
 			}
 		}

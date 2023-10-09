@@ -1,2 +1,9 @@
 pwd
 bash
+echo $?
+echo test
+echo test
+echo $?
+ls
+echo $?
+$? + $?

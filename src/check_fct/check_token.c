@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_token.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thibault <thibault@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tsanglar <tsanglar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 14:16:59 by thibault          #+#    #+#             */
-/*   Updated: 2023/10/05 17:48:03 by thibault         ###   ########.fr       */
+/*   Updated: 2023/10/09 11:45:12 by tsanglar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,20 @@ int	is_portable_filename_char(char c)
 	if (ft_isalnum(c) || c == '.' || c == '_' || c == '-')
 		return (1);
 	return (0);
+}
+
+int	is_blank_str(char *str)
+{
+	int	i;
+	
+	i = 0;
+	while(str[i])
+	{
+		if (!is_whitespace(str[i]))
+			return (0);
+		str++;
+	}
+	return (1);
 }
 
 int	is_tk_in_out_app(int type)
