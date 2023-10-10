@@ -6,7 +6,7 @@
 /*   By: thibault <thibault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 14:34:44 by thibault          #+#    #+#             */
-/*   Updated: 2023/10/07 12:20:41 by thibault         ###   ########.fr       */
+/*   Updated: 2023/10/10 23:29:39 by thibault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ int	set_redirection(t_tk **tk)
 	redir_operator_fd(tk);
 
 	// DEBUG
-		fprintf(stderr, "===INFO===: end of redirection\n");
-		print_lst(*tk); 
+		// fprintf(stderr, "===INFO===: end of redirection\n");
+		// print_lst(*tk); 
 	return (0);
 }
 int	set_default_fd(t_tk **tk)
@@ -102,7 +102,7 @@ int	set_operator_fd(t_tk **tk)
 		{
 			file = tmp->tk_arg->tk_str;
 			close(tmp->fd_out);
-			tmp->fd_out = open_file_to_fd(file, O_CREAT | O_APPEND);
+			tmp->fd_out = open_file_to_fd(file, O_WRONLY | O_APPEND);
 			// fprintf(stderr,"tmp:%p fd_in:%d fd_out:%d\n", tmp, tmp->fd_in, tmp->fd_out);
 		}
 		else if (tmp->type == TK_HERE_DOC)
@@ -173,6 +173,39 @@ int	redir_operator_fd(t_tk **tk)
 	}		
 	return (0);
 }
+
+// int	redir_operator_fd(t_tk **tk)
+// {
+// 	t_tk		*tmp;
+
+// 	tmp = *tk;
+// 	while (tmp != NULL)
+// 	{
+// 		if (tmp->type == TK_IN_CHEVRON || tmp->type == TK_HERE_DOC)
+// 		{
+// 			if (dup2(tmp->fd_in, STDIN_FILENO) == -1)
+// 			{
+// 				perror("dup2 error: fd_in in redir_operator_fd");
+// 				fprintf(stderr, "d_in: %d, errno: %d\n", tmp->fd_in, errno);
+// 				return (-1);
+// 			}
+// 			close(tmp->fd_in);
+// 		}
+// 		else if (tmp->type == TK_OUT_CHEVRON || tmp->type == TK_APP_CHEVRON)
+// 		{
+// 			if (dup2(tmp->fd_out, STDOUT_FILENO) == -1)
+// 			{
+// 				perror("dup2 error: fd_out in redir_operator_fd");
+// 				fprintf(stderr, "fd_out: %d, errno: %d\n", tmp->fd_out, errno);
+// 				return (-1);
+// 			}
+// 			close(tmp->fd_out);
+// 		}
+// 		tmp = tmp->next;
+// 	}		
+// 	return (0);
+// }
+
 
 int	set_cmd_std_fd(t_tk **tk)
 {

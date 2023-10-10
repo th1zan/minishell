@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   built_in.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tsanglar <tsanglar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: thibault <thibault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 13:27:26 by mlachat           #+#    #+#             */
-/*   Updated: 2023/10/09 17:25:35 by tsanglar         ###   ########.fr       */
+/*   Updated: 2023/10/10 21:01:39 by thibault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,7 +126,8 @@ int	unset(t_tk *tk)
 	while (env[i] != NULL) i++;
 
 	new_env = malloc(i * sizeof(char*)); // -1 car on supprime une variable, mais pas besoin d'ajouter pour NULL car i compte déjà NULL
-
+	if(!new_env)
+		return(1);
 	j = 0;
 	k = 0;
 	while (j < i)
@@ -141,8 +142,9 @@ int	unset(t_tk *tk)
 		k++;
 	}
 	new_env[k] = NULL;  // termine le tableau avec NULL
-
-	free(env); // libère l'ancien tableau
+	print_strtab(env);
+	// if (env)
+	// 	free(env); // libère l'ancien tableau
 	*(tk->env) = new_env; // met à jour le pointeur env pour pointer vers le nouveau tableau
 
 	free(target_var); // N'oubliez pas de libérer la mémoire de target_var

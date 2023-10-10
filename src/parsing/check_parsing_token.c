@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_parsing_token.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tsanglar <tsanglar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: thibault <thibault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 14:45:21 by thibault          #+#    #+#             */
-/*   Updated: 2023/10/09 17:36:27 by tsanglar         ###   ########.fr       */
+/*   Updated: 2023/10/10 21:12:24 by thibault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,13 @@ int	test_cmd(t_tk *tk)
 		{
 			return (SUCCESS);
 		}
+	}
+	
+	if (!path)
+	{
+		global_env->status = 127;
+		printf("minishell: %s: Command not found \n", tk->tk_str);
+		return (FAILURE);
 	}
 	i = 0;
 	while (path[i] != 0)

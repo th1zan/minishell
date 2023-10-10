@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_parsing_grammar.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tsanglar <tsanglar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: thibault <thibault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 14:42:49 by thibault          #+#    #+#             */
-/*   Updated: 2023/10/09 15:09:24 by tsanglar         ###   ########.fr       */
+/*   Updated: 2023/10/10 23:32:23 by thibault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,27 @@ int	check_first_last_token(t_tk *first, t_tk *last)
 }
 
 // Vérifie les tokens dans la liste principale
+// int	check_main_list_tokens(t_tk *tk)
+// {
+// 	t_tk *tmp = tk->next;
+// 	t_tk *prev = tk;
+// 	while (tmp != NULL) {
+// 		if ((prev->type == TK_CMD || prev->type == TK_CMD_BUILT_IN) && !(is_tk_redir(tmp->type) || tmp->type == TK_PIPE))
+// 		{
+// 			// printf("error: prev TK is CMD and current TK is not a redir_operator OR a pipe\n");
+// 			return (1);
+// 		}
+// 		if ((is_tk_redir(prev->type) || prev->type == TK_PIPE) && (tmp->type == TK_CMD || tmp->type == TK_CMD_BUILT_IN))
+// 		{
+// 			// printf("error: prev TK is a redir_operator OR a pipe and current TK is not CMD\n");
+// 			return (1);
+// 		}
+// 		prev = tmp;
+// 		tmp = tmp->next;
+// 	}
+// 	return (0);
+// }
+
 int	check_main_list_tokens(t_tk *tk)
 {
 	t_tk *tmp = tk->next;
@@ -36,12 +57,14 @@ int	check_main_list_tokens(t_tk *tk)
 	while (tmp != NULL) {
 		if ((prev->type == TK_CMD || prev->type == TK_CMD_BUILT_IN) && !(is_tk_redir(tmp->type) || tmp->type == TK_PIPE))
 		{
-			// printf("error: prev TK is CMD and current TK is not a redir_operator OR a pipe\n");
 			return (1);
 		}
-		if ((is_tk_redir(prev->type) || prev->type == TK_PIPE) && (tmp->type == TK_CMD || tmp->type == TK_CMD_BUILT_IN))
+		if (is_tk_redir(prev->type) && !(tmp->type == TK_CMD || tmp->type == TK_CMD_BUILT_IN || tmp->type == TK_FILE || tmp->type == TK_ARG))
 		{
-			// printf("error: prev TK is a redir_operator OR a pipe and current TK is not CMD\n");
+			return (1);
+		}
+		if ((prev->type == TK_FILE || prev->type == TK_ARG) && !(tmp->type == TK_CMD || tmp->type == TK_CMD_BUILT_IN))
+		{
 			return (1);
 		}
 		prev = tmp;
@@ -49,6 +72,7 @@ int	check_main_list_tokens(t_tk *tk)
 	}
 	return (0);
 }
+
 
 // Vérifie les sous-listes pour les tokens de type redirection
 int	check_redir_sublist(t_tk *tk)
@@ -104,12 +128,13 @@ int	check_grammar(t_tk *tk)
 		printf("error - no argument\n");
 		return (1);
 	}
-
+	// printf("1 lets check grammar\n");
 	if (check_first_last_token(tk, tk) != 0)
 		return (1);
+	// printf("2 lets check grammar\n");
 	if (check_main_list_tokens(tk) != 0)
 		return (1);
-
+	// printf("3 lets check grammar\n");
 	tmp = tk;
 	while (tmp != NULL) {
 		if (is_tk_in_out_app(tmp->type))

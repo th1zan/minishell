@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_token.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tsanglar <tsanglar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: thibault <thibault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/11 11:49:26 by thibault          #+#    #+#             */
-/*   Updated: 2023/10/09 17:56:44 by tsanglar         ###   ########.fr       */
+/*   Updated: 2023/10/10 23:28:29 by thibault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	parse_token(t_tk **head_tk)
 	ft_handle_file_tk(*head_tk);
 	// printf("after handle_files\n");
 	// print_lst(*head_tk);
-	handle_quotes(*head_tk);
+	// handle_quotes(*head_tk); // quotes déjà gérées dans ft_handle_arg_tk(*head_tk);
 	// printf("after handle_quotes\n");
 	// print_lst(*head_tk);
 	ft_handle_arg_tk(*head_tk);
@@ -46,12 +46,14 @@ int		check_parsing(t_tk *tk)
 	int	check;
 
 	check = 0;
-	check = check + check_grammar(tk);
-	check = check + check_cmd(tk);
-	check = check + check_input_file(tk);
+	check = check_grammar(tk);
+	check = check + 2 * check_cmd(tk);
+	check = check + 3 * check_input_file(tk);
 	if (check > 0)
-		return (1);
-		
+	{	
+		global_env->error_parsing = check;
+		return (check);
+	}	
 	//DEBUG
 	// fprintf(stderr, "===INFO===: end of parsing check\n");
 	return (0);
@@ -68,21 +70,25 @@ int	delete_quotes(char **str)
 		tmp_str = ft_substr(*str, 1, len - 2);
 		free(*str);
 		*str = tmp_str;
+		return (0);
 	}
-	if (is_simple_quote(*str, 0) && is_simple_quote(*str, len - 1))
+	else if (is_simple_quote(*str, 0) && is_simple_quote(*str, len - 1))
 	{
 		tmp_str = ft_substr(*str, 1, len - 2);
 		free(*str);
 		*str = tmp_str;
+		return (0);
 	}
-	if (is_back_quote(*str, 0) && is_back_quote(*str, len - 1))
+	else if (is_back_quote(*str, 0) && is_back_quote(*str, len - 1))
 	{
 		tmp_str = ft_substr(*str, 1, len - 2);
 		free(*str);
 		*str = tmp_str;
+		return (0);
 	}
 	return (0);
 }
+
 
 int 	handle_quotes(t_tk *head_tk)
 {

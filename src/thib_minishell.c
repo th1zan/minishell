@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   thib_minishell.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tsanglar <tsanglar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: thibault <thibault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/06 15:14:08 by thibault          #+#    #+#             */
-/*   Updated: 2023/10/09 17:59:52 by tsanglar         ###   ########.fr       */
+/*   Updated: 2023/10/10 22:47:48 by thibault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,9 +117,11 @@ int	input_loop(t_env *env)
 		//DEBUG
 		fprintf(stderr, "===INFO===: print parsed input -> TK list::\n");
 		print_lst(env->tk_head);
-		if (check_parsing(env->tk_head) == 1)
+		if (check_parsing(env->tk_head))
 		{
-			env->error_parsing = 1;
+			// DEBUG
+			printf("minishell: %d : parsing error\n", global_env->error_parsing);
+			
 			free(input);
 			continue;
 		}
@@ -238,6 +240,10 @@ char	**get_path(char **env_main)
 		if (ft_strnstr(env_main[i], "PATH=", 5) != 0)
 			break;
 		i++;
+	}
+	if (!env_main[i])
+	{
+		return (path);
 	}
 	path = ft_split(env_main[i], ':');
 	if (path[0])

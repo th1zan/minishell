@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_str.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tsanglar <tsanglar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: thibault <thibault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 16:31:29 by thibault          #+#    #+#             */
-/*   Updated: 2023/10/09 17:27:53 by tsanglar         ###   ########.fr       */
+/*   Updated: 2023/10/10 23:06:41 by thibault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,31 +84,55 @@ char *get_value_after_equal(char *var_value)
 	return ft_substr(var_value, i, ft_strlen(var_value) - i);
 }
 
-char *replace_var_in_string(char *input_str, int *i, char **var_values_tab)
+// char *replace_var_in_string(char *input_str, int *i, char **var_values_tab)
+// {
+// 	char	*tmp;
+// 	char	*var_value;
+// 	int		start;
+// 	int		var_name_len;
+
+// 	// printf("BEGIN of fct: replace_var_in_string\n");
+// 	start = *i; // Sauvegardez la position actuelle
+// 	var_value = get_var_value(input_str, i, var_values_tab);
+// 	if (!var_value)
+// 		var_value = ft_strdup(" ");  // Si la variable n'est pas trouvée, utilisez une chaîne vide
+// 	// printf("i: %d, var_value: %s\n", *i, var_value);
+// 	var_name_len = get_var_name_len_from_input(input_str, *i); // Calculez la longueur du nom de la variable
+// 	tmp = ft_substr(input_str, 0, start); // Prenez la partie de la chaîne avant le nom de la variable
+// 	char *tmp2 = ft_strjoin(tmp, var_value); // Concaténez la valeur de la variable
+// 	// printf("tmp: %s, tmp2: %s\n", tmp, tmp2);
+// 	free(tmp);
+// 	free(var_value);
+// 	char *result = ft_strjoin(tmp2, &input_str[start + var_name_len]); // Concaténez la partie restante de la chaîne après le nom de la variable
+// 	// printf("result: %s, inputstr: %c\n", result, input_str[start + var_name_len]);
+// 	free(tmp2);
+// 	// printf("END of fct: replace_var_in_string\n");
+// 	return (result);
+// }
+
+char	*replace_var_in_string(char *input_str, int *i, char **var_values_tab)
 {
 	char	*tmp;
 	char	*var_value;
+	char	*tmp2;
+	char	*result;
 	int		start;
 	int		var_name_len;
 
-	printf("BEGIN of fct: replace_var_in_string\n");
-	start = *i; // Sauvegardez la position actuelle
+	start = *i;
 	var_value = get_var_value(input_str, i, var_values_tab);
 	if (!var_value)
-		var_value = ft_strdup(" ");  // Si la variable n'est pas trouvée, utilisez une chaîne vide
-	printf("i: %d, var_value: %s\n", *i, var_value);
-	var_name_len = get_var_name_len_from_input(input_str, *i); // Calculez la longueur du nom de la variable
-	tmp = ft_substr(input_str, 0, start); // Prenez la partie de la chaîne avant le nom de la variable
-	char *tmp2 = ft_strjoin(tmp, var_value); // Concaténez la valeur de la variable
-	printf("tmp: %s, tmp2: %s\n", tmp, tmp2);
+		var_value = ft_strdup(" ");
+	var_name_len = get_var_name_len_from_input(input_str, *i);
+	tmp = ft_substr(input_str, 0, start);
+	tmp2 = ft_strjoin(tmp, var_value);
 	free(tmp);
 	free(var_value);
-	char *result = ft_strjoin(tmp2, &input_str[start + var_name_len]); // Concaténez la partie restante de la chaîne après le nom de la variable
-	printf("result: %s, inputstr: %c\n", result, input_str[start + var_name_len]);
+	result = ft_strjoin(tmp2, &input_str[start + var_name_len]);
 	free(tmp2);
-	printf("END of fct: replace_var_in_string\n");
 	return (result);
 }
+
 
 int	replace_with_values(char **input, char ***var_values_tab)
 {
@@ -123,13 +147,24 @@ int	replace_with_values(char **input, char ***var_values_tab)
 	{
 		if (input_str[i] == '$' && check_inside_simple_quote(input_str, i) != SUCCESS)
 		{
-			if (ft_strncmp(&input_str[i], "$?=", 3))
+			if (input_str[i + 1] == ' ' || input_str[i + 1] == '\0' || !ft_isalnum(input_str[i + 1]))
 			{
+				i++;
+				continue;
+			}
+
+			if (ft_strncmp(&input_str[i], "$?", 2) == 0)
+			{
+				printf("print status ");
+				printf("%s\n", &input_str[i + 1]);
 				new_input = ft_itoa(global_env->status);
 			}
 			else
+			{
 				new_input = replace_var_in_string(input_str, &i, *var_values_tab);
-			if (input_str != new_input)  // Vérifiez si input_str et new_input sont différents avant de libérer
+				printf("var_value found: %s\n", new_input);
+			}
+			if (input_str != new_input)
 			{
 				free(input_str);
 				input_str = new_input;
@@ -145,7 +180,6 @@ int	replace_with_values(char **input, char ***var_values_tab)
 	
 	return (0);
 }
-
 
 
 
