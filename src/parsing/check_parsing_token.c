@@ -6,7 +6,7 @@
 /*   By: thibault <thibault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 14:45:21 by thibault          #+#    #+#             */
-/*   Updated: 2023/10/10 21:12:24 by thibault         ###   ########.fr       */
+/*   Updated: 2023/10/12 23:53:32 by thibault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,13 +54,15 @@ int		check_cmd(t_tk *tk)
 
 int	test_cmd(t_tk *tk)
 {
-	char	**path;
+	char	**path_tab;
 	char	*cmd;
 	char	*temp;
 	int		i;
 
 	// cmd = NULL;
-	path = tk->path_tab;
+	path_tab = global_env->path_tab;
+	// printf("TEST CMD\n");
+	// print_strtab(path_tab);
 	cmd = tk->tk_str;
 	temp = NULL;
 	if(cmd[0] == '/')
@@ -71,29 +73,32 @@ int	test_cmd(t_tk *tk)
 		}
 	}
 	
-	if (!path)
+	if (!path_tab)
 	{
 		global_env->status = 127;
 		printf("minishell: %s: Command not found \n", tk->tk_str);
 		return (FAILURE);
 	}
 	i = 0;
-	while (path[i] != 0)
+	while (path_tab[i] != 0)
 	{
-		temp = ft_strjoin(path[i], "/");
+		temp = ft_strjoin(path_tab[i], "/");
 		cmd = ft_strjoin(temp, tk->tk_str);
 		// printf("cmd: %s\n", cmd);
 		free(temp);
 		if (check_access(cmd) == SUCCESS)
 		{
+			free(cmd);
 			return (SUCCESS);
 		}
 		else
 		{
+			free(cmd);
 			i++;
 		}
 			
 	}
+	// free(cmd);
 	if (global_env->status == 127)
 		printf("minishell: %s: Command not found \n", tk->tk_str);
 	if (global_env->status == 126)

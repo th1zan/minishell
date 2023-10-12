@@ -6,7 +6,7 @@
 /*   By: thibault <thibault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 17:11:17 by tsanglar          #+#    #+#             */
-/*   Updated: 2023/08/07 08:48:06 by thibault         ###   ########.fr       */
+/*   Updated: 2023/10/12 23:53:47 by thibault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,12 @@ void	ft_tab(char **tab, char *s, char c)
 			while (*s != c && *s)
 				s++;
 			tab[i] = (char *)malloc((char *)s - init + 1);
+			if (!tab[i])
+				return ;
 			ft_strcpy(tab[i], init, (char *) s);
+			//DEBUG
+			// if(tab[i])
+			// 	ft_printf("tab[%d]: %s, %p\n",i, tab[i], tab[i]);
 			i++;
 		}
 		else
@@ -76,6 +81,7 @@ char	**ft_split(char const *s, char c)
 	tab = (char **)malloc(sizeof(char *) * (nbli + 1));
 	if (!tab)
 		return (0);
+	// ft_printf("ft_split: tab:  %p\n", tab);
 	ft_tab(tab, (char *)s, c);
 	return (tab);
 }

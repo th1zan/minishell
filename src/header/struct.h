@@ -6,7 +6,7 @@
 /*   By: thibault <thibault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/26 09:31:25 by thibault          #+#    #+#             */
-/*   Updated: 2023/10/07 11:40:30 by thibault         ###   ########.fr       */
+/*   Updated: 2023/10/12 18:46:04 by thibault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ typedef struct s_env
 {
 	t_tk	*tk_head;
 	char	**env_main;
+	char	**path_tab;
 	int		error_parsing;
 	int		error_processing;
 	int		status;

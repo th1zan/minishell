@@ -6,7 +6,7 @@
 /*   By: thibault <thibault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/09 14:58:05 by thibault          #+#    #+#             */
-/*   Updated: 2023/10/10 15:33:21 by thibault         ###   ########.fr       */
+/*   Updated: 2023/10/12 23:55:47 by thibault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,14 +151,16 @@ int	input_to_token(char *input, char ***envp, t_tk **tk_head, int *delimiter)
 	int		i;
 	int		len;
 	char	*tk_str;
-	char	**path;
+	// char	**path_tab;
 
 	*tk_head = NULL;
 	begin = 0;
 	len = 0;
 
-	path = get_path(*envp);
-	// print_strtab(path);
+	
+	// path_tab = global_env->env_main;
+	// printf("IN INPUT TO TOKEN");
+	// print_strtab(global_env->path_tab);
 	i = 0;
 	while (input[i] != 0)
 	{
@@ -172,7 +174,9 @@ int	input_to_token(char *input, char ***envp, t_tk **tk_head, int *delimiter)
 				// begin = 0
 				// len = 3
 				tk_str = ft_substr(input, begin, len);
-				ft_lstadd_back(tk_head, ft_lstnew(tk_str, path, envp)); //add at the end of the list. lst new adds a new element to the list.
+				// printf("input_to_token:: tk_str: %s, %p\n", tk_str,tk_str);
+				ft_lstadd_back(tk_head, ft_lstnew(tk_str, global_env->path_tab, envp)); //add at the end of the list. lst new adds a new element to the list.
+				// free(tk_str);
 				begin = i; // = 3
 			}
 		}
@@ -181,7 +185,8 @@ int	input_to_token(char *input, char ***envp, t_tk **tk_head, int *delimiter)
 	len = i - begin;
 	// printf("%d: begin:%d len:%d\n", i, begin, len);
 	tk_str = ft_substr(input, begin, len);
-	ft_lstadd_back(tk_head, ft_lstnew(tk_str, path, envp));
+	// printf("input_to_token:: tk_str: %s, %p\n", tk_str,tk_str);
+	ft_lstadd_back(tk_head, ft_lstnew(tk_str, global_env->path_tab, envp));
 	// print_lst(*tk_head);
 	return (0);
 	// check errors in addback | lstnew, substr for malloc if NULL, it is not handled anywhere yet. 

@@ -80,34 +80,82 @@ int	print_lst(t_tk *tk)
 	return (1);
 }
 
+int	free_env(t_env *env)
+{	
+	if (env)
+	{	
+		printf("free env_main: %p\n", env->env_main);
+		if(env->env_main)
+		{	
+			// print_strtab(env->env_main);
+			free_strtab_env(env->env_main);
+			free(env->env_main);
+		}
+		
+		free(env);
+	}
+	printf("free env: %p\n", env);
+	
+	return (0);
+}
+
 int	free_lst(t_tk *head_list)
 {
 	t_tk	*tmp;
 
+	
 	while (head_list != NULL)
 	{
 		tmp = head_list->next;
+		// printf("befor condition: head_list path_tab: %p\n", head_list->path_tab);
+		// if (head_list->path_tab)
+		// {	
+		// 	printf("free head_list path_tab: %p\n", head_list->path_tab);
+		// 	free_strtab(head_list->path_tab);
+		// 	head_list->path_tab = NULL;
+		// }
 		free_elem(head_list);
 		head_list = tmp;
 	}
+
+	
 	return (0);
 }
 
 int	free_elem(t_tk *token)
 {
 	t_tk	*tmp;
-	// free tk_str
+	t_tk 	*tmp_arg;
+	
+	// printf("Trying to free token : %p\n",token);
+
 	if(token->tk_str)
+	{
+		// printf("free token_str: %s, %p\n",token->tk_str, token->tk_str);
 		free(token->tk_str);
-	// free tk_arg
+		token->tk_str = NULL;
+	}	
+		
+	// if(token->path)
+	// {
+	// 	printf("free token_path: %s, %p\n",token->path, token->path);
+	// 	free(token->path);
+	// 	token->path = NULL;
+	// }
+	// if(token->path_tab)
+	// {
+	// 	printf("free path_tab: %p\n",token->path_tab);
+	// 	free_strtab(token->path_tab);
+	// 	token->path_tab = NULL;
+	// }	
 	if(token->tk_arg)
 	{
 		tmp = token->tk_arg;
 		while (tmp != NULL)
 		{
-			t_tk *next_tmp = tmp->next; // save next tk
+			tmp_arg = tmp->next; // save next tk
 			free_elem(tmp); // free current
-			tmp = next_tmp; // current = next tk
+			tmp = tmp_arg; // current = next tk
 		}
 	}
 	free(token);

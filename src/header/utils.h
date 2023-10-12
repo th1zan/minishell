@@ -4,12 +4,14 @@
 /*handle_tab.c*/
 int		malloc_strtab(char ***strtab, int nbstr);
 int		free_strtab(char **strtab);
+int		free_strtab_env(char **strtab);
 int		print_strtab(char **strtab);
 
 /*handle_list.c*/
 t_tk	*ft_lstlast(t_tk *tk);
 int		ft_lstsize(t_tk *tk);
 int		print_lst(t_tk *tk);
+int		free_env(t_env *env);
 int		free_lst(t_tk *head_list);
 int		free_elem(t_tk *token);
 

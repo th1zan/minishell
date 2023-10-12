@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tsanglar <tsanglar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: thibault <thibault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/06 16:13:42 by thibault          #+#    #+#             */
-/*   Updated: 2023/10/09 15:26:19 by tsanglar         ###   ########.fr       */
+/*   Updated: 2023/10/12 16:44:54 by thibault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,15 +46,13 @@ t_env	*init_env(char **envp);
 int		parse_input(char *input, t_env *env);
 int		input_loop(t_env *env);
 char	*get_line(char *prompt);
-char	**get_path(char **envp);
+char	**get_path_tab(char **envp);
 int		save_std(int *original_std);
 int		restore_std(int *original_std);
 void	handle_signal(void) ;
 void	handle_sigint(int signo);
 void	create_history(char *input);
 
-void	free_env(t_env *env);
-void	free_tk(t_tk *tk);
 
 
 

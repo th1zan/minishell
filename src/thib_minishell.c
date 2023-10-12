@@ -6,7 +6,7 @@
 /*   By: thibault <thibault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/06 15:14:08 by thibault          #+#    #+#             */
-/*   Updated: 2023/10/10 22:47:48 by thibault         ###   ########.fr       */
+/*   Updated: 2023/10/12 23:55:14 by thibault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,30 +23,91 @@ int	main(int argc, char **argv, char **envp)
 	
 	env = init_env(envp);
 	global_env = env;
+	
 	input_loop(env);
 
-	// free_env(env);
+	free_env(env);
 	return(0);
 	
 }
 
+static int	count_env_entries(char **envp)
+{
+	int count;
+
+	count = 0;
+	while (envp[count])
+		count++;
+	return (count);
+}
+
+static char	**copy_env(char **envp, int count)
+{
+	char	**new_env;
+	int		i;
+
+	new_env = (char **)malloc((count + 1) * sizeof(char *));
+	if (!new_env)
+		return (NULL);
+	i = -1;
+	while (++i < count)
+	{
+		new_env[i] = strdup(envp[i]);
+		if (!new_env[i])
+		{
+			while (--i >= 0)
+				free(new_env[i]);
+			free(new_env);
+			return (NULL);
+		}
+	}
+	new_env[count] = NULL;
+	return (new_env);
+}
 
 t_env	*init_env(char **envp)
 {
-	t_env *new_env;
+	t_env	*new_env;
+	int		count;
 
 	if (envp == NULL || *envp == NULL)
 	{
 		printf("minishell: environment is NULL.\n");
+		return (NULL);
 	}
-	
+	count = count_env_entries(envp);
 	new_env = (t_env *)calloc(1, sizeof(t_env));
 	if (!new_env)
 		return (NULL);
-	new_env->env_main = envp;
+	new_env->env_main = copy_env(envp, count);
+	if (!new_env->env_main)
+	{
+		free(new_env);
+		return (NULL);
+	}
+	new_env->path_tab = get_path_tab(new_env->env_main);
 	new_env->status = 0;
 	return (new_env);
 }
+
+
+// t_env	*init_env(char **envp)
+// {
+// 	t_env *new_env;
+
+// 	if (envp == NULL || *envp == NULL)
+// 	{
+// 		printf("minishell: environment is NULL.\n");
+// 	}
+	
+// 	new_env = (t_env *)calloc(1, sizeof(t_env));
+// 	if (!new_env)
+// 		return (NULL);
+// 	new_env->env_main = envp;
+// 	new_env->path_tab = get_path_tab(envp);
+// 	new_env->status = 0;
+// 	return (new_env);
+// }
 
 int	parse_input(char *input, t_env *env)
 {
@@ -115,14 +176,19 @@ int	input_loop(t_env *env)
 		}
 		
 		//DEBUG
-		fprintf(stderr, "===INFO===: print parsed input -> TK list::\n");
-		print_lst(env->tk_head);
+		// fprintf(stderr, "===INFO===: print parsed input -> TK list::\n");
+		// print_lst(env->tk_head);
+
+		// printf("LOOP\n");
+		// print_strtab(global_env->path_tab);
+
 		if (check_parsing(env->tk_head))
 		{
 			// DEBUG
 			printf("minishell: %d : parsing error\n", global_env->error_parsing);
 			
 			free(input);
+			free_lst(env->tk_head);
 			continue;
 		}
 		
@@ -137,66 +203,17 @@ int	input_loop(t_env *env)
 		restore_std(original_std);
 
 		//DEBUG
+		// fprintf(stderr, "===INFO===: print TK list before freeing::\n");
+		// print_lst(env->tk_head);
 		fprintf(stderr, "===INFO===: initial input:: %s\n", input);
 		free(input);
-		// fprintf(stderr, "===INFO===: $?:: %d\n", env->status);
+		free_lst(env->tk_head);
+		
+		fprintf(stderr, "===INFO===: all variables freed::\n");
+		
 	}
 	
 	return(0);
-}
-
-
-void free_tk(t_tk *tk)
-{
-	if (!tk)
-		return;
-
-	free_tk(tk->next); // Récursion pour libérer la liste liée
-
-	if (tk->tk_str)
-		free(tk->tk_str);
-	if (tk->env && *tk->env)
-		free(*tk->env); // Si vous avez alloué chaque ligne de env séparément, vous devrez peut-être ajouter une boucle ici pour les libérer toutes.
-	if (tk->path_tab)
-	{
-		char **path = tk->path_tab;
-		while (*path)
-		{
-			free(*path);
-			path++;
-		}
-		free(tk->path_tab);
-	}
-	if (tk->path)
-		free(tk->path);
-	if (tk->tk_arg)
-		free(tk->tk_arg); // Assurez-vous que tk_arg est bien une structure allouée dynamiquement et non une référence à une autre structure déjà libérée.
-
-	free(tk);
-}
-
-void free_env(t_env *env)
-{
-	char **env_line;
-	
-	if (!env)
-		return;
-
-	if (env->tk_head)
-		free_tk(env->tk_head);
-
-	if (env->env_main)
-	{
-		env_line = env->env_main;
-		while (*env_line)
-		{
-			free(*env_line);
-			env_line++;
-		}
-		free(env->env_main);
-	}
-
-	free(env);
 }
 
 
@@ -223,7 +240,7 @@ char	*get_line(char *prompt)
 	return (line);  // Renvoyer la ligne lue.
 }
 
-char	**get_path(char **env_main)
+char	**get_path_tab(char **env_main)
 {
 	char	**path;
 	int		i;
@@ -252,7 +269,7 @@ char	**get_path(char **env_main)
 		free (path[0]);
 		path[0] = tmp;
 	}
-	// printf("IN SPLIT: path adress:%p\n", path);
+	// printf("IN get_path: path adress:%p\n", path);
 	return (path);
 }
 

@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   handle_list_add.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tsanglar <tsanglar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: thibault <thibault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 09:23:09 by thibault          #+#    #+#             */
-/*   Updated: 2023/10/09 15:38:16 by tsanglar         ###   ########.fr       */
+/*   Updated: 2023/10/12 23:54:38 by thibault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-t_tk *ft_lstnew(char *token_str, char **path, char ***envp)
+t_tk *ft_lstnew(char *token_str, char **path_tab, char ***envp)
 {
 	t_tk *new_tk;
 
@@ -20,7 +20,8 @@ t_tk *ft_lstnew(char *token_str, char **path, char ***envp)
 	if (!new_tk)
 		return (NULL);
 	new_tk->tk_str = token_str;
-	new_tk->path_tab = path;
+	// printf("ft_lstnew:: tk_str: %s, %p\n", new_tk->tk_str,new_tk->tk_str);
+	new_tk->path_tab = path_tab;
 	new_tk->env = envp;
 	return (new_tk);
 }

@@ -6,7 +6,7 @@
 /*   By: thibault <thibault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 13:27:26 by mlachat           #+#    #+#             */
-/*   Updated: 2023/10/10 21:01:39 by thibault         ###   ########.fr       */
+/*   Updated: 2023/10/12 23:44:44 by thibault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,22 +81,69 @@ int	find_env_var(char **env, char *var_name)
 	return (-1); // non trouvé
 }
 
+// char	*concat_args(t_tk *tk)
+// {
+// 	char	*new_var;
+// 	char	*tmp;
+
+// 	new_var = ft_strdup("");
+// 	while(tk->tk_arg)
+// 	{
+// 		tmp = ft_strjoin(new_var, tk->tk_arg->tk_str);
+// 		if (tmp)
+// 		{
+// 			free(new_var);
+// 			free(tk->tk_arg->tk_str);
+// 			free(tk->tk_arg);
+// 			new_var = tmp;
+// 		}
+// 		else
+// 		{
+// 			free(new_var);
+// 			free(tk->tk_arg->tk_str);
+// 			free(tk->tk_arg);
+// 			return (NULL);
+// 		}
+// 		tk->tk_arg = tk->tk_arg->next;
+// 	}
+// 	return (new_var);
+// }
+
 char	*concat_args(t_tk *tk)
 {
 	char	*new_var;
 	char	*tmp;
+	t_tk	*next_arg;
 
 	new_var = ft_strdup("");
 	while(tk->tk_arg)
 	{
 		tmp = ft_strjoin(new_var, tk->tk_arg->tk_str);
-		free(new_var);
-		new_var = tmp;
-		tk->tk_arg = tk->tk_arg->next;
+		printf("tmp: %s, %p\n", tmp, tmp);
+		if (tmp)
+		{
+			free(new_var);
+			new_var = tmp;
+		}
+		else
+		{
+			free(new_var);
+			while (tk->tk_arg) {
+				next_arg = tk->tk_arg->next;
+				free(tk->tk_arg->tk_str);
+				free(tk->tk_arg);
+				tk->tk_arg = next_arg;
+			}
+			return (NULL);
+		}
+		next_arg = tk->tk_arg->next;
+		free(tk->tk_arg->tk_str);
+		free(tk->tk_arg);
+		tk->tk_arg = next_arg;
 	}
-	
-	return new_var;
+	return (new_var);
 }
+
 
 int	unset(t_tk *tk)
 {
@@ -109,21 +156,20 @@ int	unset(t_tk *tk)
 	char **new_env;
 
 	env = *(tk->env);
-	target_var = concat_args(tk); // Supposons que cette fonction crée la variable à supprimer à partir du token
+	target_var = concat_args(tk); 
 	index = find_env_var(env, target_var);
 	// printf("index: %d/n", index);
-	// Si la variable n'existe pas, on termine la fonction sans rien faire
 	if (index == -1)
 	{
-		free(target_var); // N'oubliez pas de libérer la mémoire si elle n'est pas utilisée
+		free(target_var);
 		return (0);
 	}
 
 	// 3) Si elle existe, supprime la variable du tableau
-	// free(env[index]);
-
+	free(env[index]);
 	i = 0;
-	while (env[i] != NULL) i++;
+	while (env[i] != NULL)
+	i++;
 
 	new_env = malloc(i * sizeof(char*)); // -1 car on supprime une variable, mais pas besoin d'ajouter pour NULL car i compte déjà NULL
 	if(!new_env)
@@ -132,7 +178,7 @@ int	unset(t_tk *tk)
 	k = 0;
 	while (j < i)
 	{
-		if (j == index) // si on arrive à l'index de la variable à supprimer, on saute cette entrée
+		if (j == index)
 		{
 			j++;
 			continue;
@@ -142,6 +188,7 @@ int	unset(t_tk *tk)
 		k++;
 	}
 	new_env[k] = NULL;  // termine le tableau avec NULL
+	free(env);
 	print_strtab(env);
 	// if (env)
 	// 	free(env); // libère l'ancien tableau
@@ -196,7 +243,7 @@ int	export(t_tk *tk)
 	int		i;
 	char	**new_env;
 
-	env = *(tk->env);
+	env = global_env->env_main;
 	if (tk->tk_arg == 0)
 	{
 		env_built_in(tk);
@@ -217,12 +264,14 @@ int	export(t_tk *tk)
 		while (env[i])
 			i++;
 		new_env = malloc((i + 2) * sizeof(char *));
+		if(!new_env)
+			return(1);
 		i = -1;
 		while (env[++i])
 			new_env[i] = env[i];
 		new_env[i] = new_var;
 		new_env[i + 1] = NULL;
-		*(tk->env) = new_env;
+		global_env->env_main = new_env;
 	}
 	return (0);
 }

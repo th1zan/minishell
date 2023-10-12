@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tsanglar <tsanglar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: thibault <thibault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 17:11:53 by mlachat           #+#    #+#             */
-/*   Updated: 2023/10/09 17:45:39 by tsanglar         ###   ########.fr       */
+/*   Updated: 2023/10/12 23:55:32 by thibault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,12 @@ int	execution(t_env *env, t_tk **tk)
 			
 			pid = fork();
 			if (pid == -1)
+			{
+				free(cmd);
+				free_strtab(arg_table);
+				free(arg_table);
 				perror("fork error");
+			}
 			if (pid == 0)
 			{
 				set_fd_for_cmd(tmp);
@@ -54,12 +59,20 @@ int	execution(t_env *env, t_tk **tk)
 					
 					free(cmd);
 					free_strtab(arg_table);
+					free(arg_table);
 					perror("error when executing the command");
 					exit(1);
 				}
 			}
 			else
+			{
+				// printf("PID > 0\n");
+				free(cmd);
+				// free_strtab(arg_table);
+				free(arg_table);
 				tmp->pid = pid;
+			}
+				
 		}
 		else if (tmp->type == TK_CMD_BUILT_IN)
 		{
@@ -236,7 +249,7 @@ int	tk_arg_to_table(t_tk *tk, char	***arg_table)
 		size_tab++;
 		tmp = tmp->next;
 	}
-	// print_strtab(*arg_table);
+	print_strtab(*arg_table);
 	return (0);
 }
 
@@ -261,11 +274,16 @@ int	get_cmd_path(t_tk *tk)
 		if (check_access(cmd) == SUCCESS)
 		{
 			tk->path = path[i];
+			free(cmd);
 			return (0);
 		}
 		else
+		{
+			free(cmd);
 			i++;
+		}
 	}
+	
 	fprintf(stderr,"minishell: %s: command not found\n", tk->tk_str);
 	return (1);
 }
