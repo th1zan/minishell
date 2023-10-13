@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thibault <thibault@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tsanglar <tsanglar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 17:11:53 by mlachat           #+#    #+#             */
-/*   Updated: 2023/10/12 23:55:32 by thibault         ###   ########.fr       */
+/*   Updated: 2023/10/13 16:51:06 by tsanglar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -212,7 +212,8 @@ int	cmd_arg_list_to_table(t_tk *tk, char ***arg_table, char **cmd)
 	// printf("tmp_cmd: %c\n", tmp_cmd[0]);
 	if(tmp_cmd[0] == '/')
 	{
-		*cmd = tmp_cmd;
+		*cmd = ft_strdup(tmp_cmd);
+		
 	}
 	else
 	{

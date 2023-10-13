@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_token.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thibault <thibault@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tsanglar <tsanglar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/11 11:49:26 by thibault          #+#    #+#             */
-/*   Updated: 2023/10/12 18:53:37 by thibault         ###   ########.fr       */
+/*   Updated: 2023/10/13 16:20:09 by tsanglar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,13 @@ int	parse_token(t_tk **head_tk)
 	// printf("after handle_files\n");
 	// print_lst(*head_tk);
 	// handle_quotes(*head_tk); // quotes déjà gérées dans ft_handle_arg_tk(*head_tk);
-	// printf("after handle_quotes\n");
-	// print_lst(*head_tk);
+	
 	ft_handle_arg_tk(*head_tk);
+	// printf("before hd\n");
+	// print_lst(*head_tk);
 	ft_handle_hd_arg_tk(*head_tk);
+	// printf("after hd\n");
+	// print_lst(*head_tk);
 	// ft_delete_type_token(head_tk, TK_HD_DELIM); // no more TK_HD_DELIM -> fct useless
 	ft_delete_type_token(head_tk, TK_HD_ARG);
 	ft_handle_built_in(*head_tk);

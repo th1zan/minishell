@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   thib_minishell.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thibault <thibault@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tsanglar <tsanglar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/06 15:14:08 by thibault          #+#    #+#             */
-/*   Updated: 2023/10/12 23:55:14 by thibault         ###   ########.fr       */
+/*   Updated: 2023/10/13 16:47:21 by tsanglar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -192,11 +192,15 @@ int	input_loop(t_env *env)
 			continue;
 		}
 		
+		//DEBUG
+		// fprintf(stderr, "===INFO===: print TK list before redirection::\n");
+		// print_lst(env->tk_head);
+
 		set_redirection(&(env->tk_head));
 		
 		//DEBUG
 		// fprintf(stderr, "===INFO===: print TK list before execution::\n");
-		// print_lst(tk_head);
+		// print_lst(env->tk_head);
 		fprintf(stderr, "===INFO===: result of cmd line (if displayed)::\n");
 		
 		execution(env, &(env->tk_head));
@@ -237,6 +241,7 @@ char	*get_line(char *prompt)
 
 	tcsetattr(STDIN_FILENO, TCSAFLUSH, &saved);  // Restaurer les attributs originaux du terminal.
 
+	// printf("line: %s %p\n", line, line);
 	return (line);  // Renvoyer la ligne lue.
 }
 

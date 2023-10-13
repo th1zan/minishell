@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirection.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thibault <thibault@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tsanglar <tsanglar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 14:34:44 by thibault          #+#    #+#             */
-/*   Updated: 2023/10/10 23:29:39 by thibault         ###   ########.fr       */
+/*   Updated: 2023/10/13 16:17:22 by tsanglar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 int	set_redirection(t_tk **tk)
 {
+	
 	set_default_fd(tk);
 	set_pipe_fd(tk);
 	set_operator_fd(tk);
@@ -84,6 +85,7 @@ int	set_operator_fd(t_tk **tk)
 	tmp = *tk;
 	while (tmp != NULL)
 	{
+		// fprintf(stderr, "set_operator:: tk_str: %s %p\n",tmp->tk_arg->tk_str,tmp->tk_arg->tk_str);
 		if (tmp->type == TK_IN_CHEVRON)
 		{
 			file = tmp->tk_arg->tk_str;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_str.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thibault <thibault@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tsanglar <tsanglar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 16:31:29 by thibault          #+#    #+#             */
-/*   Updated: 2023/10/10 23:06:41 by thibault         ###   ########.fr       */
+/*   Updated: 2023/10/13 12:25:34 by tsanglar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -162,7 +162,7 @@ int	replace_with_values(char **input, char ***var_values_tab)
 			else
 			{
 				new_input = replace_var_in_string(input_str, &i, *var_values_tab);
-				printf("var_value found: %s\n", new_input);
+				// printf("var_value found: %s\n", new_input);
 			}
 			if (input_str != new_input)
 			{

@@ -94,7 +94,7 @@ int	free_env(t_env *env)
 		
 		free(env);
 	}
-	printf("free env: %p\n", env);
+	// printf("free env: %p\n", env);
 	
 	return (0);
 }
@@ -114,6 +114,7 @@ int	free_lst(t_tk *head_list)
 		// 	free_strtab(head_list->path_tab);
 		// 	head_list->path_tab = NULL;
 		// }
+		printf("free head_list: %p\n", head_list);
 		free_elem(head_list);
 		head_list = tmp;
 	}
@@ -131,14 +132,14 @@ int	free_elem(t_tk *token)
 
 	if(token->tk_str)
 	{
-		// printf("free token_str: %s, %p\n",token->tk_str, token->tk_str);
+		printf("free token_str: %s, %p\n",token->tk_str, token->tk_str);
 		free(token->tk_str);
 		token->tk_str = NULL;
 	}	
 		
 	// if(token->path)
 	// {
-	// 	printf("free token_path: %s, %p\n",token->path, token->path);
+	// printf("free token_path: %s, %p\n",token->path, token->path);
 	// 	free(token->path);
 	// 	token->path = NULL;
 	// }
@@ -154,6 +155,7 @@ int	free_elem(t_tk *token)
 		while (tmp != NULL)
 		{
 			tmp_arg = tmp->next; // save next tk
+			printf("free tmp_arg: %p\n", tmp);
 			free_elem(tmp); // free current
 			tmp = tmp_arg; // current = next tk
 		}

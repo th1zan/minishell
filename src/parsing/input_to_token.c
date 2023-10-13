@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input_to_token.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thibault <thibault@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tsanglar <tsanglar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/09 14:58:05 by thibault          #+#    #+#             */
-/*   Updated: 2023/10/12 23:55:47 by thibault         ###   ########.fr       */
+/*   Updated: 2023/10/13 15:11:56 by tsanglar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -184,6 +184,7 @@ int	input_to_token(char *input, char ***envp, t_tk **tk_head, int *delimiter)
 	}
 	len = i - begin;
 	// printf("%d: begin:%d len:%d\n", i, begin, len);
+	// printf("BEFORE substr ->input_to_token:: tk_str: %s, %p\n", tk_str,tk_str);
 	tk_str = ft_substr(input, begin, len);
 	// printf("input_to_token:: tk_str: %s, %p\n", tk_str,tk_str);
 	ft_lstadd_back(tk_head, ft_lstnew(tk_str, global_env->path_tab, envp));
