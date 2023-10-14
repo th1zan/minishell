@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: tsanglar <tsanglar@student.42.fr>          +#+  +:+       +#+         #
+#    By: thibault <thibault@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/20 17:58:32 by ebennace          #+#    #+#              #
-#    Updated: 2023/10/06 16:31:01 by tsanglar         ###   ########.fr        #
+#    Updated: 2023/10/12 14:07:44 by thibault         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -54,8 +54,12 @@ TEMPLATE = src/header/minishell_header.txt
 # TEMPLATE = 	
 
 # ==== Debug && Leak ==== #
-SANITIZE       = -fsanitize=address
-LEAKS          = -fsanitize=leak
+# SANITIZE       = -fsanitize=address
+# LEAKS          = -fsanitize=leak
+SANITIZE       = 
+LEAKS       = 
+
+
 DEBUGGER       = lldb
 
 # ==== Remove ==== #
@@ -85,6 +89,22 @@ $(NAME): $(OBJS)
 	@$(CC) $(FLAGS) -o $(NAME) $(OBJS) $(LIBFT) $(READLINE) 
 	@echo "==== $(NAME) is ready! ===="
 	@cat "$(TEMPLATE)"
+
+ENTITLEMENTS = entitlements.plist
+
+sign: $(NAME)
+	@echo "==== Signing $(NAME) for profiling ===="
+	@echo '<?xml version="1.0" encoding="UTF-8"?>' > $(ENTITLEMENTS)
+	@echo '<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "https://www.apple.com/DTDs/PropertyList-1.0.dtd">' >> $(ENTITLEMENTS)
+	@echo '<plist version="1.0">' >> $(ENTITLEMENTS)
+	@echo '    <dict>' >> $(ENTITLEMENTS)
+	@echo '        <key>com.apple.security.get-task-allow</key>' >> $(ENTITLEMENTS)
+	@echo '        <true/>' >> $(ENTITLEMENTS)
+	@echo '    </dict>' >> $(ENTITLEMENTS)
+	@echo '</plist>' >> $(ENTITLEMENTS)
+	@codesign -s - -v -f --entitlements $(ENTITLEMENTS) $(NAME)
+	@rm -f $(ENTITLEMENTS)
+
 
 clean:
 	@echo "==== Cleaning all LIBFT .o files ===="
