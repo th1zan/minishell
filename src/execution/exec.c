@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tsanglar <tsanglar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: thibault <thibault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 17:11:53 by mlachat           #+#    #+#             */
-/*   Updated: 2023/10/13 16:51:06 by tsanglar         ###   ########.fr       */
+/*   Updated: 2023/10/14 15:27:30 by thibault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ int	execution(t_env *env, t_tk **tk)
 		}
 		else if (tmp->type == TK_CMD_BUILT_IN)
 		{
+				// printf("BUILTIN tmp: %s\n", tmp->tk_str);
 				set_fd_for_cmd(tmp);
 				status_built_in = is_builtin_exec(tmp);
 		}

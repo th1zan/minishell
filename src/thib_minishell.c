@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   thib_minishell.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tsanglar <tsanglar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: thibault <thibault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/06 15:14:08 by thibault          #+#    #+#             */
-/*   Updated: 2023/10/13 16:47:21 by tsanglar         ###   ########.fr       */
+/*   Updated: 2023/10/14 15:41:15 by thibault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	main(int argc, char **argv, char **envp)
 	
 	env = init_env(envp);
 	global_env = env;
-	
+	// print_strtab(global_env->env_main);
 	input_loop(env);
 
 	free_env(env);
@@ -53,6 +53,7 @@ static char	**copy_env(char **envp, int count)
 	while (++i < count)
 	{
 		new_env[i] = strdup(envp[i]);
+		printf("new_env[%d]: %s\n", i, new_env[i]);
 		if (!new_env[i])
 		{
 			while (--i >= 0)
@@ -80,11 +81,16 @@ t_env	*init_env(char **envp)
 	if (!new_env)
 		return (NULL);
 	new_env->env_main = copy_env(envp, count);
+	// printf("new_env->env_main[2]: %s\n", new_env->env_main[2]);
+	// print_strtab(new_env->env_main);
+	
 	if (!new_env->env_main)
+	
 	{
 		free(new_env);
 		return (NULL);
 	}
+	
 	new_env->path_tab = get_path_tab(new_env->env_main);
 	new_env->status = 0;
 	return (new_env);
@@ -330,7 +336,7 @@ void	handle_signal(void)
 void	handle_sigint(int signo) 
 {
 	(void)signo;
-	rl_replace_line("", 0);
+	// rl_replace_line("", 0);
 	rl_on_new_line();
 	write(1, "\n", 1);
 	rl_redisplay();

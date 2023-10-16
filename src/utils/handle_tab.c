@@ -6,7 +6,7 @@
 /*   By: thibault <thibault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/09 22:07:23 by thibault          #+#    #+#             */
-/*   Updated: 2023/10/12 23:52:54 by thibault         ###   ########.fr       */
+/*   Updated: 2023/10/14 15:38:48 by thibault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ int	print_strtab(char **strtab)
 	i = 0;
 	while (strtab[i] != NULL)
 	{
-		// printf("%s, %p\n", strtab[i], strtab[i]);
+		printf("%s, %p\n", strtab[i], strtab[i]);
 		i++;
 	}
 	return (0);

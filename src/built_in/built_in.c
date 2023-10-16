@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   built_in.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tsanglar <tsanglar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: thibault <thibault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 13:27:26 by mlachat           #+#    #+#             */
-/*   Updated: 2023/10/13 15:58:23 by tsanglar         ###   ########.fr       */
+/*   Updated: 2023/10/14 15:41:52 by thibault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -189,7 +189,7 @@ int	unset(t_tk *tk)
 	}
 	new_env[k] = NULL;  // termine le tableau avec NULL
 	free(env);
-	print_strtab(env);
+	// print_strtab(env);
 	// if (env)
 	// 	free(env); // libère l'ancien tableau
 	*(tk->env) = new_env; // met à jour le pointeur env pour pointer vers le nouveau tableau
@@ -280,9 +280,11 @@ int	export(t_tk *tk)
 
 int	env_built_in(t_tk *tk)
 {
+	printf("env_built_in:: tk: %s\n", tk->tk_str);
+	printf("env_built_in:: tk->env: %p\n", tk->env);
 	if(*(tk->env) == 0)
 		return(1);
-	print_strtab(*(tk->env));
+	print_strtab(global_env->env_main);
 	return(0);
 }
 
