@@ -1,0 +1,83 @@
+/bin/ls
+/bin/ls -la
+/bin/pwd
+/bin/existepas
+echo salut
+echo -n salut -n
+echo -n $HOME $PWD
+echo /bin/ls $USER
+echo
+ls
+echo $?
+exipas
+echo $?
+grep -t
+echo $?
+cat exipas
+echo $?
+echo exit 113 > exit.sh
+bash exit.sh
+echo $?
+echo $?$?
+echo $?$? $?
+echo $? $? $?
+CTRL + C
+echo $?
+CTRL + C
+CTRL + \
+CTRL + D										X saut de ligne
+echo "cat lol.c | cat > lol.c"
+echo "te ; st"
+ls "-la"
+echo "salut"    w
+echo 's' "salut"
+echo sa"$HOME"$ma$ta'sa$lut' $ $home $ 			X parsing avec is-variable
+echo 'salut'
+ls '  '
+ls '-la'
+echo 'cat lol.c | cat > lol.c'
+echo '$USER | cat -e'
+env
+export TEST
+env
+export											X
+export TEST=1234
+env
+unset TEST
+env
+export
+cd .. 
+echo $PWD
+echo $OLDPWD
+cd .
+cd nemarchepas
+cd /bin
+cd $HOME
+cd $OLDPWD
+cd
+pwd
+pwd arg
+echo test > outfile1
+echo test > outfile1 >> outfile2				X erreur de checkparsing
+cat < outfile1
+echo 1 < outfile1
+echo $USER
+echo "$USER"
+echo "$PATH"
+echo "$HOME"$PWD/NEWDIR
+
+"echo << test"
+"echo 2 << file"
+"echo test | cat -e"
+"cat infile | grep test | wc -l"
+"cat existepas | grep test"
+"cat | cat | ls"
+
+env
+unset PATH
+env
+ls
+
+exit
+exit test
+exit t e s t

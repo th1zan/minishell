@@ -6,7 +6,7 @@
 /*   By: thibault <thibault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 09:24:48 by thibault          #+#    #+#             */
-/*   Updated: 2023/10/14 15:21:59 by thibault         ###   ########.fr       */
+/*   Updated: 2023/10/16 10:59:12 by thibault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ int	is_exit(t_tk *tk)
 int	is_builtin_exec(t_tk *cmd)
 {
 	int	status;
-	printf("is_bultin_exec:: tk: %s\n", cmd->tk_str);
+	// printf("is_bultin_exec:: tk: %s\n", cmd->tk_str);
 	status = -1;
 	if (is_echo(cmd))
 		status = echo(cmd);

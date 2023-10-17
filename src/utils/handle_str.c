@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_str.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tsanglar <tsanglar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: thibault <thibault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 16:31:29 by thibault          #+#    #+#             */
-/*   Updated: 2023/10/13 12:25:34 by tsanglar         ###   ########.fr       */
+/*   Updated: 2023/10/16 16:31:22 by thibault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,31 +84,35 @@ char *get_value_after_equal(char *var_value)
 	return ft_substr(var_value, i, ft_strlen(var_value) - i);
 }
 
-// char *replace_var_in_string(char *input_str, int *i, char **var_values_tab)
-// {
-// 	char	*tmp;
-// 	char	*var_value;
-// 	int		start;
-// 	int		var_name_len;
+char	*replace_var_status_in_string(char *input_str, int *i, char *var_value)
+{
+	char	*tmp;
+	char	*tmp2;
+	char	*result;
+	int		start;
+	int		var_name_len;
 
-// 	// printf("BEGIN of fct: replace_var_in_string\n");
-// 	start = *i; // Sauvegardez la position actuelle
-// 	var_value = get_var_value(input_str, i, var_values_tab);
-// 	if (!var_value)
-// 		var_value = ft_strdup(" ");  // Si la variable n'est pas trouvée, utilisez une chaîne vide
-// 	// printf("i: %d, var_value: %s\n", *i, var_value);
-// 	var_name_len = get_var_name_len_from_input(input_str, *i); // Calculez la longueur du nom de la variable
-// 	tmp = ft_substr(input_str, 0, start); // Prenez la partie de la chaîne avant le nom de la variable
-// 	char *tmp2 = ft_strjoin(tmp, var_value); // Concaténez la valeur de la variable
-// 	// printf("tmp: %s, tmp2: %s\n", tmp, tmp2);
-// 	free(tmp);
-// 	free(var_value);
-// 	char *result = ft_strjoin(tmp2, &input_str[start + var_name_len]); // Concaténez la partie restante de la chaîne après le nom de la variable
-// 	// printf("result: %s, inputstr: %c\n", result, input_str[start + var_name_len]);
-// 	free(tmp2);
-// 	// printf("END of fct: replace_var_in_string\n");
-// 	return (result);
-// }
+	start = *i;
+
+	// Calculer la longueur du nom de la variable dans la chaîne d'entrée.
+	// Cette fonction doit être définie pour calculer la longueur du nom de la variable.
+	var_name_len = 2;
+
+	// Extraire la partie de la chaîne avant le nom de la variable.
+	tmp = ft_substr(input_str, 0, start);
+
+	// Concaténer la partie précédente de la chaîne avec la valeur de la variable.
+	tmp2 = ft_strjoin(tmp, var_value);
+	free(tmp);
+
+	// Concaténer le résultat précédent avec la partie de la chaîne après le nom de la variable.
+	result = ft_strjoin(tmp2, &input_str[start + var_name_len]);
+	free(tmp2);
+
+
+	return (result);
+}
+
 
 char	*replace_var_in_string(char *input_str, int *i, char **var_values_tab)
 {
@@ -139,26 +143,41 @@ int	replace_with_values(char **input, char ***var_values_tab)
 	int		i;
 	char	*input_str;
 	char	*new_input;
+	char	*status;
+	int		is_var;
 
 	input_str = *input;
+	status = NULL;
 	i = 0;
-
+	is_var = 0;
+	
 	while (input_str[i])
 	{
 		if (input_str[i] == '$' && check_inside_simple_quote(input_str, i) != SUCCESS)
 		{
-			if (input_str[i + 1] == ' ' || input_str[i + 1] == '\0' || !ft_isalnum(input_str[i + 1]))
+			
+			if (ft_strncmp(&input_str[i], "$?", 2) == 0)
+			{
+			// printf("print status ");
+			// printf("%s\n", &input_str[i + 1]);
+				status = ft_itoa(global_env->status);
+				new_input = replace_var_status_in_string(input_str, &i, status);
+				i = i + 1;
+				free(status);
+			// new_input = ft_itoa(global_env->status);
+			}
+			else if (input_str[i + 1] == ' ' || input_str[i + 1] == '\0' || !ft_isalnum(input_str[i + 1]))
 			{
 				i++;
 				continue;
 			}
-
-			if (ft_strncmp(&input_str[i], "$?", 2) == 0)
-			{
-				printf("print status ");
-				printf("%s\n", &input_str[i + 1]);
-				new_input = ft_itoa(global_env->status);
-			}
+			// if (ft_strncmp(&input_str[i], "$?", 2) == 0)
+			// {
+			// 	// printf("print status ");
+			// 	// printf("%s\n", &input_str[i + 1]);
+			// 	replace_var_in_string(input_str, &i, global_env->status)
+			// 	// new_input = ft_itoa(global_env->status);
+			// }
 			else
 			{
 				new_input = replace_var_in_string(input_str, &i, *var_values_tab);
@@ -168,6 +187,7 @@ int	replace_with_values(char **input, char ***var_values_tab)
 			{
 				free(input_str);
 				input_str = new_input;
+				is_var = 1;
 			}
 		}
 		else
@@ -178,7 +198,7 @@ int	replace_with_values(char **input, char ***var_values_tab)
 	
 	*input = input_str;  // Pas besoin de vérifier si new_input est non NULL car input_str pointera toujours vers la dernière version de la chaîne
 	
-	return (0);
+	return (is_var);
 }
 
 
@@ -201,19 +221,6 @@ char *get_var_value(char *input, int *i, char **var_values_tab)
 	return (var_value);
 }
 
-// int	replace_env_variables(char **input, char **env)
-// {
-// 	// char	**var_values_tab;
-
-// 	// var_values_tab = NULL;
-// 	// printf("input: %s env[0]:%s\n", *input, env[0]);
-// 	// var_values_tab = get_variables_values(*input);
-// 	replace_with_values(input, env);
-// 	// print_strtab(env);
-// 	// free (input);
-// 	// *input = tmp_input;
-// 	return (0);
-// }
 
 int	check_inside_simple_quote(char *input, int index)
 {

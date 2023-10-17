@@ -6,7 +6,7 @@
 /*   By: thibault <thibault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 13:27:26 by mlachat           #+#    #+#             */
-/*   Updated: 2023/10/14 15:41:52 by thibault         ###   ########.fr       */
+/*   Updated: 2023/10/16 22:14:56 by thibault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,12 @@ int	echo(t_tk *tk)
 	while(tmp)
 	{
 		if (tmp->tk_str)
+		{	
 			printf("%s", tmp->tk_str);
+			// printf("--%d--", tmp->is_var_type);
+		}
 		tmp = tmp->next;
-		if (tmp)
+		if (tmp && !tmp->is_var_type_with_space)
 			printf(" ");
 	}
 	if(ret)
@@ -119,7 +122,7 @@ char	*concat_args(t_tk *tk)
 	while(tk->tk_arg)
 	{
 		tmp = ft_strjoin(new_var, tk->tk_arg->tk_str);
-		printf("tmp: %s, %p\n", tmp, tmp);
+		// printf("tmp: %s, %p\n", tmp, tmp);
 		if (tmp)
 		{
 			free(new_var);
@@ -155,7 +158,7 @@ int	unset(t_tk *tk)
 	int k;
 	char **new_env;
 
-	env = *(tk->env);
+	env = global_env->env_main;
 	target_var = concat_args(tk); 
 	index = find_env_var(env, target_var);
 	// printf("index: %d/n", index);
@@ -174,6 +177,7 @@ int	unset(t_tk *tk)
 	new_env = malloc(i * sizeof(char*)); // -1 car on supprime une variable, mais pas besoin d'ajouter pour NULL car i compte déjà NULL
 	if(!new_env)
 		return(1);
+	// printf("new_env %p\n", new_env);
 	j = 0;
 	k = 0;
 	while (j < i)
@@ -192,10 +196,23 @@ int	unset(t_tk *tk)
 	// print_strtab(env);
 	// if (env)
 	// 	free(env); // libère l'ancien tableau
-	*(tk->env) = new_env; // met à jour le pointeur env pour pointer vers le nouveau tableau
-
+	global_env->env_main = new_env; // met à jour le pointeur env pour pointer vers le nouveau tableau
+	// printf("global_env->env_main:%p\n", global_env->env_main);
+	if(ft_strncmp(target_var, "PATH", 4) == 0)
+	{
+		// printf("AVANT, path_tab: %p\n", global_env->path_tab);
+		// print_strtab(global_env->path_tab);
+		free_strtab(global_env->path_tab);
+		free(global_env->path_tab);
+		global_env->path_tab = NULL;
+		global_env->path_tab = get_path_tab(global_env->env_main);
+		// printf("APRES, path_tab: %p\n", global_env->path_tab);
+		// if (global_env->path_tab)
+		// 	print_strtab(global_env->path_tab);
+	}
 	free(target_var); // N'oubliez pas de libérer la mémoire de target_var
 
+	
 	return (0); // Tout s'est bien passé
 }
 
@@ -251,7 +268,10 @@ int	export(t_tk *tk)
 	}
 	new_var = concat_args(tk);
 	if (!is_valid_env_argument(new_var))
+	{
+		free(new_var);	
 		return (1);
+	}
 	index = find_env_var(env, new_var);
 	if (index != -1)
 	{
@@ -271,7 +291,18 @@ int	export(t_tk *tk)
 			new_env[i] = env[i];
 		new_env[i] = new_var;
 		new_env[i + 1] = NULL;
+		free(global_env->env_main);
 		global_env->env_main = new_env;
+	}
+	if(ft_strncmp(new_var, "PATH", 4) == 0)
+	{
+		// printf("AVANT, path_tab: %p\n", global_env->path_tab);
+		// if (global_env->path_tab)
+		// 	print_strtab(global_env->path_tab);
+		global_env->path_tab = get_path_tab(global_env->env_main);
+		// printf("APRES, path_tab: %p\n", global_env->path_tab);
+		// if (global_env->path_tab)
+		// 	print_strtab(global_env->path_tab);
 	}
 	return (0);
 }
@@ -280,8 +311,10 @@ int	export(t_tk *tk)
 
 int	env_built_in(t_tk *tk)
 {
-	printf("env_built_in:: tk: %s\n", tk->tk_str);
-	printf("env_built_in:: tk->env: %p\n", tk->env);
+	// printf("env_built_in:: tk: %s\n", tk->tk_str);
+	// printf("env_built_in:: tk->env: %p\n", tk->env);
+	// printf("global env_built_in:: global_env->env_main: %p\n", global_env->env_main);
+	// printf("global env_built_in:: global_env->env_main[3]:%s %p\n", global_env->env_main[3], global_env->env_main[3]);
 	if(*(tk->env) == 0)
 		return(1);
 	print_strtab(global_env->env_main);
@@ -297,10 +330,55 @@ int pwd(void)
 	return(0);
 }
 
+int update_oldpwd(char *current_directory)
+{
+	
+	char	**env;
+	// char	*new_var;
+	int		index;
+	int		i;
+	char	**new_env;
+
+	env = global_env->env_main;
+	// new_var = ft_strdup(current_directory);
+	// if (!is_valid_env_argument(new_var))
+	// {
+	// 	free(new_var);	
+	// 	return (1);
+	// }
+	index = find_env_var(env, "OLDPWD");
+	if (index != -1)
+	{
+		free(env[index]);
+		env[index] = ft_strjoin("OLDPWD=", current_directory);
+	}
+	else
+	{
+		i = 0;
+		while (env[i])
+			i++;
+		new_env = malloc((i + 2) * sizeof(char *));
+		if(!new_env)
+			return(1);
+		i = -1;
+		while (env[++i])
+			new_env[i] = env[i];
+		new_env[i] = ft_strjoin("OLDPWD=", current_directory);
+		new_env[i + 1] = NULL;
+		free(global_env->env_main);
+		global_env->env_main = new_env;
+	}
+	return (0);
+}
+
 
 int	cd(t_tk *tk) 
 {
 	char *path;
+	char cwd[1024];
+
+	getcwd(cwd, sizeof(cwd));
+	update_oldpwd(cwd);
 
 	if (tk == NULL)
 	{

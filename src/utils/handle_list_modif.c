@@ -40,10 +40,15 @@ void	ft_lst_replace_var(t_tk *tk, int (*f)(char **str, char ***env))
 		return ;
 	while (tk)
 	{
-		(f)(&tk->tk_str, tk->env);
+		if ((f)(&tk->tk_str, tk->env) == 1)
+			if (!is_quote(tk->tk_str, 0) && !is_quote(tk->tk_str, ft_strlen(tk->tk_str) - 1))
+				if(tk->prev && tk->prev->type != TK_BLANK)
+					tk->is_var_type_with_space = 1;
+				// printf("tk var type:%d\n", tk->is_var_type = 1);
 		tk = tk->next;
 	}
 }
+
 
 
 void	ft_lst_classify_tk_unclassified(t_tk *tk)

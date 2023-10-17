@@ -6,7 +6,7 @@
 /*   By: thibault <thibault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/06 15:14:08 by thibault          #+#    #+#             */
-/*   Updated: 2023/10/14 15:41:15 by thibault         ###   ########.fr       */
+/*   Updated: 2023/10/16 22:53:34 by thibault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@ int	main(int argc, char **argv, char **envp)
 	// print_strtab(global_env->env_main);
 	input_loop(env);
 
-	free_env(env);
+	// free_env(env);
+	free_global_env(global_env);
 	return(0);
 	
 }
@@ -53,7 +54,7 @@ static char	**copy_env(char **envp, int count)
 	while (++i < count)
 	{
 		new_env[i] = strdup(envp[i]);
-		printf("new_env[%d]: %s\n", i, new_env[i]);
+		// printf("new_env[%d]: %s\n", i, new_env[i]);
 		if (!new_env[i])
 		{
 			while (--i >= 0)
@@ -70,7 +71,9 @@ t_env	*init_env(char **envp)
 {
 	t_env	*new_env;
 	int		count;
+	char cwd[1024];
 
+	getcwd(cwd, sizeof(cwd));
 	if (envp == NULL || *envp == NULL)
 	{
 		printf("minishell: environment is NULL.\n");
@@ -92,28 +95,12 @@ t_env	*init_env(char **envp)
 	}
 	
 	new_env->path_tab = get_path_tab(new_env->env_main);
+	new_env->minishell_directory = ft_strdup(cwd);
 	new_env->status = 0;
 	return (new_env);
 }
 
 
-// t_env	*init_env(char **envp)
-// {
-// 	t_env *new_env;
-
-// 	if (envp == NULL || *envp == NULL)
-// 	{
-// 		printf("minishell: environment is NULL.\n");
-// 	}
-	
-// 	new_env = (t_env *)calloc(1, sizeof(t_env));
-// 	if (!new_env)
-// 		return (NULL);
-// 	new_env->env_main = envp;
-// 	new_env->path_tab = get_path_tab(envp);
-// 	new_env->status = 0;
-// 	return (new_env);
-// }
 
 int	parse_input(char *input, t_env *env)
 {
@@ -142,7 +129,7 @@ int	parse_input(char *input, t_env *env)
 	parse_token(&(env->tk_head));
 
 		//DEBUG
-		fprintf(stderr, "===INFO===: end of parsing\n");
+		// fprintf(stderr, "===INFO===: end of parsing\n");
 		// fprintf(stderr, "===INFO===: print PATH\n");
 		// print_strtab(tk_head->path_tab);
 		// fprintf(stderr, "===INFO===: print ENV\n");
@@ -192,9 +179,11 @@ int	input_loop(t_env *env)
 		{
 			// DEBUG
 			printf("minishell: %d : parsing error\n", global_env->error_parsing);
-			
+			// printf("coucou1\n");
 			free(input);
+			// printf("coucou2\n");
 			free_lst(env->tk_head);
+			// printf("coucou3\n");
 			continue;
 		}
 		
@@ -207,7 +196,7 @@ int	input_loop(t_env *env)
 		//DEBUG
 		// fprintf(stderr, "===INFO===: print TK list before execution::\n");
 		// print_lst(env->tk_head);
-		fprintf(stderr, "===INFO===: result of cmd line (if displayed)::\n");
+		// fprintf(stderr, "===INFO===: result of cmd line (if displayed)::\n");
 		
 		execution(env, &(env->tk_head));
 		restore_std(original_std);
@@ -215,11 +204,11 @@ int	input_loop(t_env *env)
 		//DEBUG
 		// fprintf(stderr, "===INFO===: print TK list before freeing::\n");
 		// print_lst(env->tk_head);
-		fprintf(stderr, "===INFO===: initial input:: %s\n", input);
+		// fprintf(stderr, "===INFO===: initial input:: %s\n", input);
 		free(input);
 		free_lst(env->tk_head);
 		
-		fprintf(stderr, "===INFO===: all variables freed::\n");
+		// fprintf(stderr, "===INFO===: all variables freed::\n");
 		
 	}
 	
@@ -336,10 +325,12 @@ void	handle_signal(void)
 void	handle_sigint(int signo) 
 {
 	(void)signo;
-	// rl_replace_line("", 0);
+	rl_replace_line("", 0);
+	global_env->status = 1;
 	rl_on_new_line();
 	write(1, "\n", 1);
 	rl_redisplay();
+	
 	// update_variable_status_process(g_env, 130);
 }
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_token.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tsanglar <tsanglar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: thibault <thibault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/11 11:49:26 by thibault          #+#    #+#             */
-/*   Updated: 2023/10/13 16:20:09 by tsanglar         ###   ########.fr       */
+/*   Updated: 2023/10/16 22:52:46 by thibault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,11 +50,11 @@ int		check_parsing(t_tk *tk)
 
 	check = 0;
 	check = check_grammar(tk);
-	fprintf(stderr, "===INFO===: end of check_grammar\n");
+	// fprintf(stderr, "===INFO===: end of check_grammar\n");
 	check = check + 2 * check_cmd(tk);
-	fprintf(stderr, "===INFO===: end of check_cmd\n");
+	// fprintf(stderr, "===INFO===: end of check_cmd\n");
 	check = check + 3 * check_input_file(tk);
-	fprintf(stderr, "===INFO===: end of check_input_file\n");
+	// fprintf(stderr, "===INFO===: end of check_input_file\n");
 	if (check > 0)
 	{	
 		global_env->error_parsing = check;

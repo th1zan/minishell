@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   classify_token.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tsanglar <tsanglar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: thibault <thibault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 16:26:16 by thibault          #+#    #+#             */
-/*   Updated: 2023/10/13 16:36:56 by tsanglar         ###   ########.fr       */
+/*   Updated: 2023/10/16 22:31:57 by thibault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,70 +70,6 @@ int	ft_handle_arg_tk(t_tk *tk)
 	return (0);
 }
 
-// int	ft_handle_hd_arg_tk(t_tk *tk)
-// {
-// 	char	*input;
-// 	char	*tmp_hd_arg_file;
-// 	int		fd_tmp;
-// 	ssize_t	bytes_written;
-
-	
-// 	tmp_hd_arg_file = ft_strdup("hd_arg.txt");
-// 	// Supprimer le fichier
-// 	unlink(tmp_hd_arg_file);
-// 	fd_tmp = open(tmp_hd_arg_file, O_CREAT | O_APPEND | O_WRONLY, 0777);
-// 	if (!tk)
-// 		return (1);
-// 	while (tk)
-// 	{	
-// 		if (tk->type == TK_HD_ARG)
-// 		{	
-		
-// 			if (fd_tmp == -1)
-// 			{
-// 				perror("Error opening file");
-// 				return (1);
-// 			}
-
-// 			if(tk->prev->tk_str)
-// 			{	
-// 				printf("FREE tk->prev->tk_str: %s %p\n", tk->prev->tk_str, tk->prev->tk_str);
-// 				free(tk->prev->tk_str);
-// 				tk->prev->tk_str = NULL;
-// 			}
-// 			while(1)
-// 			{
-// 				input = get_line("heredoc> ");
-// 				if (!input)
-// 				{
-// 					printf("minishell: error: here-doc get_line returned NULL\n");
-// 					continue;
-// 				}
-// 				replace_with_values(&input, &global_env->env_main);
-// 				// printf("Received input: %s\n", input); // Debug line
-// 				if (!ft_strncmp(input, tk->tk_str, ft_strlen(tk->tk_str)))
-// 					break;
-// 				// printf("fd_tmp = %d\n", fd_tmp);
-// 				bytes_written = write(fd_tmp, input, ft_strlen(input));
-// 				write(fd_tmp, "\n", 1);
-// 				if (bytes_written == -1)
-// 				{
-// 					perror("Error writing to file");
-// 				}
-
-// 				// printf("Wrote %zd bytes to file\n", bytes_written); // Debug line
-// 				free(input);
-// 				printf("tk->prev->tk_str: %s %p\n", tk->prev->tk_str, tk->prev->tk_str);
-// 				tk->prev->tk_str = tmp_hd_arg_file;
-// 				printf("tk->prev->tk_str: %s %p\n", tk->prev->tk_str, tk->prev->tk_str);
-// 			}
-// 		}
-// 		tk = tk->next;
-// 	}			
-// 	close(fd_tmp);
-// 	return (0);
-// }
-
 
 int	ft_handle_hd_arg_tk(t_tk *tk)
 {
@@ -141,14 +77,19 @@ int	ft_handle_hd_arg_tk(t_tk *tk)
 	char	*tmp_hd_arg_file;
 	int		fd_tmp;
 	ssize_t	bytes_written;
+	int		hd_arg_exist;
 
-	tmp_hd_arg_file = ft_strdup("hd_arg.txt");
+	tmp_hd_arg_file = ft_strjoin(global_env->minishell_directory, "/hd_arg.txt");
+	// printf("%s\n", tmp_hd_arg_file);
 	// Supprimer le fichier
 	unlink(tmp_hd_arg_file);
 	fd_tmp = open(tmp_hd_arg_file, O_CREAT | O_APPEND | O_WRONLY, 0777);
+	hd_arg_exist = 0;
 	if (fd_tmp == -1)
 	{
 		perror("Error opening file");
+		printf("FREE 1\n");
+		// printf("FREE 1: tk->prev->tk_str: %s %p\n", tk->prev->tk_str, tk->prev->tk_str);
 		free(tmp_hd_arg_file);
 		return (1);
 	}
@@ -156,6 +97,8 @@ int	ft_handle_hd_arg_tk(t_tk *tk)
 	if (!tk)
 	{
 		close(fd_tmp);
+		// printf("FREE 2\n");
+		// printf("FREE 2: tk->prev->tk_str: %s %p\n", tk->prev->tk_str, tk->prev->tk_str);
 		free(tmp_hd_arg_file);
 		return (1);
 	}
@@ -166,7 +109,8 @@ int	ft_handle_hd_arg_tk(t_tk *tk)
 		{	
 			if(tk->prev->tk_str)
 			{	
-				printf("FREE tk->prev->tk_str: %s %p\n", tk->prev->tk_str, tk->prev->tk_str);
+				// printf("FREE 3\n");
+				// printf("FREE 3: tk->prev->tk_str: %s %p\n", tk->prev->tk_str, tk->prev->tk_str);
 				free(tk->prev->tk_str);
 				tk->prev->tk_str = NULL;
 			}
@@ -189,12 +133,16 @@ int	ft_handle_hd_arg_tk(t_tk *tk)
 				}
 				free(input);
 				tk->prev->tk_str = tmp_hd_arg_file;
+				hd_arg_exist = 1;
 			}
 		}
 		tk = tk->next;
 	}			
 	close(fd_tmp);
-	free(tmp_hd_arg_file);
+	// printf("FREE 4\n");
+	// printf("FREE 4: tmp_hd_arg_file: %s %p\n", tmp_hd_arg_file, tmp_hd_arg_file);
+	if (!hd_arg_exist)
+		free(tmp_hd_arg_file);
 	return (0);
 }
 

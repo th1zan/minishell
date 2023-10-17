@@ -6,7 +6,7 @@
 /*   By: thibault <thibault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 17:11:53 by mlachat           #+#    #+#             */
-/*   Updated: 2023/10/14 15:27:30 by thibault         ###   ########.fr       */
+/*   Updated: 2023/10/16 14:55:59 by thibault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ int	execution(t_env *env, t_tk **tk)
 	
 
 	//DEBUG
-		fprintf(stderr, "===INFO===: end of execution\n");
+		// fprintf(stderr, "===INFO===: end of execution\n");
 		
 		// print_lst(tk_head);
 	return (0);
@@ -251,7 +251,7 @@ int	tk_arg_to_table(t_tk *tk, char	***arg_table)
 		size_tab++;
 		tmp = tmp->next;
 	}
-	print_strtab(*arg_table);
+	// print_strtab(*arg_table);
 	return (0);
 }
 
@@ -263,7 +263,9 @@ int	get_cmd_path(t_tk *tk)
 	char	*temp;
 	int		i;
 
-	path = tk->path_tab;
+	path = global_env->path_tab;
+	// printf("IN fct:: get_cmd_path\n");
+	// print_strtab(path);
 	cmd = tk->tk_str;
 	temp = NULL;
 	i = 0;

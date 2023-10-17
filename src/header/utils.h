@@ -12,6 +12,7 @@ t_tk	*ft_lstlast(t_tk *tk);
 int		ft_lstsize(t_tk *tk);
 int		print_lst(t_tk *tk);
 int		free_env(t_env *env);
+int		free_global_env(t_env *env);
 int		free_lst(t_tk *head_list);
 int		free_elem(t_tk *token);
 
@@ -42,6 +43,7 @@ char	*get_var_name_from_input(char *input, int *i);
 int		get_var_name_len_from_input(char *input, int i);
 char	*find_value_in_tab(char *var_name, char **var_values_tab);
 char	*get_value_after_equal(char *var_value);
+char	*replace_var_status_in_string(char *input_str, int *i, char *var_value);
 char	*replace_var_in_string(char *input_str, int *i, char **var_values_tab);
 int		replace_with_values(char **input, char ***var_values_tab);
 char	*get_var_value(char *input, int *i, char **var_values_tab);
