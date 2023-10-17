@@ -6,7 +6,7 @@
 /*   By: thibault <thibault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 13:27:26 by mlachat           #+#    #+#             */
-/*   Updated: 2023/10/16 22:14:56 by thibault         ###   ########.fr       */
+/*   Updated: 2023/10/17 12:05:10 by thibault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,12 @@ int	echo(t_tk *tk)
 
 	tmp = NULL;
 	ret = 1;
+	fprintf(stderr, "echo:: fd_out: %d\n", tk->fd_out);
 	if (tk->tk_arg)
 		tmp = tk->tk_arg;
 	else
 	{	
-		printf("\n");
+		ft_putstr_fd("\n", tk->fd_out);
 		return (0);
 	}
 	if (ft_strncmp(tmp->tk_str, "-n", 2) == 0)
@@ -34,17 +35,18 @@ int	echo(t_tk *tk)
 	}
 	while(tmp)
 	{
-		if (tmp->tk_str)
+		if (!is_blank_str(tmp->tk_str))
 		{	
-			printf("%s", tmp->tk_str);
-			// printf("--%d--", tmp->is_var_type);
+			ft_putstr_fd(tmp->tk_str, tk->fd_out);
+			// fprintf(stderr, "%s", tmp->tk_str);
+			// printf("--%d--", tmp->is_var_type_with_space_before);
 		}
 		tmp = tmp->next;
-		if (tmp && !tmp->is_var_type_with_space)
-			printf(" ");
+		if (tmp && tmp->is_var_type_with_space_before)
+			ft_putstr_fd(" ", tk->fd_out);
 	}
 	if(ret)
-		printf("\n");
+		ft_putstr_fd("\n", tk->fd_out);
 	return(0);
 }
 
@@ -321,12 +323,13 @@ int	env_built_in(t_tk *tk)
 	return(0);
 }
 
-int pwd(void)
+int pwd(t_tk *tk)
 {
 	char cwd[1024];
 
 	getcwd(cwd, sizeof(cwd));
-	printf("%s\n", cwd);
+	ft_putstr_fd(cwd, tk->fd_out);
+	ft_putstr_fd("\n", tk->fd_out);
 	return(0);
 }
 

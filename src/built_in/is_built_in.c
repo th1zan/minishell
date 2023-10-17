@@ -6,7 +6,7 @@
 /*   By: thibault <thibault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 09:24:48 by thibault          #+#    #+#             */
-/*   Updated: 2023/10/16 10:59:12 by thibault         ###   ########.fr       */
+/*   Updated: 2023/10/17 12:06:40 by thibault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ int	is_builtin_exec(t_tk *cmd)
 	else if (is_cd(cmd))
 		status = cd(cmd);
     else if (is_pwd(cmd))
-		status = pwd();
+		status = pwd(cmd);
 	else if (is_export(cmd))
 		status = export(cmd);
 	else if (is_unset(cmd))
@@ -79,7 +79,7 @@ int	is_builtin_exec(t_tk *cmd)
 	else if (is_exit(cmd))
 	{
 		status = 0;
-		printf("exit\n");
+		ft_putstr_fd("exit\n", 2);
 		if (cmd->tk_arg)
 			printf("minishell: exit: exit does not take any arguments\n");
 		

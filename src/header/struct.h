@@ -6,7 +6,7 @@
 /*   By: thibault <thibault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/26 09:31:25 by thibault          #+#    #+#             */
-/*   Updated: 2023/10/16 22:26:24 by thibault         ###   ########.fr       */
+/*   Updated: 2023/10/17 10:40:17 by thibault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ typedef struct s_tk
 	int			pid;
 	char		**path_tab;		// paths
 	char		*path;
-	int			is_var_type_with_space;
+	int			is_var_type_with_space_before;
 	
 	struct s_tk	*tk_arg; 	// premier arguments du token (sous-liste)
 	struct s_tk	*prev; 		// token suivant

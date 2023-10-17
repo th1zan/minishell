@@ -6,7 +6,7 @@
 /*   By: thibault <thibault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 14:42:49 by thibault          #+#    #+#             */
-/*   Updated: 2023/10/10 23:32:23 by thibault         ###   ########.fr       */
+/*   Updated: 2023/10/17 10:09:00 by thibault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,20 +52,24 @@ int	check_first_last_token(t_tk *first, t_tk *last)
 
 int	check_main_list_tokens(t_tk *tk)
 {
-	t_tk *tmp = tk->next;
-	t_tk *prev = tk;
+	t_tk *tmp;
+	t_tk *prev;
+
+	tmp = tk->next;
+	prev = tk;
 	while (tmp != NULL) {
 		if ((prev->type == TK_CMD || prev->type == TK_CMD_BUILT_IN) && !(is_tk_redir(tmp->type) || tmp->type == TK_PIPE))
 		{
-			return (1);
+			return (131);
 		}
-		if (is_tk_redir(prev->type) && !(tmp->type == TK_CMD || tmp->type == TK_CMD_BUILT_IN || tmp->type == TK_FILE || tmp->type == TK_ARG))
+		if (is_tk_redir(prev->type) && !(tmp->type == TK_CMD || tmp->type == TK_CMD_BUILT_IN || tmp->type == TK_FILE || tmp->type == TK_ARG || is_tk_redir(tmp->type)))
 		{
-			return (1);
+			// printf("prev->str: %s, tmp->str: %s\n", prev->tk_str, tmp->tk_str);
+			return (132);
 		}
 		if ((prev->type == TK_FILE || prev->type == TK_ARG) && !(tmp->type == TK_CMD || tmp->type == TK_CMD_BUILT_IN))
 		{
-			return (1);
+			return (133);
 		}
 		prev = tmp;
 		tmp = tmp->next;
@@ -122,43 +126,45 @@ int	check_cmd_sublist(t_tk *tk)
 int	check_grammar(t_tk *tk)
 {
 	t_tk	*tmp;
-
+	int		check;
+	
 	if (!tk)
 	{
 		printf("error - no argument\n");
-		return (1);
+		return (11);
 	}
 	// printf("1 lets check grammar\n");
 	if (check_first_last_token(tk, tk) != 0)
-		return (1);
+		return (12);
 	// printf("2 lets check grammar\n");
-	if (check_main_list_tokens(tk) != 0)
-		return (1);
+	check = check_main_list_tokens(tk);
+	if (check != 0)
+		return (check);
 	// printf("3 lets check grammar\n");
 	tmp = tk;
 	while (tmp != NULL) {
 		if (is_tk_in_out_app(tmp->type))
 		{
 			if (check_redir_sublist(tmp) != 0)
-				return (1);
+				return (14);
 		}
 		else if (tmp->type == TK_PIPE)
 		{
 			if (tmp->tk_arg != NULL)
 			{
 				printf("minishell : error: any argument after pipe operator\n");
-				return (1);
+				return (15);
 			}
 		}
 		else if (tmp->type == TK_HERE_DOC)
 		{
 			if (check_here_doc_sublist(tmp) != 0)
-				return (1);
+				return (16);
 		}
 		else if (tmp->type == TK_CMD)
 		{
 			if (check_cmd_sublist(tmp) != 0)
-				return (1);
+				return (17);
 		}
 		tmp = tmp->next;
 	}

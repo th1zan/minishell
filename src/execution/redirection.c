@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirection.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tsanglar <tsanglar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: thibault <thibault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 14:34:44 by thibault          #+#    #+#             */
-/*   Updated: 2023/10/13 16:17:22 by tsanglar         ###   ########.fr       */
+/*   Updated: 2023/10/17 11:39:28 by thibault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -175,38 +175,6 @@ int	redir_operator_fd(t_tk **tk)
 	}		
 	return (0);
 }
-
-// int	redir_operator_fd(t_tk **tk)
-// {
-// 	t_tk		*tmp;
-
-// 	tmp = *tk;
-// 	while (tmp != NULL)
-// 	{
-// 		if (tmp->type == TK_IN_CHEVRON || tmp->type == TK_HERE_DOC)
-// 		{
-// 			if (dup2(tmp->fd_in, STDIN_FILENO) == -1)
-// 			{
-// 				perror("dup2 error: fd_in in redir_operator_fd");
-// 				fprintf(stderr, "d_in: %d, errno: %d\n", tmp->fd_in, errno);
-// 				return (-1);
-// 			}
-// 			close(tmp->fd_in);
-// 		}
-// 		else if (tmp->type == TK_OUT_CHEVRON || tmp->type == TK_APP_CHEVRON)
-// 		{
-// 			if (dup2(tmp->fd_out, STDOUT_FILENO) == -1)
-// 			{
-// 				perror("dup2 error: fd_out in redir_operator_fd");
-// 				fprintf(stderr, "fd_out: %d, errno: %d\n", tmp->fd_out, errno);
-// 				return (-1);
-// 			}
-// 			close(tmp->fd_out);
-// 		}
-// 		tmp = tmp->next;
-// 	}		
-// 	return (0);
-// }
 
 
 int	set_cmd_std_fd(t_tk **tk)

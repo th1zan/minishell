@@ -6,7 +6,7 @@
 /*   By: thibault <thibault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 17:11:53 by mlachat           #+#    #+#             */
-/*   Updated: 2023/10/16 14:55:59 by thibault         ###   ########.fr       */
+/*   Updated: 2023/10/17 13:12:29 by thibault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,11 +77,15 @@ int	execution(t_env *env, t_tk **tk)
 		else if (tmp->type == TK_CMD_BUILT_IN)
 		{
 				// printf("BUILTIN tmp: %s\n", tmp->tk_str);
-				set_fd_for_cmd(tmp);
+				// set_fd_for_cmd(tmp);
+			
 				status_built_in = is_builtin_exec(tmp);
-		}
 
+		}
+		// fprintf(stderr,"tmp->str: %s\n", tmp->tk_str);
 		tmp = get_next_cmd(tmp);
+		// if(tmp)
+			// fprintf(stderr,"next tmp->str: %s\n", tmp->tk_str);
 	}
 	
 	close_all_fd(tk);
@@ -360,7 +364,7 @@ int	close_all_fd(t_tk **tk)
 	tmp = *tk;
 	while (tmp != NULL)
 	{
-		if (tmp->type == TK_CMD)
+		if (tmp->type == TK_CMD || tmp->type == TK_CMD_BUILT_IN)
 		{
 			if ((tmp->fd_in != -1) && (fd_is_standard(tmp->fd_in) != 1))
 			{
@@ -392,17 +396,20 @@ int	wait_all_pid(t_tk **tk)
 	int		status;
 
 	tmp = *tk;
+	// fprintf(stderr, "wait_all_pid:: IN\n");
 	if (tmp->type != TK_CMD)
 		tmp = get_next_type_tk(tmp, TK_CMD);
+	// fprintf(stderr, "wait_all_pid:: start loop\n");
 	status = 0;
 	while(tmp)
 	{
+		// fprintf(stderr, "===INFO-1===: in :: wait_all_pid: tmp = %s PID: %d\n", tmp->tk_str, tmp->pid);
 		waitpid(tmp->pid, &status, 0);
-		// fprintf(stderr, "===INFO===: in :: wait_all_pid: status = %d\n", status);
+		// fprintf(stderr, "===INFO-2===: in :: wait_all_pid: status = %d\n", status);
 		status = get_status_info(status);
 		tmp = get_next_type_tk(tmp, TK_CMD);
 	}
-	// fprintf(stderr, "===INFO===: in :: wait_all_pid: status = %d\n", status);
+	// fprintf(stderr, "===INFO-3===: in :: wait_all_pid: end loop: status = %d\n", status);
 	return (status);
 }
 

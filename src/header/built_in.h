@@ -18,7 +18,7 @@ int		export(t_tk *tk);
 int		env_built_in(t_tk *tk);
 int		find_env_var(char **env, char *var_name);
 int		is_valid_env_argument(char *arg);
-int		pwd(void);
+int		pwd(t_tk *tk);
 int		cd(t_tk *tk);
 
 
