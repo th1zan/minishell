@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_token.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tsanglar <tsanglar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: thibault <thibault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 14:16:59 by thibault          #+#    #+#             */
-/*   Updated: 2023/10/09 11:45:12 by tsanglar         ###   ########.fr       */
+/*   Updated: 2023/10/17 17:19:38 by thibault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ int	classify_operator(char *str)
 {
 	if (*str == '\0')
 		return (TK_NULL);
-	if(is_whitespace(*str))
+	if(is_blank_str(str))
 		return(TK_BLANK);
 	if(is_here_doc(str, 0))
 		return(TK_HERE_DOC);

@@ -6,7 +6,7 @@
 /*   By: thibault <thibault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 13:27:26 by mlachat           #+#    #+#             */
-/*   Updated: 2023/10/17 12:05:10 by thibault         ###   ########.fr       */
+/*   Updated: 2023/10/17 17:24:35 by thibault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	echo(t_tk *tk)
 
 	tmp = NULL;
 	ret = 1;
-	fprintf(stderr, "echo:: fd_out: %d\n", tk->fd_out);
+	// fprintf(stderr, "echo:: fd_out: %d\n", tk->fd_out);
 	if (tk->tk_arg)
 		tmp = tk->tk_arg;
 	else
@@ -204,8 +204,8 @@ int	unset(t_tk *tk)
 	{
 		// printf("AVANT, path_tab: %p\n", global_env->path_tab);
 		// print_strtab(global_env->path_tab);
-		free_strtab(global_env->path_tab);
-		free(global_env->path_tab);
+		// free_strtab(global_env->path_tab);
+		// free(global_env->path_tab);
 		global_env->path_tab = NULL;
 		global_env->path_tab = get_path_tab(global_env->env_main);
 		// printf("APRES, path_tab: %p\n", global_env->path_tab);
@@ -223,14 +223,15 @@ int	is_valid_env_argument(char *arg)
 	int		i;
 	int		equals_found;  // 0 pour false, 1 pour true
 
+	// printf("is_valid_env_argument:: arg: %s\n", arg);
 	equals_found = 0;
 	// Check if the argument is not empty
 	if (!arg || arg[0] == '\0')
-		return (0);  // 0 pour false
+		return (-1);  // -1 pour empty
 
 	// Check for a valid starting character: either a letter or an underscore
-	if (!(ft_isalpha(arg[0]) || arg[0] == '_'))
-		return (0);  // 0 pour false
+	if (!ft_isalnum(arg[0]) && arg[0] != '_')
+		return (-2);  // 0 pour non-valide
 
 	i = 1;
 
@@ -240,10 +241,12 @@ int	is_valid_env_argument(char *arg)
 		if (arg[i] == '=')
 		{
 			equals_found = 1;  // 1 pour true
+			if (arg[i + 1] == 0)
+				return (1);
 			break;
 		}
 		else if (!ft_isalnum(arg[i]) && arg[i] != '_')
-			return (0);  // 0 pour false
+			return (-2);  // -2 pour non-valide
 		i++;
 	}
 
@@ -269,7 +272,13 @@ int	export(t_tk *tk)
 		return (0);
 	}
 	new_var = concat_args(tk);
-	if (!is_valid_env_argument(new_var))
+	if (is_valid_env_argument(new_var) == -2)
+	{
+		printf("minishell:  export: %s : not a valid identifier\n", new_var);
+		free(new_var);	
+		return (1);
+	}
+	else if (!is_valid_env_argument(new_var))
 	{
 		free(new_var);	
 		return (1);

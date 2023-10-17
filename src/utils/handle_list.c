@@ -84,7 +84,7 @@ int	free_env(t_env *env)
 {	
 	if (env)
 	{	
-		printf("free env_main: %p\n", env->env_main);
+		// printf("free env_main: %p\n", env->env_main);
 		if(env->env_main)
 		{	
 			// print_strtab(env->env_main);
@@ -108,19 +108,19 @@ int	free_global_env(t_env *env)
 {	
 	if (env)
 	{	
-		printf("free env_main: %p\n", global_env->env_main);
+		// printf("free env_main: %p\n", global_env->env_main);
 		if(global_env->env_main)
 		{	
 			// print_strtab(env->env_main);
-			printf("free global_env->env_main: %p\n", global_env->env_main);
-			printf("free env_main: %p\n", global_env->env_main);
+			// printf("free global_env->env_main: %p\n", global_env->env_main);
+			// printf("free env_main: %p\n", global_env->env_main);
 			free_strtab_env(global_env->env_main);
 			free(global_env->env_main);
 		}
 		if(env->path_tab)
 		{	
 			// print_strtab(env->env_main);
-			printf("free global_env->path_tab: %p\n", global_env->path_tab);
+			// printf("free global_env->path_tab: %p\n", global_env->path_tab);
 			free_strtab_env(global_env->path_tab);
 			free(global_env->path_tab);
 		}
