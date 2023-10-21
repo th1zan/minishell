@@ -6,7 +6,7 @@
 /*   By: thibault <thibault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 16:31:29 by thibault          #+#    #+#             */
-/*   Updated: 2023/10/16 16:31:22 by thibault         ###   ########.fr       */
+/*   Updated: 2023/10/20 14:42:49 by thibault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,8 @@ int get_var_name_len_from_input(char *input, int i)
 	return (len);
 }
 
+
+
 char *find_value_in_tab(char *var_name, char **var_values_tab)
 {
 	int i = 0;
@@ -83,6 +85,32 @@ char *get_value_after_equal(char *var_value)
 	i++;
 	return ft_substr(var_value, i, ft_strlen(var_value) - i);
 }
+
+
+
+char	*replace_var_in_string(char *input_str, int *i, char **var_values_tab)
+{
+	char	*tmp;
+	char	*var_value;
+	char	*tmp2;
+	char	*result;
+	int		start;
+	int		var_name_len;
+
+	start = *i;
+	var_value = get_var_value(input_str, i, var_values_tab);
+	if (!var_value)
+		var_value = ft_strdup("");
+	var_name_len = get_var_name_len_from_input(input_str, *i);
+	tmp = ft_substr(input_str, 0, start);
+	tmp2 = ft_strjoin(tmp, var_value);
+	free(tmp);
+	free(var_value);
+	result = ft_strjoin(tmp2, &input_str[start + var_name_len]);
+	free(tmp2);
+	return (result);
+}
+
 
 char	*replace_var_status_in_string(char *input_str, int *i, char *var_value)
 {
@@ -112,31 +140,6 @@ char	*replace_var_status_in_string(char *input_str, int *i, char *var_value)
 
 	return (result);
 }
-
-
-char	*replace_var_in_string(char *input_str, int *i, char **var_values_tab)
-{
-	char	*tmp;
-	char	*var_value;
-	char	*tmp2;
-	char	*result;
-	int		start;
-	int		var_name_len;
-
-	start = *i;
-	var_value = get_var_value(input_str, i, var_values_tab);
-	if (!var_value)
-		var_value = ft_strdup(" ");
-	var_name_len = get_var_name_len_from_input(input_str, *i);
-	tmp = ft_substr(input_str, 0, start);
-	tmp2 = ft_strjoin(tmp, var_value);
-	free(tmp);
-	free(var_value);
-	result = ft_strjoin(tmp2, &input_str[start + var_name_len]);
-	free(tmp2);
-	return (result);
-}
-
 
 int	replace_with_values(char **input, char ***var_values_tab)
 {
@@ -181,6 +184,7 @@ int	replace_with_values(char **input, char ***var_values_tab)
 			else
 			{
 				new_input = replace_var_in_string(input_str, &i, *var_values_tab);
+				i--;
 				// printf("var_value found: %s\n", new_input);
 			}
 			if (input_str != new_input)
@@ -216,7 +220,7 @@ char *get_var_value(char *input, int *i, char **var_values_tab)
 	else
 		var_value = NULL;
 	if (!var_value)
-		var_value = ft_strdup(" ");
+		var_value = ft_strdup("");
 	free(var_name);
 	return (var_value);
 }

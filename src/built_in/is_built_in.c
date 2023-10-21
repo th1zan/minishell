@@ -6,7 +6,7 @@
 /*   By: thibault <thibault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 09:24:48 by thibault          #+#    #+#             */
-/*   Updated: 2023/10/17 12:06:40 by thibault         ###   ########.fr       */
+/*   Updated: 2023/10/20 13:44:54 by thibault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ int	is_builtin_exec(t_tk *cmd)
 		status = echo(cmd);
 	else if (is_cd(cmd))
 		status = cd(cmd);
-    else if (is_pwd(cmd))
+	else if (is_pwd(cmd))
 		status = pwd(cmd);
 	else if (is_export(cmd))
 		status = export(cmd);
@@ -78,17 +78,13 @@ int	is_builtin_exec(t_tk *cmd)
 		status = env_built_in(cmd);
 	else if (is_exit(cmd))
 	{
-		status = 0;
-		ft_putstr_fd("exit\n", 2);
-		if (cmd->tk_arg)
-			printf("minishell: exit: exit does not take any arguments\n");
-		
-		//free all variable before exit
+		status = exit_builtin(cmd);		
 		exit(status);
 	}
 	// fprintf(stderr, "===INFO===: in :: is_builtin_exec: status = %d\n", status);
 	return (status);
 }
+
 
 int	is_builtin_cmd_tk(t_tk *cmd)
 {
@@ -99,7 +95,7 @@ int	is_builtin_cmd_tk(t_tk *cmd)
 		status = 1;
 	else if (is_cd(cmd))
 		status = 1;
-    else if (is_pwd(cmd))
+	else if (is_pwd(cmd))
 		status = 1;
 	else if (is_export(cmd))
 		status = 1;

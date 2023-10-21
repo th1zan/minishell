@@ -51,40 +51,71 @@ void	ft_lst_replace_var(t_tk *tk, int (*f)(char **str, char ***env))
 	}
 }
 
-
+// void	ft_lst_classify_tk_unclassified(t_tk *tk)
+// {
+// 	int prev_classified_tk;
+	
+// 	if (!(tk))
+// 		return;
+// 	prev_classified_tk = tk->type;
+// 	while (tk)
+// 	{
+// 		if (is_tk_in_out_app(tk->type) || tk->type == TK_PIPE || tk->type == TK_HERE_DOC)
+// 			prev_classified_tk = tk->type;
+// 		// printf("IN-> tr:%s type: %d, prev_classified_tk:%d \n", tk->tk_str, tk->type, prev_classified_tk);
+// 		if (tk->type == TK_UNCLASSIFIED)
+// 		{
+// 			// printf("INSIDE IF-> %s type: %d\n", tk->tk_str, tk->type);
+// 			if (tk->prev == NULL || prev_classified_tk == TK_BLANK)
+// 				tk->type = TK_CMD;
+// 			else if (prev_classified_tk == TK_PIPE)
+// 				tk->type = TK_CMD;
+// 			else if (tk->prev->type == TK_FILE && is_tk_in_out_app(prev_classified_tk))
+// 				tk->type = TK_CMD;
+// 			else if (tk->prev->type == TK_CMD)
+// 				tk->type = TK_CMD;
+// 			else if (tk->prev->type == TK_HD_ARG)
+// 				tk->type = TK_CMD;
+// 			else if (is_tk_in_out_app(prev_classified_tk))
+// 				tk->type = TK_FILE;	
+// 			else if (prev_classified_tk == TK_HERE_DOC)
+// 				tk->type = TK_HD_ARG;
+// 		}
+// 		// printf("OUT-> %s type: %d \n", tk->tk_str, tk->type);
+// 		tk = tk->next;
+// 	}
+// }
 
 void	ft_lst_classify_tk_unclassified(t_tk *tk)
 {
-	int prev_classified_tk;
+	t_tk	*tmp;
 	
 	if (!(tk))
 		return;
-	prev_classified_tk = tk->type;
-	while (tk)
+	tmp = tk;
+	while (tmp)
 	{
-		if (is_tk_in_out_app(tk->type) || tk->type == TK_PIPE || tk->type == TK_HERE_DOC)
-			prev_classified_tk = tk->type;
-		// printf("IN-> tr:%s type: %d, prev_classified_tk:%d \n", tk->tk_str, tk->type, prev_classified_tk);
 		if (tk->type == TK_UNCLASSIFIED)
 		{
 			// printf("INSIDE IF-> %s type: %d\n", tk->tk_str, tk->type);
-			if (tk->prev == NULL || prev_classified_tk == TK_BLANK)
-				tk->type = TK_CMD;
-			else if (prev_classified_tk == TK_PIPE)
-				tk->type = TK_CMD;
-			else if (tk->prev->type == TK_FILE && is_tk_in_out_app(prev_classified_tk))
-				tk->type = TK_CMD;
-			else if (tk->prev->type == TK_CMD)
-				tk->type = TK_CMD;
-			else if (tk->prev->type == TK_HD_ARG)
-				tk->type = TK_CMD;
-			else if (is_tk_in_out_app(prev_classified_tk))
-				tk->type = TK_FILE;	
-			else if (prev_classified_tk == TK_HERE_DOC)
-				tk->type = TK_HD_ARG;
+			if (tmp->prev == NULL || tmp->prev->type == TK_BLANK || tmp->prev->type == TK_PIPE)
+				tmp->type = TK_CMD;
+			else if (tmp->prev->type == TK_APP_CHEVRON || tmp->prev->type == TK_IN_CHEVRON || tmp->prev->type == TK_OUT_CHEVRON)
+				tmp->type = TK_FILE;
+			else if (tmp->prev->type == TK_HERE_DOC)
+				tmp->type = TK_HD_ARG;
 		}
 		// printf("OUT-> %s type: %d \n", tk->tk_str, tk->type);
-		tk = tk->next;
+		tmp = tmp->next;
+	}
+
+	tmp = tk;
+	while (tmp)
+	{
+		if (tmp->type == TK_UNCLASSIFIED)
+			tmp->type = TK_CMD;
+		// printf("OUT-> %s type: %d \n", tk->tk_str, tk->type);
+		tmp = tmp->next;
 	}
 }
 

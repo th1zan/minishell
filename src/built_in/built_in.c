@@ -6,7 +6,7 @@
 /*   By: thibault <thibault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 13:27:26 by mlachat           #+#    #+#             */
-/*   Updated: 2023/10/17 17:24:35 by thibault         ###   ########.fr       */
+/*   Updated: 2023/10/18 21:55:50 by thibault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,34 +85,6 @@ int	find_env_var(char **env, char *var_name)
 
 	return (-1); // non trouvé
 }
-
-// char	*concat_args(t_tk *tk)
-// {
-// 	char	*new_var;
-// 	char	*tmp;
-
-// 	new_var = ft_strdup("");
-// 	while(tk->tk_arg)
-// 	{
-// 		tmp = ft_strjoin(new_var, tk->tk_arg->tk_str);
-// 		if (tmp)
-// 		{
-// 			free(new_var);
-// 			free(tk->tk_arg->tk_str);
-// 			free(tk->tk_arg);
-// 			new_var = tmp;
-// 		}
-// 		else
-// 		{
-// 			free(new_var);
-// 			free(tk->tk_arg->tk_str);
-// 			free(tk->tk_arg);
-// 			return (NULL);
-// 		}
-// 		tk->tk_arg = tk->tk_arg->next;
-// 	}
-// 	return (new_var);
-// }
 
 char	*concat_args(t_tk *tk)
 {
@@ -230,7 +202,7 @@ int	is_valid_env_argument(char *arg)
 		return (-1);  // -1 pour empty
 
 	// Check for a valid starting character: either a letter or an underscore
-	if (!ft_isalnum(arg[0]) && arg[0] != '_')
+	if (!ft_isalpha(arg[0]) && arg[0] != '_')
 		return (-2);  // 0 pour non-valide
 
 	i = 1;
@@ -252,7 +224,11 @@ int	is_valid_env_argument(char *arg)
 
 	// Check for presence of '='. If '=' is found, there should be valid characters before it.
 	if (!equals_found || i == 0)
+	{
+		// printf("minishell:  export: not a valid identifier\n");
 		return (0);  // 0 pour false
+	}
+		
 
 	return (1);  // 1 pour true
 }
@@ -274,14 +250,15 @@ int	export(t_tk *tk)
 	new_var = concat_args(tk);
 	if (is_valid_env_argument(new_var) == -2)
 	{
-		printf("minishell:  export: %s : not a valid identifier\n", new_var);
+		printf("minishell:  export: '%s' : not a valid identifier\n", new_var);
 		free(new_var);	
 		return (1);
 	}
 	else if (!is_valid_env_argument(new_var))
 	{
+		// printf("minishell:  export: %s : not a valid identifier\n", new_var);
 		free(new_var);	
-		return (1);
+		return (0);
 	}
 	index = find_env_var(env, new_var);
 	if (index != -1)
@@ -296,7 +273,7 @@ int	export(t_tk *tk)
 			i++;
 		new_env = malloc((i + 2) * sizeof(char *));
 		if(!new_env)
-			return(1);
+			return(0);
 		i = -1;
 		while (env[++i])
 			new_env[i] = env[i];
@@ -322,13 +299,15 @@ int	export(t_tk *tk)
 
 int	env_built_in(t_tk *tk)
 {
+	int	fd_out;
 	// printf("env_built_in:: tk: %s\n", tk->tk_str);
 	// printf("env_built_in:: tk->env: %p\n", tk->env);
 	// printf("global env_built_in:: global_env->env_main: %p\n", global_env->env_main);
 	// printf("global env_built_in:: global_env->env_main[3]:%s %p\n", global_env->env_main[3], global_env->env_main[3]);
 	if(*(tk->env) == 0)
 		return(1);
-	print_strtab(global_env->env_main);
+	fd_out = tk->fd_out;
+	print_strtab(global_env->env_main, fd_out);
 	return(0);
 }
 
@@ -406,12 +385,71 @@ int	cd(t_tk *tk)
 	if (chdir(path) != 0) 
 	{
 		// perror("chdir failed");
-		printf("minishell: cd: %s: No such file or directory\n", path);
+		printf("minishell: cd: %s: parsing path: No such file or directory\n", path);
 		return (1);
 	}
 	return (0);
 }
 
+int	exit_builtin(t_tk *cmd)
+{
+	int status = 0;
+
+	status = 0;
+	ft_putstr_fd("exit\n", 2);
+
+	if (cmd->tk_arg)
+	{
+		if (cmd->tk_arg->next)
+		{
+			ft_putstr_fd("minishell: exit: too many arguments\n", 2);
+			status = 1;
+		}
+		else
+		{
+			if (is_str_with_alpha(cmd->tk_arg->tk_str) || !is_all_digit(cmd->tk_arg->tk_str))
+			{
+				ft_putstr_fd("minishell: exit: numeric argument required\n", 2);
+				status = 255;
+			}
+			else
+			{
+				status = ft_atoi(cmd->tk_arg->tk_str);
+				if (status < 0)
+					status = 256 + (status % 256);
+				else
+					status = status % 256;
+			}
+		}
+	}
+	return (status);
+}
+
+int	is_str_with_alpha(char *str)
+{
+	if (str == NULL)
+		return (0);
+	while (*str)
+	{
+		if (ft_isalpha(*str))
+			return (1);
+		str++;
+	}
+	return (0);
+}
+
+int	is_all_digit(char *str)
+{
+	if (str == NULL)
+		return (0);
+	while (*str)
+	{
+		if (ft_isdigit(*str))
+			return (1);
+		str++;
+	}
+	return (0);
+}
 
 /*
 echo : Cette commande imprime ses arguments à l'écran. Elle prend également en charge quelques options, comme -n qui supprime le saut de ligne final.

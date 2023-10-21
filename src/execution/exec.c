@@ -6,7 +6,7 @@
 /*   By: thibault <thibault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 17:11:53 by mlachat           #+#    #+#             */
-/*   Updated: 2023/10/17 13:12:29 by thibault         ###   ########.fr       */
+/*   Updated: 2023/10/21 00:04:59 by thibault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -192,6 +192,8 @@ t_tk	*get_next_type_tk(t_tk *tk, int type)
 {
 	t_tk	*tmp;
 
+	if (!tk) 
+		return (NULL);
 	if (tk->next)
 		tmp = tk->next;
 	else
@@ -201,6 +203,25 @@ t_tk	*get_next_type_tk(t_tk *tk, int type)
 		if (tmp->type == type)
 			return (tmp);
 		tmp = tmp->next;
+	}
+	return (NULL);
+}
+
+t_tk	*get_prev_type_tk(t_tk *tk, int type)
+{
+	t_tk	*tmp;
+
+	if (!tk) 
+		return (NULL);
+	if (tk->prev)
+		tmp = tk->prev;
+	else
+		return (NULL);
+	while (tmp != NULL)
+	{
+		if (tmp->type == type)
+			return (tmp);
+		tmp = tmp->prev;
 	}
 	return (NULL);
 }
@@ -292,7 +313,10 @@ int	get_cmd_path(t_tk *tk)
 		}
 	}
 	
-	fprintf(stderr,"minishell: %s: command not found\n", tk->tk_str);
+	ft_putstr_fd("minishell: ", 2);
+	ft_putstr_fd(tk->tk_str, 2);
+	ft_putstr_fd(": command not found\n", 2);
+	global_env->status = 127;
 	return (1);
 }
 
@@ -311,7 +335,7 @@ int	set_fd_for_cmd(t_tk *tk)
 			if (dup2(fd_in, STDIN_FILENO) == -1)
 			{
 				perror("dup2 error: fd_in in set_fd_for_cmd");
-				fprintf(stderr, "set_fd_for_cmd :: fd_in: %d, errno: %d\n", fd_in, errno);
+				// fprintf(stderr, "set_fd_for_cmd :: fd_in: %d, errno: %d\n", fd_in, errno);
 				return (-1);
 			}
 			// fprintf(stderr, "set_fd_for_cmd :: fd_in dup2 %d : %d\n", fd_in, STDIN_FILENO);
@@ -325,7 +349,7 @@ int	set_fd_for_cmd(t_tk *tk)
 			if (dup2(fd_out, STDOUT_FILENO) == -1)
 			{
 				perror("dup2 error: fd_out in set_fd_for_cmd");
-				fprintf(stderr, "set_fd_for_cmd :: fd_out: %d, errno: %d\n", fd_out, errno);
+				// fprintf(stderr, "set_fd_for_cmd :: fd_out: %d, errno: %d\n", fd_out, errno);
 				return (-1);
 			}
 		}
@@ -343,7 +367,7 @@ int	set_fd_for_cmd(t_tk *tk)
 				return (-1);
 			}
 		}
-			// fprintf(stderr, "set_fd_for_cmd :: fd_out dup2 %d : %d\n", fd_out, STDOUT_FILENO);
+			fprintf(stderr, "set_fd_for_cmd :: fd_out dup2 %d : %d\n", fd_out, STDOUT_FILENO);
 	}
 	return (0);
 }

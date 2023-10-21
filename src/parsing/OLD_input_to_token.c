@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   OLD_input_to_word.c                                :+:      :+:    :+:   */
+/*   OLD_input_to_token.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: thibault <thibault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/09 14:58:05 by thibault          #+#    #+#             */
-/*   Updated: 2023/08/10 15:12:23 by thibault         ###   ########.fr       */
+/*   Updated: 2023/10/17 22:40:48 by thibault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,12 +128,12 @@ int	input_to_word(char *input)
 		}
 		else
 		{
-			i++;TIOCCBRK
+			i++;
 		}
 	}
 	// Add the last word if there's any
 	if (i > tab[0])
-		tab_words[nb_word++] = ft_substr(input, tab[0], i - tab[0]);tibo
+		tab_words[nb_word++] = ft_substr(input, tab[0], i - tab[0]);
 		
 
 	print_strtab(tab_words);

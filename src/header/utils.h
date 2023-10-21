@@ -5,7 +5,7 @@
 int		malloc_strtab(char ***strtab, int nbstr);
 int		free_strtab(char **strtab);
 int		free_strtab_env(char **strtab);
-int		print_strtab(char **strtab);
+int		print_strtab(char **strtab, int fd_out);
 
 /*handle_list.c*/
 t_tk	*ft_lstlast(t_tk *tk);
@@ -43,6 +43,7 @@ char	*get_var_name_from_input(char *input, int *i);
 int		get_var_name_len_from_input(char *input, int i);
 char	*find_value_in_tab(char *var_name, char **var_values_tab);
 char	*get_value_after_equal(char *var_value);
+char	*construct_new_string(char *input, char *value, int start, int end);
 char	*replace_var_status_in_string(char *input_str, int *i, char *var_value);
 char	*replace_var_in_string(char *input_str, int *i, char **var_values_tab);
 int		replace_with_values(char **input, char ***var_values_tab);

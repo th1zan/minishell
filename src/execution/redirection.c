@@ -6,7 +6,7 @@
 /*   By: thibault <thibault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 14:34:44 by thibault          #+#    #+#             */
-/*   Updated: 2023/10/17 11:39:28 by thibault         ###   ########.fr       */
+/*   Updated: 2023/10/19 17:13:49 by thibault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -197,6 +197,45 @@ int	set_cmd_std_fd(t_tk **tk)
 	return (0);
 }
 
+// int	set_cmd_pipe_fd(t_tk **tk)
+// {
+// 	t_tk *tmp;
+// 	t_tk *prev_pipe;
+// 	t_tk *next_pipe;
+
+// 	tmp = *tk;
+// 	while (tmp != NULL)
+// 	{
+// 		// Réinitialisation des variables à chaque itération
+// 		prev_pipe = NULL;
+// 		next_pipe = NULL;
+
+// 		if (tmp->type == TK_CMD || tmp->type == TK_CMD_BUILT_IN)
+// 		{
+// 			// Vérification de l'existence de tmp->prev avant de vérifier son type
+// 			if (tmp->prev && tmp->prev->type == TK_PIPE)
+// 				prev_pipe = tmp->prev;
+
+// 			// Vérification de l'existence de tmp->next avant de vérifier son type
+// 			if (tmp->next && tmp->next->type == TK_PIPE)
+// 				next_pipe = tmp->next;
+// 			else if (tmp->next && tmp->next->type == TK_HERE_DOC) // cas du here doc -> aller chercher le pipe APRES le HERE-DOC
+// 			{
+// 				if (tmp->next->next && tmp->next->next->type == TK_PIPE)
+// 					next_pipe = tmp->next->next;
+// 			}
+// 			if (prev_pipe)
+// 				tmp->fd_in = prev_pipe->fd_out;
+
+// 			if (next_pipe)
+// 				tmp->fd_out = next_pipe->fd_in;
+// 		}
+// 		tmp = tmp->next;
+// 	}
+
+// 	return (0);
+// }
+
 int	set_cmd_pipe_fd(t_tk **tk)
 {
 	t_tk *tmp;
@@ -207,23 +246,11 @@ int	set_cmd_pipe_fd(t_tk **tk)
 	while (tmp != NULL)
 	{
 		// Réinitialisation des variables à chaque itération
-		prev_pipe = NULL;
-		next_pipe = NULL;
+		prev_pipe = get_prev_type_tk(tmp, TK_PIPE);
+		next_pipe = get_next_type_tk(tmp, TK_PIPE);
 
 		if (tmp->type == TK_CMD || tmp->type == TK_CMD_BUILT_IN)
 		{
-			// Vérification de l'existence de tmp->prev avant de vérifier son type
-			if (tmp->prev && tmp->prev->type == TK_PIPE)
-				prev_pipe = tmp->prev;
-
-			// Vérification de l'existence de tmp->next avant de vérifier son type
-			if (tmp->next && tmp->next->type == TK_PIPE)
-				next_pipe = tmp->next;
-			else if (tmp->next && tmp->next->type == TK_HERE_DOC) // cas du here doc -> aller chercher le pipe APRES le HERE-DOC
-			{
-				if (tmp->next->next && tmp->next->next->type == TK_PIPE)
-					next_pipe = tmp->next->next;
-			}
 			if (prev_pipe)
 				tmp->fd_in = prev_pipe->fd_out;
 
@@ -236,38 +263,119 @@ int	set_cmd_pipe_fd(t_tk **tk)
 	return (0);
 }
 
+
+t_tk	*get_next_input_operator_tk(t_tk *tk)
+{
+	t_tk	*tmp;
+
+	if (!tk) 
+		return (NULL);
+	if (tk->next)
+		tmp = tk->next;
+	else
+		return (NULL);
+	while (tmp != NULL)
+	{
+		if (tmp->type == TK_IN_CHEVRON || tmp->type == TK_HERE_DOC)
+			return (tmp);
+		tmp = tmp->next;
+	}
+	return (NULL);
+}
+
+t_tk	*get_prev_input_operator_tk(t_tk *tk)
+{
+	t_tk	*tmp;
+
+	if (!tk) 
+		return (NULL);
+	if (tk->prev)
+		tmp = tk->prev;
+	else
+		return (NULL);
+	while (tmp != NULL)
+	{
+			if (tmp->type == TK_IN_CHEVRON || tmp->type == TK_HERE_DOC)
+			return (tmp);
+		tmp = tmp->prev;
+	}
+	return (NULL);
+}
+
+
+t_tk	*get_next_output_operator_tk(t_tk *tk)
+{
+	t_tk	*tmp;
+
+	if (!tk) 
+		return (NULL);
+	if (tk->next)
+		tmp = tk->next;
+	else
+		return (NULL);
+	while (tmp != NULL)
+	{
+		if (tmp->type == TK_OUT_CHEVRON || tmp->type == TK_APP_CHEVRON)
+			return (tmp);
+		tmp = tmp->next;
+	}
+	return (NULL);
+}
+
+t_tk	*get_prev_output_operator_tk(t_tk *tk)
+{
+	t_tk	*tmp;
+
+	if (!tk) 
+		return (NULL);
+	if (tk->prev)
+		tmp = tk->prev;
+	else
+		return (NULL);
+	while (tmp != NULL)
+	{
+			if (tmp->type == TK_OUT_CHEVRON || tmp->type == TK_APP_CHEVRON)
+			return (tmp);
+		tmp = tmp->prev;
+	}
+	return (NULL);
+}
+
 int set_cmd_operator_fd(t_tk **tk)
 {
 	t_tk *tmp;
-	t_tk *prev_operator;
-	t_tk *next_operator;
+	t_tk *prev_input_operator;
+	t_tk *next_input_operator;
+	t_tk *prev_output_operator;
+	t_tk *next_output_operator;
 
 	tmp = *tk;
 	while (tmp != NULL)
 	{
 		// Réinitialisation des variables à chaque itération
-		prev_operator = NULL;
-		next_operator = NULL;
+		prev_input_operator = get_prev_input_operator_tk(tmp);
+		next_input_operator = get_next_input_operator_tk(tmp);
+		prev_output_operator = get_prev_output_operator_tk(tmp);
+		next_output_operator = get_next_output_operator_tk(tmp);
 		// printf("set_cdm_operator_fd :: tmp: %s\n", tmp->tk_str); // DEBUG
 		if (tmp->type == TK_CMD || tmp->type == TK_CMD_BUILT_IN)
 		{
-			// Vérification de l'existence de tmp->prev avant de vérifier son type
-			if (tmp->prev && (tmp->prev->type == TK_IN_CHEVRON))
-				prev_operator = tmp->prev;
+			if (prev_input_operator)
+				tmp->fd_in = prev_input_operator->fd_in;
 
-			// Vérification de l'existence de tmp->next avant de vérifier son type
-			if (tmp->next && (tmp->next->type == TK_OUT_CHEVRON || tmp->next->type == TK_APP_CHEVRON))
-				next_operator = tmp->next;
-			
-			// Cas du Here-doc spécial. le HD est placé après la fonction mais compte comme une input
-			if (tmp->next && (tmp->next->type == TK_HERE_DOC))
-				prev_operator = tmp->next;
+			if (next_input_operator)
+				tmp->fd_in = next_input_operator->fd_in;
 
-			if (prev_operator)
-				tmp->fd_in = prev_operator->fd_in;
+			if (prev_output_operator)
+				tmp->fd_out = prev_output_operator->fd_out;
 
-			if (next_operator)
-				tmp->fd_out = next_operator->fd_out;
+			if (next_output_operator)
+				tmp->fd_out = next_output_operator->fd_out;
+
+			if (tmp->fd_out == -1)
+				tmp->fd_out = 1;
+			if (tmp->fd_in == -1)
+				tmp->fd_in = 0;
 			// fprintf(stderr, "set_cdm_operator_fd :: prev_operator / fd_in: %s / %d\n", prev_operator->tk_str, prev_operator->fd_in);// DEBUG
 			// fprintf(stderr, "set_cdm_operator_fd :: tmp / fd_in: %s / %d\n", tmp->tk_str, tmp->fd_in);
 		}
@@ -276,6 +384,49 @@ int set_cmd_operator_fd(t_tk **tk)
 	}
 	return (0);
 }
+
+
+
+// int set_cmd_operator_fd(t_tk **tk)
+// {
+// 	t_tk *tmp;
+// 	t_tk *prev_operator;
+// 	t_tk *next_operator;
+
+// 	tmp = *tk;
+// 	while (tmp != NULL)
+// 	{
+// 		// Réinitialisation des variables à chaque itération
+// 		prev_operator = NULL;
+// 		next_operator = NULL;
+// 		// printf("set_cdm_operator_fd :: tmp: %s\n", tmp->tk_str); // DEBUG
+// 		if (tmp->type == TK_CMD || tmp->type == TK_CMD_BUILT_IN)
+// 		{
+// 			// Vérification de l'existence de tmp->prev avant de vérifier son type
+// 			if (tmp->prev && (tmp->prev->type == TK_IN_CHEVRON))
+// 				prev_operator = tmp->prev;
+
+// 			// Vérification de l'existence de tmp->next avant de vérifier son type
+// 			if (tmp->next && (tmp->next->type == TK_OUT_CHEVRON || tmp->next->type == TK_APP_CHEVRON))
+// 				next_operator = tmp->next;
+			
+// 			// Cas du Here-doc spécial. le HD est placé après la fonction mais compte comme une input
+// 			if (tmp->next && (tmp->next->type == TK_HERE_DOC))
+// 				prev_operator = tmp->next;
+
+// 			if (prev_operator)
+// 				tmp->fd_in = prev_operator->fd_in;
+
+// 			if (next_operator)
+// 				tmp->fd_out = next_operator->fd_out;
+// 			// fprintf(stderr, "set_cdm_operator_fd :: prev_operator / fd_in: %s / %d\n", prev_operator->tk_str, prev_operator->fd_in);// DEBUG
+// 			// fprintf(stderr, "set_cdm_operator_fd :: tmp / fd_in: %s / %d\n", tmp->tk_str, tmp->fd_in);
+// 		}
+
+// 		tmp = tmp->next;
+// 	}
+// 	return (0);
+// }
 
 
 

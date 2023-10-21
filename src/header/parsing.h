@@ -13,6 +13,9 @@ int		classify_operator(char *str);
 int		delete_quotes(char **str);
 int 	handle_quotes(t_tk *head_tk);
 
+char	*remove_quotes(char *str);
+char	*copy_without_quotes(char *str, int len, int *quote_positions, int num_quotes);
+
 
 /*check_parsing_grammar.c*/
 int		check_first_last_token(t_tk *first, t_tk *last);
@@ -34,6 +37,6 @@ int		ft_handle_hd_arg_tk(t_tk *tk);
 int		ft_handle_arg_tk(t_tk *tk);
 int		ft_handle_file_tk(t_tk *tk);
 int		ft_handle_built_in(t_tk *tk);
-
-
+void	move_arg_to_sublist(t_tk **tmp, t_tk **sublst_last, t_tk *cmd, t_tk **last_non_arg);
+t_tk	*move_args_to_sublist(t_tk *tk);
 #endif

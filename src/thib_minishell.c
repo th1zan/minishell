@@ -6,7 +6,7 @@
 /*   By: thibault <thibault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/06 15:14:08 by thibault          #+#    #+#             */
-/*   Updated: 2023/10/17 17:04:51 by thibault         ###   ########.fr       */
+/*   Updated: 2023/10/20 15:06:36 by thibault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,7 +140,7 @@ int	parse_input(char *input, t_env *env)
 int	input_loop(t_env *env)
 {
 	char	*input;
-	int	original_std[3];
+	int		original_std[3];
 	
 	while (1)
 	{
@@ -178,7 +178,7 @@ int	input_loop(t_env *env)
 		if (check_parsing(env->tk_head))
 		{
 			// DEBUG
-			// printf("minishell: %d : parsing error\n", global_env->error_parsing);
+			printf("minishell: %d : parsing error\n", global_env->error_parsing);
 			// printf("coucou1\n");
 			free(input);
 			// printf("coucou2\n");
@@ -193,9 +193,9 @@ int	input_loop(t_env *env)
 
 		set_redirection(&(env->tk_head));
 		
-		//DEBUG
-		fprintf(stderr, "===INFO===: print TK list before execution::\n");
-		print_lst(env->tk_head);
+		// //DEBUG
+		// fprintf(stderr, "===INFO===: print TK list before execution::\n");
+		// print_lst(env->tk_head);
 		// fprintf(stderr, "===INFO===: result of cmd line (if displayed)::\n");
 		
 		execution(env, &(env->tk_head));
@@ -325,7 +325,7 @@ void	handle_signal(void)
 void	handle_sigint(int signo) 
 {
 	(void)signo;
-	// rl_replace_line("", 0);
+	rl_replace_line("", 0);
 	global_env->status = 1;
 	rl_on_new_line();
 	write(1, "\n", 1);

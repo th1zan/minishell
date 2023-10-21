@@ -56,8 +56,9 @@ int	print_lst(t_tk *tk)
 		fprintf(stderr," tk_type: %-5d", tk->type);
 		fprintf(stderr," fd_in: %-5d", tk->fd_in);
 		fprintf(stderr," fd_out: %-5d", tk->fd_out);
-		// fprintf(stderr," prev_tk: %-15p", tk->prev);
-		fprintf(stderr," next_tk: %-15p\n", tk->next);
+		fprintf(stderr," prev_tk: %-15p", tk->prev);
+		fprintf(stderr," next_tk: %-15p", tk->next);
+		fprintf(stderr," sub_tk: %-15p\n", tk->tk_arg);
 		// Print sublist
 		if (tk->tk_arg)
 		{

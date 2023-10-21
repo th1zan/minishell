@@ -6,7 +6,7 @@
 /*   By: thibault <thibault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 14:45:21 by thibault          #+#    #+#             */
-/*   Updated: 2023/10/16 14:56:37 by thibault         ###   ########.fr       */
+/*   Updated: 2023/10/18 16:37:26 by thibault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int		check_input_file(t_tk *tk)
 			} 
 			else
 			{
-				printf("minishell: %s: No such file or directory\n", tk->tk_arg->tk_str);
+				printf("minishell: %s: parsing: No such file or directory\n", tk->tk_arg->tk_str);
 				return (1);
 			}
 		}
