@@ -6,7 +6,7 @@
 /*   By: thibault <thibault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 14:45:21 by thibault          #+#    #+#             */
-/*   Updated: 2023/10/18 16:37:26 by thibault         ###   ########.fr       */
+/*   Updated: 2023/10/24 19:29:54 by thibault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,11 @@ int		check_input_file(t_tk *tk)
 			} 
 			else
 			{
-				printf("minishell: %s: parsing: No such file or directory\n", tk->tk_arg->tk_str);
+				// printf("minishell: %s: No such file or directory\n", tk->tk_arg->tk_str);
+				ft_putstr_fd("minishell: ", 2);
+				ft_putstr_fd(tk->tk_arg->tk_str, 2);
+				ft_putstr_fd(": No such file or directory\n", 2);
+				global_env->status = 1;
 				return (1);
 			}
 		}
@@ -77,7 +81,7 @@ int	test_cmd(t_tk *tk)
 	if (!path_tab)
 	{
 		global_env->status = 127;
-		printf("minishell: %s: Command not found \n", tk->tk_str);
+		fprintf(stderr, "minishell: %s: Command not found \n", tk->tk_str);
 		return (FAILURE);
 	}
 	i = 0;
@@ -101,9 +105,9 @@ int	test_cmd(t_tk *tk)
 	}
 	// free(cmd);
 	if (global_env->status == 127)
-		printf("minishell: %s: Command not found \n", tk->tk_str);
+		fprintf(stderr,"minishell: %s: Command not found \n", tk->tk_str);
 	if (global_env->status == 126)
-		printf("minishell: %s: Permission denied\n", tk->tk_str);
+		fprintf(stderr,"minishell: %s: Permission denied\n", tk->tk_str);
 	return (FAILURE);
 }
 

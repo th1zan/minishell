@@ -6,7 +6,7 @@
 /*   By: thibault <thibault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/11 11:49:26 by thibault          #+#    #+#             */
-/*   Updated: 2023/10/20 15:07:00 by thibault         ###   ########.fr       */
+/*   Updated: 2023/10/29 22:36:27 by thibault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,14 +27,21 @@ int	parse_token(t_tk **head_tk)
 	// printf("after handle_quotes\n");
 	// print_lst(*head_tk);
 	ft_delete_type_token(head_tk, TK_BLANK);
+	
 	ft_lst_classify_tk_unclassified(*head_tk);
 	/*TODO: vérification des règles de grammaire ex: deux operateur à la suite-> pas possible*/
 	ft_handle_file_tk(*head_tk);
+	
 	// printf("after handle_files\n");
 	// print_lst(*head_tk);
 	handle_quotes(*head_tk); // quotes déjà gérées dans ft_handle_arg_tk(*head_tk);
 	
+
 	ft_handle_arg_tk(*head_tk);
+	ft_handle_built_in(*head_tk);
+
+	if (check_cmd(*head_tk))
+		return (-1);
 	// printf("before hd\n");
 	// print_lst(*head_tk);
 	ft_handle_hd_arg_tk(*head_tk);
@@ -42,7 +49,9 @@ int	parse_token(t_tk **head_tk)
 	// print_lst(*head_tk);
 	// ft_delete_type_token(head_tk, TK_HD_DELIM); // no more TK_HD_DELIM -> fct useless
 	ft_delete_type_token(head_tk, TK_HD_ARG);
-	ft_handle_built_in(*head_tk);
+	
+	if (check_input_file(*head_tk))
+		return (-1);
 
 	// printf("after ft_handle_built_in\n");
 	// print_lst(*head_tk);
@@ -56,11 +65,11 @@ int		check_parsing(t_tk *tk)
 	check = 0;
 	check = check_grammar(tk);
 	// fprintf(stderr, "===INFO===: end of check_grammar, check: %d\n", check);
-	if (!check)
-		check = check + 2 * check_cmd(tk);
+	// if (!check)
+	// 	check = check + 2 * check_cmd(tk);
 	// fprintf(stderr, "===INFO===: end of check_cmd, check: %d\n", check);
-	if (!check)
-		check = check + 3 * check_input_file(tk);
+	// if (!check)
+	// 	check = check + 3 * check_input_file(tk);
 	// fprintf(stderr, "===INFO===: end of check_input_file, check: %d\n", check);
 	if (check > 0)
 	{	
@@ -119,7 +128,10 @@ int 	handle_quotes(t_tk *head_tk)
 			// tmp->tk_str = remove_quotes(tmp->tk_str, '\'');
 			// tmp->tk_str = remove_quotes(tmp->tk_str, '"');
 			// tmp->tk_str = remove_quotes(tmp->tk_str, '`');
+			// printf("tk->tk->str:%s \n", tmp->tk_str);
 			tmp->tk_str = remove_quotes(tmp->tk_str);
+			if(tmp->tk_arg)
+				handle_quotes(tmp->tk_arg);
 			// delete_quotes(&(tmp->tk_str));
 		// }
 		tmp = tmp->next;

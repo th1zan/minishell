@@ -6,7 +6,7 @@
 /*   By: thibault <thibault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 14:34:44 by thibault          #+#    #+#             */
-/*   Updated: 2023/10/19 17:13:49 by thibault         ###   ########.fr       */
+/*   Updated: 2023/10/24 19:18:45 by thibault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,20 @@
 int	set_redirection(t_tk **tk)
 {
 	
-	set_default_fd(tk);
-	set_pipe_fd(tk);
-	set_operator_fd(tk);
-	set_cmd_std_fd(tk);
-	set_cmd_pipe_fd(tk);
-	set_cmd_operator_fd(tk);
-	redir_operator_fd(tk);
+	if (set_default_fd(tk))
+		return (-1);
+	if (set_pipe_fd(tk))
+		return (-1);
+	if (set_operator_fd(tk))
+		return (-1);
+	if (set_cmd_std_fd(tk))
+		return (-1);
+	if (set_cmd_pipe_fd(tk))
+		return (-1);
+	if(set_cmd_operator_fd(tk))
+		return (-1);
+	if (redir_operator_fd(tk))
+		return (-1);
 
 	// DEBUG
 		// fprintf(stderr, "===INFO===: end of redirection\n");
@@ -114,7 +121,8 @@ int	set_operator_fd(t_tk **tk)
 			tmp->fd_in = open_file_to_fd(file, O_RDONLY);
 			// fprintf(stderr,"tmp:%p fd_in:%d fd_out:%d\n", tmp, tmp->fd_in, tmp->fd_out);
 		}
-		
+		if (tmp->fd_in == -2 || tmp->fd_out == -2)
+			return(-1);
 		tmp = tmp->next;
 	}
 	return (0);
@@ -128,8 +136,8 @@ int open_file_to_fd(char *file, int option)
 	fd = open(file, option, 0777);
 	if (fd == -1)
 	{
-		perror("Erreur lors de l'ouverture du fichier");
-		return (-1);
+		perror("minishell: Erreur lors de l'obtention du file descriptor");
+		return (-2);
 	}
 	// fprintf(stderr, "open fd : %d\n", fd);
 	return (fd);

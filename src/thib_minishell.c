@@ -6,7 +6,7 @@
 /*   By: thibault <thibault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/06 15:14:08 by thibault          #+#    #+#             */
-/*   Updated: 2023/10/20 15:06:36 by thibault         ###   ########.fr       */
+/*   Updated: 2023/10/24 19:34:59 by thibault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,7 +126,8 @@ int	parse_input(char *input, t_env *env)
 	
 	// if ft_calloc called in get_delimiter, return NULL (shit happens), you can't free it, you'll have a memory problem. 
 	free(delimiter_tab);
-	parse_token(&(env->tk_head));
+	if (parse_token(&(env->tk_head)))
+		return (-1);
 
 		//DEBUG
 		// fprintf(stderr, "===INFO===: end of parsing\n");
@@ -178,7 +179,7 @@ int	input_loop(t_env *env)
 		if (check_parsing(env->tk_head))
 		{
 			// DEBUG
-			printf("minishell: %d : parsing error\n", global_env->error_parsing);
+			printf("minishell: %d : parsing grammar error\n", global_env->error_parsing);
 			// printf("coucou1\n");
 			free(input);
 			// printf("coucou2\n");
@@ -191,7 +192,16 @@ int	input_loop(t_env *env)
 		// fprintf(stderr, "===INFO===: print TK list before redirection::\n");
 		// print_lst(env->tk_head);
 
-		set_redirection(&(env->tk_head));
+		if (set_redirection(&(env->tk_head)))
+		{
+				// DEBUG
+			// printf("coucou1\n");
+			free(input);
+			// printf("coucou2\n");
+			free_lst(env->tk_head);
+			// printf("coucou3\n");
+			continue;
+		}
 		
 		// //DEBUG
 		// fprintf(stderr, "===INFO===: print TK list before execution::\n");
