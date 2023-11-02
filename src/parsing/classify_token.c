@@ -6,7 +6,7 @@
 /*   By: thibault <thibault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 16:26:16 by thibault          #+#    #+#             */
-/*   Updated: 2023/10/20 10:44:23 by thibault         ###   ########.fr       */
+/*   Updated: 2023/10/30 15:27:22 by thibault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,9 @@ t_tk	*move_args_to_sublist(t_tk *tk)
 			{
 				if (tmp->type == TK_ARG) // Si c'est un argument, déplacez-le sous la commande
 				{
+
 					move_arg_to_sublist(&tmp, &sublst_last, cmd, &last_non_arg);
+					handle_quotes(tmp);
 				}
 				else
 				{
@@ -85,78 +87,6 @@ t_tk	*move_args_to_sublist(t_tk *tk)
 
 	return tk; // Retourner la tête modifiée de la liste principale
 }
-
-
-// t_tk	*move_args_to_sublist(t_tk *tk)
-// {
-// 	t_tk	*tmp = tk;
-// 	t_tk	*cmd = NULL;
-// 	t_tk	*next;
-// 	t_tk	*last_non_arg = NULL; // Dernier token qui n'est pas de type TK_ARG
-// 	t_tk	*sublst_last = NULL; // Dernier argument dans la sous-liste
-
-// 	while (tmp)
-// 	{
-// 		if (tmp->type == TK_CMD)
-// 		{
-// 			cmd = tmp;
-// 			last_non_arg = tmp; // Le dernier non-arg est la commande pour le moment
-// 			sublst_last = NULL; // Réinitialiser pour la nouvelle commande
-// 			tmp = tmp->next; // Avancer au token suivant après avoir trouvé une commande
-
-// 			while (tmp && tmp->type != TK_PIPE) // Boucle jusqu'au prochain pipe
-// 			{
-// 				next = tmp->next; // Sauvegarder le token suivant
-
-// 				if (tmp->type == TK_ARG) // Si c'est un argument, déplacez-le sous la commande
-// 				{
-// 					// Détacher le token actuel de la liste principale
-// 					if (tmp->prev)
-// 						tmp->prev->next = tmp->next;
-// 					if (tmp->next)
-// 						tmp->next->prev = tmp->prev;
-
-// 					if (sublst_last) // S'il y a déjà des arguments dans la sous-liste
-// 					{
-// 						// Ajouter le token actuel à la fin de la sous-liste
-// 						tmp->prev = sublst_last;
-// 						sublst_last->next = tmp;
-// 						tmp->next = NULL; // Il est maintenant à la fin de la sous-liste
-// 					}
-// 					else // Si c'est le premier argument de la sous-liste
-// 					{
-// 						cmd->tk_arg = tmp; // Mettre à jour la tête de la sous-liste
-// 						tmp->prev = NULL; // Il est maintenant en tête de la sous-liste
-// 						tmp->next = NULL; // Il est aussi à la fin pour l'instant
-// 					}
-
-// 					sublst_last = tmp; // Mettre à jour le dernier argument de la sous-liste
-
-// 					// Si last_non_arg n'est pas un argument, son 'next' doit pointer vers le prochain non-arg ou null
-// 					if (last_non_arg && last_non_arg->type != TK_ARG)
-// 						last_non_arg->next = next;
-// 				}
-// 				else
-// 				{
-// 					last_non_arg = tmp; // Si ce n'est pas un argument, c'est le dernier non-arg
-// 				}
-
-// 				tmp = next; // Passer au token suivant dans la liste principale
-// 			}
-// 		}
-// 		else
-// 		{
-// 			tmp = tmp->next; // Si ce n'est pas une commande, passer simplement au token suivant
-// 		}
-
-// 		// Si nous atteignons un pipe, nous devons arrêter de regrouper les arguments sous la commande actuelle
-// 		if (tmp && tmp->type == TK_PIPE)
-// 			tmp = tmp->next; // Passer au token suivant après le pipe
-// 	}
-
-// 	return tk; // Retourner la tête modifiée de la liste principale
-// }
-
 
 
 int	ft_handle_arg_tk(t_tk *tk)
@@ -185,11 +115,13 @@ int	ft_handle_arg_tk(t_tk *tk)
 		{
 			
 			tmp = tmp->next;
-			while (tmp && tmp->type != TK_PIPE)
+			while (tmp && (tmp->type != TK_PIPE))
+			// while (tmp && is_tk_redir(tmp->type))
 			{
+				// printf("AVANT tmp: %s, type: %d %p\n", tmp->tk_str, tmp->type, tmp->next);
 				if (tmp->type == TK_CMD)
 					tmp->type = TK_ARG;
-				// printf("2 tmp: %s, %p\n", tmp->tk_str, tmp->next);
+				// printf("APRES tmp: %s, type: %d %p\n", tmp->tk_str, tmp->type, tmp->next);
 				tmp = tmp->next;
 			}
 		}
@@ -219,64 +151,6 @@ int	ft_handle_arg_tk(t_tk *tk)
 	return (0);
 }
 
-
-// int	ft_handle_arg_tk(t_tk *tk)
-// {
-// 	t_tk	*tk_cmd;
-// 	t_tk	*tk_arg_first;
-// 	t_tk	*tk_arg_last; // Dernier argument pour un TOKEN_COMMAND
-
-// 	//classify token as COMMAND or ARGUMENT
-// 	tk_cmd = tk;
-// 	while (tk)
-// 	{
-// 		if (tk->type == TK_CMD && tk->next)
-// 		{
-// 			tk = tk->next;
-// 			while (tk && tk->type >= TK_CMD)
-// 			{
-// 				tk->type = TK_ARG;
-// 				delete_quotes(&(tk->tk_str));
-// 				tk = tk->next;
-// 			}
-// 		}
-// 		if(tk)
-// 			tk = tk->next;
-// 	}
-// 	//move token to the sublist
-// 	tk = tk_cmd;
-// 	while (tk)
-// 	{
-// 		if (tk->type == TK_CMD && tk->next && tk->next->type >= TK_CMD)
-// 		{
-// 			tk_cmd = tk;
-// 			tk = tk->next;
-			
-// 			tk_arg_last = NULL;
-// 			tk_arg_first = NULL;
-
-// 			// if (tk->type == TOKEN_COMMAND)
-// 				tk_arg_first = tk;
-			
-// 			while (tk && tk->type == TK_ARG)
-// 			{
-// 				tk_arg_last = tk;
-// 				tk = tk->next;
-// 			}
-// 			tk_cmd->tk_arg = tk_arg_first;
-// 			if (tk_arg_last)
-// 			{
-// 				tk_cmd->next = tk_arg_last->next;
-// 				if (tk_arg_last->next)
-// 					tk_arg_last->next->prev = tk_cmd;
-// 				tk_arg_last->next = NULL;
-// 			}
-// 		}
-// 		if (tk)
-// 			tk = tk->next;
-// 	}
-// 	return (0);
-// }
 
 
 int	ft_handle_hd_arg_tk(t_tk *tk)

@@ -24,6 +24,7 @@ int		check_redir_sublist(t_tk *tk);
 int		check_here_doc_sublist(t_tk *tk);
 int		check_cmd_sublist(t_tk *tk);
 int		check_grammar(t_tk *tk);
+int		check_cmd_after_pipe(t_tk *tk);
 
 /*check_parsing_token.c*/
 int		check_cmd(t_tk *tk);

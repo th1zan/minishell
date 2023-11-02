@@ -95,15 +95,15 @@ void	ft_lst_classify_tk_unclassified(t_tk *tk)
 	tmp = tk;
 	while (tmp)
 	{
-		if (tk->type == TK_UNCLASSIFIED)
+		if (tmp->type == TK_UNCLASSIFIED)
 		{
 			// printf("INSIDE IF-> %s type: %d\n", tk->tk_str, tk->type);
-			if (tmp->prev == NULL || tmp->prev->type == TK_BLANK || tmp->prev->type == TK_PIPE)
+			if (tmp->prev && tmp->prev->type == TK_HERE_DOC)
+				tmp->type = TK_HD_ARG;
+			else if (tmp->prev == NULL || tmp->prev->type == TK_BLANK || tmp->prev->type == TK_PIPE)
 				tmp->type = TK_CMD;
 			else if (tmp->prev->type == TK_APP_CHEVRON || tmp->prev->type == TK_IN_CHEVRON || tmp->prev->type == TK_OUT_CHEVRON)
 				tmp->type = TK_FILE;
-			else if (tmp->prev->type == TK_HERE_DOC)
-				tmp->type = TK_HD_ARG;
 		}
 		// printf("OUT-> %s type: %d \n", tk->tk_str, tk->type);
 		tmp = tmp->next;
@@ -134,6 +134,7 @@ int ft_delete_type_token(t_tk **tk, int tk_type)
 			if (tmp->prev == NULL)
 				*tk = tmp->next;
 			tmp = ft_lst_remove(tmp);
+			
 			// printf("token deleted !\n");
 		}
 		else

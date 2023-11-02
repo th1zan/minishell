@@ -105,6 +105,7 @@ int	free_env(t_env *env)
 	
 	return (0);
 }
+
 int	free_global_env(t_env *env)
 {	
 	if (env)
@@ -118,46 +119,90 @@ int	free_global_env(t_env *env)
 			free_strtab_env(global_env->env_main);
 			free(global_env->env_main);
 		}
-		if(env->path_tab)
+		if(global_env->path_tab)
 		{	
 			// print_strtab(env->env_main);
 			// printf("free global_env->path_tab: %p\n", global_env->path_tab);
 			free_strtab_env(global_env->path_tab);
 			free(global_env->path_tab);
 		}
+		// printf("free global_env->tk_head: %p\n", global_env->tk_head);
+		if (global_env->tk_head)
+		{
+			// printf("global_env->tk_head = NULL\n");
+			free_lst(global_env->tk_head);
+			// free(global_env->tk_head);
+			global_env->tk_head = NULL;
+			// free(global	_env->tk_head);
+		}
+	
 		if(env->minishell_directory)
 			free(env->minishell_directory);
+	
+	}
 		
 		free(env);
-	}
+
 	// printf("free env: %p\n", env);
 	
 	return (0);
 }
 
+// int free_lst(t_tk *head) {
+//     t_tk *tmp;
+
+//     while (head) {
+//         tmp = head->next;
+
+//         // Si l'élément a une sous-liste, libérez-la
+//         if (head->tk_arg) {
+//             free_lst(head->tk_arg);
+//         }
+
+//         // Libération de l'élément lui-même
+//         free_elem(head);
+
+//         head = tmp;
+//     }
+// 	return (0);
+// }
+
 int	free_lst(t_tk *head_list)
 {
 	t_tk	*tmp;
 
-	
-	while (head_list != NULL)
+	tmp = head_list;
+	while (head_list)
 	{
 		tmp = head_list->next;
-		// printf("befor condition: head_list path_tab: %p\n", head_list->path_tab);
-		// if (head_list->path_tab)
-		// {	
-		// 	printf("free head_list path_tab: %p\n", head_list->path_tab);
-		// 	free_strtab(head_list->path_tab);
-		// 	head_list->path_tab = NULL;
-		// }
+		
 		// printf("free head_list: %p\n", head_list);
 		free_elem(head_list);
+		free(head_list);
+			
+	
+		// free(head_list);
 		head_list = tmp;
 	}
 
 	
 	return (0);
 }
+
+// int free_elem(t_tk *token)
+// {
+//     if (!token) return(1);
+
+//     if (token->tk_str) {
+//         free(token->tk_str);
+//         token->tk_str = NULL;
+//     }
+
+//     // Libération de l'élément lui-même
+//     free(token);
+// 	return (0);
+// }
+
 
 int	free_elem(t_tk *token)
 {
@@ -173,18 +218,7 @@ int	free_elem(t_tk *token)
 		token->tk_str = NULL;
 	}	
 		
-	// if(token->path)
-	// {
-	// printf("free token_path: %s, %p\n",token->path, token->path);
-	// 	free(token->path);
-	// 	token->path = NULL;
-	// }
-	// if(token->path_tab)
-	// {
-	// 	printf("free path_tab: %p\n",token->path_tab);
-	// 	free_strtab(token->path_tab);
-	// 	token->path_tab = NULL;
-	// }	
+	
 	if(token->tk_arg)
 	{
 		tmp = token->tk_arg;
@@ -192,11 +226,16 @@ int	free_elem(t_tk *token)
 		{
 			tmp_arg = tmp->next; // save next tk
 			// printf("free tmp_arg: %p\n", tmp);
-			free_elem(tmp); // free current
+			// free_elem(tmp); // free current
+			
+			if (tmp->tk_str)
+				free(tmp->tk_str);
+			free(tmp);
 			tmp = tmp_arg; // current = next tk
 		}
 	}
-	free(token);
+	// free(token);
+	// token = NULL;
 	return (0);
 }
 

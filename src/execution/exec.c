@@ -6,7 +6,7 @@
 /*   By: thibault <thibault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 17:11:53 by mlachat           #+#    #+#             */
-/*   Updated: 2023/10/21 00:04:59 by thibault         ###   ########.fr       */
+/*   Updated: 2023/10/30 13:35:52 by thibault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -328,7 +328,8 @@ int	set_fd_for_cmd(t_tk *tk)
 
 	fd_in = tk->fd_in;
 	fd_out = tk->fd_out;
-	if (tk->prev && tk->prev->type == TK_PIPE)
+	// if (tk->prev && tk->prev->type == TK_PIPE)
+	if(get_prev_type_tk(tk, TK_PIPE))
 	{
 		if (fd_is_standard(fd_in) == 0)
 		{
@@ -341,7 +342,8 @@ int	set_fd_for_cmd(t_tk *tk)
 			// fprintf(stderr, "set_fd_for_cmd :: fd_in dup2 %d : %d\n", fd_in, STDIN_FILENO);
 		}
 	}
-	if (tk->next && tk->next->type == TK_PIPE)
+	// if (tk->next && tk->next->type == TK_PIPE)
+	if(get_next_type_tk(tk, TK_PIPE))
 	{
 		if (fd_is_standard(fd_out) == 0)
 		{
@@ -367,7 +369,7 @@ int	set_fd_for_cmd(t_tk *tk)
 				return (-1);
 			}
 		}
-			fprintf(stderr, "set_fd_for_cmd :: fd_out dup2 %d : %d\n", fd_out, STDOUT_FILENO);
+			// fprintf(stderr, "set_fd_for_cmd :: fd_out dup2 %d : %d\n", fd_out, STDOUT_FILENO);
 	}
 	return (0);
 }
@@ -386,26 +388,31 @@ int	close_all_fd(t_tk **tk)
 	int		ret;// Variable pour stocker le retour de close
 
 	tmp = *tk;
+	
 	while (tmp != NULL)
 	{
+		// fprintf(stderr, "close_all_fd :: close : tmp: %s\n", tmp->tk_str);
 		if (tmp->type == TK_CMD || tmp->type == TK_CMD_BUILT_IN)
 		{
 			if ((tmp->fd_in != -1) && (fd_is_standard(tmp->fd_in) != 1))
 			{
+				// fprintf(stderr, "close_all_fd :: close : %d\n", tmp->fd_in);
 				ret = close(tmp->fd_in);
-				if (ret == -1) {
+				if (ret == -1)
+				{
 					perror("Error closing fd_in");
 				}
-				// fprintf(stderr, "close_all_fd :: close : %d\n", tmp->fd_in);
+				// fprintf(stderr, "close_all_fd :: close fd_in: %d\n", tmp->fd_in);
 				tmp->fd_in = -1;
 			}
 			if ((tmp->fd_out != -1) && (fd_is_standard(tmp->fd_out) != 1))
 			{
 				ret = close(tmp->fd_out);
-				if (ret == -1) {
+				if (ret == -1)
+				{
 					perror("Error closing fd_out");
 				}
-				// fprintf(stderr, "close_all_fd :: close : %d\n", tmp->fd_out);
+				// fprintf(stderr, "close_all_fd :: close fd_out: %d\n", tmp->fd_out);
 				tmp->fd_out = -1;
 			}
 		}

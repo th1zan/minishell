@@ -6,7 +6,7 @@
 /*   By: thibault <thibault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/06 15:14:08 by thibault          #+#    #+#             */
-/*   Updated: 2023/10/24 19:34:59 by thibault         ###   ########.fr       */
+/*   Updated: 2023/11/01 18:23:37 by thibault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,7 @@ t_env	*init_env(char **envp)
 	new_env->path_tab = get_path_tab(new_env->env_main);
 	new_env->minishell_directory = ft_strdup(cwd);
 	new_env->status = 0;
+	new_env->tk_head = NULL;
 	return (new_env);
 }
 
@@ -121,14 +122,14 @@ int	parse_input(char *input, t_env *env)
 	}
 	
 	
-	input_to_token(input, &(env->env_main), &(env->tk_head), delimiter_tab);
+	input_to_token(input, &(global_env->env_main), &(global_env->tk_head), delimiter_tab);
 	// here we have a linked list, with each node is a part of the input seperated with the delimiter, that was set in the delimiter array of int.
 	
 	// if ft_calloc called in get_delimiter, return NULL (shit happens), you can't free it, you'll have a memory problem. 
 	free(delimiter_tab);
-	if (parse_token(&(env->tk_head)))
+	if (parse_token(&(global_env->tk_head)))
 		return (-1);
-
+	
 		//DEBUG
 		// fprintf(stderr, "===INFO===: end of parsing\n");
 		// fprintf(stderr, "===INFO===: print PATH\n");
@@ -166,24 +167,27 @@ int	input_loop(t_env *env)
 		if (parse_input(input, env))
 		{	
 			free(input);
+			free_lst(env->tk_head);
+			// free(env->tk_head);
+			env->tk_head = NULL;
 			continue;
 		}
-		
 		//DEBUG
 		// fprintf(stderr, "===INFO===: print parsed input -> TK list::\n");
 		// print_lst(env->tk_head);
 
 		// printf("LOOP\n");
 		// print_strtab(global_env->path_tab);
-
 		if (check_parsing(env->tk_head))
 		{
 			// DEBUG
-			printf("minishell: %d : parsing grammar error\n", global_env->error_parsing);
+			// printf("minishell: %d : parsing grammar error\n", global_env->error_parsing);
 			// printf("coucou1\n");
 			free(input);
 			// printf("coucou2\n");
 			free_lst(env->tk_head);
+			// free(env->tk_head);
+			env->tk_head = NULL;
 			// printf("coucou3\n");
 			continue;
 		}
@@ -199,6 +203,8 @@ int	input_loop(t_env *env)
 			free(input);
 			// printf("coucou2\n");
 			free_lst(env->tk_head);
+			// free(env->tk_head);
+			env->tk_head = NULL;
 			// printf("coucou3\n");
 			continue;
 		}
@@ -217,6 +223,8 @@ int	input_loop(t_env *env)
 		// fprintf(stderr, "===INFO===: initial input:: %s\n", input);
 		free(input);
 		free_lst(env->tk_head);
+		// free(env->tk_head);
+		env->tk_head = NULL;
 		
 		// fprintf(stderr, "===INFO===: all variables freed::\n");
 		

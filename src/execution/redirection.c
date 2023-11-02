@@ -6,7 +6,7 @@
 /*   By: thibault <thibault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 14:34:44 by thibault          #+#    #+#             */
-/*   Updated: 2023/10/24 19:18:45 by thibault         ###   ########.fr       */
+/*   Updated: 2023/11/02 15:31:17 by thibault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@ int	set_redirection(t_tk **tk)
 		return (-1);
 	if (set_cmd_std_fd(tk))
 		return (-1);
-	if (set_cmd_pipe_fd(tk))
-		return (-1);
 	if(set_cmd_operator_fd(tk))
+		return (-1);
+	if (set_cmd_pipe_fd(tk))
 		return (-1);
 	if (redir_operator_fd(tk))
 		return (-1);
@@ -111,7 +111,7 @@ int	set_operator_fd(t_tk **tk)
 		{
 			file = tmp->tk_arg->tk_str;
 			close(tmp->fd_out);
-			tmp->fd_out = open_file_to_fd(file, O_WRONLY | O_APPEND);
+			tmp->fd_out = open_file_to_fd(file, O_CREAT | O_WRONLY | O_APPEND);
 			// fprintf(stderr,"tmp:%p fd_in:%d fd_out:%d\n", tmp, tmp->fd_in, tmp->fd_out);
 		}
 		else if (tmp->type == TK_HERE_DOC)
@@ -136,7 +136,8 @@ int open_file_to_fd(char *file, int option)
 	fd = open(file, option, 0777);
 	if (fd == -1)
 	{
-		perror("minishell: Erreur lors de l'obtention du file descriptor");
+		// perror("minishell: Erreur lors de l'obtention du file descriptor");
+		perror("minishell");
 		return (-2);
 	}
 	// fprintf(stderr, "open fd : %d\n", fd);

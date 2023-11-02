@@ -6,7 +6,7 @@
 /*   By: thibault <thibault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 09:23:09 by thibault          #+#    #+#             */
-/*   Updated: 2023/10/12 23:54:38 by thibault         ###   ########.fr       */
+/*   Updated: 2023/11/02 15:05:05 by thibault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ t_tk *ft_lstnew(char *token_str, char **path_tab, char ***envp)
 	if (!new_tk)
 		return (NULL);
 	new_tk->tk_str = token_str;
+	// printf("ft_lstnew:: new_tk: %p\n", new_tk);
 	// printf("ft_lstnew:: tk_str: %s, %p\n", new_tk->tk_str,new_tk->tk_str);
 	new_tk->path_tab = path_tab;
 	new_tk->env = envp;
@@ -68,6 +69,8 @@ t_tk	*ft_lst_remove(t_tk *current_tk)
 
 	// then free current_tk
 	free_elem(current_tk);
+	free(current_tk);
+	// current_tk = NULL;
 	return (tmp);
 }
 

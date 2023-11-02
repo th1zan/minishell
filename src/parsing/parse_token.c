@@ -6,7 +6,7 @@
 /*   By: thibault <thibault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/11 11:49:26 by thibault          #+#    #+#             */
-/*   Updated: 2023/10/29 22:36:27 by thibault         ###   ########.fr       */
+/*   Updated: 2023/10/30 16:23:43 by thibault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,27 +24,33 @@ int	parse_token(t_tk **head_tk)
 	// printf("after ft_lst_replace_var\n");
 	// print_lst(*head_tk);
 	// handle_quotes(*head_tk); // quotes déjà gérées dans ft_handle_arg_tk(*head_tk);
-	// printf("after handle_quotes\n");
+	// printf("after ft_lst_replace_var\n");
 	// print_lst(*head_tk);
 	ft_delete_type_token(head_tk, TK_BLANK);
 	
 	ft_lst_classify_tk_unclassified(*head_tk);
 	/*TODO: vérification des règles de grammaire ex: deux operateur à la suite-> pas possible*/
+	
+	
+	// printf("after ft_lst_classify_tk_unclassified\n");
+	// print_lst(*head_tk);
+	 // quotes déjà gérées dans ft_handle_arg_tk(*head_tk);
+	ft_handle_hd_arg_tk(*head_tk);
 	ft_handle_file_tk(*head_tk);
 	
-	// printf("after handle_files\n");
-	// print_lst(*head_tk);
-	handle_quotes(*head_tk); // quotes déjà gérées dans ft_handle_arg_tk(*head_tk);
-	
-
 	ft_handle_arg_tk(*head_tk);
+	
 	ft_handle_built_in(*head_tk);
-
 	if (check_cmd(*head_tk))
 		return (-1);
+	handle_quotes(*head_tk);
+
+	
+
+	
 	// printf("before hd\n");
 	// print_lst(*head_tk);
-	ft_handle_hd_arg_tk(*head_tk);
+	
 	// printf("after hd\n");
 	// print_lst(*head_tk);
 	// ft_delete_type_token(head_tk, TK_HD_DELIM); // no more TK_HD_DELIM -> fct useless
@@ -55,6 +61,7 @@ int	parse_token(t_tk **head_tk)
 
 	// printf("after ft_handle_built_in\n");
 	// print_lst(*head_tk);
+		
 	return (0);
 }
 
@@ -116,6 +123,7 @@ int	delete_quotes(char **str)
 int 	handle_quotes(t_tk *head_tk)
 {
 	t_tk	*tmp;
+	char	*tmp_str;
 
 	// printf("DEBUG\n");
 	tmp = head_tk;
@@ -129,7 +137,9 @@ int 	handle_quotes(t_tk *head_tk)
 			// tmp->tk_str = remove_quotes(tmp->tk_str, '"');
 			// tmp->tk_str = remove_quotes(tmp->tk_str, '`');
 			// printf("tk->tk->str:%s \n", tmp->tk_str);
+			tmp_str = tmp->tk_str;
 			tmp->tk_str = remove_quotes(tmp->tk_str);
+			free(tmp_str);
 			if(tmp->tk_arg)
 				handle_quotes(tmp->tk_arg);
 			// delete_quotes(&(tmp->tk_str));

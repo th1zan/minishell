@@ -6,7 +6,7 @@
 /*   By: thibault <thibault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 14:45:21 by thibault          #+#    #+#             */
-/*   Updated: 2023/10/24 19:29:54 by thibault         ###   ########.fr       */
+/*   Updated: 2023/11/02 15:32:38 by thibault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,13 @@ int		check_input_file(t_tk *tk)
 		if (tk->type == TK_IN_CHEVRON)
 		{
 			// printf("file:%s\n")
+			if (!tk->tk_arg)
+			{
+				ft_putstr_fd("minishell: syntax error near unexpected token `newline'\n", 2);
+				global_env->status = 258;
+				return (1);
+			}
+			
 			if (access(tk->tk_arg->tk_str, R_OK) == 0)
 			{
 				// file exist and can be readed

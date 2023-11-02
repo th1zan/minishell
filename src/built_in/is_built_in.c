@@ -6,7 +6,7 @@
 /*   By: thibault <thibault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 09:24:48 by thibault          #+#    #+#             */
-/*   Updated: 2023/10/20 13:44:54 by thibault         ###   ########.fr       */
+/*   Updated: 2023/11/01 15:27:01 by thibault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,14 @@ int	is_builtin_exec(t_tk *cmd)
 		status = env_built_in(cmd);
 	else if (is_exit(cmd))
 	{
-		status = exit_builtin(cmd);		
+		status = exit_builtin(cmd);
+		
+		// printf("exit:: free :: global_env->tk_head: %p\n", global_env->tk_head);
+		// free_lst(global_env->tk_head);
+		// printf("exit:: free :: global_env->tk_head: %p\n", global_env->tk_head);
+		free_global_env(global_env);
+		// free(global_env->tk_head);
+		
 		exit(status);
 	}
 	// fprintf(stderr, "===INFO===: in :: is_builtin_exec: status = %d\n", status);

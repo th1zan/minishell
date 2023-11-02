@@ -6,7 +6,7 @@
 /*   By: thibault <thibault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 14:42:49 by thibault          #+#    #+#             */
-/*   Updated: 2023/10/18 14:50:35 by thibault         ###   ########.fr       */
+/*   Updated: 2023/11/02 15:32:22 by thibault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,14 @@ int	check_first_last_token(t_tk *first, t_tk *last)
 	if (!(is_tk_redir(first->type) || first->type == TK_CMD || first->type == TK_CMD_BUILT_IN))
 	{
 		printf("minishell: syntax error near unexpected token '%s'\n", first->tk_str);
-		printf("error: first TK is not redir_operator or CMD\n");
+		// printf("error: first TK is not redir_operator or CMD\n");
 		global_env->status = 258;
 		return (1);
 	}
 	if (!(is_tk_redir(last->type) || last->type == TK_CMD || first->type == TK_CMD_BUILT_IN || last->type == TK_PIPE))
 	{
 		printf("minishell: syntax error near unexpected token '%s'\n", last->tk_str);
-		printf("error: last TK is not redir_operator or CMD or PIPE\n");
+		// printf("error: last TK is not redir_operator or CMD or PIPE\n");
 		global_env->status = 258;
 		return (1);
 	}
@@ -42,7 +42,7 @@ int	check_here_doc_arg(t_tk *tk)
 		{
 			if (tmp->tk_arg == NULL)
 			{
-				printf("bash: syntax error near unexpected token `newline'\n");
+				ft_putstr_fd("minishell: syntax error near unexpected token `newline'\n", 2);
 				global_env->status = 258;
 				return (258);
 			}
@@ -52,7 +52,7 @@ int	check_here_doc_arg(t_tk *tk)
 			// printf("OK %s\n", tmp->tk_str);
 			if (ft_strncmp(tmp->tk_str, "<<", 2) == 0)
 			{
-				printf("bash: syntax error near unexpected token `newline'\n");
+				ft_putstr_fd("minishell: syntax error near unexpected token `newline'\n", 2);
 				global_env->status = 258;
 				return (258);
 			}
@@ -63,6 +63,37 @@ int	check_here_doc_arg(t_tk *tk)
 	return (0);
 }
 
+int check_cmd_after_pipe(t_tk *tk)
+{
+	t_tk *tmp;
+
+	tmp = tk;
+	while (tmp != NULL)
+	{
+		if (tmp->type == TK_PIPE)
+		{
+			if (!get_next_type_tk(tmp, TK_CMD))
+			{
+				printf("minishell: syntax error near unexpected token `|'\n");
+				global_env->status = 258;
+				return (258);
+			}
+		}
+		else if (tmp->type == TK_HERE_DOC )
+		{
+			// printf("OK %s\n", tmp->tk_str);
+			if (ft_strncmp(tmp->tk_str, "<<", 2) == 0)
+			{
+				ft_putstr_fd("minishell: syntax error near unexpected token `newline'\n", 2);
+				global_env->status = 258;
+				return (258);
+			}
+		}
+		
+		tmp = tmp->next;
+	}
+	return (0);
+}
 
 int	check_main_list_tokens(t_tk *tk)
 {
@@ -155,6 +186,8 @@ int	check_grammar(t_tk *tk)
 	}
 	if (check_here_doc_arg(tk))
 		return(258);
+	if (check_cmd_after_pipe(tk))
+		return(259);
 	// printf("1 lets check grammar\n");
 	if (check_first_last_token(tk, tk) != 0)
 		return (12);
@@ -168,8 +201,21 @@ int	check_grammar(t_tk *tk)
 	{
 		if (is_tk_in_out_app(tmp->type))
 		{
-			if (check_redir_sublist(tmp) != 0)
-				return (14);
+			
+			if (check_redir_sublist(tmp))
+				return (141);
+			if (tmp->type == TK_IN_CHEVRON && tmp->next && (tmp->next->type == TK_IN_CHEVRON || tmp->next->type == TK_HERE_DOC))
+			{
+				ft_putstr_fd("minishell : error: two or more input are not permitted\n", 2);
+				global_env->status = 1;
+				return (142);
+			}
+			if (((tmp->type == TK_OUT_CHEVRON || tmp->type == TK_APP_CHEVRON)) && tmp->next && (tmp->next->type == TK_OUT_CHEVRON || tmp->next->type == TK_APP_CHEVRON))
+			{
+				ft_putstr_fd("minishell : error: two or more output are not permitted\n", 2);
+				global_env->status = 1;
+				return (143);
+			}
 		}
 		else if (tmp->type == TK_PIPE)
 		{

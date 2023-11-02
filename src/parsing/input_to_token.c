@@ -6,7 +6,7 @@
 /*   By: thibault <thibault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/09 14:58:05 by thibault          #+#    #+#             */
-/*   Updated: 2023/10/20 13:16:28 by thibault         ###   ########.fr       */
+/*   Updated: 2023/11/01 15:32:51 by thibault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,172 +150,6 @@ int	*get_delimiter(char *input)
 
 
 
-
-// int	*get_delimiter(char *input) //input = user's command not parsed / input = "test"
-// {
-// 	int		i;
-// 	int		*delimiter;
-// 	char	tmp_char;
-// 	int		tmp_i;
-
-// 	delimiter = (int *)ft_calloc(ft_strlen(input), sizeof(int) + 1); // size = ft_strlen(input) && count = sizeof(int) + 1 | size = 4 + 1 ('\0'), count = 4. Isn't it (the number of elements + 1) times sizeof() ?
-// 	if (!delimiter)
-// 	{
-// 		//Gestion d'erreur
-// 		return (NULL);
-// 	}
-// 	i = 0;
-// 	tmp_char = 0;
-// 	while (i < (int)ft_strlen(input))
-// 	{
-// 		// PRINT TEST
-// 		// printf("input[%d]:%c ", i, input[i]);
-// 		if (is_twochar_delim(input, i) && input[i + 1]) // check for input[i + 1] != NULL already done in is_twochar_delim(), if it is NULL, the first condition is not met anyway.
-// 		{
-// 			delimiter[i] = 1;
-// 			i++;
-// 		}
-// 		else if (is_onechar_delim(input, i))
-// 		{
-// 			delimiter[i] = 1;
-// 			if (input[i + 1])
-// 			{
-				
-// 				delimiter[i + 1] = 1;
-// 				// printf("input[%d]= %c , delimiter[%d] = %d \n", i+1, input[i + 1], i +1 , delimiter[i + 1]);
-			
-// 			}
-			
-// 		}
-// 		else if (is_quote(input, i))
-// 		{
-// 			// delimiter[i] = 1;
-// 			tmp_char = input[i];
-// 			tmp_i = i + 1;
-// 			while (input[tmp_i])
-// 			{	
-// 				// printf("input[%d]:%c == tmp_char: %c\n", tmp_i, input[tmp_i], tmp_char);
-// 				if (input[tmp_i] == tmp_char)
-// 				{
-// 					i = tmp_i;
-// 					break;
-// 				}	
-// 				tmp_i++;
-// 			}
-// 			// delimiter[tmp_i] = 1;
-// 			// delimiter[i] = 1;
-// 		}
-// 		// else if (is_simple_quote(input, i))
-// 		// {
-	
-// 		// 	delimiter[i] = 1; //ajout 18.10.23
-// 		// 	i++;
-// 		// 	while (!is_simple_quote(input, i))
-// 		// 	{	
-// 		// 		if (input[i] == 0)
-// 		// 			{
-// 		// 				// printf("minishell: error: unclosed quote\n");
-// 		// 				// return (NULL);
-// 		// 			}	
-// 		// 		i++;
-// 		// 	}
-// 		// 	// i++; //ajout 18.10.23
-// 		// }
-// 		// else if (is_double_quote(input, i))
-// 		// {
-// 		// 	delimiter[i] = 1; //ajout 18.10.23
-// 		// 	i++;
-// 		// 	while (!is_double_quote(input, i))
-// 		// 	{	
-// 		// 		if (input[i] == 0)
-// 		// 			{
-// 		// 				// printf("minishell: error: unclosed double quote\n");
-// 		// 				// return (NULL);
-// 		// 			}	
-// 		// 		i++;
-// 		// 	}
-// 		// 	// i++; //ajout 18.10.23
-// 		// }
-// 		// else if (is_back_quote(input, i))
-// 		// {
-	
-// 		// 	delimiter[i] = 1; //ajout 18.10.23
-// 		// 	i++;
-// 		// 	while (!is_back_quote(input, i))
-// 		// 	{	
-// 		// 		if (input[i] == 0)
-// 		// 			{
-// 		// 				// printf("minishell: error: unclosed back quote\n");
-// 		// 				// return (NULL);
-// 		// 			}	
-// 		// 		i++;
-// 		// 	}
-// 		// 	// i++; //ajout 18.10.23
-// 		// }
-// 		else if (input[i] == '\n')
-// 		{
-// 			delimiter[i] = 1;
-// 			i++;
-// 			while (input[i] == '\n')
-// 			{	
-// 				i++;
-// 			}
-// 			i--;
-// 		}	
-// 		else if (is_whitespace(input[i]))
-// 		{
-// 			delimiter[i] = 1;
-// 			// i++;
-// 			while (is_whitespace(input[i]))
-// 			{	
-// 				i++;
-// 			}
-// 			i--;
-// 		}
-// 		// else if (is_name(input[i]) || input[i] == '/' || input[i] == '$')
-// 		// {
-// 		// 	delimiter[i] = 1;
-// 		// 	i++;
-// 		// 	while (is_portable_filename_char(input[i]) || input[i] == '/') 
-// 		// 	{	
-// 		// 		i++;
-// 		// 	}
-// 		// 	i--;
-// 		// }		
-// 		else if (ft_isprint(input[i]) && input[i] != ' ' && (!input[i - 1] || is_whitespace(input[i - 1])))
-// 		{
-// 			delimiter[i] = 1;
-// 			i++;
-// 			while (ft_isprint(input[i]) && input[i] != ' ') 
-// 			{	
-// 				i++;
-// 			}
-// 			i--;
-// 		}	
-// 		else if (delimiter[i] != 1)
-// 		{
-			
-// 			delimiter[i] = 0;
-// 		}
-// 		// PRINT TEST
-// 		if (input[i])
-// 			printf("input[%d]:%c is delimiter[%d]:%d \n", i, input[i], i, delimiter[i]);
-// 		i++; // if the first if is true,, i++ was already done, so this new i++ might go too far. 
-// 	}
-
-// 	// PRINT TEST
-// 	// printf("\n%s\n", input);
-// 	// i = 0;
-// 	// while (i < (int)ft_strlen(input))
-// 	// {
-// 	// 	printf("%d", delimiter[i]);
-// 	// 	i++;
-// 	// }
-// 	// printf("\n---------------------\n\ns");
-
-// 	return (delimiter);
-// }
-
 int	input_to_token(char *input, char ***envp, t_tk **tk_head, int *delimiter)
 {
 	// input = "ls | wc"
@@ -325,7 +159,6 @@ int	input_to_token(char *input, char ***envp, t_tk **tk_head, int *delimiter)
 	int		len;
 	char	*tk_str;
 	// char	**path_tab;
-
 	*tk_head = NULL;
 	begin = 0;
 	len = 0;
