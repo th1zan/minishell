@@ -4,7 +4,7 @@
 set minishell "./minishell"
 
 # Fichier contenant les commandes à exécuter
-set infile "infile_cmd"
+set infile "eval_cmd"
 
 # Fichier où les sorties seront enregistrées
 set outfile "output_file"
@@ -14,6 +14,8 @@ set fp [open $infile r]
 
 # Lancer minishell
 spawn $minishell
+
+sleep 10
 
 # Log all the output to a file
 log_file -a $outfile; # -a appends instead of overwriting
@@ -27,6 +29,7 @@ while {[gets $fp cmd] != -1} {
     send -- "$cmd\r"
     # Attendre que la commande soit exécutée avant de continuer
     expect "minishell> "
+	# sleep 1
 }
 
 # Fin de l'envoi des commandes, on envoie EOF (Ctrl+D)
