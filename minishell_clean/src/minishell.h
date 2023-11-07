@@ -6,7 +6,7 @@
 /*   By: thibault <thibault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/06 16:13:42 by thibault          #+#    #+#             */
-/*   Updated: 2023/11/07 21:34:58 by thibault         ###   ########.fr       */
+/*   Updated: 2023/11/07 22:19:24 by thibault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,12 +40,21 @@
 
 extern t_env	*g_env;
 
-/* Minishell.c */
-t_env	*init_env(char **envp);
-int		parse_input(char *input, t_env *env);
+/* minishell.c */
+int		main(int argc, char **argv, char **envp);
+int		execute_command(t_env *env, char *input);
+int		process_main_input(t_env *env, char *input);
 int		input_loop(t_env *env);
 char	*get_line(char *prompt);
-char	**get_path_tab(char **envp);
+
+/* init_env.c */
+int		count_env_entries(char **envp);
+char	**copy_env(char **envp, int count);
+t_env	*init_env(char **envp);
+int		parse_input(char *input, t_env *env);
+char	**get_path_tab(char **env_main);
+
+/* signal.c */
 int		save_std(int *original_std);
 int		restore_std(int *original_std);
 void	handle_signal(void);

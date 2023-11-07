@@ -1335,3 +1335,13 @@ ls
 env | sort | grep -v SHLVL | grep -v ^_
 cat ./test_files/infile_big | grep oi
 cat minishell.h | grep ");"$
+ls
+cat << test
+1
+23
+3
+4
+test
+ls | grep mak | wc -l
+ls | grep mak | wc
+ls | grep Mak | wc

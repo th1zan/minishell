@@ -6,7 +6,7 @@
 #    By: thibault <thibault@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/20 17:58:32 by ebennace          #+#    #+#              #
-#    Updated: 2023/11/07 21:14:51 by thibault         ###   ########.fr        #
+#    Updated: 2023/11/07 22:09:51 by thibault         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,6 +19,8 @@ LIBFT		= $(LIBFT_DIR)/libft.a
 
 # ==== Project's files ==== #
 SRCS       = 		src/minishell.c \
+					src/init_env.c \
+					src/signal.c \
 					src/check_fct/check_ctrl_op.c \
 					src/check_fct/check_group_op.c \
 					src/check_fct/check_redir_op.c \
