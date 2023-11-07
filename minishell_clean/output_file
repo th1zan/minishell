@@ -1,0 +1,647 @@
+[?2004hminishell> env | sort | grep -v SHLVL | grep -v ^_
+[?2004l
+-----PRINT LST--------
+env             || tk_addr: 0x143606d20     tk_type: 100   fd_in: 0     fd_out: 0     prev_tk: 0x0             next_tk: 0x143606af0     sub_tk: 0x0            
+|               || tk_addr: 0x143606af0     tk_type: 10    fd_in: 0     fd_out: 0     prev_tk: 0x143606d20     next_tk: 0x143606e10     sub_tk: 0x0            
+sort            || tk_addr: 0x143606e10     tk_type: 100   fd_in: 0     fd_out: 0     prev_tk: 0x143606af0     next_tk: 0x143606ed0     sub_tk: 0x0            
+|               || tk_addr: 0x143606ed0     tk_type: 10    fd_in: 0     fd_out: 0     prev_tk: 0x143606e10     next_tk: 0x143606fa0     sub_tk: 0x0            
+grep            || tk_addr: 0x143606fa0     tk_type: 100   fd_in: 0     fd_out: 0     prev_tk: 0x143606ed0     next_tk: 0x143607080     sub_tk: 0x0            
+-v              || tk_addr: 0x143607080     tk_type: 1000  fd_in: 0     fd_out: 0     prev_tk: 0x143606fa0     next_tk: 0x143607160     sub_tk: 0x0            
+SHLVL           || tk_addr: 0x143607160     tk_type: 1000  fd_in: 0     fd_out: 0     prev_tk: 0x143607080     next_tk: 0x143607240     sub_tk: 0x0            
+|               || tk_addr: 0x143607240     tk_type: 10    fd_in: 0     fd_out: 0     prev_tk: 0x143607160     next_tk: 0x143607320     sub_tk: 0x0            
+grep            || tk_addr: 0x143607320     tk_type: 100   fd_in: 0     fd_out: 0     prev_tk: 0x143607240     next_tk: 0x143607400     sub_tk: 0x0            
+-v              || tk_addr: 0x143607400     tk_type: 1000  fd_in: 0     fd_out: 0     prev_tk: 0x143607320     next_tk: 0x1436074e0     sub_tk: 0x0            
+^_              || tk_addr: 0x1436074e0     tk_type: 1000  fd_in: 0     fd_out: 0     prev_tk: 0x143607400     next_tk: 0x0             sub_tk: 0x0            
+
+      ----->END PRINT ARG------
+
+
+-----PRINT LST--------
+env             || tk_addr: 0x143606d20     tk_type: 100   fd_in: 0     fd_out: 0     prev_tk: 0x0             next_tk: 0x143606af0     sub_tk: 0x0            
+|               || tk_addr: 0x143606af0     tk_type: 10    fd_in: 0     fd_out: 0     prev_tk: 0x143606d20     next_tk: 0x143606e10     sub_tk: 0x0            
+sort            || tk_addr: 0x143606e10     tk_type: 100   fd_in: 0     fd_out: 0     prev_tk: 0x143606af0     next_tk: 0x143606ed0     sub_tk: 0x0            
+|               || tk_addr: 0x143606ed0     tk_type: 10    fd_in: 0     fd_out: 0     prev_tk: 0x143606e10     next_tk: 0x143606fa0     sub_tk: 0x0            
+grep            || tk_addr: 0x143606fa0     tk_type: 100   fd_in: 0     fd_out: 0     prev_tk: 0x143606ed0     next_tk: 0x143607080     sub_tk: 0x0            
+-v              || tk_addr: 0x143607080     tk_type: 1000  fd_in: 0     fd_out: 0     prev_tk: 0x143606fa0     next_tk: 0x143607160     sub_tk: 0x0            
+SHLVL           || tk_addr: 0x143607160     tk_type: 1000  fd_in: 0     fd_out: 0     prev_tk: 0x143607080     next_tk: 0x143607240     sub_tk: 0x0            
+|               || tk_addr: 0x143607240     tk_type: 10    fd_in: 0     fd_out: 0     prev_tk: 0x143607160     next_tk: 0x143607320     sub_tk: 0x0            
+grep            || tk_addr: 0x143607320     tk_type: 100   fd_in: 0     fd_out: 0     prev_tk: 0x143607240     next_tk: 0x143607400     sub_tk: 0x0            
+-v              || tk_addr: 0x143607400     tk_type: 1000  fd_in: 0     fd_out: 0     prev_tk: 0x143607320     next_tk: 0x1436074e0     sub_tk: 0x0            
+^_              || tk_addr: 0x1436074e0     tk_type: 1000  fd_in: 0     fd_out: 0     prev_tk: 0x143607400     next_tk: 0x0             sub_tk: 0x0            
+
+      ----->END PRINT ARG------
+
+
+-----PRINT LST--------
+env             || tk_addr: 0x143606d20     tk_type: 100   fd_in: 0     fd_out: 0     prev_tk: 0x0             next_tk: 0x143606af0     sub_tk: 0x0            
+|               || tk_addr: 0x143606af0     tk_type: 10    fd_in: 0     fd_out: 0     prev_tk: 0x143606d20     next_tk: 0x143606e10     sub_tk: 0x0            
+sort            || tk_addr: 0x143606e10     tk_type: 100   fd_in: 0     fd_out: 0     prev_tk: 0x143606af0     next_tk: 0x143606ed0     sub_tk: 0x0            
+|               || tk_addr: 0x143606ed0     tk_type: 10    fd_in: 0     fd_out: 0     prev_tk: 0x143606e10     next_tk: 0x143606fa0     sub_tk: 0x0            
+grep            || tk_addr: 0x143606fa0     tk_type: 100   fd_in: 0     fd_out: 0     prev_tk: 0x143606ed0     next_tk: 0x143607240     sub_tk: 0x143607080    
+
+      ----->PRINT ARG--------
+
+-----PRINT LST--------
+-v              || tk_addr: 0x143607080     tk_type: 1000  fd_in: 0     fd_out: 0     prev_tk: 0x0             next_tk: 0x143607160     sub_tk: 0x0            
+SHLVL           || tk_addr: 0x143607160     tk_type: 1000  fd_in: 0     fd_out: 0     prev_tk: 0x143607080     next_tk: 0x143607400     sub_tk: 0x0            
+-v              || tk_addr: 0x143607400     tk_type: 1000  fd_in: 0     fd_out: 0     prev_tk: 0x143607160     next_tk: 0x1436074e0     sub_tk: 0x0            
+^_              || tk_addr: 0x1436074e0     tk_type: 1000  fd_in: 0     fd_out: 0     prev_tk: 0x143607400     next_tk: 0x0             sub_tk: 0x0            
+
+      ----->END PRINT ARG------
+
+|               || tk_addr: 0x143607240     tk_type: 10    fd_in: 0     fd_out: 0     prev_tk: 0x143606fa0     next_tk: 0x143607320     sub_tk: 0x0            
+grep            || tk_addr: 0x143607320     tk_type: 100   fd_in: 0     fd_out: 0     prev_tk: 0x143607240     next_tk: 0x0             sub_tk: 0x0            
+
+-----END PRINT LST--------
+
+
+-----PRINT LST--------
+env             || tk_addr: 0x143606d20     tk_type: 100   fd_in: 0     fd_out: 0     prev_tk: 0x0             next_tk: 0x143606af0     sub_tk: 0x0            
+|               || tk_addr: 0x143606af0     tk_type: 10    fd_in: 0     fd_out: 0     prev_tk: 0x143606d20     next_tk: 0x143606e10     sub_tk: 0x0            
+sort            || tk_addr: 0x143606e10     tk_type: 100   fd_in: 0     fd_out: 0     prev_tk: 0x143606af0     next_tk: 0x143606ed0     sub_tk: 0x0            
+|               || tk_addr: 0x143606ed0     tk_type: 10    fd_in: 0     fd_out: 0     prev_tk: 0x143606e10     next_tk: 0x143606fa0     sub_tk: 0x0            
+grep            || tk_addr: 0x143606fa0     tk_type: 100   fd_in: 0     fd_out: 0     prev_tk: 0x143606ed0     next_tk: 0x143607240     sub_tk: 0x143607080    
+
+      ----->PRINT ARG--------
+
+-----PRINT LST--------
+-v              || tk_addr: 0x143607080     tk_type: 1000  fd_in: 0     fd_out: 0     prev_tk: 0x0             next_tk: 0x143607160     sub_tk: 0x0            
+SHLVL           || tk_addr: 0x143607160     tk_type: 1000  fd_in: 0     fd_out: 0     prev_tk: 0x143607080     next_tk: 0x143607400     sub_tk: 0x0            
+-v              || tk_addr: 0x143607400     tk_type: 1000  fd_in: 0     fd_out: 0     prev_tk: 0x143607160     next_tk: 0x1436074e0     sub_tk: 0x0            
+^_              || tk_addr: 0x1436074e0     tk_type: 1000  fd_in: 0     fd_out: 0     prev_tk: 0x143607400     next_tk: 0x0             sub_tk: 0x0            
+
+      ----->END PRINT ARG------
+
+|               || tk_addr: 0x143607240     tk_type: 10    fd_in: 0     fd_out: 0     prev_tk: 0x143606fa0     next_tk: 0x143607320     sub_tk: 0x0            
+grep            || tk_addr: 0x143607320     tk_type: 100   fd_in: 0     fd_out: 0     prev_tk: 0x143607240     next_tk: 0x0             sub_tk: 0x0            
+
+-----END PRINT LST--------
+
+
+-----PRINT LST--------
+env             || tk_addr: 0x143606d20     tk_type: 100   fd_in: 0     fd_out: 0     prev_tk: 0x0             next_tk: 0x143606af0     sub_tk: 0x0            
+|               || tk_addr: 0x143606af0     tk_type: 10    fd_in: 0     fd_out: 0     prev_tk: 0x143606d20     next_tk: 0x143606e10     sub_tk: 0x0            
+sort            || tk_addr: 0x143606e10     tk_type: 100   fd_in: 0     fd_out: 0     prev_tk: 0x143606af0     next_tk: 0x143606ed0     sub_tk: 0x0            
+|               || tk_addr: 0x143606ed0     tk_type: 10    fd_in: 0     fd_out: 0     prev_tk: 0x143606e10     next_tk: 0x143606fa0     sub_tk: 0x0            
+grep            || tk_addr: 0x143606fa0     tk_type: 100   fd_in: 0     fd_out: 0     prev_tk: 0x143606ed0     next_tk: 0x143607240     sub_tk: 0x143607080    
+
+      ----->PRINT ARG--------
+
+-----PRINT LST--------
+-v              || tk_addr: 0x143607080     tk_type: 1000  fd_in: 0     fd_out: 0     prev_tk: 0x0             next_tk: 0x143607160     sub_tk: 0x0            
+SHLVL           || tk_addr: 0x143607160     tk_type: 1000  fd_in: 0     fd_out: 0     prev_tk: 0x143607080     next_tk: 0x143607400     sub_tk: 0x0            
+-v              || tk_addr: 0x143607400     tk_type: 1000  fd_in: 0     fd_out: 0     prev_tk: 0x143607160     next_tk: 0x1436074e0     sub_tk: 0x0            
+^_              || tk_addr: 0x1436074e0     tk_type: 1000  fd_in: 0     fd_out: 0     prev_tk: 0x143607400     next_tk: 0x0             sub_tk: 0x0            
+
+      ----->END PRINT ARG------
+
+|               || tk_addr: 0x143607240     tk_type: 10    fd_in: 0     fd_out: 0     prev_tk: 0x143606fa0     next_tk: 0x143607320     sub_tk: 0x0            
+grep            || tk_addr: 0x143607320     tk_type: 100   fd_in: 0     fd_out: 0     prev_tk: 0x143607240     next_tk: 0x0             sub_tk: 0x0            
+
+-----END PRINT LST--------
+
+usage: grep [-abcdDEFGHhIiJLlMmnOopqRSsUVvwXxZz] [-A num] [-B num] [-C[num]]
+	[-e pattern] [-f file] [--binary-files=value] [--color=when]
+	[--context[=num]] [--directories=action] [--label] [--line-buffered]
+	[--null] [pattern] [file ...]
+grep: ^_: No such file or directory
+[?2004hminishell> cat ./test_files/infile_big | grep oi
+[?2004l
+-----PRINT LST--------
+cat             || tk_addr: 0x143607320     tk_type: 100   fd_in: 0     fd_out: 0     prev_tk: 0x0             next_tk: 0x143607380     sub_tk: 0x143606a90    
+
+      ----->PRINT ARG--------
+
+-----PRINT LST--------
+./test_files/infile_big || tk_addr: 0x143606a90     tk_type: 1000  fd_in: 0     fd_out: 0     prev_tk: 0x0             next_tk: 0x143606db0     sub_tk: 0x0            
+oi              || tk_addr: 0x143606db0     tk_type: 1000  fd_in: 0     fd_out: 0     prev_tk: 0x143606a90     next_tk: 0x0             sub_tk: 0x0            
+
+      ----->END PRINT ARG------
+
+|               || tk_addr: 0x143607380     tk_type: 10    fd_in: 0     fd_out: 0     prev_tk: 0x143607320     next_tk: 0x143607440     sub_tk: 0x0            
+grep            || tk_addr: 0x143607440     tk_type: 100   fd_in: 0     fd_out: 0     prev_tk: 0x143607380     next_tk: 0x0             sub_tk: 0x0            
+
+-----END PRINT LST--------
+
+
+-----PRINT LST--------
+cat             || tk_addr: 0x143607320     tk_type: 100   fd_in: 0     fd_out: 0     prev_tk: 0x0             next_tk: 0x143607380     sub_tk: 0x143606a90    
+
+      ----->PRINT ARG--------
+
+-----PRINT LST--------
+./test_files/infile_big || tk_addr: 0x143606a90     tk_type: 1000  fd_in: 0     fd_out: 0     prev_tk: 0x0             next_tk: 0x143606db0     sub_tk: 0x0            
+oi              || tk_addr: 0x143606db0     tk_type: 1000  fd_in: 0     fd_out: 0     prev_tk: 0x143606a90     next_tk: 0x0             sub_tk: 0x0            
+
+      ----->END PRINT ARG------
+
+|               || tk_addr: 0x143607380     tk_type: 10    fd_in: 0     fd_out: 0     prev_tk: 0x143607320     next_tk: 0x143607440     sub_tk: 0x0            
+grep            || tk_addr: 0x143607440     tk_type: 100   fd_in: 0     fd_out: 0     prev_tk: 0x143607380     next_tk: 0x0             sub_tk: 0x0            
+
+-----END PRINT LST--------
+
+
+-----PRINT LST--------
+cat             || tk_addr: 0x143607320     tk_type: 100   fd_in: 0     fd_out: 0     prev_tk: 0x0             next_tk: 0x143607380     sub_tk: 0x143606a90    
+
+      ----->PRINT ARG--------
+
+-----PRINT LST--------
+./test_files/infile_big || tk_addr: 0x143606a90     tk_type: 1000  fd_in: 0     fd_out: 0     prev_tk: 0x0             next_tk: 0x143606db0     sub_tk: 0x0            
+oi              || tk_addr: 0x143606db0     tk_type: 1000  fd_in: 0     fd_out: 0     prev_tk: 0x143606a90     next_tk: 0x0             sub_tk: 0x0            
+
+      ----->END PRINT ARG------
+
+|               || tk_addr: 0x143607380     tk_type: 10    fd_in: 0     fd_out: 0     prev_tk: 0x143607320     next_tk: 0x143607440     sub_tk: 0x0            
+grep            || tk_addr: 0x143607440     tk_type: 100   fd_in: 0     fd_out: 0     prev_tk: 0x143607380     next_tk: 0x0             sub_tk: 0x0            
+
+-----END PRINT LST--------
+
+cat: ./test_files/infile_big: No such file or directory
+cat: oi: No such file or directory
+usage: grep [-abcdDEFGHhIiJLlMmnOopqRSsUVvwXxZz] [-A num] [-B num] [-C[num]]
+	[-e pattern] [-f file] [--binary-files=value] [--color=when]
+	[--context[=num]] [--directories=action] [--label] [--line-buffered]
+	[--null] [pattern] [file ...]
+[?2004hminishell> cat minishell.h | grep ");"$
+[?2004lexport GHOST=123 | env | grep GHOST
+[?2004hminishell> env | sort | grep -v SHLVL | grep -v ^_
+[?2004l
+-----PRINT LST--------
+env             || tk_addr: 0x1257041c0     tk_type: 100   fd_in: 0     fd_out: 0     prev_tk: 0x0             next_tk: 0x1257042a0     sub_tk: 0x0            
+|               || tk_addr: 0x1257042a0     tk_type: 10    fd_in: 0     fd_out: 0     prev_tk: 0x1257041c0     next_tk: 0x125704380     sub_tk: 0x0            
+sort            || tk_addr: 0x125704380     tk_type: 100   fd_in: 0     fd_out: 0     prev_tk: 0x1257042a0     next_tk: 0x125704460     sub_tk: 0x0            
+|               || tk_addr: 0x125704460     tk_type: 10    fd_in: 0     fd_out: 0     prev_tk: 0x125704380     next_tk: 0x125704540     sub_tk: 0x0            
+grep            || tk_addr: 0x125704540     tk_type: 100   fd_in: 0     fd_out: 0     prev_tk: 0x125704460     next_tk: 0x1257047e0     sub_tk: 0x125704620    
+
+      ----->PRINT ARG--------
+
+-----PRINT LST--------
+-v              || tk_addr: 0x125704620     tk_type: 1000  fd_in: 0     fd_out: 0     prev_tk: 0x0             next_tk: 0x125704700     sub_tk: 0x0            
+SHLVL           || tk_addr: 0x125704700     tk_type: 1000  fd_in: 0     fd_out: 0     prev_tk: 0x125704620     next_tk: 0x1257049a0     sub_tk: 0x0            
+-v              || tk_addr: 0x1257049a0     tk_type: 1000  fd_in: 0     fd_out: 0     prev_tk: 0x125704700     next_tk: 0x125704a80     sub_tk: 0x0            
+^_              || tk_addr: 0x125704a80     tk_type: 1000  fd_in: 0     fd_out: 0     prev_tk: 0x1257049a0     next_tk: 0x0             sub_tk: 0x0            
+
+      ----->END PRINT ARG------
+
+|               || tk_addr: 0x1257047e0     tk_type: 10    fd_in: 0     fd_out: 0     prev_tk: 0x125704540     next_tk: 0x1257048c0     sub_tk: 0x0            
+grep            || tk_addr: 0x1257048c0     tk_type: 100   fd_in: 0     fd_out: 0     prev_tk: 0x1257047e0     next_tk: 0x0             sub_tk: 0x0            
+
+-----END PRINT LST--------
+
+
+-----PRINT LST--------
+env             || tk_addr: 0x1257041c0     tk_type: 100   fd_in: 0     fd_out: 0     prev_tk: 0x0             next_tk: 0x1257042a0     sub_tk: 0x0            
+|               || tk_addr: 0x1257042a0     tk_type: 10    fd_in: 0     fd_out: 0     prev_tk: 0x1257041c0     next_tk: 0x125704380     sub_tk: 0x0            
+sort            || tk_addr: 0x125704380     tk_type: 100   fd_in: 0     fd_out: 0     prev_tk: 0x1257042a0     next_tk: 0x125704460     sub_tk: 0x0            
+|               || tk_addr: 0x125704460     tk_type: 10    fd_in: 0     fd_out: 0     prev_tk: 0x125704380     next_tk: 0x125704540     sub_tk: 0x0            
+grep            || tk_addr: 0x125704540     tk_type: 100   fd_in: 0     fd_out: 0     prev_tk: 0x125704460     next_tk: 0x1257047e0     sub_tk: 0x125704620    
+
+      ----->PRINT ARG--------
+
+-----PRINT LST--------
+-v              || tk_addr: 0x125704620     tk_type: 1000  fd_in: 0     fd_out: 0     prev_tk: 0x0             next_tk: 0x125704700     sub_tk: 0x0            
+SHLVL           || tk_addr: 0x125704700     tk_type: 1000  fd_in: 0     fd_out: 0     prev_tk: 0x125704620     next_tk: 0x1257049a0     sub_tk: 0x0            
+-v              || tk_addr: 0x1257049a0     tk_type: 1000  fd_in: 0     fd_out: 0     prev_tk: 0x125704700     next_tk: 0x125704a80     sub_tk: 0x0            
+^_              || tk_addr: 0x125704a80     tk_type: 1000  fd_in: 0     fd_out: 0     prev_tk: 0x1257049a0     next_tk: 0x0             sub_tk: 0x0            
+
+      ----->END PRINT ARG------
+
+|               || tk_addr: 0x1257047e0     tk_type: 10    fd_in: 0     fd_out: 0     prev_tk: 0x125704540     next_tk: 0x1257048c0     sub_tk: 0x0            
+grep            || tk_addr: 0x1257048c0     tk_type: 100   fd_in: 0     fd_out: 0     prev_tk: 0x1257047e0     next_tk: 0x0             sub_tk: 0x0            
+
+-----END PRINT LST--------
+
+usage: grep [-abcdDEFGHhIiJLlMmnOopqRSsUVvwXxZz] [-A num] [-B num] [-C[num]]
+	[-e pattern] [-f file] [--binary-files=value] [--color=when]
+	[--context[=num]] [--directories=action] [--label] [--line-buffered]
+	[--null] [pattern] [file ...]
+grep: ^_: No such file or directory
+[?2004hminishell> cat ./test_files/infile_big | grep oi
+[?2004l
+-----PRINT LST--------
+cat             || tk_addr: 0x126a041c0     tk_type: 100   fd_in: 0     fd_out: 0     prev_tk: 0x0             next_tk: 0x126a04390     sub_tk: 0x126a042b0    
+
+      ----->PRINT ARG--------
+
+-----PRINT LST--------
+./test_files/infile_big || tk_addr: 0x126a042b0     tk_type: 1000  fd_in: 0     fd_out: 0     prev_tk: 0x0             next_tk: 0x126a04550     sub_tk: 0x0            
+oi              || tk_addr: 0x126a04550     tk_type: 1000  fd_in: 0     fd_out: 0     prev_tk: 0x126a042b0     next_tk: 0x0             sub_tk: 0x0            
+
+      ----->END PRINT ARG------
+
+|               || tk_addr: 0x126a04390     tk_type: 10    fd_in: 0     fd_out: 0     prev_tk: 0x126a041c0     next_tk: 0x126a04470     sub_tk: 0x0            
+grep            || tk_addr: 0x126a04470     tk_type: 100   fd_in: 0     fd_out: 0     prev_tk: 0x126a04390     next_tk: 0x0             sub_tk: 0x0            
+
+-----END PRINT LST--------
+
+
+-----PRINT LST--------
+cat             || tk_addr: 0x126a041c0     tk_type: 100   fd_in: 0     fd_out: 0     prev_tk: 0x0             next_tk: 0x126a04390     sub_tk: 0x126a042b0    
+
+      ----->PRINT ARG--------
+
+-----PRINT LST--------
+./test_files/infile_big || tk_addr: 0x126a042b0     tk_type: 1000  fd_in: 0     fd_out: 0     prev_tk: 0x0             next_tk: 0x126a04550     sub_tk: 0x0            
+oi              || tk_addr: 0x126a04550     tk_type: 1000  fd_in: 0     fd_out: 0     prev_tk: 0x126a042b0     next_tk: 0x0             sub_tk: 0x0            
+
+      ----->END PRINT ARG------
+
+|               || tk_addr: 0x126a04390     tk_type: 10    fd_in: 0     fd_out: 0     prev_tk: 0x126a041c0     next_tk: 0x126a04470     sub_tk: 0x0            
+grep            || tk_addr: 0x126a04470     tk_type: 100   fd_in: 0     fd_out: 0     prev_tk: 0x126a04390     next_tk: 0x0             sub_tk: 0x0            
+
+-----END PRINT LST--------
+
+cat: ./test_files/infile_big: No such file or directory
+cat: oi: No such file or directory
+usage: grep [-abcdDEFGHhIiJLlMmnOopqRSsUVvwXxZz] [-A num] [-B num] [-C[num]]
+	[-e pattern] [-f file] [--binary-files=value] [--color=when]
+	[--context[=num]] [--directories=action] [--label] [--line-buffered]
+	[--null] [pattern] [file ...]
+[?2004hminishell> cat minishell.h | grep ");"$
+[?2004lexport GHOST=123 | env | grep GHOST
+|
+| echo oi
+| |
+[?2004hminishell> env | sort | grep -v SHLVL | grep -v ^_
+[?2004l
+-----PRINT LST--------
+env             || tk_addr: 0x11e704190     tk_type: 100   fd_in: 0     fd_out: 0     prev_tk: 0x0             next_tk: 0x11e704270     sub_tk: 0x0            
+|               || tk_addr: 0x11e704270     tk_type: 10    fd_in: 0     fd_out: 0     prev_tk: 0x11e704190     next_tk: 0x11e704350     sub_tk: 0x0            
+sort            || tk_addr: 0x11e704350     tk_type: 100   fd_in: 0     fd_out: 0     prev_tk: 0x11e704270     next_tk: 0x11e704430     sub_tk: 0x0            
+|               || tk_addr: 0x11e704430     tk_type: 10    fd_in: 0     fd_out: 0     prev_tk: 0x11e704350     next_tk: 0x11e704510     sub_tk: 0x0            
+grep            || tk_addr: 0x11e704510     tk_type: 100   fd_in: 0     fd_out: 0     prev_tk: 0x11e704430     next_tk: 0x11e7047b0     sub_tk: 0x11e7045f0    
+
+      ----->PRINT ARG--------
+
+-----PRINT LST--------
+-v              || tk_addr: 0x11e7045f0     tk_type: 1000  fd_in: 0     fd_out: 0     prev_tk: 0x0             next_tk: 0x11e7046d0     sub_tk: 0x0            
+SHLVL           || tk_addr: 0x11e7046d0     tk_type: 1000  fd_in: 0     fd_out: 0     prev_tk: 0x11e7045f0     next_tk: 0x11e704970     sub_tk: 0x0            
+-v              || tk_addr: 0x11e704970     tk_type: 1000  fd_in: 0     fd_out: 0     prev_tk: 0x11e7046d0     next_tk: 0x11e704a50     sub_tk: 0x0            
+^_              || tk_addr: 0x11e704a50     tk_type: 1000  fd_in: 0     fd_out: 0     prev_tk: 0x11e704970     next_tk: 0x0             sub_tk: 0x0            
+
+      ----->END PRINT ARG------
+
+|               || tk_addr: 0x11e7047b0     tk_type: 10    fd_in: 0     fd_out: 0     prev_tk: 0x11e704510     next_tk: 0x11e704890     sub_tk: 0x0            
+grep            || tk_addr: 0x11e704890     tk_type: 100   fd_in: 0     fd_out: 0     prev_tk: 0x11e7047b0     next_tk: 0x0             sub_tk: 0x0            
+
+-----END PRINT LST--------
+
+
+-----PRINT LST--------
+env             || tk_addr: 0x11e704190     tk_type: 100   fd_in: 0     fd_out: 0     prev_tk: 0x0             next_tk: 0x11e704270     sub_tk: 0x0            
+|               || tk_addr: 0x11e704270     tk_type: 10    fd_in: 0     fd_out: 0     prev_tk: 0x11e704190     next_tk: 0x11e704350     sub_tk: 0x0            
+sort            || tk_addr: 0x11e704350     tk_type: 100   fd_in: 0     fd_out: 0     prev_tk: 0x11e704270     next_tk: 0x11e704430     sub_tk: 0x0            
+|               || tk_addr: 0x11e704430     tk_type: 10    fd_in: 0     fd_out: 0     prev_tk: 0x11e704350     next_tk: 0x11e704510     sub_tk: 0x0            
+grep            || tk_addr: 0x11e704510     tk_type: 100   fd_in: 0     fd_out: 0     prev_tk: 0x11e704430     next_tk: 0x11e7047b0     sub_tk: 0x11e7045f0    
+
+      ----->PRINT ARG--------
+
+-----PRINT LST--------
+-v              || tk_addr: 0x11e7045f0     tk_type: 1000  fd_in: 0     fd_out: 0     prev_tk: 0x0             next_tk: 0x11e7046d0     sub_tk: 0x0            
+SHLVL           || tk_addr: 0x11e7046d0     tk_type: 1000  fd_in: 0     fd_out: 0     prev_tk: 0x11e7045f0     next_tk: 0x11e704970     sub_tk: 0x0            
+-v              || tk_addr: 0x11e704970     tk_type: 1000  fd_in: 0     fd_out: 0     prev_tk: 0x11e7046d0     next_tk: 0x11e704a50     sub_tk: 0x0            
+^_              || tk_addr: 0x11e704a50     tk_type: 1000  fd_in: 0     fd_out: 0     prev_tk: 0x11e704970     next_tk: 0x0             sub_tk: 0x0            
+
+      ----->END PRINT ARG------
+
+|               || tk_addr: 0x11e7047b0     tk_type: 10    fd_in: 0     fd_out: 0     prev_tk: 0x11e704510     next_tk: 0x11e704890     sub_tk: 0x0            
+grep            || tk_addr: 0x11e704890     tk_type: 100   fd_in: 0     fd_out: 0     prev_tk: 0x11e7047b0     next_tk: 0x0             sub_tk: 0x0            
+
+-----END PRINT LST--------
+
+usage: grep [-abcdDEFGHhIiJLlMmnOopqRSsUVvwXxZz] [-A num] [-B num] [-C[num]]
+	[-e pattern] [-f file] [--binary-files=value] [--color=when]
+	[--context[=num]] [--directories=action] [--label] [--line-buffered]
+	[--null] [pattern] [file ...]
+grep: ^_: No such file or directory
+[?2004hminishell> cat ./test_files/infile_big | grep oi
+[?2004l
+-----PRINT LST--------
+cat             || tk_addr: 0x1400059c0     tk_type: 100   fd_in: 0     fd_out: 0     prev_tk: 0x0             next_tk: 0x140005b90     sub_tk: 0x140005ab0    
+
+      ----->PRINT ARG--------
+
+-----PRINT LST--------
+./test_files/infile_big || tk_addr: 0x140005ab0     tk_type: 1000  fd_in: 0     fd_out: 0     prev_tk: 0x0             next_tk: 0x140005d50     sub_tk: 0x0            
+oi              || tk_addr: 0x140005d50     tk_type: 1000  fd_in: 0     fd_out: 0     prev_tk: 0x140005ab0     next_tk: 0x0             sub_tk: 0x0            
+
+      ----->END PRINT ARG------
+
+|               || tk_addr: 0x140005b90     tk_type: 10    fd_in: 0     fd_out: 0     prev_tk: 0x1400059c0     next_tk: 0x140005c70     sub_tk: 0x0            
+grep            || tk_addr: 0x140005c70     tk_type: 100   fd_in: 0     fd_out: 0     prev_tk: 0x140005b90     next_tk: 0x0             sub_tk: 0x0            
+
+-----END PRINT LST--------
+
+
+-----PRINT LST--------
+cat             || tk_addr: 0x1400059c0     tk_type: 100   fd_in: 0     fd_out: 0     prev_tk: 0x0             next_tk: 0x140005b90     sub_tk: 0x140005ab0    
+
+      ----->PRINT ARG--------
+
+-----PRINT LST--------
+./test_files/infile_big || tk_addr: 0x140005ab0     tk_type: 1000  fd_in: 0     fd_out: 0     prev_tk: 0x0             next_tk: 0x140005d50     sub_tk: 0x0            
+oi              || tk_addr: 0x140005d50     tk_type: 1000  fd_in: 0     fd_out: 0     prev_tk: 0x140005ab0     next_tk: 0x0             sub_tk: 0x0            
+
+      ----->END PRINT ARG------
+
+|               || tk_addr: 0x140005b90     tk_type: 10    fd_in: 0     fd_out: 0     prev_tk: 0x1400059c0     next_tk: 0x140005c70     sub_tk: 0x0            
+grep            || tk_addr: 0x140005c70     tk_type: 100   fd_in: 0     fd_out: 0     prev_tk: 0x140005b90     next_tk: 0x0             sub_tk: 0x0            
+
+-----END PRINT LST--------
+
+cat: ./test_files/infile_big: No such file or directory
+cat: oi: No such file or directory
+usage: grep [-abcdDEFGHhIiJLlMmnOopqRSsUVvwXxZz] [-A num] [-B num] [-C[num]]
+	[-e pattern] [-f file] [--binary-files=value] [--color=when]
+	[--context[=num]] [--directories=action] [--label] [--line-buffered]
+	[--null] [pattern] [file ...]
+[?2004hminishell> cat minishell.h | grep ");"$
+[?2004lexport GHOST=123 | env | grep GHOST
+|
+| echo oi
+| |
+[?2004hminishell> env | sort | grep -v SHLVL | grep -v ^_
+[?2004ltoken: 0x14c104190, str: env 0x14c104180
+token: 0x14c104200, str:   0x14c1041f0
+token: 0x14c104270, str: | 0x14c104260
+token: 0x14c1042e0, str:   0x14c1042d0
+token: 0x14c104350, str: sort 0x14c104340
+token: 0x14c1043c0, str:   0x14c1043b0
+token: 0x14c104430, str: | 0x14c104420
+token: 0x14c1044a0, str:   0x14c104490
+token: 0x14c104510, str: grep 0x14c104500
+token: 0x14c104580, str:   0x14c104570
+token: 0x14c1045f0, str: -v 0x14c1045e0
+token: 0x14c104660, str:   0x14c104650
+token: 0x14c1046d0, str: SHLVL 0x14c1046c0
+token: 0x14c104740, str:   0x14c104730
+token: 0x14c1047b0, str: | 0x14c1047a0
+token: 0x14c104820, str:   0x14c104810
+token: 0x14c104890, str: grep 0x14c104880
+token: 0x14c104900, str:   0x14c1048f0
+token: 0x14c104970, str: -v 0x14c104960
+token: 0x14c1049e0, str:   0x14c1049d0
+token: 0x14c104a50, str: ^_ 0x14c104a40
+COLORTERM=truecolor
+COMMAND_MODE=unix2003
+DISPLAY=/private/tmp/com.apple.launchd.BPctLNvtWE/org.xquartz:0
+GIT_ASKPASS=/Applications/Visual Studio Code.app/Contents/Resources/app/extensions/git/dist/askpass.sh
+HOME=/Users/thibault
+HOMEBREW_CACHE=/tmp/thibault/Homebrew/Caches
+HOMEBREW_CELLAR=/opt/homebrew/Cellar
+HOMEBREW_PREFIX=/opt/homebrew
+HOMEBREW_REPOSITORY=/opt/homebrew
+HOMEBREW_TEMP=/tmp/thibault/Homebrew/Temp
+INFOPATH=/opt/homebrew/share/info:/opt/homebrew/share/info:
+LANG=fr_FR.UTF-8
+LESS=-R
+LOGNAME=thibault
+LSCOLORS=Gxfxcxdxbxegedabagacad
+LS_COLORS=di=1;36:ln=35:so=32:pi=33:ex=31:bd=34;46:cd=34;43:su=30;41:sg=30;46:tw=30;42:ow=30;43
+MANPATH=/opt/homebrew/share/man:/usr/share/man:/usr/local/share/man:/opt/X11/share/man:/opt/homebrew/share/man::
+MallocNanoZone=0
+OLDPWD=/Users/thibault/Documents/42/minishell/minishell_clean
+ORIGINAL_XDG_CURRENT_DESKTOP=undefined
+PAGER=less
+PATH=/Users/thibault/.brew/bin:/usr/local/bin/python3:/Library/Frameworks/Python.framework/Versions/3.11/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/thibault/Library/Python/3.8/bin:/opt/X11/bin:/Library/Apple/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/Users/thibault/.brew/bin:/usr/local/bin/python3:/Library/Frameworks/Python.framework/Versions/3.11/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/Users/thibault/Library/Application Support/JetBrains/Toolbox/scripts:/Users/thibault/Library/Application Support/JetBrains/Toolbox/scripts
+PWD=/Users/thibault/Documents/42/minishell/minishell_clean
+SHELL=/bin/zsh
+SSH_AUTH_SOCK=/private/tmp/com.apple.launchd.DvA1kbFUxo/Listeners
+TERM=xterm-256color
+TERM_PROGRAM=vscode
+TERM_PROGRAM_VERSION=1.83.1
+TMPDIR=/var/folders/dv/wljg4pds1c359lpyqfygbfq80000gn/T/
+USER=thibault
+USER_ZDOTDIR=/Users/thibault
+VSCODE_GIT_ASKPASS_EXTRA_ARGS=--ms-enable-electron-run-as-node
+VSCODE_GIT_ASKPASS_MAIN=/Applications/Visual Studio Code.app/Contents/Resources/app/extensions/git/dist/askpass-main.js
+VSCODE_GIT_ASKPASS_NODE=/Applications/Visual Studio Code.app/Contents/Frameworks/Code Helper (Plugin).app/Contents/MacOS/Code Helper (Plugin)
+VSCODE_GIT_IPC_HANDLE=/var/folders/dv/wljg4pds1c359lpyqfygbfq80000gn/T/vscode-git-299111fb07.sock
+VSCODE_INJECTION=1
+XPC_FLAGS=0x0
+XPC_SERVICE_NAME=0
+ZDOTDIR=/Users/thibault
+ZSH=/Users/thibault/.oh-my-zsh
+
+-----PRINT LST--------
+env             || tk_addr: 0x14c104190     tk_type: 300   fd_in: 0     fd_out: -1    prev_tk: 0x0             next_tk: 0x14c104270     sub_tk: 0x0            
+|               || tk_addr: 0x14c104270     tk_type: 10    fd_in: 11    fd_out: 10    prev_tk: 0x14c104190     next_tk: 0x14c104350     sub_tk: 0x0            
+sort            || tk_addr: 0x14c104350     tk_type: 100   fd_in: -1    fd_out: -1    prev_tk: 0x14c104270     next_tk: 0x14c104430     sub_tk: 0x0            
+|               || tk_addr: 0x14c104430     tk_type: 10    fd_in: 13    fd_out: 12    prev_tk: 0x14c104350     next_tk: 0x14c104510     sub_tk: 0x0            
+grep            || tk_addr: 0x14c104510     tk_type: 100   fd_in: -1    fd_out: -1    prev_tk: 0x14c104430     next_tk: 0x14c1047b0     sub_tk: 0x14c1045f0    
+
+      ----->PRINT ARG--------
+
+-----PRINT LST--------
+-v              || tk_addr: 0x14c1045f0     tk_type: 1000  fd_in: 0     fd_out: 0     prev_tk: 0x0             next_tk: 0x14c1046d0     sub_tk: 0x0            
+SHLVL           || tk_addr: 0x14c1046d0     tk_type: 1000  fd_in: 0     fd_out: 0     prev_tk: 0x14c1045f0     next_tk: 0x0             sub_tk: 0x0            
+
+      ----->END PRINT ARG------
+
+|               || tk_addr: 0x14c1047b0     tk_type: 10    fd_in: 15    fd_out: 14    prev_tk: 0x14c104510     next_tk: 0x14c104890     sub_tk: 0x0            
+grep            || tk_addr: 0x14c104890     tk_type: 100   fd_in: -1    fd_out: 1     prev_tk: 0x14c1047b0     next_tk: 0x0             sub_tk: 0x14c104970    
+
+      ----->PRINT ARG--------
+
+-----PRINT LST--------
+-v              || tk_addr: 0x14c104970     tk_type: 1000  fd_in: 0     fd_out: 0     prev_tk: 0x0             next_tk: 0x14c104a50     sub_tk: 0x0            
+^_              || tk_addr: 0x14c104a50     tk_type: 1000  fd_in: 0     fd_out: 0     prev_tk: 0x14c104970     next_tk: 0x0             sub_tk: 0x0            
+
+      ----->END PRINT ARG------
+
+
+-----END PRINT LST--------
+
+[?2004hminishell> cat ./test_files/infile_big | grep oi
+[?2004ltoken: 0x14ae07ea0, str: cat 0x14ae07e90
+token: 0x14ae07f10, str:   0x14ae07f00
+token: 0x14ae07f90, str: ./test_files/infile_big 0x14ae07f70
+token: 0x14ae08000, str:   0x14ae07ff0
+token: 0x14ae08070, str: | 0x14ae08060
+token: 0x14ae080e0, str:   0x14ae080d0
+token: 0x14ae08150, str: grep 0x14ae08140
+token: 0x14ae081c0, str:   0x14ae081b0
+token: 0x14ae08230, str: oi 0x14ae08220
+cat: ./test_files/infile_big: No such file or directory
+
+-----PRINT LST--------
+cat             || tk_addr: 0x14ae07ea0     tk_type: 100   fd_in: 0     fd_out: -1    prev_tk: 0x0             next_tk: 0x14ae08070     sub_tk: 0x14ae07f90    
+
+      ----->PRINT ARG--------
+
+-----PRINT LST--------
+./test_files/infile_big || tk_addr: 0x14ae07f90     tk_type: 1000  fd_in: 0     fd_out: 0     prev_tk: 0x0             next_tk: 0x0             sub_tk: 0x0            
+
+      ----->END PRINT ARG------
+
+|               || tk_addr: 0x14ae08070     tk_type: 10    fd_in: 12    fd_out: 11    prev_tk: 0x14ae07ea0     next_tk: 0x14ae08150     sub_tk: 0x0            
+grep            || tk_addr: 0x14ae08150     tk_type: 100   fd_in: -1    fd_out: 1     prev_tk: 0x14ae08070     next_tk: 0x0             sub_tk: 0x14ae08230    
+
+      ----->PRINT ARG--------
+
+-----PRINT LST--------
+oi              || tk_addr: 0x14ae08230     tk_type: 1000  fd_in: 0     fd_out: 0     prev_tk: 0x0             next_tk: 0x0             sub_tk: 0x0            
+
+      ----->END PRINT ARG------
+
+
+-----END PRINT LST--------
+
+[?2004hminishell> cat minishell.h | grep ");"$
+[?2004ltoken: 0x14c004180, str: cat 0x14c004170
+token: 0x14c004230, str:   0x14c0041e0
+token: 0x14c004290, str: minishell.h 0x14c0041f0
+token: 0x14c0042f0, str:   0x14c004200
+token: 0x14c004350, str: | 0x14c004210
+token: 0x14c0043b0, str:   0x14c004220
+token: 0x14c004420, str: grep 0x14c004410
+token: 0x14c004490, str:   0x14c004480
+token: 0x14c004500, str: ");"$ 0x14c0044f0
+export GHOST=123 | env | grep GHOST
+|
+[?2004hminishell> env | sort | grep -v SHLVL | grep -v ^_
+[?2004lCOLORTERM=truecolor
+COMMAND_MODE=unix2003
+DISPLAY=/private/tmp/com.apple.launchd.BPctLNvtWE/org.xquartz:0
+GIT_ASKPASS=/Applications/Visual Studio Code.app/Contents/Resources/app/extensions/git/dist/askpass.sh
+HOME=/Users/thibault
+HOMEBREW_CACHE=/tmp/thibault/Homebrew/Caches
+HOMEBREW_CELLAR=/opt/homebrew/Cellar
+HOMEBREW_PREFIX=/opt/homebrew
+HOMEBREW_REPOSITORY=/opt/homebrew
+HOMEBREW_TEMP=/tmp/thibault/Homebrew/Temp
+INFOPATH=/opt/homebrew/share/info:/opt/homebrew/share/info:
+LANG=fr_FR.UTF-8
+LESS=-R
+LOGNAME=thibault
+LSCOLORS=Gxfxcxdxbxegedabagacad
+LS_COLORS=di=1;36:ln=35:so=32:pi=33:ex=31:bd=34;46:cd=34;43:su=30;41:sg=30;46:tw=30;42:ow=30;43
+MANPATH=/opt/homebrew/share/man:/usr/share/man:/usr/local/share/man:/opt/X11/share/man:/opt/homebrew/share/man::
+MallocNanoZone=0
+OLDPWD=/Users/thibault/Documents/42/minishell/minishell_clean
+ORIGINAL_XDG_CURRENT_DESKTOP=undefined
+PAGER=less
+PATH=/Users/thibault/.brew/bin:/usr/local/bin/python3:/Library/Frameworks/Python.framework/Versions/3.11/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/thibault/Library/Python/3.8/bin:/opt/X11/bin:/Library/Apple/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/Users/thibault/.brew/bin:/usr/local/bin/python3:/Library/Frameworks/Python.framework/Versions/3.11/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/Users/thibault/Library/Application Support/JetBrains/Toolbox/scripts:/Users/thibault/Library/Application Support/JetBrains/Toolbox/scripts
+PWD=/Users/thibault/Documents/42/minishell/minishell_clean
+SHELL=/bin/zsh
+SSH_AUTH_SOCK=/private/tmp/com.apple.launchd.DvA1kbFUxo/Listeners
+TERM=xterm-256color
+TERM_PROGRAM=vscode
+TERM_PROGRAM_VERSION=1.83.1
+TMPDIR=/var/folders/dv/wljg4pds1c359lpyqfygbfq80000gn/T/
+USER=thibault
+USER_ZDOTDIR=/Users/thibault
+VSCODE_GIT_ASKPASS_EXTRA_ARGS=--ms-enable-electron-run-as-node
+VSCODE_GIT_ASKPASS_MAIN=/Applications/Visual Studio Code.app/Contents/Resources/app/extensions/git/dist/askpass-main.js
+VSCODE_GIT_ASKPASS_NODE=/Applications/Visual Studio Code.app/Contents/Frameworks/Code Helper (Plugin).app/Contents/MacOS/Code Helper (Plugin)
+VSCODE_GIT_IPC_HANDLE=/var/folders/dv/wljg4pds1c359lpyqfygbfq80000gn/T/vscode-git-299111fb07.sock
+VSCODE_INJECTION=1
+XPC_FLAGS=0x0
+XPC_SERVICE_NAME=0
+ZDOTDIR=/Users/thibault
+ZSH=/Users/thibault/.oh-my-zsh
+[?2004hminishell> cat ./test_files/infile_big | grep oi
+[?2004lcat: ./test_files/infile_big: No such file or directory
+[?2004hminishell> cat minishell.h | grep ");"$
+[?2004lexport GHOST=123 | env | grep GHOST
+[?2004hminishell> env | sort | grep -v SHLVL | grep -v ^_
+[?2004lCOLORTERM=truecolor
+COMMAND_MODE=unix2003
+DISPLAY=/private/tmp/com.apple.launchd.BPctLNvtWE/org.xquartz:0
+GIT_ASKPASS=/Applications/Visual Studio Code.app/Contents/Resources/app/extensions/git/dist/askpass.sh
+HOME=/Users/thibault
+HOMEBREW_CACHE=/tmp/thibault/Homebrew/Caches
+HOMEBREW_CELLAR=/opt/homebrew/Cellar
+HOMEBREW_PREFIX=/opt/homebrew
+HOMEBREW_REPOSITORY=/opt/homebrew
+HOMEBREW_TEMP=/tmp/thibault/Homebrew/Temp
+INFOPATH=/opt/homebrew/share/info:/opt/homebrew/share/info:
+LANG=fr_FR.UTF-8
+LESS=-R
+LOGNAME=thibault
+LSCOLORS=Gxfxcxdxbxegedabagacad
+LS_COLORS=di=1;36:ln=35:so=32:pi=33:ex=31:bd=34;46:cd=34;43:su=30;41:sg=30;46:tw=30;42:ow=30;43
+MANPATH=/opt/homebrew/share/man:/usr/share/man:/usr/local/share/man:/opt/X11/share/man:/opt/homebrew/share/man::
+MallocNanoZone=0
+OLDPWD=/Users/thibault/Documents/42/minishell/minishell_clean
+ORIGINAL_XDG_CURRENT_DESKTOP=undefined
+PAGER=less
+PATH=/Users/thibault/.brew/bin:/usr/local/bin/python3:/Library/Frameworks/Python.framework/Versions/3.11/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/thibault/Library/Python/3.8/bin:/opt/X11/bin:/Library/Apple/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/Users/thibault/.brew/bin:/usr/local/bin/python3:/Library/Frameworks/Python.framework/Versions/3.11/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/Users/thibault/Library/Application Support/JetBrains/Toolbox/scripts:/Users/thibault/Library/Application Support/JetBrains/Toolbox/scripts
+PWD=/Users/thibault/Documents/42/minishell/minishell_clean
+SHELL=/bin/zsh
+SSH_AUTH_SOCK=/private/tmp/com.apple.launchd.DvA1kbFUxo/Listeners
+TERM=xterm-256color
+TERM_PROGRAM=vscode
+TERM_PROGRAM_VERSION=1.83.1
+TMPDIR=/var/folders/dv/wljg4pds1c359lpyqfygbfq80000gn/T/
+USER=thibault
+USER_ZDOTDIR=/Users/thibault
+VSCODE_GIT_ASKPASS_EXTRA_ARGS=--ms-enable-electron-run-as-node
+VSCODE_GIT_ASKPASS_MAIN=/Applications/Visual Studio Code.app/Contents/Resources/app/extensions/git/dist/askpass-main.js
+VSCODE_GIT_ASKPASS_NODE=/Applications/Visual Studio Code.app/Contents/Frameworks/Code Helper (Plugin).app/Contents/MacOS/Code Helper (Plugin)
+VSCODE_GIT_IPC_HANDLE=/var/folders/dv/wljg4pds1c359lpyqfygbfq80000gn/T/vscode-git-299111fb07.sock
+VSCODE_INJECTION=1
+XPC_FLAGS=0x0
+XPC_SERVICE_NAME=0
+ZDOTDIR=/Users/thibault
+ZSH=/Users/thibault/.oh-my-zsh
+[?2004hminishell> cat ./test_files/infile_big | grep oi
+[?2004lcat: ./test_files/infile_big: No such file or directory
+[?2004hminishell> cat minishell.h | grep ");"$
+[?2004lexport GHOST=123 | env | grep GHOST
+[?2004hminishell> env | sort | grep -v SHLVL | grep -v ^_
+[?2004lCOLORTERM=truecolor
+COMMAND_MODE=unix2003
+DISPLAY=/private/tmp/com.apple.launchd.BPctLNvtWE/org.xquartz:0
+GIT_ASKPASS=/Applications/Visual Studio Code.app/Contents/Resources/app/extensions/git/dist/askpass.sh
+HOME=/Users/thibault
+HOMEBREW_CACHE=/tmp/thibault/Homebrew/Caches
+HOMEBREW_CELLAR=/opt/homebrew/Cellar
+HOMEBREW_PREFIX=/opt/homebrew
+HOMEBREW_REPOSITORY=/opt/homebrew
+HOMEBREW_TEMP=/tmp/thibault/Homebrew/Temp
+INFOPATH=/opt/homebrew/share/info:/opt/homebrew/share/info:
+LANG=fr_FR.UTF-8
+LESS=-R
+LOGNAME=thibault
+LSCOLORS=Gxfxcxdxbxegedabagacad
+LS_COLORS=di=1;36:ln=35:so=32:pi=33:ex=31:bd=34;46:cd=34;43:su=30;41:sg=30;46:tw=30;42:ow=30;43
+MANPATH=/opt/homebrew/share/man:/usr/share/man:/usr/local/share/man:/opt/X11/share/man:/opt/homebrew/share/man::
+MallocNanoZone=0
+OLDPWD=/Users/thibault/Documents/42/minishell/minishell_clean
+ORIGINAL_XDG_CURRENT_DESKTOP=undefined
+PAGER=less
+PATH=/Users/thibault/.brew/bin:/usr/local/bin/python3:/Library/Frameworks/Python.framework/Versions/3.11/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/thibault/Library/Python/3.8/bin:/opt/X11/bin:/Library/Apple/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/Users/thibault/.brew/bin:/usr/local/bin/python3:/Library/Frameworks/Python.framework/Versions/3.11/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/Users/thibault/Library/Application Support/JetBrains/Toolbox/scripts:/Users/thibault/Library/Application Support/JetBrains/Toolbox/scripts
+PWD=/Users/thibault/Documents/42/minishell/minishell_clean
+SHELL=/bin/zsh
+SSH_AUTH_SOCK=/private/tmp/com.apple.launchd.DvA1kbFUxo/Listeners
+TERM=xterm-256color
+TERM_PROGRAM=vscode
+TERM_PROGRAM_VERSION=1.83.1
+TMPDIR=/var/folders/dv/wljg4pds1c359lpyqfygbfq80000gn/T/
+USER=thibault
+USER_ZDOTDIR=/Users/thibault
+VSCODE_GIT_ASKPASS_EXTRA_ARGS=--ms-enable-electron-run-as-node
+VSCODE_GIT_ASKPASS_MAIN=/Applications/Visual Studio Code.app/Contents/Resources/app/extensions/git/dist/askpass-main.js
+VSCODE_GIT_ASKPASS_NODE=/Applications/Visual Studio Code.app/Contents/Frameworks/Code Helper (Plugin).app/Contents/MacOS/Code Helper (Plugin)
+VSCODE_GIT_IPC_HANDLE=/var/folders/dv/wljg4pds1c359lpyqfygbfq80000gn/T/vscode-git-299111fb07.sock
+VSCODE_INJECTION=1
+XPC_FLAGS=0x0
+XPC_SERVICE_NAME=0
+ZDOTDIR=/Users/thibault
+ZSH=/Users/thibault/.oh-my-zsh
+[?2004hminishell> cat ./test_files/infile_big | grep oi
+[?2004lcat: ./test_files/infile_big: No such file or directory
+[?2004hminishell> cat minishell.h | grep ");"$
+[?2004lexport GHOST=123 | env | grep GHOST
+|
+| echo oi
+| |
+| $
+| >
+>
+>>
+>>>
+<
+<<
