@@ -6,7 +6,7 @@
 /*   By: thibault <thibault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 14:50:20 by thibault          #+#    #+#             */
-/*   Updated: 2023/11/06 11:34:00 by thibault         ###   ########.fr       */
+/*   Updated: 2023/11/09 16:09:22 by thibault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,7 @@ int	replace_with_values(char **input, char ***var_val_tab)
 	while ((*input)[i])
 	{
 		process_input(input, &i, *var_val_tab, &is_var);
+		i++;
 	}
 	return (is_var);
 }
