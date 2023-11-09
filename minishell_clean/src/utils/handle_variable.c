@@ -6,7 +6,7 @@
 /*   By: thibault <thibault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 14:50:20 by thibault          #+#    #+#             */
-/*   Updated: 2023/11/09 16:09:22 by thibault         ###   ########.fr       */
+/*   Updated: 2023/11/09 16:28:09 by thibault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,6 @@ void	process_input(char **input, int *i, char **var_val_tab, int *is_var)
 		else
 			(*i)--;
 	}
-	else
-		(*i)++;
 }
 
 int	replace_with_values(char **input, char ***var_val_tab)
