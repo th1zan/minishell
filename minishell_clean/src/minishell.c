@@ -6,7 +6,7 @@
 /*   By: thibault <thibault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/06 15:14:08 by thibault          #+#    #+#             */
-/*   Updated: 2023/11/09 16:05:49 by thibault         ###   ########.fr       */
+/*   Updated: 2023/11/09 17:26:41 by thibault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ int	process_main_input(t_env *env, char *input)
 		env->tk_head = NULL;
 		return (1);
 	}
+	// print_lst(g_env->tk_head);
 	return (execute_command(env, input));
 }
 

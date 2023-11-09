@@ -6,7 +6,7 @@
 /*   By: thibault <thibault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 14:42:49 by thibault          #+#    #+#             */
-/*   Updated: 2023/11/06 15:12:28 by thibault         ###   ########.fr       */
+/*   Updated: 2023/11/09 17:43:20 by thibault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	check_input_redirect(t_tk *tmp)
 {
 	if (tmp->type == TK_IN_CHEVRON && tmp->next
 		&& (tmp->next->type == TK_IN_CHEVRON || tmp->next->type == TK_HERE_DOC))
-		return (prt_err("only one input redirection allowed\n", 1, 142));
+		ft_lst_remove(tmp);
 	return (0);
 }
 
@@ -33,7 +33,7 @@ int	check_output_redirect(t_tk *tmp)
 	if ((tmp->type == TK_OUT_CHEVRON || tmp->type == TK_APP_CHEVRON)
 		&& tmp->next && (tmp->next->type == TK_OUT_CHEVRON
 			|| tmp->next->type == TK_APP_CHEVRON))
-		return (prt_err("only one output redirection allowed\n", 1, 143));
+		ft_lst_remove(tmp);
 	return (0);
 }
 

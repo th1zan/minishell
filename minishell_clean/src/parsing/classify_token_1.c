@@ -6,7 +6,7 @@
 /*   By: thibault <thibault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 16:26:16 by thibault          #+#    #+#             */
-/*   Updated: 2023/11/07 21:19:54 by thibault         ###   ########.fr       */
+/*   Updated: 2023/11/09 17:33:20 by thibault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,13 +73,15 @@ t_tk	*move_args_to_sublist(t_tk *tk)
 	sub_last = NULL;
 	while (tmp)
 	{
-		if (tmp->type == TK_CMD)
+		if (tmp->type == TK_CMD || tmp->type == TK_CMD_BUILT_IN)
 			tmp = handle_command(&cmd, &tmp, &last, &sub_last);
 		else if (tmp && tmp->type == TK_PIPE)
 		{
 			last = tmp;
 			tmp = tmp->next;
 		}
+		else
+			tmp = tmp->next;
 	}
 	return (tk);
 }

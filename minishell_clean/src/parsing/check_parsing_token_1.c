@@ -6,7 +6,7 @@
 /*   By: thibault <thibault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 14:45:21 by thibault          #+#    #+#             */
-/*   Updated: 2023/11/07 21:17:33 by thibault         ###   ########.fr       */
+/*   Updated: 2023/11/09 17:00:48 by thibault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,15 @@ int	check_cmd(t_tk *tk)
 void	cmd_err(int status, char *cmd)
 {
 	if (status == 127)
-		fprintf(stderr, "minishell: %s: Command not found \n", cmd);
+	{
+		ft_putstr_fd("minishell: ", 2);
+		ft_putstr_fd(cmd, 2);
+		ft_putstr_fd(": Command not found \n", 2);
+	}
 	else if (status == 126)
-		fprintf(stderr, "minishell: %s: Permission denied\n", cmd);
+	{
+		ft_putstr_fd("minishell: ", 2);
+		ft_putstr_fd(cmd, 2);
+		ft_putstr_fd(": Permission denied\n", 2);
+	}
 }

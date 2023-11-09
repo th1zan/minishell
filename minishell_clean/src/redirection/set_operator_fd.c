@@ -6,7 +6,7 @@
 /*   By: thibault <thibault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 13:35:20 by thibault          #+#    #+#             */
-/*   Updated: 2023/11/06 23:12:28 by thibault         ###   ########.fr       */
+/*   Updated: 2023/11/09 17:01:16 by thibault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,9 @@ int	open_file_to_fd(char *file, int option)
 	fd = open(file, option, 0777);
 	if (fd == -1)
 	{
-		perror("minishell");
+		ft_putstr_fd("minishell: ", 2);
+		ft_putstr_fd(file, 2);
+		ft_putstr_fd(": Permission denied\n", 2);
 		return (-2);
 	}
 	return (fd);

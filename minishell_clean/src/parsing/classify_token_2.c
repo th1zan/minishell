@@ -6,7 +6,7 @@
 /*   By: thibault <thibault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 21:04:53 by thibault          #+#    #+#             */
-/*   Updated: 2023/11/07 21:20:01 by thibault         ###   ########.fr       */
+/*   Updated: 2023/11/09 17:22:46 by thibault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,12 @@ int	ft_handle_arg_tk(t_tk *tk)
 	tmp = tk;
 	while (tmp)
 	{
-		if (tmp->type == TK_CMD)
+		if (tmp->type == TK_CMD || tmp->type == TK_CMD_BUILT_IN)
 		{
 			tmp = tmp->next;
 			while (tmp && (tmp->type != TK_PIPE))
 			{
-				if (tmp->type == TK_CMD)
+				if (tmp->type == TK_CMD || tmp->type == TK_CMD_BUILT_IN)
 					tmp->type = TK_ARG;
 				tmp = tmp->next;
 			}

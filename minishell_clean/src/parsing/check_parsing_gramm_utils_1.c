@@ -6,7 +6,7 @@
 /*   By: thibault <thibault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 14:06:36 by thibault          #+#    #+#             */
-/*   Updated: 2023/11/07 21:09:29 by thibault         ###   ########.fr       */
+/*   Updated: 2023/11/09 16:56:57 by thibault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,8 @@ int	check_cmd_after_pipe(t_tk *tk)
 	tmp = tk;
 	while (tmp)
 	{
-		if (tmp->type == TK_PIPE && !get_next_type_tk(tmp, TK_CMD))
+		if (tmp->type == TK_PIPE && !(get_next_type_tk(tmp, TK_CMD)
+				|| get_next_type_tk(tmp, TK_CMD_BUILT_IN)))
 		{
 			report_syntax_error("|");
 			return (258);
