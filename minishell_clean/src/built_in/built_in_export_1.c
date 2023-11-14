@@ -6,7 +6,7 @@
 /*   By: thibault <thibault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/02 18:51:44 by thibault          #+#    #+#             */
-/*   Updated: 2023/11/03 09:42:33 by thibault         ###   ########.fr       */
+/*   Updated: 2023/11/14 11:33:00 by thibault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,9 @@ int	handle_new_var(char *new_var)
 	validation_result = is_valid_env_argument(new_var);
 	if (validation_result == -2)
 	{
-		printf("minishell: export: '%s' : not a valid identifier\n", new_var);
+		ft_putstr_fd("minishell: export: '", 2);
+		ft_putstr_fd(new_var, 2);
+		ft_putstr_fd("' : not a valid identifier\n", 2);
 		free(new_var);
 		return (1);
 	}

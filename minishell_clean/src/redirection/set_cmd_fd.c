@@ -6,7 +6,7 @@
 /*   By: thibault <thibault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 13:40:14 by thibault          #+#    #+#             */
-/*   Updated: 2023/11/03 13:56:23 by thibault         ###   ########.fr       */
+/*   Updated: 2023/11/14 13:10:00 by thibault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,8 @@ int	set_cmd_pipe_fd(t_tk **tk)
 	tmp = *tk;
 	while (tmp != NULL)
 	{
-		prev_pipe = get_prev_type_tk(tmp, TK_PIPE);
-		next_pipe = get_next_type_tk(tmp, TK_PIPE);
+		prev_pipe = get_prev_pipe_tk(tmp);
+		next_pipe = get_next_pipe_tk(tmp);
 		if (tmp->type == TK_CMD || tmp->type == TK_CMD_BUILT_IN)
 		{
 			if (prev_pipe)

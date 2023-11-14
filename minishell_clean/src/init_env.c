@@ -6,7 +6,7 @@
 /*   By: thibault <thibault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 21:56:39 by thibault          #+#    #+#             */
-/*   Updated: 2023/11/09 16:07:45 by thibault         ###   ########.fr       */
+/*   Updated: 2023/11/14 11:34:05 by thibault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,11 +55,11 @@ t_env	*init_env(char **envp)
 	getcwd(cwd, sizeof(cwd));
 	if (envp == NULL || *envp == NULL)
 	{
-		printf("minishell: environment is NULL.\n");
+		ft_putstr_fd("minishell: environment is NULL.\n", 2);
 		return (NULL);
 	}
 	count = count_env_entries(envp);
-	new_env = (t_env *)calloc(1, sizeof(t_env));
+	new_env = (t_env *)ft_calloc(1, sizeof(t_env));
 	if (!new_env)
 		return (NULL);
 	new_env->env_main = copy_env(envp, count);

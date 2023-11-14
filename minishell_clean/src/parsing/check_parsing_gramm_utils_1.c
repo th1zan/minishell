@@ -6,7 +6,7 @@
 /*   By: thibault <thibault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 14:06:36 by thibault          #+#    #+#             */
-/*   Updated: 2023/11/09 16:56:57 by thibault         ###   ########.fr       */
+/*   Updated: 2023/11/14 11:47:13 by thibault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,24 +45,21 @@ void	report_syntax_error(char *token)
 
 int	check_cmd_after_pipe(t_tk *tk)
 {
-	t_tk	*tmp;
-
-	tmp = tk;
-	while (tmp)
+	while (tk)
 	{
-		if (tmp->type == TK_PIPE && !(get_next_type_tk(tmp, TK_CMD)
-				|| get_next_type_tk(tmp, TK_CMD_BUILT_IN)))
+		if (tk->type == TK_PIPE && !(get_next_type_tk(tk, TK_CMD)
+				|| get_next_type_tk(tk, TK_CMD_BUILT_IN)))
 		{
 			report_syntax_error("|");
 			return (258);
 		}
-		else if (tmp->type == TK_HERE_DOC
-			&& ft_strncmp(tmp->tk_str, "<<", 2) == 0)
+		else if (tk->type == TK_HERE_DOC
+			&& ft_strncmp(tk->tk_str, "<<", 2) == 0)
 		{
 			report_syntax_error("newline");
 			return (258);
 		}
-		tmp = tmp->next;
+		tk = tk->next;
 	}
 	return (0);
 }

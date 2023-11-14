@@ -6,7 +6,7 @@
 /*   By: thibault <thibault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 12:29:09 by thibault          #+#    #+#             */
-/*   Updated: 2023/11/07 21:26:27 by thibault         ###   ########.fr       */
+/*   Updated: 2023/11/14 13:09:39 by thibault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ int		free_elem(t_tk *token);
 t_tk	*get_next_cmd(t_tk *tk);
 t_tk	*get_next_type_tk(t_tk *tk, int type);
 t_tk	*get_prev_type_tk(t_tk *tk, int type);
+t_tk	*get_prev_pipe_tk(t_tk *tk);
+t_tk	*get_next_pipe_tk(t_tk *tk);
 
 /*handle_list_add.c*/
 t_tk	*ft_lstnew(char *token_str);

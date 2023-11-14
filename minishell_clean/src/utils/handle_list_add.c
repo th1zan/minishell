@@ -6,7 +6,7 @@
 /*   By: thibault <thibault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 09:23:09 by thibault          #+#    #+#             */
-/*   Updated: 2023/11/07 21:19:13 by thibault         ###   ########.fr       */
+/*   Updated: 2023/11/14 11:05:33 by thibault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ t_tk	*ft_lstnew(char *token_str)
 {
 	t_tk	*new_tk;
 
-	new_tk = (t_tk *)calloc(1, sizeof(t_tk));
+	new_tk = (t_tk *)ft_calloc(1, sizeof(t_tk));
 	if (!new_tk)
 		return (NULL);
 	new_tk->tk_str = token_str;

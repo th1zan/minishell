@@ -6,7 +6,7 @@
 /*   By: thibault <thibault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 11:13:41 by thibault          #+#    #+#             */
-/*   Updated: 2023/11/03 11:56:38 by thibault         ###   ########.fr       */
+/*   Updated: 2023/11/14 13:56:35 by thibault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,12 +60,15 @@ int	save_status_var_in_env(t_env *env_tk)
 
 int	update_status_variable(t_env *env, int bin_status, int status_built_in)
 {
-	if (status_built_in != 0)
+	t_tk	*tmp;
+
+	tmp = ft_lstlast(env->tk_head);
+	if (status_built_in != 0 && tmp->type == TK_CMD_BUILT_IN)
 	{
 		env->status = status_built_in;
 		return (status_built_in);
 	}
-	else if (bin_status != 0)
+	else if (bin_status != 0 && tmp->type == TK_CMD)
 	{
 		env->status = bin_status;
 		return (bin_status);
