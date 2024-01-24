@@ -1,0 +1,18 @@
+pwd
+bash
+echo $?
+echo test
+echo test
+echo $?
+ls
+echo $?
+$? + $?
+/bin/ls
+cd asdas
+cd ..
+ls
+pwd
+pwd tss
+ls
+pwd
+cd ..
