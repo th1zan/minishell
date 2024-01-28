@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tsanglar <tsanglar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: thibault <thibault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/06 16:13:42 by thibault          #+#    #+#             */
-/*   Updated: 2024/01/24 14:53:37 by tsanglar         ###   ########.fr       */
+/*   Updated: 2024/01/27 15:57:04 by thibault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@
 # include "./header/redirection.h"
 # include "./header/execution.h"
 
-extern t_env	*g_env;
+extern int	g_status;
 
 /* minishell.c */
 int		main(int argc, char **argv, char **envp);

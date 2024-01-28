@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tsanglar <tsanglar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: thibault <thibault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/06 15:14:08 by thibault          #+#    #+#             */
-/*   Updated: 2024/01/24 15:18:05 by tsanglar         ###   ########.fr       */
+/*   Updated: 2024/01/27 18:48:49 by thibault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_env	*g_env;
+int	g_status;
 
 int	main(int argc, char **argv, char **envp)
 {
@@ -21,9 +21,9 @@ int	main(int argc, char **argv, char **envp)
 	(void)argc;
 	(void)argv;
 	env = init_env(envp);
-	g_env = env;
+	// g_env = env;
 	input_loop(env);
-	free_global_env(g_env);
+	free_env(env);
 	return (0);
 }
 
@@ -35,6 +35,7 @@ int	execute_command(t_env *env, char *input)
 		env->tk_head = NULL;
 		return (1);
 	}
+	// print_lst(env->tk_head);
 	execution(env, &(env->tk_head));
 	free(input);
 	free_lst(env->tk_head);

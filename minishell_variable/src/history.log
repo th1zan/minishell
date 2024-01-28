@@ -16,3 +16,4 @@ pwd tss
 ls
 pwd
 cd ..
+echo $?

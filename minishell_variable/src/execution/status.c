@@ -6,7 +6,7 @@
 /*   By: thibault <thibault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 11:13:41 by thibault          #+#    #+#             */
-/*   Updated: 2023/11/14 13:56:35 by thibault         ###   ########.fr       */
+/*   Updated: 2024/01/27 16:35:29 by thibault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,14 +65,19 @@ int	update_status_variable(t_env *env, int bin_status, int status_built_in)
 	tmp = ft_lstlast(env->tk_head);
 	if (status_built_in != 0 && tmp->type == TK_CMD_BUILT_IN)
 	{
-		env->status = status_built_in;
+		// env->status = status_built_in;
+		g_status = status_built_in;
+		// printf("update_status_variable:: status_built_in %d, g_status %d\n", status_built_in, g_status);
 		return (status_built_in);
 	}
 	else if (bin_status != 0 && tmp->type == TK_CMD)
 	{
-		env->status = bin_status;
+		// env->status = bin_status;
+		g_status = bin_status;
+		// printf("update_status_variable:: bin_status %d, g_status %d\n", bin_status, g_status);
 		return (bin_status);
 	}
-	env->status = 0;
+	// env->status = 0;
+	// g_status = 0;
 	return (0);
 }

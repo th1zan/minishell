@@ -6,7 +6,7 @@
 /*   By: thibault <thibault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/02 18:51:44 by thibault          #+#    #+#             */
-/*   Updated: 2023/11/14 11:33:00 by thibault         ###   ########.fr       */
+/*   Updated: 2024/01/27 15:34:35 by thibault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,10 @@ int	export(t_tk *tk)
 		return (0);
 	}
 	new_var = concat_args(tk);
-	return (handle_new_var(new_var));
+	return (handle_new_var(tk->env_struct, new_var));
 }
 
-int	handle_new_var(char *new_var)
+int	handle_new_var(t_env *env, char *new_var)
 {
 	int	validation_result;
 
@@ -43,15 +43,15 @@ int	handle_new_var(char *new_var)
 		free(new_var);
 		return (0);
 	}
-	return (update_or_add_env_var(new_var));
+	return (update_or_add_env_var(env, new_var));
 }
 
-int	update_or_add_env_var(char *new_var)
+int	update_or_add_env_var(t_env *env_struct, char *new_var)
 {
 	int		index;
 	char	**env;
 
-	env = g_env->env_main;
+	env = env_struct->env_main;
 	index = find_env_var(env, new_var);
 	if (index != -1)
 	{
@@ -60,15 +60,15 @@ int	update_or_add_env_var(char *new_var)
 	}
 	else
 	{
-		if (!add_new_env_var(env, new_var))
+		if (!add_new_env_var(env_struct, env, new_var))
 			return (0);
 	}
 	if (ft_strncmp(new_var, "PATH", 4) == 0)
-		update_path_tab();
+		update_path_tab(env_struct);
 	return (0);
 }
 
-int	add_new_env_var(char **env, char *new_var)
+int	add_new_env_var(t_env *env_struct, char **env, char *new_var)
 {
 	int		i;
 	char	**new_env;
@@ -84,13 +84,13 @@ int	add_new_env_var(char **env, char *new_var)
 		new_env[i] = env[i];
 	new_env[i] = new_var;
 	new_env[i + 1] = NULL;
-	free(g_env->env_main);
-	g_env->env_main = new_env;
+	free(env_struct->env_main);
+	env_struct->env_main = new_env;
 	return (1);
 }
 
-void	update_path_tab(void)
+void	update_path_tab(t_env *env)
 {
-	free(g_env->path_tab);
-	g_env->path_tab = get_path_tab(g_env->env_main);
+	free(env->path_tab);
+	env->path_tab = get_path_tab(env->env_main);
 }

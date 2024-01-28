@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_variable.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tsanglar <tsanglar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: thibault <thibault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 14:50:20 by thibault          #+#    #+#             */
-/*   Updated: 2024/01/24 16:50:26 by tsanglar         ###   ########.fr       */
+/*   Updated: 2024/01/27 15:58:43 by thibault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,9 @@ char	*handle_status_variable(char *input, int *i, t_env *env)
 	char	*status;
 	char	*new_input;
 
-	status = ft_itoa(env->status);
+	(void)env;
+	// status = ft_itoa(env->status);
+	status = ft_itoa(g_status);
 	new_input = replace_var_status_in_string(input, i, status);
 	(*i) += 1;
 	free(status);

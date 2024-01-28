@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tsanglar <tsanglar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: thibault <thibault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 12:29:09 by thibault          #+#    #+#             */
-/*   Updated: 2024/01/24 16:52:36 by tsanglar         ###   ########.fr       */
+/*   Updated: 2024/01/27 15:36:14 by thibault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ void	classify_token_type(t_tk *tk);
 void	ft_lst_classify_tk_unclassified(t_tk *tk);
 
 /*free_lst.c*/
+// int		free_env(t_env *env);
 int		free_env(t_env *env);
-int		free_global_env(t_env *env);
 int		free_lst(t_tk *head_list);
 int		free_elem(t_tk *token);
 

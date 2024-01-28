@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_parsing_gramm_utils_1.c                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tsanglar <tsanglar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: thibault <thibault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 14:06:36 by thibault          #+#    #+#             */
-/*   Updated: 2024/01/24 16:10:57 by tsanglar         ###   ########.fr       */
+/*   Updated: 2024/01/27 15:58:03 by thibault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,15 @@
 
 int	check_first_last_token(t_tk *first, t_tk *last, t_env *env)
 {
+	(void)env;
 	if (!(is_tk_redir(first->type)
 			|| first->type == TK_CMD || first->type == TK_CMD_BUILT_IN))
 	{
 		ft_putstr_fd("minishell: syntax error near unexpected token '", 2);
 		ft_putstr_fd(first->tk_str, 2);
 		ft_putstr_fd("'\n", 2);
-		g_env->status = 258;
+		// env->status = 258;
+		g_status = 258;
 		return (1);
 	}
 	if (!(is_tk_redir(last->type) || last->type == TK_CMD
@@ -29,7 +31,8 @@ int	check_first_last_token(t_tk *first, t_tk *last, t_env *env)
 		ft_putstr_fd("minishell: syntax error near unexpected token '", 2);
 		ft_putstr_fd(first->tk_str, 2);
 		ft_putstr_fd("'\n", 2);
-		env->status = 258;
+		// env->status = 258;
+		g_status = 258;
 		return (1);
 	}
 	return (0);
@@ -37,10 +40,12 @@ int	check_first_last_token(t_tk *first, t_tk *last, t_env *env)
 
 void	report_syntax_error(t_env *env, char *token)
 {
+	(void)env;
 	ft_putstr_fd("minishell: syntax error near unexpected token '", 2);
 	ft_putstr_fd(token, 2);
 	ft_putstr_fd("'\n", 2);
-	env->status = 258;
+	// env->status = 258;
+	g_status = 258;
 }
 
 int	check_cmd_after_pipe(t_tk *tk)

@@ -1,592 +1,963 @@
-[?2004hminishell> env | sort | grep -v SHLVL | grep -v ^_
-[?2004lCOLORTERM=truecolor
+env | sort | grep -v SHLVL | grep -v ^_
+
+COLORTERM=truecolor
+COMMAND_MODE=unix2003
+DISPLAY=/private/tmp/com.apple.launchd.4MamTqxbgp/org.xquartz:0
 GIT_ASKPASS=/Applications/Visual Studio Code.app/Contents/Resources/app/extensions/git/dist/askpass.sh
-HOME=/Users/tsanglar
-HOMEBREW_CACHE=/tmp/tsanglar/Homebrew/Caches
-HOMEBREW_TEMP=/tmp/tsanglar/Homebrew/Temp
-LANG=en_US.UTF-8
+HOME=/Users/thibault
+HOMEBREW_CACHE=/tmp/thibault/Homebrew/Caches
+HOMEBREW_CELLAR=/opt/homebrew/Cellar
+HOMEBREW_PREFIX=/opt/homebrew
+HOMEBREW_REPOSITORY=/opt/homebrew
+HOMEBREW_TEMP=/tmp/thibault/Homebrew/Temp
+INFOPATH=/opt/homebrew/share/info:/opt/homebrew/share/info:/opt/homebrew/share/info:
+LANG=fr_FR.UTF-8
 LESS=-R
-LOGNAME=tsanglar
+LOGNAME=thibault
 LSCOLORS=Gxfxcxdxbxegedabagacad
 LS_COLORS=di=1;36:ln=35:so=32:pi=33:ex=31:bd=34;46:cd=34;43:su=30;41:sg=30;46:tw=30;42:ow=30;43
+LaunchInstanceID=D65278D9-7C8E-44C5-B27F-4AE85156260B
+MANPATH=/opt/homebrew/share/man:/usr/share/man:/usr/local/share/man:/opt/X11/share/man:/opt/homebrew/share/man::
 MallocNanoZone=0
-OLDPWD=/Users/tsanglar/Documents/minishell/minishell_variable
+OLDPWD=/Users/thibault/Documents/42/minishell/minishell_variable
 ORIGINAL_XDG_CURRENT_DESKTOP=undefined
 PAGER=less
-PATH=/Users/tsanglar/.brew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/munki:/Library/Apple/usr/bin:/Users/tsanglar/.brew/bin
-PWD=/Users/tsanglar/Documents/minishell/minishell_variable
+PATH=/Users/thibault/.brew/bin:/usr/local/bin/python3:/Library/Frameworks/Python.framework/Versions/3.11/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/thibault/Library/Python/3.8/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/opt/X11/bin:/Library/Apple/usr/bin:/Users/thibault/.brew/bin:/usr/local/bin/python3:/Library/Frameworks/Python.framework/Versions/3.11/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/Users/thibault/Library/Application Support/JetBrains/Toolbox/scripts:/Users/thibault/Library/Application Support/JetBrains/Toolbox/scripts
+PWD=/Users/thibault/Documents/42/minishell/minishell_variable
+SECURITYSESSIONID=186ab
 SHELL=/bin/zsh
-SSH_AUTH_SOCK=/private/tmp/com.apple.launchd.xRvTdAhEtV/Listeners
+SSH_AUTH_SOCK=/private/tmp/com.apple.launchd.x6Vo4mCBQY/Listeners
 TERM=xterm-256color
 TERM_PROGRAM=vscode
-TERM_PROGRAM_VERSION=1.84.2
-TMPDIR=/var/folders/zz/zyxvpxvq6csfxvn_n000ccr8003362/T/
-USER=tsanglar
-USER_ZDOTDIR=/Users/tsanglar
+TERM_PROGRAM_VERSION=1.85.2
+TMPDIR=/var/folders/dv/wljg4pds1c359lpyqfygbfq80000gn/T/
+USER=thibault
+USER_ZDOTDIR=/Users/thibault
 VSCODE_GIT_ASKPASS_EXTRA_ARGS=--ms-enable-electron-run-as-node
 VSCODE_GIT_ASKPASS_MAIN=/Applications/Visual Studio Code.app/Contents/Resources/app/extensions/git/dist/askpass-main.js
 VSCODE_GIT_ASKPASS_NODE=/Applications/Visual Studio Code.app/Contents/Frameworks/Code Helper (Plugin).app/Contents/MacOS/Code Helper (Plugin)
-VSCODE_GIT_IPC_HANDLE=/var/folders/zz/zyxvpxvq6csfxvn_n000ccr8003362/T/vscode-git-ab8e33bdd8.sock
+VSCODE_GIT_IPC_HANDLE=/var/folders/dv/wljg4pds1c359lpyqfygbfq80000gn/T/vscode-git-48e14ebe9b.sock
 VSCODE_INJECTION=1
 XPC_FLAGS=0x0
 XPC_SERVICE_NAME=0
-ZDOTDIR=/Users/tsanglar
-ZSH=/Users/tsanglar/.oh-my-zsh
-[?2004hminishell> cat ./test_files/infile_big | grep oi
-[?2004lcat: ./test_files/infile_big: No such file or directory
-[?2004hminishell> cat minishell.h | grep ");"$
-[?2004lcat: minishell.h: No such file or directory
-[?2004hminishell> export GHOST=123 | env | grep GHOST
-[?2004lGHOST=123
-[?2004hminishell> |
-[?2004lminishell: syntax error near unexpected token '|'
-[?2004hminishell> | echo oi
-[?2004lminishell: syntax error near unexpected token '|'
-[?2004hminishell> | |
-[?2004lminishell: syntax error near unexpected token '|'
-[?2004hminishell> | $
-[?2004lminishell: $: Command not found 
-[?2004hminishell> | >
-[?2004lminishell: syntax error near unexpected token 'newline'
-[?2004hminishell> >
-[?2004lminishell: syntax error near unexpected token 'newline'
-[?2004hminishell> >>
-[?2004lminishell: syntax error near unexpected token 'newline'
-[?2004hminishell> >>>
-[?2004l[?2004hminishell> <
-[?2004lminishell: syntax error near unexpected token 'newline'
-[?2004hminishell> <<
-[?2004lminishell: syntax error near unexpected token 'newline'
-[?2004hminishell> echo hi <
-[?2004lminishell: syntax error near unexpected token 'newline'
-[?2004hminishell> cat    <| ls
-[?2004lminishell: |: No such file or directory
-[?2004hminishell> echo hi | >
-[?2004lminishell: syntax error near unexpected token 'newline'
-[?2004hminishell> echo hi | > >>
-[?2004lminishell: syntax error near unexpected token '|'
-[?2004hminishell> echo hi | < |
-[?2004lminishell: |: No such file or directory
-[?2004hminishell> echo hi |   |
-[?2004lminishell: syntax error near unexpected token '|'
-[?2004hminishell> echo hi |  "|"
-[?2004lminishell: |: Command not found 
-[?2004hminishell> grep hi <./test_files/infile
-[?2004lminishell: ./test_files/infile: No such file or directory
-[?2004hminishell> grep hi "<infile" <         ./test_files/infile
-[?2004lminishell: ./test_files/infile: No such file or directory
-[?2004hminishell> echo hi < ./test_files/infile bye bye
-[?2004lminishell: ./test_files/infile: No such file or directory
-[?2004hminishell> grep hi <./test_files/infile_big <./test_files/infile
-[?2004lminishell: ./test_files/infile_big: No such file or directory
-[?2004hminishell> echo <"./test_files/infile" "bonjour       42"
-[?2004lminishell: ./test_files/infile: No such file or directory
-[?2004hminishell> cat <"./test_files/file name with spaces"
-[?2004lminishell: ./test_files/file name with spaces: No such file or directory
-[?2004hminishell> cat <./test_files/infile_big ./test_files/infile
-[?2004lminishell: ./test_files/infile_big: No such file or directory
-[?2004hminishell> cat <"1""2""3""4""5"
-[?2004lminishell: 12345: No such file or directory
-[?2004hminishell> echo <"./test_files/infile" <missing <"./test_files/infile"
-[?2004lminishell: ./test_files/infile: No such file or directory
-[?2004hminishell> echo <missing <"./test_files/infile" <missing
-[?2004lminishell: missing: No such file or directory
-[?2004hminishell> cat <"./test_files/infile"
-[?2004lminishell: ./test_files/infile: No such file or directory
-[?2004hminishell> echo <"./test_files/infile_big" | cat <"./test_files/infile"
-[?2004lminishell: ./test_files/infile_big: No such file or directory
-[?2004hminishell> echo <"./test_files/infile_big" | cat "./test_files/infile"
-[?2004lminishell: ./test_files/infile_big: No such file or directory
-[?2004hminishell> echo <"./test_files/infile_big" | echo <"./test_files/infile"
-[?2004lminishell: ./test_files/infile_big: No such file or directory
-[?2004hminishell> echo hi | cat <"./test_files/infile"
-[?2004lminishell: ./test_files/infile: No such file or directory
-[?2004hminishell> echo hi | cat "./test_files/infile"
-[?2004lcat: ./test_files/infile: No such file or directory
-[?2004hminishell> cat <"./test_files/infile" | echo hi
-[?2004lminishell: ./test_files/infile: No such file or directory
-[?2004hminishell> cat <"./test_files/infile" | grep hello
-[?2004lminishell: ./test_files/infile: No such file or directory
-[?2004hminishell> cat <"./test_files/infile_big" | echo hi
-[?2004lminishell: ./test_files/infile_big: No such file or directory
-[?2004hminishell> cat <missing
-[?2004lminishell: missing: No such file or directory
-[?2004hminishell> cat <missing | cat
-[?2004lminishell: missing: No such file or directory
-[?2004hminishell> cat <missing | echo oi
-[?2004lminishell: missing: No such file or directory
-[?2004hminishell> cat <missing | cat <"./test_files/infile"
-[?2004lminishell: missing: No such file or directory
-[?2004hminishell> echo <123 <456 hi | echo 42
-[?2004lminishell: 123: No such file or directory
-[?2004hminishell> ls >./outfiles/outfile01
-[?2004lminishell: ./outfiles/outfile01: No such file or directory
-[?2004hminishell> ls >         ./outfiles/outfile01
-[?2004lminishell: ./outfiles/outfile01: No such file or directory
-[?2004hminishell> echo hi >         ./outfiles/outfile01 bye
-[?2004lminishell: ./outfiles/outfile01: No such file or directory
-[?2004hminishell> ls >./outfiles/outfile01 >./outfiles/outfile02
-[?2004lminishell: ./outfiles/outfile02: No such file or directory
-[?2004hminishell> ls >./outfiles/outfile01 >./test_files/invalid_permission
-[?2004lminishell: ./test_files/invalid_permission: No such file or directory
-[?2004hminishell> ls >"./outfiles/outfile with spaces"
-[?2004lminishell: ./outfiles/outfile with spaces: No such file or directory
-[?2004hminishell> ls >"./outfiles/outfile""1""2""3""4""5"
-[?2004lminishell: ./outfiles/outfile12345: No such file or directory
-[?2004hminishell> ls >"./outfiles/outfile01" >./test_files/invalid_permission >"./outfiles/outfile02"
-[?2004lminishell: ./outfiles/outfile02: No such file or directory
-[?2004hminishell> ls >./test_files/invalid_permission >"./outfiles/outfile01" >./test_files/invalid_permission
-[?2004lminishell: ./test_files/invalid_permission: No such file or directory
-[?2004hminishell> cat <"./test_files/infile" >"./outfiles/outfile01"
-[?2004lminishell: ./test_files/infile: No such file or directory
-[?2004hminishell> echo hi >./outfiles/outfile01 | echo bye
-[?2004lminishell: ./outfiles/outfile01: No such file or directory
-[?2004hminishell> echo hi >./outfiles/outfile01 >./outfiles/outfile02 | echo bye
-[?2004lminishell: ./outfiles/outfile02: No such file or directory
-[?2004hminishell> echo hi | echo >./outfiles/outfile01 bye
-[?2004lminishell: ./outfiles/outfile01: No such file or directory
-[?2004hminishell> echo hi | echo bye >./outfiles/outfile01 >./outfiles/outfile02
-[?2004lminishell: ./outfiles/outfile02: No such file or directory
-[?2004hminishell> echo hi >./outfiles/outfile01 | echo bye >./outfiles/outfile02
-[?2004lminishell: ./outfiles/outfile01: No such file or directory
-[?2004hminishell> echo hi >./outfiles/outfile01 >./test_files/invalid_permission | echo bye
-[?2004lminishell: ./test_files/invalid_permission: No such file or directory
-[?2004hminishell> echo hi >./test_files/invalid_permission | echo bye
-[?2004lminishell: ./test_files/invalid_permission: No such file or directory
-[?2004hminishell> echo hi >./test_files/invalid_permission >./outfiles/outfile01 | echo bye
-[?2004lminishell: ./outfiles/outfile01: No such file or directory
-[?2004hminishell> echo hi | echo bye >./test_files/invalid_permission
-[?2004lminishell: ./test_files/invalid_permission: No such file or directory
-[?2004hminishell> echo hi | >./outfiles/outfile01 echo bye >./test_files/invalid_permission
-[?2004lminishell: ./outfiles/outfile01: No such file or directory
-[?2004hminishell> echo hi | echo bye >./test_files/invalid_permission >./outfiles/outfile01
-[?2004lminishell: ./outfiles/outfile01: No such file or directory
-[?2004hminishell> cat <"./test_files/infile" >./test_files/invalid_permission
-[?2004lminishell: ./test_files/infile: No such file or directory
-[?2004hminishell> cat >./test_files/invalid_permission <"./test_files/infile"
-[?2004lminishell: ./test_files/infile: No such file or directory
-[?2004hminishell> cat <missing >./outfiles/outfile01
-[?2004lminishell: missing: No such file or directory
-[?2004hminishell> cat >./outfiles/outfile01 <missing
-[?2004lminishell: missing: No such file or directory
-[?2004hminishell> cat <missing >./test_files/invalid_permission
-[?2004lminishell: missing: No such file or directory
-[?2004hminishell> cat >./test_files/invalid_permission <missing
-[?2004lminishell: missing: No such file or directory
-[?2004hminishell> cat >./outfiles/outfile01 <missing >./test_files/invalid_permission
-[?2004lminishell: missing: No such file or directory
-[?2004hminishell> ls >>./outfiles/outfile01
-[?2004lminishell: ./outfiles/outfile01: No such file or directory
-[?2004hminishell> ls >>      ./outfiles/outfile01
-[?2004lminishell: ./outfiles/outfile01: No such file or directory
-[?2004hminishell> ls >>./outfiles/outfile01 >./outfiles/outfile01
-[?2004lminishell: ./outfiles/outfile01: No such file or directory
-[?2004hminishell> ls >./outfiles/outfile01 >>./outfiles/outfile01
-[?2004lminishell: ./outfiles/outfile01: No such file or directory
-[?2004hminishell> ls >./outfiles/outfile01 >>./outfiles/outfile01 >./outfiles/outfile02
-[?2004lminishell: ./outfiles/outfile02: No such file or directory
-[?2004hminishell> ls >>./outfiles/outfile01 >>./outfiles/outfile02
-[?2004lminishell: ./outfiles/outfile02: No such file or directory
-[?2004hminishell> ls >>./test_files/invalid_permission
-[?2004lminishell: ./test_files/invalid_permission: No such file or directory
-[?2004hminishell> ls >>./test_files/invalid_permission >>./outfiles/outfile01
-[?2004lminishell: ./outfiles/outfile01: No such file or directory
-[?2004hminishell> ls >>./outfiles/outfile01 >>./test_files/invalid_permission
-[?2004lminishell: ./test_files/invalid_permission: No such file or directory
-[?2004hminishell> ls >./outfiles/outfile01 >>./test_files/invalid_permission >>./outfiles/outfile02
-[?2004lminishell: ./outfiles/outfile02: No such file or directory
-[?2004hminishell> ls <missing >>./test_files/invalid_permission >>./outfiles/outfile02
-[?2004lminishell: missing: No such file or directory
-[?2004hminishell> ls >>./test_files/invalid_permission >>./outfiles/outfile02 <missing
-[?2004lminishell: missing: No such file or directory
-[?2004hminishell> echo hi >>./outfiles/outfile01 | echo bye
-[?2004lminishell: ./outfiles/outfile01: No such file or directory
-[?2004hminishell> echo hi >>./outfiles/outfile01 >>./outfiles/outfile02 | echo bye
-[?2004lminishell: ./outfiles/outfile02: No such file or directory
-[?2004hminishell> echo hi | echo >>./outfiles/outfile01 bye
-[?2004lminishell: ./outfiles/outfile01: No such file or directory
-[?2004hminishell> echo hi | echo bye >>./outfiles/outfile01 >>./outfiles/outfile02
-[?2004lminishell: ./outfiles/outfile02: No such file or directory
-[?2004hminishell> echo hi >>./outfiles/outfile01 | echo bye >>./outfiles/outfile02
-[?2004lminishell: ./outfiles/outfile01: No such file or directory
-[?2004hminishell> echo hi >>./test_files/invalid_permission | echo bye
-[?2004lminishell: ./test_files/invalid_permission: No such file or directory
-[?2004hminishell> echo hi >>./test_files/invalid_permission >./outfiles/outfile01 | echo bye
-[?2004lminishell: ./outfiles/outfile01: No such file or directory
-[?2004hminishell> echo hi | echo bye >>./test_files/invalid_permission
-[?2004lminishell: ./test_files/invalid_permission: No such file or directory
-[?2004hminishell> echo hi | echo >>./outfiles/outfile01 bye >./test_files/invalid_permission
-[?2004lminishell: ./test_files/invalid_permission: No such file or directory
-[?2004hminishell> cat <minishell.h>./outfiles/outfile
-[?2004lminishell: minishell.h: No such file or directory
-[?2004hminishell> cat <minishell.h|ls
-[?2004lminishell: minishell.h: No such file or directory
-[?2004hminishell> echo hello world
-[?2004lhello world
-[?2004hminishell> echo "hello world"
-[?2004lhello world
-[?2004hminishell> echo 'hello world'
-[?2004lhello world
-[?2004hminishell> echo hello'world'
-[?2004lhelloworld
-[?2004hminishell> echo hello""world
-[?2004lhelloworld
-[?2004hminishell> echo ''
-[?2004l
-[?2004hminishell> echo "$PWD"
-[?2004l/Users/tsanglar/Documents/minishell/minishell_variable
-[?2004hminishell> echo '$PWD'
-[?2004l$PWD
-[?2004hminishell> echo "aspas ->'"
-[?2004laspas ->'
-[?2004hminishell> echo "aspas -> ' "
-[?2004laspas -> ' 
-[?2004hminishell> echo 'aspas ->"'
-[?2004laspas ->"
-[?2004hminishell> echo 'aspas -> " '
-[?2004laspas -> " 
-[?2004hminishell> echo "> >> < * ? [ ] | ; [ ] || && ( ) & # $ \ <<"
-[?2004l> >> < * ? [ ] | ; [ ] || && ( ) & # $ \ <<
-[?2004hminishell> echo '> >> < * ? [ ] | ; [ ] || && ( ) & # $ \ <<'
-[?2004l> >> < * ? [ ] | ; [ ] || && ( ) & # $ \ <<
-[?2004hminishell> echo "exit_code ->$? user ->$USER home -> $HOME"
-[?2004lexit_code ->1 user ->tsanglar home -> /Users/tsanglar
-[?2004hminishell> echo 'exit_code ->$? user ->$USER home -> $HOME'
-[?2004lexit_code ->$? user ->$USER home -> $HOME
-[?2004hminishell> echo "$"
-[?2004l$
-[?2004hminishell> echo '$'
-[?2004l$
-[?2004hminishell> echo $
-[?2004l$
-[?2004hminishell> echo $?
-[?2004l1
-[?2004hminishell> echo $?HELLO
-[?2004l1HELLO
-[?2004hminishell> pwd
-[?2004l/Users/tsanglar/Documents/minishell/minishell_variable
-[?2004hminishell> pwd oi
-[?2004l/Users/tsanglar/Documents/minishell/minishell_variable
-[?2004hminishell> export hello
-[?2004l[?2004hminishell> export HELLO=123
-[?2004l[?2004hminishell> export A-
-[?2004lminishell: export: 'A-' : not a valid identifier
-[?2004hminishell> export HELLO=123 A
-[?2004l[?2004hminishell> export HELLO="123 A-"
-[?2004l[?2004hminishell> export hello world
-[?2004l[?2004hminishell> export HELLO-=123
-[?2004lminishell: export: 'HELLO-=123' : not a valid identifier
-[?2004hminishell> export =
-[?2004lminishell: export: '=' : not a valid identifier
-[?2004hminishell> export 123
-[?2004lminishell: export: '123' : not a valid identifier
-[?2004hminishell> unset
-[?2004l[?2004hminishell> unset HELLO
-[?2004l[?2004hminishell> unset HELLO1 HELLO2
-[?2004l[?2004hminishell> unset HOME
-[?2004l[?2004hminishell> unset PATH
-[?2004l[?2004hminishell> unset SHELL
-[?2004l[?2004hminishell> cd $PWD
-[?2004l[?2004hminishell> cd $PWD hi 
-[?2004l[?2004hminishell> cd 123123
-[?2004lminishell: cd:123123: parsing path: No such file or directory
-[?2004hminishell> cat "exit 123 exit 298 exit +100 exit "+100" exit +"100" exit -100 exit "-100" exit -"100" exit hello exit 42 world"
-[?2004lminishell: cat: Command not found 
-[?2004hminishell> [?2004l
-exit
-[?2004hminishell> env | sort | grep -v SHLVL | grep -v ^_
-[?2004lCOLORTERM=truecolor
-GIT_ASKPASS=/Applications/Visual Studio Code.app/Contents/Resources/app/extensions/git/dist/askpass.sh
-HOME=/Users/tsanglar
-HOMEBREW_CACHE=/tmp/tsanglar/Homebrew/Caches
-HOMEBREW_TEMP=/tmp/tsanglar/Homebrew/Temp
-LANG=en_US.UTF-8
-LESS=-R
-LOGNAME=tsanglar
-LSCOLORS=Gxfxcxdxbxegedabagacad
-LS_COLORS=di=1;36:ln=35:so=32:pi=33:ex=31:bd=34;46:cd=34;43:su=30;41:sg=30;46:tw=30;42:ow=30;43
-MallocNanoZone=0
-OLDPWD=/Users/tsanglar/Documents/minishell/minishell_variable
-ORIGINAL_XDG_CURRENT_DESKTOP=undefined
-PAGER=less
-PATH=/Users/tsanglar/.brew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/munki:/Library/Apple/usr/bin:/Users/tsanglar/.brew/bin
-PWD=/Users/tsanglar/Documents/minishell/minishell_variable
-SHELL=/bin/zsh
-SSH_AUTH_SOCK=/private/tmp/com.apple.launchd.xRvTdAhEtV/Listeners
-TERM=xterm-256color
-TERM_PROGRAM=vscode
-TERM_PROGRAM_VERSION=1.84.2
-TMPDIR=/var/folders/zz/zyxvpxvq6csfxvn_n000ccr8003362/T/
-USER=tsanglar
-USER_ZDOTDIR=/Users/tsanglar
-VSCODE_GIT_ASKPASS_EXTRA_ARGS=--ms-enable-electron-run-as-node
-VSCODE_GIT_ASKPASS_MAIN=/Applications/Visual Studio Code.app/Contents/Resources/app/extensions/git/dist/askpass-main.js
-VSCODE_GIT_ASKPASS_NODE=/Applications/Visual Studio Code.app/Contents/Frameworks/Code Helper (Plugin).app/Contents/MacOS/Code Helper (Plugin)
-VSCODE_GIT_IPC_HANDLE=/var/folders/zz/zyxvpxvq6csfxvn_n000ccr8003362/T/vscode-git-ab8e33bdd8.sock
-VSCODE_INJECTION=1
-XPC_FLAGS=0x0
-XPC_SERVICE_NAME=0
-ZDOTDIR=/Users/tsanglar
-ZSH=/Users/tsanglar/.oh-my-zsh
-[?2004hminishell> cat ./test_files/infile_big | grep oi
-[?2004lcat: ./test_files/infile_big: No such file or directory
-[?2004hminishell> cat minishell.h | grep ");"$
-[?2004lcat: minishell.h: No such file or directory
-[?2004hminishell> export GHOST=123 | env | grep GHOST
-[?2004lGHOST=123
-[?2004hminishell> |
-[?2004lminishell: syntax error near unexpected token '|'
-[?2004hminishell> | echo oi
-[?2004lminishell: syntax error near unexpected token '|'
-[?2004hminishell> | |
-[?2004lminishell: syntax error near unexpected token '|'
-[?2004hminishell> | $
-[?2004lminishell: $: Command not found 
-[?2004hminishell> | >
-[?2004lminishell: syntax error near unexpected token 'newline'
-[?2004hminishell> >
-[?2004lminishell: syntax error near unexpected token 'newline'
-[?2004hminishell> >>
-[?2004lminishell: syntax error near unexpected token 'newline'
-[?2004hminishell> >>>
-[?2004l[?2004hminishell> <
-[?2004lminishell: syntax error near unexpected token 'newline'
-[?2004hminishell> <<
-[?2004lminishell: syntax error near unexpected token 'newline'
-[?2004hminishell> echo hi <
-[?2004lminishell: syntax error near unexpected token 'newline'
-[?2004hminishell> cat    <| ls
-[?2004lminishell: |: No such file or directory
-[?2004hminishell> echo hi | >
-[?2004lminishell: syntax error near unexpected token 'newline'
-[?2004hminishell> echo hi | > >>
-[?2004lminishell: syntax error near unexpected token '|'
-[?2004hminishell> echo hi | < |
-[?2004lminishell: |: No such file or directory
-[?2004hminishell> echo hi |   |
-[?2004lminishell: syntax error near unexpected token '|'
-[?2004hminishell> echo hi |  "|"
-[?2004lminishell: |: Command not found 
-[?2004hminishell> grep hi <./test_files/infile
-[?2004lminishell: ./test_files/infile: No such file or directory
-[?2004hminishell> grep hi "<infile" <         ./test_files/infile
-[?2004lminishell: ./test_files/infile: No such file or directory
-[?2004hminishell> echo hi < ./test_files/infile bye bye
-[?2004lminishell: ./test_files/infile: No such file or directory
-[?2004hminishell> grep hi <./test_files/infile_big <./test_files/infile
-[?2004lminishell: ./test_files/infile_big: No such file or directory
-[?2004hminishell> echo <"./test_files/infile" "bonjour       42"
-[?2004lminishell: ./test_files/infile: No such file or directory
-[?2004hminishell> cat <"./test_files/file name with spaces"
-[?2004lminishell: ./test_files/file name with spaces: No such file or directory
-[?2004hminishell> cat <./test_files/infile_big ./test_files/infile
-[?2004lminishell: ./test_files/infile_big: No such file or directory
-[?2004hminishell> cat <"1""2""3""4""5"
-[?2004lminishell: 12345: No such file or directory
-[?2004hminishell> echo <"./test_files/infile" <missing <"./test_files/infile"
-[?2004lminishell: ./test_files/infile: No such file or directory
-[?2004hminishell> echo <missing <"./test_files/infile" <missing
-[?2004lminishell: missing: No such file or directory
-[?2004hminishell> cat <"./test_files/infile"
-[?2004lminishell: ./test_files/infile: No such file or directory
-[?2004hminishell> echo <"./test_files/infile_big" | cat <"./test_files/infile"
-[?2004lminishell: ./test_files/infile_big: No such file or directory
-[?2004hminishell> echo <"./test_files/infile_big" | cat "./test_files/infile"
-[?2004lminishell: ./test_files/infile_big: No such file or directory
-[?2004hminishell> echo <"./test_files/infile_big" | echo <"./test_files/infile"
-[?2004lminishell: ./test_files/infile_big: No such file or directory
-[?2004hminishell> echo hi | cat <"./test_files/infile"
-[?2004lminishell: ./test_files/infile: No such file or directory
-[?2004hminishell> echo hi | cat "./test_files/infile"
-[?2004lcat: ./test_files/infile: No such file or directory
-[?2004hminishell> cat <"./test_files/infile" | echo hi
-[?2004lminishell: ./test_files/infile: No such file or directory
-[?2004hminishell> cat <"./test_files/infile" | grep hello
-[?2004lminishell: ./test_files/infile: No such file or directory
-[?2004hminishell> cat <"./test_files/infile_big" | echo hi
-[?2004lminishell: ./test_files/infile_big: No such file or directory
-[?2004hminishell> cat <missing
-[?2004lminishell: missing: No such file or directory
-[?2004hminishell> cat <missing | cat
-[?2004lminishell: missing: No such file or directory
-[?2004hminishell> cat <missing | echo oi
-[?2004lminishell: missing: No such file or directory
-[?2004hminishell> cat <missing | cat <"./test_files/infile"
-[?2004lminishell: missing: No such file or directory
-[?2004hminishell> echo <123 <456 hi | echo 42
-[?2004lminishell: 123: No such file or directory
-[?2004hminishell> ls >./outfiles/outfile01
-[?2004lminishell: ./outfiles/outfile01: No such file or directory
-[?2004hminishell> ls >         ./outfiles/outfile01
-[?2004lminishell: ./outfiles/outfile01: No such file or directory
-[?2004hminishell> echo hi >         ./outfiles/outfile01 bye
-[?2004lminishell: ./outfiles/outfile01: No such file or directory
-[?2004hminishell> ls >./outfiles/outfile01 >./outfiles/outfile02
-[?2004lminishell: ./outfiles/outfile02: No such file or directory
-[?2004hminishell> ls >./outfiles/outfile01 >./test_files/invalid_permission
-[?2004lminishell: ./test_files/invalid_permission: No such file or directory
-[?2004hminishell> ls >"./outfiles/outfile with spaces"
-[?2004lminishell: ./outfiles/outfile with spaces: No such file or directory
-[?2004hminishell> ls >"./outfiles/outfile""1""2""3""4""5"
-[?2004lminishell: ./outfiles/outfile12345: No such file or directory
-[?2004hminishell> ls >"./outfiles/outfile01" >./test_files/invalid_permission >"./outfiles/outfile02"
-[?2004lminishell: ./outfiles/outfile02: No such file or directory
-[?2004hminishell> ls >./test_files/invalid_permission >"./outfiles/outfile01" >./test_files/invalid_permission
-[?2004lminishell: ./test_files/invalid_permission: No such file or directory
-[?2004hminishell> cat <"./test_files/infile" >"./outfiles/outfile01"
-[?2004lminishell: ./test_files/infile: No such file or directory
-[?2004hminishell> echo hi >./outfiles/outfile01 | echo bye
-[?2004lminishell: ./outfiles/outfile01: No such file or directory
-[?2004hminishell> echo hi >./outfiles/outfile01 >./outfiles/outfile02 | echo bye
-[?2004lminishell: ./outfiles/outfile02: No such file or directory
-[?2004hminishell> echo hi | echo >./outfiles/outfile01 bye
-[?2004lminishell: ./outfiles/outfile01: No such file or directory
-[?2004hminishell> echo hi | echo bye >./outfiles/outfile01 >./outfiles/outfile02
-[?2004lminishell: ./outfiles/outfile02: No such file or directory
-[?2004hminishell> echo hi >./outfiles/outfile01 | echo bye >./outfiles/outfile02
-[?2004lminishell: ./outfiles/outfile01: No such file or directory
-[?2004hminishell> echo hi >./outfiles/outfile01 >./test_files/invalid_permission | echo bye
-[?2004lminishell: ./test_files/invalid_permission: No such file or directory
-[?2004hminishell> echo hi >./test_files/invalid_permission | echo bye
-[?2004lminishell: ./test_files/invalid_permission: No such file or directory
-[?2004hminishell> echo hi >./test_files/invalid_permission >./outfiles/outfile01 | echo bye
-[?2004lminishell: ./outfiles/outfile01: No such file or directory
-[?2004hminishell> echo hi | echo bye >./test_files/invalid_permission
-[?2004lminishell: ./test_files/invalid_permission: No such file or directory
-[?2004hminishell> echo hi | >./outfiles/outfile01 echo bye >./test_files/invalid_permission
-[?2004lminishell: ./outfiles/outfile01: No such file or directory
-[?2004hminishell> echo hi | echo bye >./test_files/invalid_permission >./outfiles/outfile01
-[?2004lminishell: ./outfiles/outfile01: No such file or directory
-[?2004hminishell> cat <"./test_files/infile" >./test_files/invalid_permission
-[?2004lminishell: ./test_files/infile: No such file or directory
-[?2004hminishell> cat >./test_files/invalid_permission <"./test_files/infile"
-[?2004lminishell: ./test_files/infile: No such file or directory
-[?2004hminishell> cat <missing >./outfiles/outfile01
-[?2004lminishell: missing: No such file or directory
-[?2004hminishell> cat >./outfiles/outfile01 <missing
-[?2004lminishell: missing: No such file or directory
-[?2004hminishell> cat <missing >./test_files/invalid_permission
-[?2004lminishell: missing: No such file or directory
-[?2004hminishell> cat >./test_files/invalid_permission <missing
-[?2004lminishell: missing: No such file or directory
-[?2004hminishell> cat >./outfiles/outfile01 <missing >./test_files/invalid_permission
-[?2004lminishell: missing: No such file or directory
-[?2004hminishell> ls >>./outfiles/outfile01
-[?2004lminishell: ./outfiles/outfile01: No such file or directory
-[?2004hminishell> ls >>      ./outfiles/outfile01
-[?2004lminishell: ./outfiles/outfile01: No such file or directory
-[?2004hminishell> ls >>./outfiles/outfile01 >./outfiles/outfile01
-[?2004lminishell: ./outfiles/outfile01: No such file or directory
-[?2004hminishell> ls >./outfiles/outfile01 >>./outfiles/outfile01
-[?2004lminishell: ./outfiles/outfile01: No such file or directory
-[?2004hminishell> ls >./outfiles/outfile01 >>./outfiles/outfile01 >./outfiles/outfile02
-[?2004lminishell: ./outfiles/outfile02: No such file or directory
-[?2004hminishell> ls >>./outfiles/outfile01 >>./outfiles/outfile02
-[?2004lminishell: ./outfiles/outfile02: No such file or directory
-[?2004hminishell> ls >>./test_files/invalid_permission
-[?2004lminishell: ./test_files/invalid_permission: No such file or directory
-[?2004hminishell> ls >>./test_files/invalid_permission >>./outfiles/outfile01
-[?2004lminishell: ./outfiles/outfile01: No such file or directory
-[?2004hminishell> ls >>./outfiles/outfile01 >>./test_files/invalid_permission
-[?2004lminishell: ./test_files/invalid_permission: No such file or directory
-[?2004hminishell> ls >./outfiles/outfile01 >>./test_files/invalid_permission >>./outfiles/outfile02
-[?2004lminishell: ./outfiles/outfile02: No such file or directory
-[?2004hminishell> ls <missing >>./test_files/invalid_permission >>./outfiles/outfile02
-[?2004lminishell: missing: No such file or directory
-[?2004hminishell> ls >>./test_files/invalid_permission >>./outfiles/outfile02 <missing
-[?2004lminishell: missing: No such file or directory
-[?2004hminishell> echo hi >>./outfiles/outfile01 | echo bye
-[?2004lminishell: ./outfiles/outfile01: No such file or directory
-[?2004hminishell> echo hi >>./outfiles/outfile01 >>./outfiles/outfile02 | echo bye
-[?2004lminishell: ./outfiles/outfile02: No such file or directory
-[?2004hminishell> echo hi | echo >>./outfiles/outfile01 bye
-[?2004lminishell: ./outfiles/outfile01: No such file or directory
-[?2004hminishell> echo hi | echo bye >>./outfiles/outfile01 >>./outfiles/outfile02
-[?2004lminishell: ./outfiles/outfile02: No such file or directory
-[?2004hminishell> echo hi >>./outfiles/outfile01 | echo bye >>./outfiles/outfile02
-[?2004lminishell: ./outfiles/outfile01: No such file or directory
-[?2004hminishell> echo hi >>./test_files/invalid_permission | echo bye
-[?2004lminishell: ./test_files/invalid_permission: No such file or directory
-[?2004hminishell> echo hi >>./test_files/invalid_permission >./outfiles/outfile01 | echo bye
-[?2004lminishell: ./outfiles/outfile01: No such file or directory
-[?2004hminishell> echo hi | echo bye >>./test_files/invalid_permission
-[?2004lminishell: ./test_files/invalid_permission: No such file or directory
-[?2004hminishell> echo hi | echo >>./outfiles/outfile01 bye >./test_files/invalid_permission
-[?2004lminishell: ./test_files/invalid_permission: No such file or directory
-[?2004hminishell> cat <minishell.h>./outfiles/outfile
-[?2004lminishell: minishell.h: No such file or directory
-[?2004hminishell> cat <minishell.h|ls
-[?2004lminishell: minishell.h: No such file or directory
-[?2004hminishell> echo hello world
-[?2004lhello world
-[?2004hminishell> echo "hello world"
-[?2004lhello world
-[?2004hminishell> echo 'hello world'
-[?2004lhello world
-[?2004hminishell> echo hello'world'
-[?2004lhelloworld
-[?2004hminishell> echo hello""world
-[?2004lhelloworld
-[?2004hminishell> echo ''
-[?2004l
-[?2004hminishell> echo "$PWD"
-[?2004l/Users/tsanglar/Documents/minishell/minishell_variable
-[?2004hminishell> echo '$PWD'
-[?2004l$PWD
-[?2004hminishell> echo "aspas ->'"
-[?2004laspas ->'
-[?2004hminishell> echo "aspas -> ' "
-[?2004laspas -> ' 
-[?2004hminishell> echo 'aspas ->"'
-[?2004laspas ->"
-[?2004hminishell> echo 'aspas -> " '
-[?2004laspas -> " 
-[?2004hminishell> echo "> >> < * ? [ ] | ; [ ] || && ( ) & # $ \ <<"
-[?2004l> >> < * ? [ ] | ; [ ] || && ( ) & # $ \ <<
-[?2004hminishell> echo '> >> < * ? [ ] | ; [ ] || && ( ) & # $ \ <<'
-[?2004l> >> < * ? [ ] | ; [ ] || && ( ) & # $ \ <<
-[?2004hminishell> echo "exit_code ->$? user ->$USER home -> $HOME"
-[?2004lexit_code ->1 user ->tsanglar home -> /Users/tsanglar
-[?2004hminishell> echo 'exit_code ->$? user ->$USER home -> $HOME'
-[?2004lexit_code ->$? user ->$USER home -> $HOME
-[?2004hminishell> echo "$"
-[?2004l$
-[?2004hminishell> echo '$'
-[?2004l$
-[?2004hminishell> echo $
-[?2004l$
-[?2004hminishell> echo $?
-[?2004l1
-[?2004hminishell> echo $?HELLO
-[?2004l1HELLO
-[?2004hminishell> pwd
-[?2004l/Users/tsanglar/Documents/minishell/minishell_variable
-[?2004hminishell> pwd oi
-[?2004l/Users/tsanglar/Documents/minishell/minishell_variable
-[?2004hminishell> export hello
-[?2004l[?2004hminishell> export HELLO=123
-[?2004l[?2004hminishell> export A-
-[?2004lminishell: export: 'A-' : not a valid identifier
-[?2004hminishell> export HELLO=123 A
-[?2004l[?2004hminishell> export HELLO="123 A-"
-[?2004l[?2004hminishell> export hello world
-[?2004l[?2004hminishell> export HELLO-=123
-[?2004lminishell: export: 'HELLO-=123' : not a valid identifier
-[?2004hminishell> export =
-[?2004lminishell: export: '=' : not a valid identifier
-[?2004hminishell> export 123
-[?2004lminishell: export: '123' : not a valid identifier
-[?2004hminishell> unset
-[?2004l[?2004hminishell> unset HELLO
-[?2004l[?2004hminishell> unset HELLO1 HELLO2
-[?2004l[?2004hminishell> unset HOME
-[?2004l[?2004hminishell> unset PATH
-[?2004l[?2004hminishell> unset SHELL
-[?2004l[?2004hminishell> cd $PWD
-[?2004l[?2004hminishell> cd $PWD hi 
-[?2004l[?2004hminishell> cd 123123
-[?2004lminishell: cd:123123: parsing path: No such file or directory
-[?2004hminishell> cat "exit 123 exit 298 exit +100 exit "+100" exit +"100" exit -100 exit "-100" exit -"100" exit hello exit 42 world"
-[?2004lminishell: cat: Command not found 
-[?2004hminishell> [?2004l
+ZDOTDIR=/Users/thibault
+ZSH=/Users/thibault/.oh-my-zsh
+minishell> echo $?
+
+0
+minishell> cat ./minishell_tester/test_files/infile_big | grep oi
+
+was going to happen next. First, she tried to look down and make out
+disappointment it was empty: she did not like to drop the jar for fear
+not going to do _that_ in a hurry. “No, I’ll look first,” she said,
+“and see whether it’s marked ‘_poison_’ or not”; for she had read
+bottle marked “poison,” it is almost certain to disagree with you,
+However, this bottle was _not_ marked “poison,” so Alice ventured to
+brightened up at the thought that she was now the right size for going
+waited for a few minutes to see if she was going to shrink any further:
+said Alice to herself, “in my going out altogether, like a candle. I
+After a while, finding that nothing more happened, she decided on going
+Rabbit came near her, she began, in a low, timid voice, “If you please,
+to repeat it, but her voice sounded hoarse and strange, and the words
+now about two feet high, and was going on shrinking rapidly: she soon
+dropped it hastily, just in time to avoid shrinking away altogether.
+“Not like cats!” cried the Mouse, in a shrill, passionate voice. “Would
+trembling voice, “Let us get to the shore, and then I’ll tell you my
+“What I was going to say,” said the Dodo in an offended tone, “was,
+“But who is to give the prizes?” quite a chorus of voices asked.
+“Why, _she_, of course,” said the Dodo, pointing to Alice with one
+The next thing was to eat the comfits: this caused some noise and
+the others all joined in chorus, “Yes, please do!” but the Mouse only
+doesn’t suit my throat!” and a Canary called out in a trembling voice
+doing out here? Run home this moment, and fetch me a pair of gloves and
+at once in the direction it pointed to, without trying to explain the
+“How queer it seems,” Alice said to herself, “to be going messages for
+gloves, and was just going to leave the room, when her eye fell upon a
+she heard a voice outside, and stopped to listen.
+“Mary Ann! Mary Ann!” said the voice. “Fetch me my gloves this moment!”
+Next came an angry voice—the Rabbit’s—“Pat! Pat! Where are you?” And
+then a voice she had never heard before, “Sure then I’m here! Digging
+rumbling of little cartwheels, and the sound of a good many voices all
+then the Rabbit’s voice along—“Catch him, you by the hedge!” then
+silence, and then another confusion of voices—“Hold up his head—Brandy
+Last came a little feeble, squeaking voice, (“That’s Bill,” thought
+“We must burn the house down!” said the Rabbit’s voice; and Alice
+addressed her in a languid, sleepy voice.
+came different!” Alice replied in a very melancholy voice.
+By the use of this ointment—one shilling the box—
+going to dive in among the leaves, which she found to be nothing but
+Pigeon, raising its voice to a shriek, “and just as I was thinking I
+going to be, from one minute to another! However, I’ve got back to my
+are; secondly, because they’re making such a noise inside, no one could
+noise going on within—a constant howling and sneezing, and every now
+“Oh, _please_ mind what you’re doing!” cried Alice, jumping up and down
+(In which the cook and the baby joined):
+ear and left foot, so as to prevent its undoing itself,) she carried it
+No, there were no tears. “If you’re going to turn into a pig, my dear,”
+eyes, “Of course, of course; just what I was going to remark myself.”
+quarrelled last March—just before _he_ went mad, you know—” (pointing
+hoarse, feeble voice: “I heard every word you fellows were saying.”
+The Dormouse had closed its eyes by this time, and was going off into a
+neither of the others took the least notice of her going, though she
+voice, “Why the fact is, you see, Miss, this here ought to have been a
+you see, Miss, we’re doing our best, afore she comes, to—” At this
+“And who are _these?_” said the Queen, pointing to the three gardeners
+“Get up!” said the Queen, in a shrill, loud voice, and the three
+turning to the rose-tree, she went on, “What _have_ you been doing
+“May it please your Majesty,” said Two, in a very humble tone, going
+“Come on, then!” roared the Queen, and Alice joined the procession,
+“It’s—it’s a very fine day!” said a timid voice at her side. She was
+“Get to your places!” shouted the Queen in a voice of thunder, and
+had got its neck nicely straightened out, and was going to give the
+going to begin again, it was very provoking to find that the hedgehog
+“How do you like the Queen?” said the Cat in a low voice.
+“Who _are_ you talking to?” said the King, going up to Alice, and
+Alice thought she might as well go back, and see how the game was going
+on, as she heard the Queen’s voice in the distance, screaming with
+a large crowd collected round it: there was a dispute going on between
+thing before, and he wasn’t going to begin at _his_ time of life.
+startled when she heard her voice close to her ear. “You’re thinking
+“The game’s going on rather better now,” she said, by way of keeping up
+But here, to Alice’s great surprise, the Duchess’s voice died away,
+“A fine day, your Majesty!” the Duchess began in a low, weak voice.
+about half no time! Take your choice!”
+The Duchess took her choice, and was gone in a moment.
+As they walked off together, Alice heard the King say in a low voice,
+sea. The master was an old Turtle—we used to call him Tortoise—”
+“Why did you call him Tortoise, if he wasn’t one?” Alice asked.
+“We called him Tortoise because he taught us,” said the Mock Turtle
+Fainting in Coils.”
+two sobs choked his voice. “Same as if he had a bone in his throat,”
+the back. At last the Mock Turtle recovered his voice, and, with tears
+“Change lobsters again!” yelled the Gryphon at the top of its voice.
+Turtle, suddenly dropping his voice; and the two creatures, who had
+“There’s a porpoise close behind us, and he’s treading on my tail.
+They are waiting on the shingle—will you come and join the dance?
+Will you, won’t you, will you, won’t you, will you join the dance?
+Will you, won’t you, will you, won’t you, won’t you join the dance?
+Said he thanked the whiting kindly, but he would not join the dance.
+Would not, could not, would not, could not, would not join the dance.
+Would not, could not, would not, could not, could not join the dance.
+Then turn not pale, beloved snail, but come and join the dance.
+Will you, won’t you, will you, won’t you, will you join the dance?
+Will you, won’t you, will you, won’t you, won’t you join the dance?”
+“Boots and shoes under the sea,” the Gryphon went on in a deep voice,
+running on the song, “I’d have said to the porpoise, ‘Keep back,
+wise fish would go anywhere without a porpoise.”
+and told me he was going a journey, I should say ‘With what porpoise?’”
+Alice a little timidly: “but it’s no use going back to yesterday,
+“Stand up and repeat ‘’_Tis the voice of the sluggard_,’” said the
+“’Tis the voice of the Lobster; I heard him declare,
+His voice has a timid and tremulous sound.]
+wrong, and she went on in a trembling voice:—
+The Mock Turtle sighed deeply, and began, in a voice sometimes choked
+they doing?” Alice whispered to the Gryphon. “They can’t have anything
+“Stupid things!” Alice began in a loud, indignant voice, but she
+“I’m a poor man, your Majesty,” the Hatter began, in a trembling voice,
+The King looked anxiously at the White Rabbit, who said in a low voice,
+nearly out of sight, he said in a deep voice, “What are tarts made of?”
+“Treacle,” said a sleepy voice behind her.
+little voice, the name “Alice!”
+“The trial cannot proceed,” said the King in a very grave voice, “until
+verdict,” he said to the jury, in a low, trembling voice.
+“Why, there they are!” said the King triumphantly, pointing to the
+“Off with her head!” the Queen shouted at the top of her voice. Nobody
+looking up into hers—she could hear the very tones of her voice, and
+shared their never-ending meal, and the shrill voice of the Queen
+cries to the voice of the shepherd boy—and the sneeze of the baby, the
+shriek of the Gryphon, and all the other queer noises, would change
+unenforceability of any provision of this agreement shall not void the
+minishell> echo $?
+
+0
+minishell> cat minishell.h | grep ");"$
+
+cat: minishell.h: No such file or directory
+minishell> echo $?
+
+1
+minishell> export GHOST=123 | env | grep GHOST
+
+GHOST=123
+minishell> echo $?
+
+0
+minishell> |
+
+minishell: syntax error near unexpected token '|'
+minishell> echo $?
+
+258
+minishell> | echo oi
+
+minishell: syntax error near unexpected token '|'
+minishell> echo $?
+
+258
+minishell> | |
+
+minishell: syntax error near unexpected token '|'
+minishell> echo $?
+
+258
+minishell> | $
+
+minishell> echo $?
+
+127
+minishell> | >
+
+minishell: syntax error near unexpected token 'newline'
+minishell> echo $?
+
+258
+minishell> >
+
+minishell: syntax error near unexpected token 'newline'
+minishell> echo $?
+
+258
+minishell> >>
+
+minishell: syntax error near unexpected token 'newline'
+minishell> echo $?
+
+258
+minishell> >>>
+
+minishell> echo $?
+
+258
+minishell> <
+
+minishell: syntax error near unexpected token 'newline'
+minishell> echo $?
+
+258
+minishell> <<
+
+minishell: syntax error near unexpected token 'newline'
+minishell> echo $?
+
+258
+minishell> echo hi <
+
+minishell: syntax error near unexpected token 'newline'
+minishell> echo $?
+
+258
+minishell> cat    <| ls
+
+minishell: |: No such file or directory
+minishell> echo $?
+
+1
+minishell> echo hi | >
+
+minishell: syntax error near unexpected token 'newline'
+minishell> echo $?
+
+258
+minishell> echo hi | > >>
+
+minishell: syntax error near unexpected token '|'
+minishell> echo $?
+
+258
+minishell> echo hi | < |
+
+minishell: |: No such file or directory
+minishell> echo $?
+
+1
+minishell> echo hi |   |
+
+minishell: syntax error near unexpected token '|'
+minishell> echo $?
+
+258
+minishell> echo hi |  "|"
+
+minishell> echo $?
+
+127
+minishell> grep hi <./minishell_tester/test_files/infile
+
+minishell> echo $?
+
+0
+minishell> grep hi "<infile" <         ./minishell_tester/test_files/infile
+
+grep: <infile: No such file or directory
+minishell> echo $?
+
+0
+minishell> echo hi < ./minishell_tester/test_files/infile bye bye
+
+hi bye bye
+minishell> echo $?
+
+0
+minishell> grep hi <./minishell_tester/test_files/infile_big <./minishell_tester/test_files/infile
+
+minishell> echo $?
+
+0
+minishell> echo <"./minishell_tester/test_files/infile" "bonjour       42"
+
+bonjour       42
+minishell> echo $?
+
+0
+minishell> cat <"./minishell_tester/test_files/file name with spaces"
+
+ð ð ð
+This will break your minishell
+ð ð ð
+minishell> echo $?
+
+0
+minishell> cat <./minishell_tester/test_files/infile_big ./minishell_tester/test_files/infile
+
+
+-----PRINT LST--------
+
+minishell> echo $?
+minishell> cat <"1""2""3""4""5"
+
+minishell: 12345: No such file or directory
+minishell> echo $?
+
+1
+minishell> echo <"./minishell_tester/test_files/infile" <missing <"./minishell_tester/test_files/infile"
+
+minishell: missing: No such file or directory
+minishell> echo $?
+
+1
+minishell> echo <missing <"./minishell_tester/test_files/infile" <missing
+
+minishell: missing: No such file or directory
+minishell> echo $?
+
+1
+minishell> cat <"./minishell_tester/test_files/infile"
+
+
+-----PRINT LST--------
+
+minishell> echo $?
+minishell> echo <"./minishell_tester/test_files/infile_big" | cat <"./minishell_tester/test_files/infile"
+
+
+minishell> echo $?
+
+0
+minishell> echo <"./minishell_tester/test_files/infile_big" | cat "./minishell_tester/test_files/infile"
+
+
+-----PRINT LST--------
+
+minishell> echo $?
+minishell> echo <"./minishell_tester/test_files/infile_big" | echo <"./minishell_tester/test_files/infile"
+
+
+minishell> echo $?
+
+0
+minishell> echo hi | cat <"./minishell_tester/test_files/infile"
+
+hi
+minishell> echo $?
+
+0
+minishell> echo hi | cat "./minishell_tester/test_files/infile"
+
+
+-----PRINT LST--------
+
+minishell> echo $?
+minishell> cat <"./minishell_tester/test_files/infile" | echo hi
+
+hi
+minishell> echo $?
+
+0
+minishell> cat <"./minishell_tester/test_files/infile" | grep hello
+
+minishell> echo $?
+
+1
+minishell> cat <"./minishell_tester/test_files/infile_big" | echo hi
+
+hi
+minishell> echo $?
+
+0
+minishell> cat <missing
+
+minishell: missing: No such file or directory
+minishell> echo $?
+
+1
+minishell> cat <missing | cat
+
+minishell: missing: No such file or directory
+minishell> echo $?
+
+1
+minishell> cat <missing | echo oi
+
+minishell: missing: No such file or directory
+minishell> echo $?
+
+1
+minishell> cat <missing | cat <"./minishell_tester/test_files/infile"
+
+minishell: missing: No such file or directory
+minishell> echo $?
+
+1
+minishell> echo <123 <456 hi | echo 42
+
+minishell: 123: No such file or directory
+minishell> echo $?
+
+1
+minishell> ls >./minishell_tester/outfiles/outfile01
+
+minishell: ./minishell_tester/outfiles/outfile01: No such file or directory
+minishell> echo $?
+
+0
+minishell> ls >         ./minishell_tester/outfiles/outfile01
+
+minishell: ./minishell_tester/outfiles/outfile01: No such file or directory
+minishell> echo $?
+
+0
+minishell> echo hi >         ./minishell_tester/outfiles/outfile01 bye
+
+minishell: ./minishell_tester/outfiles/outfile01: No such file or directory
+minishell> echo $?
+
+0
+minishell> ls >./minishell_tester/outfiles/outfile01 >./minishell_tester/outfiles/outfile02
+
+minishell: ./minishell_tester/outfiles/outfile02: No such file or directory
+minishell> echo $?
+
+0
+minishell> ls >./minishell_tester/outfiles/outfile01 >./minishell_tester/test_files/invalid_permission
+
+minishell> echo $?
+
+0
+minishell> ls >"./minishell_tester/outfiles/outfile with spaces"
+
+minishell: ./minishell_tester/outfiles/outfile with spaces: No such file or directory
+minishell> echo $?
+
+0
+minishell> ls >"./minishell_tester/outfiles/outfile""1""2""3""4""5"
+
+minishell: ./minishell_tester/outfiles/outfile12345: No such file or directory
+minishell> echo $?
+
+0
+minishell> ls >"./minishell_tester/outfiles/outfile01" >./minishell_tester/test_files/invalid_permission >"./minishell_tester/outfiles/outfile02"
+
+minishell: ./minishell_tester/outfiles/outfile02: No such file or directory
+minishell> echo $?
+
+0
+minishell> ls >./minishell_tester/test_files/invalid_permission >"./minishell_tester/outfiles/outfile01" >./minishell_tester/test_files/invalid_permission
+
+minishell: ./minishell_tester/outfiles/outfile01: No such file or directory
+minishell> echo $?
+
+0
+minishell> cat <"./minishell_tester/test_files/infile" >"./minishell_tester/outfiles/outfile01"
+
+minishell: ./minishell_tester/outfiles/outfile01: No such file or directory
+minishell> echo $?
+
+0
+minishell> echo hi >./minishell_tester/outfiles/outfile01 | echo bye
+
+minishell: ./minishell_tester/outfiles/outfile01: No such file or directory
+minishell> echo $?
+
+0
+minishell> echo hi >./minishell_tester/outfiles/outfile01 >./minishell_tester/outfiles/outfile02 | echo bye
+
+minishell: ./minishell_tester/outfiles/outfile02: No such file or directory
+minishell> echo $?
+
+0
+minishell> echo hi | echo >./minishell_tester/outfiles/outfile01 bye
+
+minishell: ./minishell_tester/outfiles/outfile01: No such file or directory
+minishell> echo $?
+
+0
+minishell> echo hi | echo bye >./minishell_tester/outfiles/outfile01 >./minishell_tester/outfiles/outfile02
+
+minishell: ./minishell_tester/outfiles/outfile02: No such file or directory
+minishell> echo $?
+
+0
+minishell> echo hi >./minishell_tester/outfiles/outfile01 | echo bye >./minishell_tester/outfiles/outfile02
+
+minishell: ./minishell_tester/outfiles/outfile01: No such file or directory
+minishell> echo $?
+
+0
+minishell> echo hi >./minishell_tester/outfiles/outfile01 >./minishell_tester/test_files/invalid_permission | echo bye
+
+minishell> echo $?
+
+0
+minishell> echo hi >./minishell_tester/test_files/invalid_permission | echo bye
+
+minishell> echo $?
+
+0
+minishell> echo hi >./minishell_tester/test_files/invalid_permission >./minishell_tester/outfiles/outfile01 | echo bye
+
+minishell: ./minishell_tester/outfiles/outfile01: No such file or directory
+minishell> echo $?
+
+0
+minishell> echo hi | echo bye >./minishell_tester/test_files/invalid_permission
+
+minishell> echo $?
+
+0
+minishell> echo hi | >./minishell_tester/outfiles/outfile01 echo bye >./minishell_tester/test_files/invalid_permission
+
+minishell: ./minishell_tester/outfiles/outfile01: No such file or directory
+minishell> echo $?
+
+0
+minishell> echo hi | echo bye >./minishell_tester/test_files/invalid_permission >./minishell_tester/outfiles/outfile01
+
+minishell: ./minishell_tester/outfiles/outfile01: No such file or directory
+minishell> echo $?
+
+0
+minishell> cat <"./minishell_tester/test_files/infile" >./minishell_tester/test_files/invalid_permission
+
+minishell> echo $?
+
+0
+minishell> cat >./minishell_tester/test_files/invalid_permission <"./minishell_tester/test_files/infile"
+
+minishell> echo $?
+
+0
+minishell> cat <missing >./minishell_tester/outfiles/outfile01
+
+minishell: missing: No such file or directory
+minishell> echo $?
+
+1
+minishell> cat >./minishell_tester/outfiles/outfile01 <missing
+
+minishell: missing: No such file or directory
+minishell> echo $?
+
+1
+minishell> cat <missing >./minishell_tester/test_files/invalid_permission
+
+minishell: missing: No such file or directory
+minishell> echo $?
+
+1
+minishell> cat >./minishell_tester/test_files/invalid_permission <missing
+
+minishell: missing: No such file or directory
+minishell> echo $?
+
+1
+minishell> cat >./minishell_tester/outfiles/outfile01 <missing >./minishell_tester/test_files/invalid_permission
+
+minishell: missing: No such file or directory
+minishell> echo $?
+
+1
+minishell> ls >>./minishell_tester/outfiles/outfile01
+
+minishell: ./minishell_tester/outfiles/outfile01: No such file or directory
+minishell> echo $?
+
+0
+minishell> ls >>      ./minishell_tester/outfiles/outfile01
+
+minishell: ./minishell_tester/outfiles/outfile01: No such file or directory
+minishell> echo $?
+
+0
+minishell> ls >>./minishell_tester/outfiles/outfile01 >./minishell_tester/outfiles/outfile01
+
+minishell: ./minishell_tester/outfiles/outfile01: No such file or directory
+minishell> echo $?
+
+0
+minishell> ls >./minishell_tester/outfiles/outfile01 >>./minishell_tester/outfiles/outfile01
+
+minishell: ./minishell_tester/outfiles/outfile01: No such file or directory
+minishell> echo $?
+
+0
+minishell> ls >./minishell_tester/outfiles/outfile01 >>./minishell_tester/outfiles/outfile01 >./minishell_tester/outfiles/outfile02
+
+minishell: ./minishell_tester/outfiles/outfile01: No such file or directory
+minishell> echo $?
+
+0
+minishell> ls >>./minishell_tester/outfiles/outfile01 >>./minishell_tester/outfiles/outfile02
+
+minishell: ./minishell_tester/outfiles/outfile02: No such file or directory
+minishell> echo $?
+
+0
+minishell> ls >>./minishell_tester/test_files/invalid_permission
+
+minishell> echo $?
+
+0
+minishell> ls >>./minishell_tester/test_files/invalid_permission >>./minishell_tester/outfiles/outfile01
+
+minishell: ./minishell_tester/outfiles/outfile01: No such file or directory
+minishell> echo $?
+
+0
+minishell> ls >>./minishell_tester/outfiles/outfile01 >>./minishell_tester/test_files/invalid_permission
+
+minishell> echo $?
+
+0
+minishell> ls >./minishell_tester/outfiles/outfile01 >>./minishell_tester/test_files/invalid_permission >>./minishell_tester/outfiles/outfile02
+
+minishell: ./minishell_tester/outfiles/outfile02: No such file or directory
+minishell> echo $?
+
+0
+minishell> ls <missing >>./minishell_tester/test_files/invalid_permission >>./minishell_tester/outfiles/outfile02
+
+minishell: missing: No such file or directory
+minishell> echo $?
+
+1
+minishell> ls >>./minishell_tester/test_files/invalid_permission >>./minishell_tester/outfiles/outfile02 <missing
+
+minishell: missing: No such file or directory
+minishell> echo $?
+
+1
+minishell> echo hi >>./minishell_tester/outfiles/outfile01 | echo bye
+
+minishell: ./minishell_tester/outfiles/outfile01: No such file or directory
+minishell> echo $?
+
+1
+minishell> echo hi >>./minishell_tester/outfiles/outfile01 >>./minishell_tester/outfiles/outfile02 | echo bye
+
+minishell: ./minishell_tester/outfiles/outfile02: No such file or directory
+minishell> echo $?
+
+1
+minishell> echo hi | echo >>./minishell_tester/outfiles/outfile01 bye
+
+minishell: ./minishell_tester/outfiles/outfile01: No such file or directory
+minishell> echo $?
+
+1
+minishell> echo hi | echo bye >>./minishell_tester/outfiles/outfile01 >>./minishell_tester/outfiles/outfile02
+
+minishell: ./minishell_tester/outfiles/outfile02: No such file or directory
+minishell> echo $?
+
+1
+minishell> echo hi >>./minishell_tester/outfiles/outfile01 | echo bye >>./minishell_tester/outfiles/outfile02
+
+minishell: ./minishell_tester/outfiles/outfile01: No such file or directory
+minishell> echo $?
+
+1
+minishell> echo hi >>./minishell_tester/test_files/invalid_permission | echo bye
+
+minishell> echo $?
+
+1
+minishell> echo hi >>./minishell_tester/test_files/invalid_permission >./minishell_tester/outfiles/outfile01 | echo bye
+
+minishell: ./minishell_tester/outfiles/outfile01: No such file or directory
+minishell> echo $?
+
+1
+minishell> echo hi | echo bye >>./minishell_tester/test_files/invalid_permission
+
+minishell> echo $?
+
+1
+minishell> echo hi | echo >>./minishell_tester/outfiles/outfile01 bye >./minishell_tester/test_files/invalid_permission
+
+minishell> echo $?
+
+1
+minishell> cat <minishell.h>./minishell_tester/outfiles/outfile
+
+minishell: minishell.h: No such file or directory
+minishell> echo $?
+
+1
+minishell> cat <minishell.h|ls
+
+minishell: minishell.h: No such file or directory
+minishell> echo $?
+
+1
+minishell> echo hello world
+
+hello world
+minishell> echo $?
+
+1
+minishell> echo "hello world"
+
+hello world
+minishell> echo $?
+
+1
+minishell> echo 'hello world'
+
+hello world
+minishell> echo $?
+
+1
+minishell> echo hello'world'
+
+helloworld
+minishell> echo $?
+
+1
+minishell> echo hello""world
+
+helloworld
+minishell> echo $?
+
+1
+minishell> echo ''
+
+
+minishell> echo $?
+
+1
+minishell> echo "$PWD"
+
+/Users/thibault/Documents/42/minishell/minishell_variable
+minishell> echo $?
+
+1
+minishell> echo '$PWD'
+
+$PWD
+minishell> echo $?
+
+1
+minishell> echo "aspas ->'"
+
+aspas ->'
+minishell> echo $?
+
+1
+minishell> echo "aspas -> ' "
+
+aspas -> ' 
+minishell> echo $?
+
+1
+minishell> echo 'aspas ->"'
+
+aspas ->"
+minishell> echo $?
+
+1
+minishell> echo 'aspas -> " '
+
+aspas -> " 
+minishell> echo $?
+
+1
+minishell> echo "> >> < * ? [ ] | ; [ ] || && ( ) & # $ \ <<"
+
+> >> < * ? [ ] | ; [ ] || && ( ) & # $ \ <<
+minishell> echo $?
+
+1
+minishell> echo '> >> < * ? [ ] | ; [ ] || && ( ) & # $ \ <<'
+
+> >> < * ? [ ] | ; [ ] || && ( ) & # $ \ <<
+minishell> echo $?
+
+1
+minishell> echo "exit_code ->$? user ->$USER home -> $HOME"
+
+exit_code ->1 user ->thibault home -> /Users/thibault
+minishell> echo $?
+
+1
+minishell> echo 'exit_code ->$? user ->$USER home -> $HOME'
+
+exit_code ->$? user ->$USER home -> $HOME
+minishell> echo $?
+
+1
+minishell> echo "$"
+
+$
+minishell> echo $?
+
+1
+minishell> echo '$'
+
+$
+minishell> echo $?
+
+1
+minishell> echo $
+
+$
+minishell> echo $?
+
+1
+minishell> echo $?
+
+1
+minishell> echo $?
+
+1
+minishell> echo $?HELLO
+
+1HELLO
+minishell> echo $?
+
+1
+minishell> pwd
+
+/Users/thibault/Documents/42/minishell/minishell_variable
+minishell> echo $?
+
+1
+minishell> pwd oi
+
+/Users/thibault/Documents/42/minishell/minishell_variable
+minishell> echo $?
+
+1
+minishell> export hello
+
+minishell> echo $?
+
+1
+minishell> export HELLO=123
+
+minishell> echo $?
+
+1
+minishell> export A-
+
+minishell: export: 'A-' : not a valid identifier
+minishell> echo $?
+
+1
+minishell> export HELLO=123 A
+
+minishell> echo $?
+
+1
+minishell> export HELLO="123 A-"
+
+minishell> echo $?
+
+1
+minishell> export hello world
+
+minishell> echo $?
+
+1
+minishell> export HELLO-=123
+
+minishell: export: 'HELLO-=123' : not a valid identifier
+minishell> echo $?
+
+1
+minishell> export =
+
+minishell: export: '=' : not a valid identifier
+minishell> echo $?
+
+1
+minishell> export 123
+
+minishell: export: '123' : not a valid identifier
+minishell> echo $?
+
+1
+minishell> unset
+
+minishell> echo $?
+
+1
+minishell> unset HELLO
+
+minishell> echo $?
+
+1
+minishell> unset HELLO1 HELLO2
+
+minishell> echo $?
+
+1
+minishell> unset HOME
+
+minishell> echo $?
+
+1
+minishell> unset PATH
+
+minishell> echo $?
+
+1
+minishell> unset SHELL
+
+minishell> echo $?
+
+1
+minishell> cd $PWD
+
+minishell> echo $?
+
+1
+minishell> cd $PWD hi 
+
+minishell> echo $?
+
+1
+minishell> cd 123123
+
+minishell: cd:123123: parsing path: No such file or directory
+minishell> echo $?
+
+1
+minishell> cat "exit 123 exit 298 exit +100 exit "+100" exit +"100" exit -100 exit "-100" exit -"100" exit hello exit 42 world"
+
+minishell: cat: Command not found 
+minishell> echo $?
+
+1
+minishell> 
+
 exit

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   built_in.c                                         :+:      :+:    :+:   */
+/*   built_in_env_pwd.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: thibault <thibault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 13:27:26 by mlachat           #+#    #+#             */
-/*   Updated: 2023/11/03 10:05:38 by thibault         ###   ########.fr       */
+/*   Updated: 2024/01/27 18:09:01 by thibault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ int	env_built_in(t_tk *tk)
 	if (*(tk->env) == 0)
 		return (1);
 	fd_out = tk->fd_out;
-	print_strtab(g_env->env_main, fd_out);
+	// printf("fd_out: %d\n", fd_out);
+	print_strtab(tk->env_struct->env_main, fd_out);
 	return (0);
 }
 

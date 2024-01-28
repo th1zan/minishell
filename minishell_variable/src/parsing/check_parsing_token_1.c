@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_parsing_token_1.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tsanglar <tsanglar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: thibault <thibault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 14:45:21 by thibault          #+#    #+#             */
-/*   Updated: 2024/01/24 16:00:49 by tsanglar         ###   ########.fr       */
+/*   Updated: 2024/01/27 15:58:34 by thibault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ int	check_input_file(t_tk *tk, t_env *env)
 			if (!tk->tk_arg)
 			{
 				report_syntax_error(env, "newline");
-				env->status = 258;
+				// env->status = 258;
+				g_status = 258;
 				return (1);
 			}
 			if (access(tk->tk_arg->tk_str, R_OK) == 0)
@@ -31,7 +32,8 @@ int	check_input_file(t_tk *tk, t_env *env)
 				ft_putstr_fd("minishell: ", 2);
 				ft_putstr_fd(tk->tk_arg->tk_str, 2);
 				ft_putstr_fd(": No such file or directory\n", 2);
-				env->status = 1;
+				// env->status = 1;
+				g_status = 1;
 				return (1);
 			}
 		}

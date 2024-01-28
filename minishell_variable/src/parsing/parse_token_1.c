@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_token_1.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tsanglar <tsanglar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: thibault <thibault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/11 11:49:26 by thibault          #+#    #+#             */
-/*   Updated: 2024/01/24 15:58:50 by tsanglar         ###   ########.fr       */
+/*   Updated: 2024/01/27 11:22:49 by thibault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,9 @@ int	parse_token(t_tk **head_tk, t_env *env)
 int	check_parsing(t_env *env)
 {
 	int	check;
-	t_tk	*tk;
+	// t_tk	*tk;
 
-	tk = env->tk_head;
-
+	// tk = env->tk_head;
 	check = 0;
 	check = check_grammar(env);
 	if (check > 0)

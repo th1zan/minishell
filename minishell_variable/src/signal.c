@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signal.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tsanglar <tsanglar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: thibault <thibault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 21:54:14 by thibault          #+#    #+#             */
-/*   Updated: 2024/01/24 14:53:45 by tsanglar         ###   ########.fr       */
+/*   Updated: 2024/01/27 16:34:30 by thibault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,12 @@ int	restore_std(int *original_std)
 
 void	handle_signal(t_env *env)
 {
+	(void)env;
 	signal(SIGQUIT, SIG_IGN); // Ctrl + backslash
 	signal(SIGINT, handle_sigint); //Ctrl + C
-	env->status = 1;
+	// env->status = 1;
+	// g_status = 0; /// ???
+	// printf("handle_signal:: g_status %d\n", g_status);
 }
 
 void	handle_sigint(int signo)

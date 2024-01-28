@@ -6,7 +6,7 @@
 /*   By: thibault <thibault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 13:47:09 by thibault          #+#    #+#             */
-/*   Updated: 2023/11/14 13:32:10 by thibault         ###   ########.fr       */
+/*   Updated: 2024/01/27 18:30:35 by thibault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ t_tk	*get_next_input_operator_tk(t_tk *tk)
 		return (NULL);
 	while (tmp != NULL)
 	{
+		if (tmp->type == TK_PIPE)
+			return (NULL);
 		if (tmp->type == TK_IN_CHEVRON || tmp->type == TK_HERE_DOC)
 			return (tmp);
 		tmp = tmp->next;
@@ -43,6 +45,8 @@ t_tk	*get_prev_input_operator_tk(t_tk *tk)
 		return (NULL);
 	while (tmp != NULL)
 	{
+		if (tmp->type == TK_PIPE)
+			return (NULL);
 		if (tmp->type == TK_IN_CHEVRON || tmp->type == TK_HERE_DOC)
 			return (tmp);
 		tmp = tmp->prev;
@@ -62,6 +66,8 @@ t_tk	*get_next_output_operator_tk(t_tk *tk)
 		return (NULL);
 	while (tmp != NULL)
 	{
+		if (tmp->type == TK_PIPE)
+			return (NULL);
 		if (tmp->type == TK_OUT_CHEVRON || tmp->type == TK_APP_CHEVRON)
 			return (tmp);
 		tmp = tmp->next;
@@ -81,6 +87,8 @@ t_tk	*get_prev_output_operator_tk(t_tk *tk)
 		return (NULL);
 	while (tmp != NULL)
 	{
+		if (tmp->type == TK_PIPE)
+			return (NULL);
 		if (tmp->type == TK_OUT_CHEVRON || tmp->type == TK_APP_CHEVRON)
 			return (tmp);
 		tmp = tmp->prev;

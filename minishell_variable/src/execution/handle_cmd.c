@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_cmd.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tsanglar <tsanglar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: thibault <thibault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 11:50:20 by thibault          #+#    #+#             */
-/*   Updated: 2024/01/24 16:22:51 by tsanglar         ###   ########.fr       */
+/*   Updated: 2024/01/27 17:26:46 by thibault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,18 +79,19 @@ int	get_cmd_path(t_tk *tk)
 	int		i;
 
 	i = 0;
-	while (g_env->path_tab[i])
+	while (tk->env_struct->path_tab[i])
 	{
-		temp = ft_strjoin(g_env->path_tab[i], "/");
+		temp = ft_strjoin(tk->env_struct->path_tab[i], "/");
 		cmd = ft_strjoin(temp, tk->tk_str);
 		free(temp);
-		if (check_and_set_path(tk, cmd, g_env->path_tab[i]) == SUCCESS)
+		if (check_and_set_path(tk, cmd, tk->env_struct->path_tab[i]) == SUCCESS)
 			return (0);
 		i++;
 	}
 	ft_putstr_fd("minishell: ", STDERR_FILENO);
 	ft_putstr_fd(tk->tk_str, STDERR_FILENO);
 	ft_putstr_fd(": command not found\n", STDERR_FILENO);
-	g_env->status = 127;
+	// printf("get_cmd_path::\n");
+	tk->env_struct->status = 127;
 	return (1);
 }

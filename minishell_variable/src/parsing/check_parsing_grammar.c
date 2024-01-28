@@ -3,20 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   check_parsing_grammar.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tsanglar <tsanglar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: thibault <thibault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 14:42:49 by thibault          #+#    #+#             */
-/*   Updated: 2024/01/24 15:26:30 by tsanglar         ###   ########.fr       */
+/*   Updated: 2024/01/27 15:58:16 by thibault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int	prt_err(char *message, int status, int return_value)
+int	prt_err(t_env *env, char *message, int status, int return_value)
 {
+	(void)env;
 	ft_putstr_fd("minishell: error: ", 2);
 	ft_putstr_fd(message, 2);
-	g_env->status = status;
+	// env->status = status;
+	g_status = status;
 	return (return_value);
 }
 
@@ -68,7 +70,7 @@ int	check_grammar(t_env *env)
 	tk = env->tk_head;
 	check = 0;
 	if (!tk)
-		return (prt_err("error - no argument\n", 11, 11));
+		return (prt_err(env, "error - no argument\n", 11, 11));
 	check = check_here_doc_arg(tk);
 	if (check != 0)
 		return (check);

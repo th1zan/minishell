@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tsanglar <tsanglar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: thibault <thibault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 21:00:32 by thibault          #+#    #+#             */
-/*   Updated: 2024/01/24 16:22:20 by tsanglar         ###   ########.fr       */
+/*   Updated: 2024/01/27 15:33:57 by thibault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int		check_main_list_tokens(t_tk *tk);
 int		check_redir_sublist(t_tk *tk);
 
 /*check_parsing_grammar.c*/
-int		prt_err(char *message, int status, int return_value);
+int		prt_err(t_env *env, char *message, int status, int return_value);
 int		check_input_redirect(t_tk *tmp);
 int		check_output_redirect(t_tk *tmp);
 int		validate_tokens(t_tk *tk);

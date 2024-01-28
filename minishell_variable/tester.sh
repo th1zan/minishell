@@ -15,13 +15,11 @@ set fp [open $infile r]
 # Lancer minishell
 spawn $minishell
 
-sleep 10
+# Attendre que minishell soit prêt
+expect "minishell> "
 
 # Log all the output to a file
 log_file -a $outfile; # -a appends instead of overwriting
-
-# Attendre que minishell soit prêt
-expect "minishell> "
 
 # Lire et exécuter les commandes ligne par ligne
 while {[gets $fp cmd] != -1} {
@@ -29,7 +27,11 @@ while {[gets $fp cmd] != -1} {
     send -- "$cmd\r"
     # Attendre que la commande soit exécutée avant de continuer
     expect "minishell> "
-	# sleep 1
+
+    # Envoyer la commande 'echo $?' pour obtenir le code de sortie
+    send -- "echo $?\r"
+    # Attendre que la commande 'echo $?' soit exécutée avant de continuer
+    expect "minishell> "
 }
 
 # Fin de l'envoi des commandes, on envoie EOF (Ctrl+D)

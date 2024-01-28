@@ -6,7 +6,7 @@
 /*   By: thibault <thibault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/02 18:38:33 by thibault          #+#    #+#             */
-/*   Updated: 2023/11/14 12:49:07 by thibault         ###   ########.fr       */
+/*   Updated: 2024/01/27 16:18:49 by thibault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int	is_builtin_exec(t_tk *cmd)
 	else if (is_exit(cmd))
 	{
 		status = exit_builtin(cmd);
-		free_global_env(g_env);
+		free_env(cmd->env_struct);
 		exit(status);
 	}
 	return (status);

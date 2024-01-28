@@ -6,7 +6,7 @@
 /*   By: thibault <thibault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/02 18:44:47 by thibault          #+#    #+#             */
-/*   Updated: 2023/11/03 10:22:40 by thibault         ###   ########.fr       */
+/*   Updated: 2024/01/27 15:29:15 by thibault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 # define BUILT_IN_H
 
 /*built_in_cd.c*/
-int		add_new_oldpwd(char *current_directory);
-int		update_oldpwd(char *current_directory);
+int		add_new_oldpwd(char *current_directory, t_env *env);
+int		update_oldpwd(char *current_directory, t_env *env);
 int		cd(t_tk *tk);
 
 /*built_in_echo.c*/
@@ -34,10 +34,10 @@ int		is_all_digit(char *str);
 
 /*built_in_export_1.c*/
 int		export(t_tk *tk);
-int		handle_new_var(char *new_var);
-int		update_or_add_env_var(char *new_var);
-int		add_new_env_var(char **env, char *new_var);
-void	update_path_tab(void);
+int		handle_new_var(t_env *env, char *new_var);
+int		update_or_add_env_var(t_env *env, char *new_var);
+int		add_new_env_var(t_env *env_struct, char **env, char *new_var);
+void	update_path_tab(t_env *env);
 
 /*built_in_export_2.c*/
 char	*concat_args(t_tk *tk);
@@ -47,8 +47,8 @@ int		is_valid_env_argument(char *arg);
 int		validate_env_arg_characters(char *arg);
 
 /*built_in_unset.c*/
-void	remove_env(char **env, int index);
-void	check_path_var(char *var);
+void	remove_env(t_env *env_struct, int index);
+void	check_path_var(t_env *env, char *var);
 int		unset(t_tk *tk);
 
 /*is_built_in_1.c*/

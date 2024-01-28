@@ -6,11 +6,30 @@
 /*   By: thibault <thibault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 14:47:38 by thibault          #+#    #+#             */
-/*   Updated: 2023/11/07 21:19:29 by thibault         ###   ########.fr       */
+/*   Updated: 2024/01/27 15:36:08 by thibault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
+
+// int	free_env(t_env *env)
+// {
+// 	if (env)
+// 	{
+// 		if (env->env_main)
+// 		{
+// 			free_strtab_env(env->env_main);
+// 			free(env->env_main);
+// 		}
+// 		if (env->path_tab)
+// 		{
+// 			free_strtab_env(env->path_tab);
+// 			free(env->path_tab);
+// 		}
+// 		free(env);
+// 	}
+// 	return (0);
+// }
 
 int	free_env(t_env *env)
 {
@@ -26,29 +45,10 @@ int	free_env(t_env *env)
 			free_strtab_env(env->path_tab);
 			free(env->path_tab);
 		}
-		free(env);
-	}
-	return (0);
-}
-
-int	free_global_env(t_env *env)
-{
-	if (env)
-	{
-		if (g_env->env_main)
+		if (env->tk_head)
 		{
-			free_strtab_env(g_env->env_main);
-			free(g_env->env_main);
-		}
-		if (g_env->path_tab)
-		{
-			free_strtab_env(g_env->path_tab);
-			free(g_env->path_tab);
-		}
-		if (g_env->tk_head)
-		{
-			free_lst(g_env->tk_head);
-			g_env->tk_head = NULL;
+			free_lst(env->tk_head);
+			env->tk_head = NULL;
 		}
 		if (env->minishell_directory)
 			free(env->minishell_directory);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_parsing_token_2.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tsanglar <tsanglar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: thibault <thibault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 14:45:21 by thibault          #+#    #+#             */
-/*   Updated: 2024/01/24 16:22:05 by tsanglar         ###   ########.fr       */
+/*   Updated: 2024/01/27 17:29:04 by thibault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ int	test_cmd(t_tk *tk)
 		return (SUCCESS);
 	if (!tk->env_struct->path_tab)
 	{
+		// printf("test_cmd::\n");
 		tk->env_struct->status = 127;
 		cmd_err(tk->env_struct->status, cmd);
 		return (FAILURE);
@@ -56,17 +57,22 @@ int	test_cmd(t_tk *tk)
 	return (FAILURE);
 }
 
-int	check_access(t_env *env,char *cmd)
+int	check_access(t_env *env, char *cmd)
 {
+	(void)env;
 	if (access(cmd, F_OK) == -1)
 	{
-		env->status = 127;
+		// env->status = 127;
+		// printf("check_access:: cmd: %s\n", cmd);
+		g_status = 127;
 		return (FAILURE);
 	}
 	else if (access(cmd, X_OK) == -1)
 	{
-		env->status = 126;
+		// env->status = 126;
+		g_status = 126;
 		return (FAILURE);
 	}
+	g_status = 0; //Nécessaire pour les tests de pipes
 	return (SUCCESS);
 }
