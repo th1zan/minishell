@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   set_cmd_fd.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thibault <thibault@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tsanglar <tsanglar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 13:40:14 by thibault          #+#    #+#             */
-/*   Updated: 2024/01/27 18:47:19 by thibault         ###   ########.fr       */
+/*   Updated: 2024/01/30 14:30:01 by tsanglar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,51 +31,51 @@ int	set_cmd_std_fd(t_tk **tk)
 	return (0);
 }
 
-// int	set_cmd_pipe_fd(t_tk **tk)
-// {
-// 	t_tk	*tmp;
-// 	t_tk	*prev_pipe;
-// 	t_tk	*next_pipe;
-
-// 	tmp = *tk;
-// 	while (tmp != NULL)
-// 	{
-// 		prev_pipe = get_prev_pipe_tk(tmp);
-// 		next_pipe = get_next_pipe_tk(tmp);
-// 		if (tmp->type == TK_CMD || tmp->type == TK_CMD_BUILT_IN)
-// 		{
-// 			if (prev_pipe)
-// 				tmp->fd_in = prev_pipe->fd_out;
-// 			if (next_pipe)
-// 				tmp->fd_out = next_pipe->fd_in;
-// 		}
-// 		tmp = tmp->next;
-// 	}
-// 	return (0);
-// }
 
 // Vérifie la présence de chevrons entre les tokens
-int	chevron_between(t_tk *start, t_tk *end)
+int	chevron_out_between_pipe_and_cmd(t_tk *start, t_tk *end)
 {
 	t_tk *tmp;
 
 	tmp = start->next;
-	while (tmp != end)
+	while (tmp && tmp->type != TK_PIPE)
 	{
 		if (tmp->type == TK_APP_CHEVRON || tmp->type == TK_OUT_CHEVRON)
 			return (1);
+		if (tmp == end)
+			break;
 		tmp = tmp->next;
 	}
 	return (0);
 }
 
-// Configure les descripteurs de fichier pour les commandes dans le pipeline
+int	chevron_in_between_pipe_and_cmd(t_tk *start, t_tk *end)
+{
+	t_tk *tmp;
+
+	// printf("start : %s\n", start->tk_str);
+	// printf("end : %s\n", end->tk_str);
+	tmp = start->next;
+	// printf("tmp : %s\n", tmp->tk_str);
+	while (tmp && tmp->type != TK_PIPE)
+	{
+		// printf("tmp %s type: %d\n", tmp->tk_str,tmp->type);
+		if (tmp->type == TK_IN_CHEVRON)
+			return (1);
+		if (tmp == end)
+			break;
+		tmp = tmp->next;
+	}
+	return (0);
+}
+
 int	set_cmd_pipe_fd(t_tk **tk)
 {
 	t_tk *tmp;
 	t_tk *prev_pipe;
 	t_tk *next_pipe;
 
+	// print_lst(*tk);
 	tmp = *tk;
 	while (tmp)
 	{
@@ -83,15 +83,67 @@ int	set_cmd_pipe_fd(t_tk **tk)
 		{
 			prev_pipe = get_prev_pipe_tk(tmp);
 			next_pipe = get_next_pipe_tk(tmp);
-			if (prev_pipe && !chevron_between(prev_pipe, tmp))
-				tmp->fd_in = prev_pipe->fd_out;
-			if (next_pipe && !chevron_between(tmp, next_pipe))
-				tmp->fd_out = next_pipe->fd_in;
+			if (prev_pipe)
+			{
+				if (!chevron_in_between_pipe_and_cmd(prev_pipe, tmp) && 
+					!(next_pipe && chevron_in_between_pipe_and_cmd(tmp, next_pipe)) &&
+					!(next_pipe == NULL && chevron_in_between_pipe_and_cmd(tmp, ft_lstlast(tmp))))
+				{
+					tmp->fd_in = prev_pipe->fd_out;
+				}
+			}
+			if (next_pipe)
+			{
+				// if (!chevron_out_between_pipe_and_cmd(tmp, next_pipe))
+				// 	printf("C1\n");
+				// if	(!(prev_pipe && chevron_out_between_pipe_and_cmd(prev_pipe, tmp)))
+				// 	printf("C2\n");
+				// if	(!(prev_pipe == NULL && chevron_out_between_pipe_and_cmd(ft_lstfirst(tmp), tmp)))
+				// 	printf("C3\n");
+					
+				if (!chevron_out_between_pipe_and_cmd(tmp, next_pipe) &&
+					!(prev_pipe && chevron_out_between_pipe_and_cmd(prev_pipe, tmp)) &&
+					!(prev_pipe == NULL && chevron_out_between_pipe_and_cmd(ft_lstfirst(tmp), tmp)))
+				{
+					tmp->fd_out = next_pipe->fd_in;
+				}
+			}
 		}
 		tmp = tmp->next;
 	}
+	
 	return (0);
 }
+
+
+// Configure les descripteurs de fichier pour les commandes dans le pipeline
+
+// int	set_cmd_pipe_fd(t_tk **tk)
+// {
+// 	t_tk *tmp;
+// 	t_tk *prev_pipe;
+// 	t_tk *next_pipe;
+
+// 	tmp = *tk;
+// 	while (tmp)
+// 	{
+// 		if (tmp->type == TK_CMD || tmp->type == TK_CMD_BUILT_IN)
+// 		{
+// 			prev_pipe = get_prev_pipe_tk(tmp);
+// 			next_pipe = get_next_pipe_tk(tmp);
+// 			if (prev_pipe && !chevron_in_between(prev_pipe, tmp))
+// 				tmp->fd_in = prev_pipe->fd_out;
+// 			if (next_pipe && !chevron_in_between(tmp, next_pipe))
+// 				tmp->fd_in = prev_pipe->fd_out;
+// 			if (prev_pipe && !chevron_out_between(prev_pipe, tmp))
+// 				tmp->fd_in = prev_pipe->fd_out;
+// 			if (next_pipe && !chevron_out_between(tmp, next_pipe))
+// 				tmp->fd_out = next_pipe->fd_in;
+// 		}
+// 		tmp = tmp->next;
+// 	}
+// 	return (0);
+// }
 
 void	set_fd_in(t_tk *tmp)
 {

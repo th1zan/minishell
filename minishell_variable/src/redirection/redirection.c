@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirection.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thibault <thibault@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tsanglar <tsanglar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 14:34:44 by thibault          #+#    #+#             */
-/*   Updated: 2024/01/27 18:38:03 by thibault         ###   ########.fr       */
+/*   Updated: 2024/01/30 15:53:10 by tsanglar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ int	set_redirection(t_tk **tk)
 		return (-1);
 	if (set_pipe_fd(tk))
 		return (-1);
+	// set_input_operator_fd(tk);
+	// set_output_operator_fd(tk);
 	if (set_input_operator_fd(tk))
 		return (-1);
 	if (set_output_operator_fd(tk))

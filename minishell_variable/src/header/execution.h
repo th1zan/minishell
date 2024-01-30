@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thibault <thibault@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tsanglar <tsanglar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 12:15:49 by mlachat           #+#    #+#             */
-/*   Updated: 2023/11/03 14:17:34 by thibault         ###   ########.fr       */
+/*   Updated: 2024/01/30 10:48:29 by tsanglar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ int		get_cmd_path(t_tk *tk);
 /*status.c*/
 void	free_and_replace(char **env, char *new_var, int index);
 char	**create_new_env(char **env, char *new_var, int size);
-int		save_status_var_in_env(t_env *env_tk);
 int		update_status_variable(t_env *env, int bin_status, int status_built_in);
 
 /*wait_and_close.c*/

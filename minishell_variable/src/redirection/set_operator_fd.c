@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   set_operator_fd.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thibault <thibault@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tsanglar <tsanglar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 13:35:20 by thibault          #+#    #+#             */
-/*   Updated: 2023/11/14 10:34:54 by thibault         ###   ########.fr       */
+/*   Updated: 2024/01/30 16:25:55 by tsanglar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,9 +96,16 @@ int	open_file_to_fd(char *file, int option)
 		ft_putstr_fd("minishell: ", 2);
 		ft_putstr_fd(file, 2);
 		if (errno == ENOENT)
+		{
 			ft_putstr_fd(": No such file or directory\n", 2);
+			g_status = 1;
+		}	
+			
 		else if (errno == EACCES)
+		{
 			ft_putstr_fd(": Permission denied\n", 2);
+			g_status = 1;
+		}
 		return (-2);
 	}
 	return (fd);

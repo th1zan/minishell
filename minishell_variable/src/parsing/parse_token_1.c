@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_token_1.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thibault <thibault@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tsanglar <tsanglar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/11 11:49:26 by thibault          #+#    #+#             */
-/*   Updated: 2024/01/27 11:22:49 by thibault         ###   ########.fr       */
+/*   Updated: 2024/01/30 16:29:59 by tsanglar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 int	parse_token(t_tk **head_tk, t_env *env)
 {
+	(void)env;
 	ft_lst_modif_tk_str(*head_tk, del_whitespace);
 	ft_lst_modif_tk_type(*head_tk, classify_operator);
 	ft_lst_replace_var(*head_tk, replace_with_values);
@@ -27,6 +28,7 @@ int	parse_token(t_tk **head_tk, t_env *env)
 		return (-1);
 	handle_quotes(*head_tk);
 	ft_delete_type_token(head_tk, TK_HD_ARG);
+	// check_input_file(*head_tk, env);
 	if (check_input_file(*head_tk, env))
 		return (-1);
 	return (0);

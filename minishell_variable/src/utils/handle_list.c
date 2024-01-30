@@ -21,6 +21,15 @@ t_tk	*ft_lstlast(t_tk *tk)
 	return (tk);
 }
 
+t_tk	*ft_lstfirst(t_tk *tk)
+{
+	if (!tk)
+		return (0);
+	while (tk->prev != 0)
+		tk = tk->prev;
+	return (tk);
+}
+
 int	ft_lstsize(t_tk *tk)
 {
 	int	n;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_parsing_token_2.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thibault <thibault@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tsanglar <tsanglar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 14:45:21 by thibault          #+#    #+#             */
-/*   Updated: 2024/01/27 17:29:04 by thibault         ###   ########.fr       */
+/*   Updated: 2024/01/30 16:20:17 by tsanglar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,17 +62,20 @@ int	check_access(t_env *env, char *cmd)
 	(void)env;
 	if (access(cmd, F_OK) == -1)
 	{
-		// env->status = 127;
-		// printf("check_access:: cmd: %s\n", cmd);
+		env->status = 127;
 		g_status = 127;
+		// printf("check_access:: cmd: %s, status: %d\n", cmd, g_status);
 		return (FAILURE);
 	}
 	else if (access(cmd, X_OK) == -1)
 	{
 		// env->status = 126;
 		g_status = 126;
+		// printf("check_access:: cmd: %s, status: %d\n", cmd, g_status);
 		return (FAILURE);
 	}
+	
 	g_status = 0; //Nécessaire pour les tests de pipes
+	// printf("check_access:: cmd: %s, status: %d\n", cmd, g_status);
 	return (SUCCESS);
 }

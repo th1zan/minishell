@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   status.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thibault <thibault@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tsanglar <tsanglar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 11:13:41 by thibault          #+#    #+#             */
-/*   Updated: 2024/01/27 16:35:29 by thibault         ###   ########.fr       */
+/*   Updated: 2024/01/30 15:02:33 by tsanglar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,28 +34,20 @@ char	**create_new_env(char **env, char *new_var, int size)
 	return (new_env);
 }
 
-int	save_status_var_in_env(t_env *env_tk)
+t_tk	*get_prev_cmd_tk(t_tk *tk)
 {
-	char	*new_var;
-	int		index;
-	int		size;
+	t_tk	*tmp;
 
-	new_var = ft_strjoin("?=", ft_itoa(env_tk->status));
-	if (!new_var)
-		return (-1);
-	index = find_env_var(env_tk->env_main, "?");
-	if (index != -1)
-		free_and_replace(env_tk->env_main, new_var, index);
-	else
+	if (!tk)
+		return (tk);
+	tmp = tk;
+	while (tmp != NULL)
 	{
-		size = 0;
-		while (env_tk->env_main[size])
-			size++;
-		env_tk->env_main = create_new_env(env_tk->env_main, new_var, size);
-		if (!env_tk->env_main)
-			return (-1);
+		if (tmp->type == TK_CMD || tmp->type == TK_CMD_BUILT_IN)
+			return (tmp);
+		tmp = tmp->prev;
 	}
-	return (0);
+	return (tk);
 }
 
 int	update_status_variable(t_env *env, int bin_status, int status_built_in)
@@ -63,6 +55,9 @@ int	update_status_variable(t_env *env, int bin_status, int status_built_in)
 	t_tk	*tmp;
 
 	tmp = ft_lstlast(env->tk_head);
+	// printf("tmp %s, type: %d\n", tmp->tk_str, tmp->type);
+	tmp = get_prev_cmd_tk(tmp);
+	// printf("last cmd %s, type: %d\n", tmp->tk_str, tmp->type);
 	if (status_built_in != 0 && tmp->type == TK_CMD_BUILT_IN)
 	{
 		// env->status = status_built_in;
@@ -78,6 +73,6 @@ int	update_status_variable(t_env *env, int bin_status, int status_built_in)
 		return (bin_status);
 	}
 	// env->status = 0;
-	// g_status = 0;
+	g_status = 0;
 	return (0);
 }

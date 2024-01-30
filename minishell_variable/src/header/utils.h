@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thibault <thibault@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tsanglar <tsanglar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 12:29:09 by thibault          #+#    #+#             */
-/*   Updated: 2024/01/27 15:36:14 by thibault         ###   ########.fr       */
+/*   Updated: 2024/01/30 13:26:16 by tsanglar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ int		ft_delete_type_token(t_tk **tk, int tk_type);
 
 /*handle_list.c*/
 t_tk	*ft_lstlast(t_tk *tk);
+t_tk	*ft_lstfirst(t_tk *tk);
 int		ft_lstsize(t_tk *tk);
 
 /*handle_str.c*/

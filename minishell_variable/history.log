@@ -3163,3 +3163,347 @@ cd 123123
 echo $?
 cat "exit 123 exit 298 exit +100 exit "+100" exit +"100" exit -100 exit "-100" exit -"100" exit hello exit 42 world"
 echo $?
+echo <123 <456 hi | echo 42
+echo <123 <456 hi | echo 42
+echo $HOME
+echo "exit_code ->$? user ->$USER home -> $HOME"
+echo "exit_code ->$? user ->$USER home -> $HOME"
+echo "exit_code ->$? user ->$USER home -> $HOME"
+pwd pbcopy
+clear
+echo "exit_code ->$? user ->$USER home -> $HOME"
+->$? user ->$USER home -> $HOME"01~
+echo "exit_code ->$? user ->$USER home -> $HOME"
+echo "exit_code ->$? user ->$USER home -> $HOME"
+echo "exit_code ->$? user ->$USER home -> $HOME"
+echo "exit_code ->$? user ->$USER home -> $HOME"
+echo "exit_code ->$? user ->$USER home -> $HOME"
+echo "exit_code ->$? user ->$USER home -> $HOME"
+echo "exit_code ->$? user ->$USER home -> $HOME"
+echo "exit_code ->$? user ->$USER home -> $HOME"
+grep "exit_code ->$? user ->$USER home -> $HOME"
+echo "exit_code ->$? user ->$USER home -> $HOME"
+cd asdsad
+echo "exit_code ->$? user ->$USER home -> $HOME"
+grep "exit_code ->$? user ->$USER home -> $HOME"
+echo "exit_code ->$? user ->$USER home -> $HOME"
+ "exit_code ->$? user ->$USER home -> $HOME"
+echo "exit_code ->$? user ->$USER home -> $HOME"
+echo "exit_code ->$? user ->$USER home -> $HOME"
+echo "exit_code ->$? user ->$USER home -> $HOME"
+echo "exit_code ->$? user ->$USER home -> $HOME"
+exit (123)
+pwd
+export PATH+/Users/tsanglar/Documents/minishell/minishell_variable
+export PATH=/Users/tsanglar/Documents/minishell/minishell_variable
+./minishell
+exit 123
+echo $?
+./minishell
+/Users/tsanglar/Documents/minishell/minishell_variable/minishell
+exit 43
+echo $?
+echo "exit_code ->$? user ->$USER home -> $HOME"
+echo "exit_code ->$? user ->$USER home -> $HOME"
+echo "exit_code ->$? user ->$USER home -> $HOME"
+test
+test
+echo "exit_code ->$? user ->$USER home -> $HOME"
+echo "exit_code ->$? user ->$USER home -> $HOME"
+
+echo "exit_code ->$? user ->$USER home -> $HOME"
+echo "exit_code ->$? user ->$USER home -> $HOME"
+test
+clear
+/Users/tsanglar/Documents/minishell/minishell_variable
+
+echo "exit_code ->$? user ->$USER home -> $HOME"
+echo "exit_code ->$? user ->$USER home -> $HOME"
+echo "exit_code ->$? user ->$USER home -> $HOME"
+test
+echo "exit_code ->$? user ->$USER home -> $HOME"
+echo salut
+echo "exit_code ->$? user ->$USER home -> $HOME"
+echo "exit_code ->$? user ->$USER home -> $HOME"
+tes
+test
+echo "exit_code ->$? user ->$USER home -> $HOME"
+echo "exit_code ->$? user ->$USER home -> $HOME"
+ewr
+echo salut
+echo "exit_code ->$? user ->$USER home -> $HOME"
+tests
+cat >asdsad
+cat <asdsad
+cat <asdsad
+echo "exit_code ->$? user ->$USER home -> $HOME"
+cat < asdsad
+echo < rtest
+ls
+cat <Makefile
+cat <   Makefile
+cat <   Makefiles
+cat <asd
+cat < asdsad
+cat <asdsad
+echo < rtest
+cat <asdsad >testfile
+cat <asdsad
+cat < asdsad
+
+cat < asdsad
+ls
+rm asdsad 
+cat <www
+cat <www
+ls
+echo <"./test_files/infile" <missing <"./test_files/infile"
+echo $?
+echo <"./test_files/infile" <missing <"./test_files/infile"
+echo $?
+echo <"./test_files/infile_big" | cat <"./test_files/infile"
+echo $?
+ls
+cat <"./test_files/infile"
+cat <"./minishell_tester/test_files/infile"
+echo <"./test_files/infile_big" | cat <"./test_files/infile"
+echo $?
+ cat <"./test_files/infile"
+echo <"./test_files/infile_big"
+echo <"./test_files/infile_big" | cat <"./test_files/infile"
+exit
+echo <"./test_files/infile_big" | cat <"./test_files/infile"
+exit
+echo <"./test_files/infile_big" | cat <"./test_files/infile"
+exit
+
+echo <"./test_files/infile_big" | cat <"./test_files/infile"
+exit
+echo <"./test_files/infile_big" | cat <"./test_files/infile"
+echo <"./test_files/infile_big" | cat <"./test_files/infile"
+ls
+cat hd_arg.txt | grep test
+cat hd_arg.txt | grep a
+cat hd_arg.txt
+cat hd_arg.txt | grep 23
+echo <hd_arg.txt  | grep 23
+echo <"./test_files/infile_big" | cat <"./test_files/infile"
+echo <"./test_files/infile_big" | cat <"./test_files/infile"
+minishell> echo <"./test_files/infile_big" | cat <"./test_files/infile"
+minishell> echo <"./test_files/infile_big" | cat <"./test_files/infile"
+echo <"./test_files/infile_big" | cat <"./test_files/infile"
+echo <"./test_files/infile_big" | cat <"./test_files/infile"
+echo <"./test_files/infile_big" | cat <"./test_files/infile"
+ echo <"./test_files/infile_big" | cat <"./test_files/infile"
+echo <"./test_files/infile_big" | cat <"./test_files/infile"
+echo <"./test_files/infile_big" | cat <"./test_files/infile"
+echo <"./test_files/infile_big" | cat <"./test_files/infile"
+ echo <"./test_files/infile_big" | cat <"./test_files/infile"
+echo <"./test_files/infile_big" | cat <"./test_files/infile"
+echo <"./test_files/infile_big" | cat <"./test_files/infile"
+echo <"./test_files/infile_big" | cat <"./test_files/infile"
+echo <"./test_files/infile_big" | cat <"./test_files/infile"
+echo <"./test_files/infile_big" | cat <"./test_files/infile"
+echo <"./test_files/infile_big" | cat <"./test_files/infile"
+echo <"./test_files/infile_big" | cat <"./test_files/infile"
+echo <"./test_files/infile_big" | cat <"./test_files/infile"
+echo <"./test_files/infile_big" | cat <"./test_files/infile"
+echo <"./test_files/infile_big" | cat <"./test_files/infile"
+echo <"./test_files/infile_big" | cat <"./test_files/infile"
+echo <"./test_files/infile_big" | cat <"./test_files/infile"
+echo <"./test_files/infile_big" | cat <"./test_files/infile"
+echo <"./test_files/infile_big" | cat <"./test_files/infile"
+env | sort | grep -v SHLVL | grep -v ^_
+minishell> env | sort | grep -v SHLVL | grep -v ^_
+env | sort | grep -v SHLVL 
+env | sort | grep t
+echo <"./test_files/infile_big" | cat <"./test_files/infile"
+exit
+env | sort | grep -v SHLVL | grep -v ^_
+env | sort | grep -v SHLVL | grep -v ^_
+env | sort | grep -v SHLVL | grep -v ^_
+env | sort | grep -v SHLVL | grep -v ^_
+
+PAGER=less
+PATH=/Users/tsanglar/.brew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/munki:/Library/Apple/usr/bin
+PWD=/Users/tsanglar/Documents/minishell/minishell_variable
+SHELL=/bin/zsh
+SSH_AUTH_SOCK=/private/tmp/com.apple.launchd.IPzo2GQ3wh/Listeners
+TERM=xterm-256color
+TERM_PROGRAM=iTerm.app
+TERM_PROGRAM_VERSION=3.4.22
+TERM_SESSION_ID=w1t0p0:46A665F2-2968-4D50-96F8-6409C3FF4587
+TMPDIR=/var/folders/zz/zyxvpxvq6csfxvn_n000ccr8003362/T/
+USER=tsanglar
+XPC_FLAGS=0x0
+XPC_SERVICE_NAME=0
+ZSH=/Users/tsanglar/.oh-my-zsh
+minishell>
+PAGER=less
+PATH=/Users/tsanglar/.brew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/munki:/Library/Apple/usr/bin
+PWD=/Users/tsanglar/Documents/minishell/minishell_variable
+SHELL=/bin/zsh
+SSH_AUTH_SOCK=/private/tmp/com.apple.launchd.IPzo2GQ3wh/Listeners
+TERM=xterm-256color
+TERM_PROGRAM=iTerm.app
+TERM_PROGRAM_VERSION=3.4.22
+TERM_SESSION_ID=w1t0p0:46A665F2-2968-4D50-96F8-6409C3FF4587
+TMPDIR=/var/folders/zz/zyxvpxvq6csfxvn_n000ccr8003362/T/
+USER=tsanglar
+XPC_FLAGS=0x0
+XPC_SERVICE_NAME=0
+ZSH=/Users/tsanglar/.oh-my-zsh
+minishell>export GHOST=123 | env | grep GHOST
+env
+
+PAGER=less
+PATH=/Users/tsanglar/.brew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/munki:/Library/Apple/usr/bin
+PWD=/Users/tsanglar/Documents/minishell/minishell_variable
+SHELL=/bin/zsh
+SSH_AUTH_SOCK=/private/tmp/com.apple.launchd.IPzo2GQ3wh/Listeners
+TERM=xterm-256color
+TERM_PROGRAM=iTerm.app
+TERM_PROGRAM_VERSION=3.4.22
+TERM_SESSION_ID=w1t0p0:46A665F2-2968-4D50-96F8-6409C3FF4587
+TMPDIR=/var/folders/zz/zyxvpxvq6csfxvn_n000ccr8003362/T/
+USER=tsanglar
+XPC_FLAGS=0x0
+XPC_SERVICE_NAME=0
+ZSH=/Users/tsanglar/.oh-my-zsh
+minishell>
+PAGER=less
+PATH=/Users/tsanglar/.brew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/munki:/Library/Apple/usr/bin
+PWD=/Users/tsanglar/Documents/minishell/minishell_variable
+SHELL=/bin/zsh
+SSH_AUTH_SOCK=/private/tmp/com.apple.launchd.IPzo2GQ3wh/Listeners
+TERM=xterm-256color
+TERM_PROGRAM=iTerm.app
+TERM_PROGRAM_VERSION=3.4.22
+TERM_SESSION_ID=w1t0p0:46A665F2-2968-4D50-96F8-6409C3FF4587
+TMPDIR=/var/folders/zz/zyxvpxvq6csfxvn_n000ccr8003362/T/
+USER=tsanglar
+XPC_FLAGS=0x0
+XPC_SERVICE_NAME=0
+ZSH=/Users/tsanglar/.oh-my-zsh
+minishell>export GHOST=123
+env
+env
+env
+env
+export GHOST=123 | env | grep GHOST
+pwd
+clear
+ echo <"./test_files/infile" <missing <"./test_files/infile"
+ echo <"./test_files/infile" <missing <"./test_files/infile"
+echo <"./test_files/infile" <missing <"./test_files/infile"
+echo $?
+echo <missing <"./test_files/infile" 
+echo $?
+cat <"./test_files/infile" | echo hi
+echo $?
+cat <"./test_files/infile" | echo hi
+cat <"./test_files/infile" | echo hi
+ cat <"./test_files/infile" | echo hi
+echo $?
+cat <"./test_files/infile" | echo hi
+ echo <"./test_files/infile" <missing <"./test_files/infile"
+cat <"./test_files/infile_big" | echo hi
+echo $?
+cat <missing | echo oi
+cat <missing | cat <"./test_files/infile"
+cat <"./test_files/infile_big" | echo hi
+echo $?
+cat <"./test_files/infile_big" | echo hi
+cat <"./test_files/infile_big" | echo hi
+cat <missing | echo oi
+cat <missing | echo oi
+cat <"./test_files/infile_big" | echo hi
+cat <missing
+cat <missing
+echo $?
+cat <missing
+echo $?
+echo hi | echo bye >./test_files/invalid_permission
+echo hi | echo bye >./test_files/invalid_permission
+echo $?
+ls >./outfiles/outfile01 >>./test_files/invalid_permission >>./outfiles/outfile02
+echo $?
+echo hi >./test_files/invalid_permission >./outfiles/outfile01 | echo bye
+echo hi >./test_files/invalid_permission | echo bye
+echo hi >./test_files/invalid_permission | echo bye
+echo hi >./test_files/invalid_permission
+echo $?
+ ls >./outfiles/outfile01 >>./outfiles/outfile01 >./outfiles/outfile02
+ls >>outfile
+echo <"./test_files/infile" <missing <"./test_files/infile"
+ls
+cat infile
+echo < infile
+cat <missing | cat <"./test_files/infile"
+echo <"./test_files/infile" <missing <"./test_files/infile"
+cat <missing | cat <"./test_files/infile"
+cat <missing | cat <"./test_files/infile"
+cat <missing | cat <"./test_files/infile"
+cat <missing | cat <"./test_files/infile"
+cat <missing | cat <"./test_files/infile"
+echo <"./test_files/infile" <missing <"./test_files/infile"
+cat <minishell.h|ls
+cat <minishell.h|ls
+cat <minishell.h|ls
+cat <eval_cmd|ls
+echo $?
+cat >./outfiles/outfile01 <missing
+echo hi >>./outfiles/outfile01 >>./outfiles/outfile02 | echo bye
+./test_files
+echo $?
+./test_files
+./test_files
+echo $?
+asd
+asd
+asdsad
+asd
+asdasd
+asdasd
+ls
+asdsad
+ls
+echo $?
+asdsad
+echo $?
+ddsa
+sadad
+adasd
+adasd
+awdasd
+asdsad
+d
+d
+d
+d
+d
+asdasd
+asdsad
+asdsa
+asd
+cat <minishell.h|ls
+cat <minishell.h>./outfiles/outfile
+cat <minishell.h>./outfiles/outfile
+cat <minishell.h|ls
+echo hi >>./test_files/invalid_permission >./outfiles/outfile01 | echo bye
+echo hi >>./test_files/invalid_permission >./outfiles/outfile01 | echo bye
+echo hi >>./test_files/invalid_permission >./outfiles/outfile01 | echo bye
+
+echo hi >>./test_files/invalid_permission >./outfiles/outfile01 | echo bye
+
+echo hi >>./test_files/invalid_permission >./outfiles/outfile01 | echo bye
+
+check_input_file
+fdsdasd
+ echo hi >>./outfiles/outfile01 | echo bye >>./outfiles/outfile02
+ echo hi >>./outfiles/outfile01 | echo bye >>./outfiles/outfile02
+echo hi >>./test_files/invalid_permission | echo bye
+ls >>./test_files/invalid_permission >>./outfiles/outfile01
+ls
+ls >>./outfiles/outfile01 >>./test_files/invalid_permission
+cd test_files

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   built_in_echo.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thibault <thibault@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tsanglar <tsanglar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 09:56:11 by thibault          #+#    #+#             */
-/*   Updated: 2023/11/14 13:36:29 by thibault         ###   ########.fr       */
+/*   Updated: 2024/01/30 14:19:08 by tsanglar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ int	echo(t_tk *tk)
 	t_tk	*tmp;
 	int		newline;
 
+	// print_lst(tk->env_struct->tk_head);
 	tmp = tk->tk_arg;
 	if (!(tmp))
 	{
@@ -42,7 +43,7 @@ int	echo(t_tk *tk)
 	if (!newline)
 		tmp = tmp->next;
 	// fprintf(stderr, "fd_out %d\n", tk->fd_out);
-	// print_lst(g_env->tk_head);
+	
 	print_args(tk, tmp, newline);
 	return (0);
 }
