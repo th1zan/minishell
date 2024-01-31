@@ -6,7 +6,7 @@
 #    By: zsoltani <zsoltani@student.42lausanne.ch>  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/20 17:58:32 by thibault          #+#    #+#              #
-#    Updated: 2024/01/31 08:42:18 by zsoltani         ###   ########.fr        #
+#    Updated: 2024/01/31 10:39:38 by zsoltani         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -156,7 +156,7 @@ fclean: clean
 	@$(MAKE) fclean -C $(LIBFT_DIR)
 	@echo "==== Full cleaning $(NAME) ===="
 	@$(RM_FILE) -r $(OBJ_DIR)
-#@$(RM_FILE) $(NAME)
+	@$(RM_FILE) $(NAME)
 
 debug : $(OBJS)
 	@echo "==== Debug mode ===="

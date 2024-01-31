@@ -3817,3 +3817,49 @@ exit
 echo $?
 echo $?
 exit 
+exit
+ echo '$USER'
+ echo $USER
+/bin/ls
+ echo -n $USER
+$? + $?
+$?
+/bin/ls filethatdoesntexist
+echo hi
+
+echo hi
+grep b
+pwd
+ls
+grep b
+grep a
+echo "cat lol.c | cat > lol.c"
+'$USER'
+echo '$USER'
+env
+export TEST=123
+env
+export TEST=456
+env
+export TEST='456'
+env
+export TEST=$USER
+env
+unset TEST=jansol
+env
+export TEST=$USER
+env
+unset TEST
+env
+exit
+exit
+env
+export abc=567
+env
+exit
+env
+make fclean
+./minishell
+exit
+./minishell
+exit 123
