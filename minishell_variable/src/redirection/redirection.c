@@ -6,7 +6,7 @@
 /*   By: tsanglar <tsanglar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 14:34:44 by thibault          #+#    #+#             */
-/*   Updated: 2024/01/30 15:53:10 by tsanglar         ###   ########.fr       */
+/*   Updated: 2024/01/30 20:59:50 by zsoltani         ###   lausanne.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,6 @@ int	set_redirection(t_tk **tk)
 		return (-1);
 	if (set_pipe_fd(tk))
 		return (-1);
-	// set_input_operator_fd(tk);
-	// set_output_operator_fd(tk);
 	if (set_input_operator_fd(tk))
 		return (-1);
 	if (set_output_operator_fd(tk))

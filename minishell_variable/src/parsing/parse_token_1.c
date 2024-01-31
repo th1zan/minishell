@@ -6,7 +6,7 @@
 /*   By: tsanglar <tsanglar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/11 11:49:26 by thibault          #+#    #+#             */
-/*   Updated: 2024/01/30 16:29:59 by tsanglar         ###   ########.fr       */
+/*   Updated: 2024/01/30 21:53:08 by zsoltani         ###   lausanne.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ int	parse_token(t_tk **head_tk, t_env *env)
 		return (-1);
 	handle_quotes(*head_tk);
 	ft_delete_type_token(head_tk, TK_HD_ARG);
-	// check_input_file(*head_tk, env);
 	if (check_input_file(*head_tk, env))
 		return (-1);
 	return (0);
@@ -37,9 +36,7 @@ int	parse_token(t_tk **head_tk, t_env *env)
 int	check_parsing(t_env *env)
 {
 	int	check;
-	// t_tk	*tk;
 
-	// tk = env->tk_head;
 	check = 0;
 	check = check_grammar(env);
 	if (check > 0)

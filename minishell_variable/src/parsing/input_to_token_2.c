@@ -6,7 +6,7 @@
 /*   By: tsanglar <tsanglar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/09 14:58:05 by thibault          #+#    #+#             */
-/*   Updated: 2024/01/24 16:10:35 by tsanglar         ###   ########.fr       */
+/*   Updated: 2024/01/30 22:01:48 by zsoltani         ###   lausanne.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ int	add_token(char *input, int begin, int len, t_tk **tk, t_env *env)
 {
 	char	*tk_str;
 	t_tk	*new_tk;
-
 
 	new_tk = NULL;
 	if (len > 0)

@@ -6,7 +6,7 @@
 /*   By: tsanglar <tsanglar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 10:50:29 by thibault          #+#    #+#             */
-/*   Updated: 2024/01/30 11:02:58 by tsanglar         ###   ########.fr       */
+/*   Updated: 2024/01/30 21:45:15 by zsoltani         ###   lausanne.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,6 @@ int	execution(t_env *env, t_tk **tk)
 				return (-1);
 		if (tmp->type == TK_CMD_BUILT_IN)
 			status_built_in = is_builtin_exec(tmp);
-		// printf("status_built_in %d\n", status_built_in);
 		tmp = get_next_cmd(tmp);
 	}
 	close_all_fd(tk);

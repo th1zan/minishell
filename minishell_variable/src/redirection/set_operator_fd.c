@@ -6,7 +6,7 @@
 /*   By: tsanglar <tsanglar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 13:35:20 by thibault          #+#    #+#             */
-/*   Updated: 2024/01/30 16:25:55 by tsanglar         ###   ########.fr       */
+/*   Updated: 2024/01/30 21:00:50 by zsoltani         ###   lausanne.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,8 +99,7 @@ int	open_file_to_fd(char *file, int option)
 		{
 			ft_putstr_fd(": No such file or directory\n", 2);
 			g_status = 1;
-		}	
-			
+		}			
 		else if (errno == EACCES)
 		{
 			ft_putstr_fd(": Permission denied\n", 2);

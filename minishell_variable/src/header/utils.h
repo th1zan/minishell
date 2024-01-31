@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tsanglar <tsanglar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zsoltani <zsoltani@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 12:29:09 by thibault          #+#    #+#             */
-/*   Updated: 2024/01/30 13:26:16 by tsanglar         ###   ########.fr       */
+/*   Updated: 2024/01/30 22:50:04 by zsoltani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ char	*replace_var_in_str(char *input_str, int *i, char **env);
 /*handle_variable.c*/
 int		update_input_if_needed(char **input, char *new_input);
 char	*handle_status_variable(char *input, int *i, t_env *env);
-char	*process_variable_replacement(char *input, int *i, char **var_val_tab, t_env *env);
+char	*expand_var(char *input, int *i, char **var_val_tab, t_env *env);
 void	process_input(char **input, int *i, t_tk *env, int *is_var);
 int		replace_with_values(char **input, t_tk *tk);
 

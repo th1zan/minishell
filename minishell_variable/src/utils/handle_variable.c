@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_variable.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thibault <thibault@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zsoltani <zsoltani@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 14:50:20 by thibault          #+#    #+#             */
-/*   Updated: 2024/01/27 15:58:43 by thibault         ###   ########.fr       */
+/*   Updated: 2024/01/30 22:50:07 by zsoltani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ char	*handle_status_variable(char *input, int *i, t_env *env)
 	char	*new_input;
 
 	(void)env;
-	// status = ft_itoa(env->status);
 	status = ft_itoa(g_status);
 	new_input = replace_var_status_in_string(input, i, status);
 	(*i) += 1;
@@ -40,7 +39,7 @@ char	*handle_status_variable(char *input, int *i, t_env *env)
 	return (new_input);
 }
 
-char	*process_variable_replacement(char *input, int *i, char **var_val_tab, t_env *env)
+char	*expand_var(char *input, int *i, char **var_val_tab, t_env *env)
 {
 	char	*new_input;
 
@@ -58,14 +57,14 @@ char	*process_variable_replacement(char *input, int *i, char **var_val_tab, t_en
 void	process_input(char **input, int *i, t_tk *tk, int *is_var)
 {
 	char	*new_input;
-	char **var_val_tab;
+	char	**var_val_tab;
 	t_env	*env;
 
 	var_val_tab = *(tk->env);
 	env = tk->env_struct;
 	if ((*input)[*i] == '$' && check_inside_simple_quote(*input, *i) != SUCCESS)
 	{
-		new_input = process_variable_replacement(*input, i, var_val_tab, env);
+		new_input = expand_var(*input, i, var_val_tab, env);
 		if (new_input)
 			*is_var = update_input_if_needed(input, new_input);
 		else
@@ -77,7 +76,7 @@ int	replace_with_values(char **input, t_tk *tk)
 {
 	int	i;
 	int	is_var;
-	
+
 	is_var = 0;
 	i = 0;
 	while ((*input)[i])

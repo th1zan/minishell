@@ -6,7 +6,7 @@
 /*   By: thibault <thibault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 14:06:36 by thibault          #+#    #+#             */
-/*   Updated: 2024/01/27 15:58:03 by thibault         ###   ########.fr       */
+/*   Updated: 2024/01/30 21:46:49 by zsoltani         ###   lausanne.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ int	check_first_last_token(t_tk *first, t_tk *last, t_env *env)
 		ft_putstr_fd("minishell: syntax error near unexpected token '", 2);
 		ft_putstr_fd(first->tk_str, 2);
 		ft_putstr_fd("'\n", 2);
-		// env->status = 258;
 		g_status = 258;
 		return (1);
 	}
@@ -31,7 +30,6 @@ int	check_first_last_token(t_tk *first, t_tk *last, t_env *env)
 		ft_putstr_fd("minishell: syntax error near unexpected token '", 2);
 		ft_putstr_fd(first->tk_str, 2);
 		ft_putstr_fd("'\n", 2);
-		// env->status = 258;
 		g_status = 258;
 		return (1);
 	}
@@ -44,7 +42,6 @@ void	report_syntax_error(t_env *env, char *token)
 	ft_putstr_fd("minishell: syntax error near unexpected token '", 2);
 	ft_putstr_fd(token, 2);
 	ft_putstr_fd("'\n", 2);
-	// env->status = 258;
 	g_status = 258;
 }
 

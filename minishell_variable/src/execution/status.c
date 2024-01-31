@@ -6,7 +6,7 @@
 /*   By: tsanglar <tsanglar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 11:13:41 by thibault          #+#    #+#             */
-/*   Updated: 2024/01/30 15:02:33 by tsanglar         ###   ########.fr       */
+/*   Updated: 2024/01/30 21:44:23 by zsoltani         ###   lausanne.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,24 +55,17 @@ int	update_status_variable(t_env *env, int bin_status, int status_built_in)
 	t_tk	*tmp;
 
 	tmp = ft_lstlast(env->tk_head);
-	// printf("tmp %s, type: %d\n", tmp->tk_str, tmp->type);
 	tmp = get_prev_cmd_tk(tmp);
-	// printf("last cmd %s, type: %d\n", tmp->tk_str, tmp->type);
 	if (status_built_in != 0 && tmp->type == TK_CMD_BUILT_IN)
 	{
-		// env->status = status_built_in;
 		g_status = status_built_in;
-		// printf("update_status_variable:: status_built_in %d, g_status %d\n", status_built_in, g_status);
 		return (status_built_in);
 	}
 	else if (bin_status != 0 && tmp->type == TK_CMD)
 	{
-		// env->status = bin_status;
 		g_status = bin_status;
-		// printf("update_status_variable:: bin_status %d, g_status %d\n", bin_status, g_status);
 		return (bin_status);
 	}
-	// env->status = 0;
 	g_status = 0;
 	return (0);
 }

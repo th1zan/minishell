@@ -6,7 +6,7 @@
 /*   By: tsanglar <tsanglar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 21:04:53 by thibault          #+#    #+#             */
-/*   Updated: 2024/01/24 16:25:11 by tsanglar         ###   ########.fr       */
+/*   Updated: 2024/01/30 22:05:43 by zsoltani         ###   lausanne.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,8 @@ int	ft_handle_arg_tk(t_tk *tk)
 
 int	open_temp_file(t_tk *tk, char **temp_file_path)
 {
-	*temp_file_path = ft_strjoin(tk->env_struct->minishell_directory, "/hd_arg.txt");
+	*temp_file_path = ft_strjoin(tk->env_struct->minishell_directory,
+			"/hd_arg.txt");
 	unlink(*temp_file_path);
 	tk->fd_in = open(*temp_file_path, O_CREAT | O_WRONLY | O_APPEND, 0777);
 	return (tk->fd_in);

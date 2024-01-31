@@ -6,7 +6,7 @@
 /*   By: tsanglar <tsanglar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 14:42:49 by thibault          #+#    #+#             */
-/*   Updated: 2024/01/29 15:15:29 by tsanglar         ###   ########.fr       */
+/*   Updated: 2024/01/30 21:47:43 by zsoltani         ###   lausanne.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ int	prt_err(t_env *env, char *message, int status, int return_value)
 	(void)env;
 	ft_putstr_fd("minishell: error: ", 2);
 	ft_putstr_fd(message, 2);
-	// env->status = status;
 	g_status = status;
 	return (return_value);
 }

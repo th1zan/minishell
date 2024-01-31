@@ -6,7 +6,7 @@
 /*   By: tsanglar <tsanglar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/06 15:14:08 by thibault          #+#    #+#             */
-/*   Updated: 2024/01/30 15:47:16 by tsanglar         ###   ########.fr       */
+/*   Updated: 2024/01/30 20:32:41 by zsoltani         ###   lausanne.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ int	main(int argc, char **argv, char **envp)
 	(void)argc;
 	(void)argv;
 	env = init_env(envp);
-	// g_env = env;
 	input_loop(env);
 	free_env(env);
 	return (0);
@@ -35,7 +34,6 @@ int	execute_command(t_env *env, char *input)
 		env->tk_head = NULL;
 		return (1);
 	}
-	// print_lst(env->tk_head);
 	execution(env, &(env->tk_head));
 	free(input);
 	free_lst(env->tk_head);
@@ -53,7 +51,6 @@ int	process_main_input(t_env *env, char *input)
 		env->tk_head = NULL;
 		return (1);
 	}
-	// print_lst(g_env->tk_head);
 	return (execute_command(env, input));
 }
 

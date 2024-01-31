@@ -6,7 +6,7 @@
 /*   By: thibault <thibault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 21:54:14 by thibault          #+#    #+#             */
-/*   Updated: 2024/01/27 16:34:30 by thibault         ###   ########.fr       */
+/*   Updated: 2024/01/30 20:30:45 by zsoltani         ###   lausanne.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,11 +51,8 @@ int	restore_std(int *original_std)
 void	handle_signal(t_env *env)
 {
 	(void)env;
-	signal(SIGQUIT, SIG_IGN); // Ctrl + backslash
-	signal(SIGINT, handle_sigint); //Ctrl + C
-	// env->status = 1;
-	// g_status = 0; /// ???
-	// printf("handle_signal:: g_status %d\n", g_status);
+	signal(SIGQUIT, SIG_IGN);
+	signal(SIGINT, handle_sigint);
 }
 
 void	handle_sigint(int signo)

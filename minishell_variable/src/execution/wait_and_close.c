@@ -6,7 +6,7 @@
 /*   By: thibault <thibault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 17:11:53 by mlachat           #+#    #+#             */
-/*   Updated: 2023/11/14 13:33:43 by thibault         ###   ########.fr       */
+/*   Updated: 2024/01/30 21:40:06 by zsoltani         ###   lausanne.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,14 +32,12 @@ int	close_all_fd(t_tk **tk)
 			{
 				if (close(tmp->fd_in) == -1)
 					perror("Error closing fd_in");
-				// fprintf(stderr, "close_all_fd :: close fd_in: %d\n", tmp->fd_in);
 				tmp->fd_in = -1;
 			}
 			if ((tmp->fd_out != -1) && (fd_is_standard(tmp->fd_out) != 1))
 			{
 				if (close(tmp->fd_out) == -1)
 					perror("Error closing fd_out");
-				// fprintf(stderr, "close_all_fd :: close fd_out: %d\n", tmp->fd_out);
 				tmp->fd_out = -1;
 			}
 		}

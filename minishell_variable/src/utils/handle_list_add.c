@@ -6,7 +6,7 @@
 /*   By: tsanglar <tsanglar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 09:23:09 by thibault          #+#    #+#             */
-/*   Updated: 2024/01/24 15:51:46 by tsanglar         ###   ########.fr       */
+/*   Updated: 2024/01/30 21:13:45 by zsoltani         ###   lausanne.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,6 @@ t_tk	*ft_lstnew(char *token_str)
 	if (!new_tk)
 		return (NULL);
 	new_tk->tk_str = token_str;
-	// new_tk->path_tab = g_env->path_tab;
-	// new_tk->env = &(g_env->env_main);
 	return (new_tk);
 }
 

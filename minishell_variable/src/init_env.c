@@ -6,7 +6,7 @@
 /*   By: tsanglar <tsanglar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 21:56:39 by thibault          #+#    #+#             */
-/*   Updated: 2024/01/30 11:02:13 by tsanglar         ###   ########.fr       */
+/*   Updated: 2024/01/30 20:28:30 by zsoltani         ###   lausanne.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,9 +70,7 @@ t_env	*init_env(char **envp)
 	}
 	new_env->path_tab = get_path_tab(new_env->env_main);
 	new_env->minishell_directory = ft_strdup(cwd);
-	// new_env->status = 0;
 	g_status = 0;
-	// printf("init_env:: g_status %d\n", g_status);
 	new_env->tk_head = NULL;
 	return (new_env);
 }

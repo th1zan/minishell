@@ -3507,3 +3507,313 @@ ls >>./test_files/invalid_permission >>./outfiles/outfile01
 ls
 ls >>./outfiles/outfile01 >>./test_files/invalid_permission
 cd test_files
+exit
+env
+./minishell
+/Users/jansol/Desktop/minishell_thibault/minishell_variable/./minishell
+env
+exit
+exit
+env
+echo hello
+./tester.sh
+tester.sh
+cd ..
+env | sort | grep -v SHLVL | grep -v ^_
+echo $?
+cat ./minishell_tester/test_files/infile_big | grep oi
+echo $?
+cat minishell.h | grep ");"$
+echo $?
+export GHOST=123 | env | grep GHOST
+echo $?
+|
+echo $?
+| echo oi
+echo $?
+| |
+echo $?
+| $
+echo $?
+| >
+echo $?
+>
+echo $?
+>>
+echo $?
+>>>
+echo $?
+<
+echo $?
+<<
+echo $?
+echo hi <
+echo $?
+cat    <| ls
+echo $?
+echo hi | >
+echo $?
+echo hi | > >>
+echo $?
+echo hi | < |
+echo $?
+echo hi |   |
+echo $?
+echo hi |  "|"
+echo $?
+grep hi <./minishell_tester/test_files/infile
+echo $?
+grep hi "<infile" <         ./minishell_tester/test_files/infile
+echo $?
+echo hi < ./minishell_tester/test_files/infile bye bye
+echo $?
+grep hi <./minishell_tester/test_files/infile_big <./minishell_tester/test_files/infile
+echo $?
+echo <"./minishell_tester/test_files/infile" "bonjour       42"
+echo $?
+cat <"./minishell_tester/test_files/file name with spaces"
+echo $?
+cat <./minishell_tester/test_files/infile_big ./minishell_tester/test_files/infile
+echo $?
+cat <"1""2""3""4""5"
+echo $?
+echo <"./minishell_tester/test_files/infile" <missing <"./minishell_tester/test_files/infile"
+echo $?
+echo <missing <"./minishell_tester/test_files/infile" <missing
+echo $?
+cat <"./minishell_tester/test_files/infile"
+echo $?
+echo <"./minishell_tester/test_files/infile_big" | cat <"./minishell_tester/test_files/infile"
+echo $?
+echo <"./minishell_tester/test_files/infile_big" | cat "./minishell_tester/test_files/infile"
+echo $?
+echo <"./minishell_tester/test_files/infile_big" | echo <"./minishell_tester/test_files/infile"
+echo $?
+echo hi | cat <"./minishell_tester/test_files/infile"
+echo $?
+echo hi | cat "./minishell_tester/test_files/infile"
+echo $?
+cat <"./minishell_tester/test_files/infile" | echo hi
+echo $?
+cat <"./minishell_tester/test_files/infile" | grep hello
+echo $?
+cat <"./minishell_tester/test_files/infile_big" | echo hi
+echo $?
+cat <missing
+echo $?
+cat <missing | cat
+echo $?
+cat <missing | echo oi
+echo $?
+cat <missing | cat <"./minishell_tester/test_files/infile"
+echo $?
+echo <123 <456 hi | echo 42
+echo $?
+ls >./minishell_tester/outfiles/outfile01
+echo $?
+ls >         ./minishell_tester/outfiles/outfile01
+echo $?
+echo hi >         ./minishell_tester/outfiles/outfile01 bye
+echo $?
+ls >./minishell_tester/outfiles/outfile01 >./minishell_tester/outfiles/outfile02
+echo $?
+ls >./minishell_tester/outfiles/outfile01 >./minishell_tester/test_files/invalid_permission
+echo $?
+ls >"./minishell_tester/outfiles/outfile with spaces"
+echo $?
+ls >"./minishell_tester/outfiles/outfile""1""2""3""4""5"
+echo $?
+ls >"./minishell_tester/outfiles/outfile01" >./minishell_tester/test_files/invalid_permission >"./minishell_tester/outfiles/outfile02"
+echo $?
+ls >./minishell_tester/test_files/invalid_permission >"./minishell_tester/outfiles/outfile01" >./minishell_tester/test_files/invalid_permission
+echo $?
+cat <"./minishell_tester/test_files/infile" >"./minishell_tester/outfiles/outfile01"
+echo $?
+echo hi >./minishell_tester/outfiles/outfile01 | echo bye
+echo $?
+echo hi >./minishell_tester/outfiles/outfile01 >./minishell_tester/outfiles/outfile02 | echo bye
+echo $?
+echo hi | echo >./minishell_tester/outfiles/outfile01 bye
+echo $?
+echo hi | echo bye >./minishell_tester/outfiles/outfile01 >./minishell_tester/outfiles/outfile02
+echo $?
+echo hi >./minishell_tester/outfiles/outfile01 | echo bye >./minishell_tester/outfiles/outfile02
+echo $?
+echo hi >./minishell_tester/outfiles/outfile01 >./minishell_tester/test_files/invalid_permission | echo bye
+echo $?
+echo hi >./minishell_tester/test_files/invalid_permission | echo bye
+echo $?
+echo hi >./minishell_tester/test_files/invalid_permission >./minishell_tester/outfiles/outfile01 | echo bye
+echo $?
+echo hi | echo bye >./minishell_tester/test_files/invalid_permission
+echo $?
+echo hi | >./minishell_tester/outfiles/outfile01 echo bye >./minishell_tester/test_files/invalid_permission
+echo $?
+echo hi | echo bye >./minishell_tester/test_files/invalid_permission >./minishell_tester/outfiles/outfile01
+echo $?
+cat <"./minishell_tester/test_files/infile" >./minishell_tester/test_files/invalid_permission
+echo $?
+cat >./minishell_tester/test_files/invalid_permission <"./minishell_tester/test_files/infile"
+echo $?
+cat <missing >./minishell_tester/outfiles/outfile01
+echo $?
+cat >./minishell_tester/outfiles/outfile01 <missing
+echo $?
+cat <missing >./minishell_tester/test_files/invalid_permission
+echo $?
+cat >./minishell_tester/test_files/invalid_permission <missing
+echo $?
+cat >./minishell_tester/outfiles/outfile01 <missing >./minishell_tester/test_files/invalid_permission
+echo $?
+ls >>./minishell_tester/outfiles/outfile01
+echo $?
+ls >>      ./minishell_tester/outfiles/outfile01
+echo $?
+ls >>./minishell_tester/outfiles/outfile01 >./minishell_tester/outfiles/outfile01
+echo $?
+ls >./minishell_tester/outfiles/outfile01 >>./minishell_tester/outfiles/outfile01
+echo $?
+ls >./minishell_tester/outfiles/outfile01 >>./minishell_tester/outfiles/outfile01 >./minishell_tester/outfiles/outfile02
+echo $?
+ls >>./minishell_tester/outfiles/outfile01 >>./minishell_tester/outfiles/outfile02
+echo $?
+ls >>./minishell_tester/test_files/invalid_permission
+echo $?
+ls >>./minishell_tester/test_files/invalid_permission >>./minishell_tester/outfiles/outfile01
+echo $?
+ls >>./minishell_tester/outfiles/outfile01 >>./minishell_tester/test_files/invalid_permission
+echo $?
+ls >./minishell_tester/outfiles/outfile01 >>./minishell_tester/test_files/invalid_permission >>./minishell_tester/outfiles/outfile02
+echo $?
+ls <missing >>./minishell_tester/test_files/invalid_permission >>./minishell_tester/outfiles/outfile02
+echo $?
+ls >>./minishell_tester/test_files/invalid_permission >>./minishell_tester/outfiles/outfile02 <missing
+echo $?
+echo hi >>./minishell_tester/outfiles/outfile01 | echo bye
+echo $?
+echo hi >>./minishell_tester/outfiles/outfile01 >>./minishell_tester/outfiles/outfile02 | echo bye
+echo $?
+echo hi | echo >>./minishell_tester/outfiles/outfile01 bye
+echo $?
+echo hi | echo bye >>./minishell_tester/outfiles/outfile01 >>./minishell_tester/outfiles/outfile02
+echo $?
+echo hi >>./minishell_tester/outfiles/outfile01 | echo bye >>./minishell_tester/outfiles/outfile02
+echo $?
+echo hi >>./minishell_tester/test_files/invalid_permission | echo bye
+echo $?
+echo hi >>./minishell_tester/test_files/invalid_permission >./minishell_tester/outfiles/outfile01 | echo bye
+echo $?
+echo hi | echo bye >>./minishell_tester/test_files/invalid_permission
+echo $?
+echo hi | echo >>./minishell_tester/outfiles/outfile01 bye >./minishell_tester/test_files/invalid_permission
+echo $?
+cat <minishell.h>./minishell_tester/outfiles/outfile
+echo $?
+cat <minishell.h|ls
+echo $?
+echo hello world
+echo $?
+echo "hello world"
+echo $?
+echo 'hello world'
+echo $?
+echo hello'world'
+echo $?
+echo hello""world
+echo $?
+echo ''
+echo $?
+echo "$PWD"
+echo $?
+echo '$PWD'
+echo $?
+echo "aspas ->'"
+echo $?
+echo "aspas -> ' "
+echo $?
+echo 'aspas ->"'
+echo $?
+echo 'aspas -> " '
+echo $?
+echo "> >> < * ? [ ] | ; [ ] || && ( ) & # $ \ <<"
+echo $?
+echo '> >> < * ? [ ] | ; [ ] || && ( ) & # $ \ <<'
+echo $?
+echo "exit_code ->$? user ->$USER home -> $HOME"
+echo $?
+echo 'exit_code ->$? user ->$USER home -> $HOME'
+echo $?
+echo "$"
+echo $?
+echo '$'
+echo $?
+echo $
+echo $?
+echo $?
+echo $?
+echo $?HELLO
+echo $?
+pwd
+echo $?
+pwd oi
+echo $?
+export hello
+echo $?
+export HELLO=123
+echo $?
+export A-
+echo $?
+export HELLO=123 A
+echo $?
+export HELLO="123 A-"
+echo $?
+export hello world
+echo $?
+export HELLO-=123
+echo $?
+export =
+echo $?
+export 123
+echo $?
+unset
+echo $?
+unset HELLO
+echo $?
+unset HELLO1 HELLO2
+echo $?
+unset HOME
+echo $?
+unset PATH
+echo $?
+unset SHELL
+echo $?
+cd $PWD
+echo $?
+cd $PWD hi 
+echo $?
+cd 123123
+echo $?
+cat "exit 123 exit 298 exit +100 exit "+100" exit +"100" exit -100 exit "-100" exit -"100" exit hello exit 42 world"
+echo $?
+env
+/Users/jansol/Desktop/minishell/minishell_variable/./minishell
+env
+export TEST=12345
+env
+unset TEST
+env
+exit 123
+$?
+echo $?
+exit 123
+exit 123
+/Users/jansol/Desktop/minishell/minishell_variable/./minishell
+exit 123
+echo $?
+env
+/Users/jansol/Desktop/minishell/minishell_variable/./minishell
+env
+exit
+echo $?
+echo $?
+exit 

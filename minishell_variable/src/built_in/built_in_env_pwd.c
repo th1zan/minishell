@@ -6,7 +6,7 @@
 /*   By: thibault <thibault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 13:27:26 by mlachat           #+#    #+#             */
-/*   Updated: 2024/01/27 18:09:01 by thibault         ###   ########.fr       */
+/*   Updated: 2024/01/30 21:34:32 by zsoltani         ###   lausanne.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ int	env_built_in(t_tk *tk)
 	if (*(tk->env) == 0)
 		return (1);
 	fd_out = tk->fd_out;
-	// printf("fd_out: %d\n", fd_out);
 	print_strtab(tk->env_struct->env_main, fd_out);
 	return (0);
 }

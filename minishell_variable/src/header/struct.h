@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tsanglar <tsanglar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zsoltani <zsoltani@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/26 09:31:25 by thibault          #+#    #+#             */
-/*   Updated: 2024/01/24 16:10:12 by tsanglar         ###   ########.fr       */
+/*   Updated: 2024/01/30 22:46:48 by zsoltani         ###   lausanne.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,9 @@
 # define STRUCT_H
 
 //faire un make re si on ajoute une variable !!
+
+typedef struct s_env	t_env;
+
 typedef struct s_tk
 {
 	char		*tk_str;
@@ -25,10 +28,10 @@ typedef struct s_tk
 	char		**path_tab;
 	char		*path;
 	int			is_var_type_with_space_before;
-	struct s_env	*env_struct;
-	struct s_tk		*tk_arg;
-	struct s_tk		*prev;
-	struct s_tk		*next;
+	t_env		*env_struct;
+	struct s_tk	*tk_arg;
+	struct s_tk	*prev;
+	struct s_tk	*next;
 }	t_tk;
 
 typedef struct s_env

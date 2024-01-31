@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: thibault <thibault@student.42.fr>          +#+  +:+       +#+         #
+#    By: zsoltani <zsoltani@student.42lausanne.ch>  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2022/06/20 17:58:32 by ebennace          #+#    #+#              #
-#    Updated: 2023/11/07 22:09:51 by thibault         ###   ########.fr        #
+#    Created: 2022/06/20 17:58:32 by thibault          #+#    #+#              #
+#    Updated: 2024/01/31 08:42:18 by zsoltani         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,6 +16,9 @@ NAME = minishell
 
 LIBFT_DIR   = ./src/libft/
 LIBFT		= $(LIBFT_DIR)/libft.a
+
+# ==== Object Directory ==== #
+OBJ_DIR = obj
 
 # ==== Project's files ==== #
 SRCS       = 		src/minishell.c \
@@ -65,7 +68,8 @@ SRCS       = 		src/minishell.c \
 					src/redirection/redirection.c \
 					src/redirection/set_pipe_fd.c \
 					src/redirection/redir_operator_fd.c \
-					src/redirection/set_cmd_fd.c \
+					src/redirection/set_cmd_fd_1.c \
+					src/redirection/set_cmd_fd_2.c \
 					src/redirection/set_operator_fd.c \
 					src/redirection/get_operator_tk.c \
 					src/execution/execution.c \
@@ -76,7 +80,8 @@ SRCS       = 		src/minishell.c \
 					
 
 # ==== Source: object files ==== #
-OBJS = $(SRCS:.c=.o)
+#OBJS = $(SRCS:.c=.o)#
+OBJS = $(SRCS:%.c=$(OBJ_DIR)/%.o)
 
 # ==== Template ==== #
 TEMPLATE = src/header/minishell_header.txt
@@ -102,12 +107,16 @@ FLAGS           += $(SANITIZE)
 FLAGS           += -I$(HOME)/.brew/opt/readline/include
 READLINE		= -lreadline
 READLINE		+= -L$(HOME)/.brew/opt/readline/lib
+READLINE		+= -L/opt/homebrew/opt/readline/lib -lreadline #my mac
+FLAGS			+= -I/opt/homebrew/opt/readline/include #my mac
 MAKE            = make -s
 
 # === Convert all .c to .o with flags and header === # 
 all: $(NAME)
 
-${OBJS}: %.o: %.c
+#${OBJS}: %.o: %.c
+$(OBJ_DIR)/%.o: %.c
+	@mkdir -p $(@D)
 	@echo "...Compiling $<"
 	@$(CC) $(FLAGS) -o $@ -c $<
 
@@ -139,13 +148,15 @@ clean:
 	@echo "==== Cleaning all LIBFT .o files ===="
 	@$(MAKE) clean -C $(LIBFT_DIR)
 	@echo "==== Cleaning all MINISHELL .o files ===="
-	@$(RM_FILE) $(OBJS)
+	@$(RM_FILE) $(OBJ_DIR)/*.o
+#@$(RM_FILE) $(OBJS)
 
 fclean: clean
 	@echo "==== Full cleaning LIBFT ===="
 	@$(MAKE) fclean -C $(LIBFT_DIR)
 	@echo "==== Full cleaning $(NAME) ===="
-	@$(RM_FILE) $(NAME)
+	@$(RM_FILE) -r $(OBJ_DIR)
+#@$(RM_FILE) $(NAME)
 
 debug : $(OBJS)
 	@echo "==== Debug mode ===="

@@ -6,7 +6,7 @@
 /*   By: thibault <thibault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 09:44:52 by thibault          #+#    #+#             */
-/*   Updated: 2024/01/27 15:31:13 by thibault         ###   ########.fr       */
+/*   Updated: 2024/01/30 21:33:31 by zsoltani         ###   lausanne.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	remove_env(t_env *env_struct, int index)
 {
-	char **env;
+	char	**env;
 	char	**new_env;
 	int		i;
 	int		j;
