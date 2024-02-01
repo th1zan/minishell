@@ -6,7 +6,7 @@
 #    By: zsoltani <zsoltani@student.42lausanne.ch>  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/20 17:58:32 by thibault          #+#    #+#              #
-#    Updated: 2024/01/31 10:39:38 by zsoltani         ###   ########.fr        #
+#    Updated: 2024/02/01 18:04:46 by zsoltani         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -65,6 +65,7 @@ SRCS       = 		src/minishell.c \
 					src/built_in/built_in_cd.c \
 					src/built_in/is_built_in_1.c \
 					src/built_in/is_built_in_2.c \
+					src/built_in/handle_shlvl.c \
 					src/redirection/redirection.c \
 					src/redirection/set_pipe_fd.c \
 					src/redirection/redir_operator_fd.c \

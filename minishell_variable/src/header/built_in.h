@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   built_in.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thibault <thibault@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zsoltani <zsoltani@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/02 18:44:47 by thibault          #+#    #+#             */
-/*   Updated: 2024/02/01 15:40:55 by thibault         ###   ########.fr       */
+/*   Updated: 2024/02/01 20:02:45 by zsoltani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,5 +68,9 @@ int		is_builtin_cmd_tk(t_tk *cmd);
 /*is_built_in_2.c*/
 int		add_new_oldshlvl(char *new_shlvl, t_env *env_struct);
 int		update_oldshlvl(int incrementation, t_env *env_struct);
-int		handle_shlvl(t_tk *tk);
+
+//*handle_shlvl.c*/
+char	*find_shlvl(char **env);
+void	update_shlvl(char ***env);
+
 #endif

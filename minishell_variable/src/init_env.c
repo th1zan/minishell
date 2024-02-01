@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_env.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thibault <thibault@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zsoltani <zsoltani@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 21:56:39 by thibault          #+#    #+#             */
-/*   Updated: 2024/02/01 14:57:17 by thibault         ###   ########.fr       */
+/*   Updated: 2024/02/01 17:56:57 by zsoltani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ t_env	*init_env(char **envp)
 		free(new_env);
 		return (NULL);
 	}
+	update_shlvl(&(new_env->env_main));
 	new_env->path_tab = get_path_tab(new_env->env_main);
 	new_env->minishell_directory = ft_strdup(cwd);
 	g_status = 0;
