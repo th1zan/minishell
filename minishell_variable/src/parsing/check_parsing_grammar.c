@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_parsing_grammar.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tsanglar <tsanglar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zsoltani <zsoltani@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 14:42:49 by thibault          #+#    #+#             */
-/*   Updated: 2024/01/30 21:47:43 by zsoltani         ###   lausanne.ch       */
+/*   Updated: 2024/02/01 10:37:59 by zsoltani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

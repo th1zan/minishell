@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirection.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thibault <thibault@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zsoltani <zsoltani@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 14:14:55 by thibault          #+#    #+#             */
-/*   Updated: 2023/11/06 15:23:24 by thibault         ###   ########.fr       */
+/*   Updated: 2024/01/31 11:00:23 by zsoltani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,16 +30,19 @@ int		process_redirection(t_tk *token);
 int		set_redirection(t_tk **tk);
 int		redir_operator_fd(t_tk **tk);
 
-/*set_cmd_fd.c*/
+/*set_cmd_fd_1.c*/
 int		set_cmd_std_fd(t_tk **tk);
 int		set_cmd_pipe_fd(t_tk **tk);
+int		chevron_out_between_pipe_and_cmd(t_tk *start, t_tk *end);
+int		chevron_in_between_pipe_and_cmd(t_tk *start, t_tk *end);
+
+/*set_cmd_fd_2.c*/
 void	set_fd_in(t_tk *tmp);
 void	set_fd_out(t_tk *tmp);
 int		set_cmd_operator_fd(t_tk **tk);
 
 /*set_operator_fd.c*/
 int		set_default_fd(t_tk **tk);
-
 int		open_chevron_fd(t_tk *tmp, int flags);
 int		set_input_operator_fd(t_tk **tk);
 int		set_output_operator_fd(t_tk **tk);

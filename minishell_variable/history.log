@@ -3863,3 +3863,16 @@ make fclean
 exit
 ./minishell
 exit 123
+./minishell
+minishell
+ls -l
+pwd
+/Users/jansol/Desktop/minishell/minishell_variable ./minishell
+ls -ld /Users/jansol/Desktop/minishell/minishell_variable
+minishell
+./minishell
+/Users/jansol/Desktop/minishell/minishell_variable/minishell
+env
+cd ..
+echo $?
+exit

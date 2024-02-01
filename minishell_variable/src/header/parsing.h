@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thibault <thibault@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zsoltani <zsoltani@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 21:00:32 by thibault          #+#    #+#             */
-/*   Updated: 2024/01/27 15:33:57 by thibault         ###   ########.fr       */
+/*   Updated: 2024/01/31 11:05:37 by zsoltani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,11 +44,11 @@ int		check_access(t_env *env, char *cmd);
 void	mv_arg_to_sublst(t_tk **tmp, t_tk **sub_last, t_tk *cmd, t_tk **last);
 t_tk	*handle_command(t_tk **cmd, t_tk **tmp, t_tk **last, t_tk **sub_last);
 t_tk	*move_args_to_sublist(t_tk *tk);
+
+/*classify_token_2.c*/
 int		ft_handle_arg_tk(t_tk *tk);
 int		open_temp_file(t_tk *tk, char **temp_file_path);
 int		write_to_temp_file(int fd, char *input);
-
-/*classify_token_2.c*/
 void	free_memory_and_close_fd(int *fd, char **file_path);
 int		process_hd_arg(t_tk *tk, char **temp_file_path);
 
