@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zsoltani <zsoltani@student.42lausanne.ch>  +#+  +:+       +#+        */
+/*   By: thibault <thibault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 12:29:09 by thibault          #+#    #+#             */
-/*   Updated: 2024/01/30 22:50:04 by zsoltani         ###   ########.fr       */
+/*   Updated: 2024/02/01 15:15:23 by thibault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ char	*expand_var(char *input, int *i, char **var_val_tab, t_env *env);
 void	process_input(char **input, int *i, t_tk *env, int *is_var);
 int		replace_with_values(char **input, t_tk *tk);
 
-//A SUPPRIMER car pas à la norme
+/*print_lst.c.c*/
+void	print_tk_details(t_tk *tk);
 int		print_lst(t_tk *tk);
 #endif

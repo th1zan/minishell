@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_env.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tsanglar <tsanglar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: thibault <thibault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 21:56:39 by thibault          #+#    #+#             */
-/*   Updated: 2024/01/30 20:28:30 by zsoltani         ###   lausanne.ch       */
+/*   Updated: 2024/02/01 14:57:17 by thibault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,8 +86,9 @@ int	parse_input(char *input, t_env *env)
 		env->error_parsing = 1;
 		return (1);
 	}
-	input_to_token(input, &(env->tk_head), delimiter_tab, env);
+	input_to_token(input, &(env->tk_head), delimiter_tab);
 	free(delimiter_tab);
+	put_env_to_token(env->tk_head, env);
 	if (parse_token(&(env->tk_head), env))
 		return (-1);
 	return (0);

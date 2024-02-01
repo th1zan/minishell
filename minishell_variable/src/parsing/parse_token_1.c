@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_token_1.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tsanglar <tsanglar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: thibault <thibault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/11 11:49:26 by thibault          #+#    #+#             */
-/*   Updated: 2024/01/30 21:53:08 by zsoltani         ###   lausanne.ch       */
+/*   Updated: 2024/02/01 15:41:04 by thibault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

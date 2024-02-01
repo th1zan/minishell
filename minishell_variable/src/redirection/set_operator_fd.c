@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   set_operator_fd.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tsanglar <tsanglar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: thibault <thibault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 13:35:20 by thibault          #+#    #+#             */
-/*   Updated: 2024/01/30 21:00:50 by zsoltani         ###   lausanne.ch       */
+/*   Updated: 2024/02/01 15:16:16 by thibault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ int	open_file_to_fd(char *file, int option)
 		{
 			ft_putstr_fd(": No such file or directory\n", 2);
 			g_status = 1;
-		}			
+		}
 		else if (errno == EACCES)
 		{
 			ft_putstr_fd(": Permission denied\n", 2);

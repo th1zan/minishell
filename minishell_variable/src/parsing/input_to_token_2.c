@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input_to_token_2.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tsanglar <tsanglar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: thibault <thibault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/09 14:58:05 by thibault          #+#    #+#             */
-/*   Updated: 2024/01/30 22:01:48 by zsoltani         ###   lausanne.ch       */
+/*   Updated: 2024/02/01 14:57:24 by thibault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	*get_delimiter(char *input)
 	return (delimiter);
 }
 
-int	add_token(char *input, int begin, int len, t_tk **tk, t_env *env)
+int	add_token(char *input, int begin, int len, t_tk **tk)
 {
 	char	*tk_str;
 	t_tk	*new_tk;
@@ -38,14 +38,11 @@ int	add_token(char *input, int begin, int len, t_tk **tk, t_env *env)
 			return (-1);
 		new_tk = ft_lstnew(tk_str);
 		ft_lstadd_back(tk, new_tk);
-		new_tk->path_tab = env->path_tab;
-		new_tk->env = &(env->env_main);
-		new_tk->env_struct = env;
 	}
 	return (0);
 }
 
-int	input_to_token(char *input, t_tk **tk, int *delimiter, t_env *env)
+int	input_to_token(char *input, t_tk **tk, int *delimiter)
 {
 	int	begin;
 	int	i;
@@ -57,13 +54,30 @@ int	input_to_token(char *input, t_tk **tk, int *delimiter, t_env *env)
 	{
 		if (delimiter[i])
 		{
-			if (add_token(input, begin, i - begin, tk, env) == -1)
+			if (add_token(input, begin, i - begin, tk) == -1)
 				return (-1);
 			begin = i;
 		}
 		i++;
 	}
-	if (add_token(input, begin, i - begin, tk, env) == -1)
+	if (add_token(input, begin, i - begin, tk) == -1)
 		return (-1);
+	return (0);
+}
+
+int	put_env_to_token(t_tk *tk, t_env *env)
+{
+	t_tk	*tmp;
+
+	if (!(tk))
+		return (1);
+	tmp = tk;
+	while (tmp)
+	{
+		tmp->path_tab = env->path_tab;
+		tmp->env = &(env->env_main);
+		tmp->env_struct = env;
+		tmp = tmp->next;
+	}
 	return (0);
 }

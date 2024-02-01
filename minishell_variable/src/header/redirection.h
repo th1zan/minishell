@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirection.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zsoltani <zsoltani@student.42lausanne.ch>  +#+  +:+       +#+        */
+/*   By: thibault <thibault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 14:14:55 by thibault          #+#    #+#             */
-/*   Updated: 2024/01/31 11:00:23 by zsoltani         ###   ########.fr       */
+/*   Updated: 2024/02/01 15:13:58 by thibault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,14 @@ int		process_redirection(t_tk *token);
 /*redirection.c*/
 int		set_redirection(t_tk **tk);
 int		redir_operator_fd(t_tk **tk);
+void	set_cmd_fd_out(t_tk *tmp, t_tk *prev_pipe, t_tk *next_pipe);
+void	set_cmd_fd_in(t_tk *tmp, t_tk *prev_pipe, t_tk *next_pipe);
 
 /*set_cmd_fd_1.c*/
 int		set_cmd_std_fd(t_tk **tk);
 int		set_cmd_pipe_fd(t_tk **tk);
-int		chevron_out_between_pipe_and_cmd(t_tk *start, t_tk *end);
-int		chevron_in_between_pipe_and_cmd(t_tk *start, t_tk *end);
+int		out_pipe_cmd(t_tk *start, t_tk *end);
+int		in_pipe_cmd(t_tk *start, t_tk *end);
 
 /*set_cmd_fd_2.c*/
 void	set_fd_in(t_tk *tmp);

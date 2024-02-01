@@ -6,7 +6,7 @@
 /*   By: thibault <thibault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/02 18:44:47 by thibault          #+#    #+#             */
-/*   Updated: 2024/01/27 15:29:15 by thibault         ###   ########.fr       */
+/*   Updated: 2024/02/01 15:40:55 by thibault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,4 +64,9 @@ int		is_cd(t_tk *tk);
 int		is_exit(t_tk *tk);
 int		is_builtin_exec(t_tk *cmd);
 int		is_builtin_cmd_tk(t_tk *cmd);
+
+/*is_built_in_2.c*/
+int		add_new_oldshlvl(char *new_shlvl, t_env *env_struct);
+int		update_oldshlvl(int incrementation, t_env *env_struct);
+int		handle_shlvl(t_tk *tk);
 #endif

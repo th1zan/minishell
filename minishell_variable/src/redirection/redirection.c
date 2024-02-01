@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirection.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tsanglar <tsanglar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: thibault <thibault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 14:34:44 by thibault          #+#    #+#             */
-/*   Updated: 2024/01/30 20:59:50 by zsoltani         ###   lausanne.ch       */
+/*   Updated: 2024/02/01 15:15:56 by thibault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,4 +47,30 @@ int	redir_operator_fd(t_tk **tk)
 		current = current->next;
 	}
 	return (0);
+}
+
+void	set_cmd_fd_in(t_tk *tmp, t_tk *prev_pipe, t_tk *next_pipe)
+{
+	if (prev_pipe)
+	{
+		if (!in_pipe_cmd(prev_pipe, tmp)
+			&& !(next_pipe && in_pipe_cmd(tmp, next_pipe))
+			&& !(!next_pipe && in_pipe_cmd(tmp, ft_lstlast(tmp))))
+		{
+			tmp->fd_in = prev_pipe->fd_out;
+		}
+	}
+}
+
+void	set_cmd_fd_out(t_tk *tmp, t_tk *prev_pipe, t_tk *next_pipe)
+{
+	if (next_pipe)
+	{
+		if (!out_pipe_cmd(tmp, next_pipe)
+			&& !(prev_pipe && out_pipe_cmd(prev_pipe, tmp))
+			&& !(!prev_pipe && out_pipe_cmd(ft_lstfirst(tmp), tmp)))
+		{
+			tmp->fd_out = next_pipe->fd_in;
+		}
+	}
 }

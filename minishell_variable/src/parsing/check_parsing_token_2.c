@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_parsing_token_2.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tsanglar <tsanglar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: thibault <thibault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 14:45:21 by thibault          #+#    #+#             */
-/*   Updated: 2024/01/30 21:51:51 by zsoltani         ###   lausanne.ch       */
+/*   Updated: 2024/02/01 14:58:48 by thibault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ int	check_access(t_env *env, char *cmd)
 	{
 		g_status = 126;
 		return (FAILURE);
-	}	
+	}
 	g_status = 0;
 	return (SUCCESS);
 }

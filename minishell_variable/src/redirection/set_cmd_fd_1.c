@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   set_cmd_fd.c                                       :+:      :+:    :+:   */
+/*   set_cmd_fd_1.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zsoltani <zsoltani@student.42lausanne.ch>  +#+  +:+       +#+        */
+/*   By: thibault <thibault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 13:40:14 by thibault          #+#    #+#             */
-/*   Updated: 2024/01/30 22:52:11 by zsoltani         ###   ########.fr       */
+/*   Updated: 2024/02/01 15:13:38 by thibault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	set_cmd_std_fd(t_tk **tk)
 }
 
 // Vérifie la présence de chevrons entre les tokens
-int	chevron_out_between_pipe_and_cmd(t_tk *start, t_tk *end)
+int	out_pipe_cmd(t_tk *start, t_tk *end)
 {
 	t_tk	*tmp;
 
@@ -48,7 +48,7 @@ int	chevron_out_between_pipe_and_cmd(t_tk *start, t_tk *end)
 	return (0);
 }
 
-int	chevron_in_between_pipe_and_cmd(t_tk *start, t_tk *end)
+int	in_pipe_cmd(t_tk *start, t_tk *end)
 {
 	t_tk	*tmp;
 
@@ -77,54 +77,10 @@ int	set_cmd_pipe_fd(t_tk **tk)
 		{
 			prev_pipe = get_prev_pipe_tk(tmp);
 			next_pipe = get_next_pipe_tk(tmp);
-			if (prev_pipe)
-			{
-				if (!chevron_in_between_pipe_and_cmd(prev_pipe, tmp) &&
-					!(next_pipe && chevron_in_between_pipe_and_cmd(tmp, next_pipe)) &&
-					!(next_pipe == NULL && chevron_in_between_pipe_and_cmd(tmp, ft_lstlast(tmp))))
-				{
-					tmp->fd_in = prev_pipe->fd_out;
-				}
-			}
-			if (next_pipe)
-			{
-				if (!chevron_out_between_pipe_and_cmd(tmp, next_pipe) &&
-					!(prev_pipe && chevron_out_between_pipe_and_cmd(prev_pipe, tmp)) &&
-					!(prev_pipe == NULL && chevron_out_between_pipe_and_cmd(ft_lstfirst(tmp), tmp)))
-				{
-					tmp->fd_out = next_pipe->fd_in;
-				}
-			}
+			set_cmd_fd_in(tmp, prev_pipe, next_pipe);
+			set_cmd_fd_out(tmp, prev_pipe, next_pipe);
 		}
 		tmp = tmp->next;
 	}
 	return (0);
 }
-
-// Configure les descripteurs de fichier pour les commandes dans le pipeline
-// int	set_cmd_pipe_fd(t_tk **tk)
-// {
-// 	t_tk *tmp;
-// 	t_tk *prev_pipe;
-// 	t_tk *next_pipe;
-
-// 	tmp = *tk;
-// 	while (tmp)
-// 	{
-// 		if (tmp->type == TK_CMD || tmp->type == TK_CMD_BUILT_IN)
-// 		{
-// 			prev_pipe = get_prev_pipe_tk(tmp);
-// 			next_pipe = get_next_pipe_tk(tmp);
-// 			if (prev_pipe && !chevron_in_between(prev_pipe, tmp))
-// 				tmp->fd_in = prev_pipe->fd_out;
-// 			if (next_pipe && !chevron_in_between(tmp, next_pipe))
-// 				tmp->fd_in = prev_pipe->fd_out;
-// 			if (prev_pipe && !chevron_out_between(prev_pipe, tmp))
-// 				tmp->fd_in = prev_pipe->fd_out;
-// 			if (next_pipe && !chevron_out_between(tmp, next_pipe))
-// 				tmp->fd_out = next_pipe->fd_in;
-// 		}
-// 		tmp = tmp->next;
-// 	}
-// 	return (0);
-// }

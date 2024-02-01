@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zsoltani <zsoltani@student.42lausanne.ch>  +#+  +:+       +#+        */
+/*   By: thibault <thibault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 21:00:32 by thibault          #+#    #+#             */
-/*   Updated: 2024/01/31 11:05:37 by zsoltani         ###   ########.fr       */
+/*   Updated: 2024/02/01 14:57:34 by thibault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,9 @@ void	initialize_delimiters(char *input, int *delimiter);
 
 /*input_to_token_2.c*/
 int		*get_delimiter(char *input);
-int		add_token(char *input, int begin, int len, t_tk **tk, t_env *env);
-int		input_to_token(char *input, t_tk **tk, int *delimiter, t_env *env);
+int		add_token(char *input, int begin, int len, t_tk **tk);
+int		input_to_token(char *input, t_tk **tk, int *delimiter);
+int		put_env_to_token(t_tk *tk, t_env *env);
 
 /*parse_token_1.c*/
 int		parse_token(t_tk **head_tk, t_env *env);
