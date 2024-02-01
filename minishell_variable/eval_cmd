@@ -1,138 +1,60 @@
-env | sort | grep -v SHLVL | grep -v ^_
-cat ./minishell_tester/test_files/infile_big | grep oi
-cat minishell.h | grep ");"$
-export GHOST=123 | env | grep GHOST
-|
-| echo oi
-| |
-| $
-| >
->
->>
->>>
-<
-<<
-echo hi <
-cat    <| ls
-echo hi | >
-echo hi | > >>
-echo hi | < |
-echo hi |   |
-echo hi |  "|"
-grep hi <./minishell_tester/test_files/infile
-grep hi "<infile" <         ./minishell_tester/test_files/infile
-echo hi < ./minishell_tester/test_files/infile bye bye
-grep hi <./minishell_tester/test_files/infile_big <./minishell_tester/test_files/infile
-echo <"./minishell_tester/test_files/infile" "bonjour       42"
-cat <"./minishell_tester/test_files/file name with spaces"
-cat <./minishell_tester/test_files/infile_big ./minishell_tester/test_files/infile
-cat <"1""2""3""4""5"
-echo <"./minishell_tester/test_files/infile" <missing <"./minishell_tester/test_files/infile"
-echo <missing <"./minishell_tester/test_files/infile" <missing
-cat <"./minishell_tester/test_files/infile"
-echo <"./minishell_tester/test_files/infile_big" | cat <"./minishell_tester/test_files/infile"
-echo <"./minishell_tester/test_files/infile_big" | cat "./minishell_tester/test_files/infile"
-echo <"./minishell_tester/test_files/infile_big" | echo <"./minishell_tester/test_files/infile"
-echo hi | cat <"./minishell_tester/test_files/infile"
-echo hi | cat "./minishell_tester/test_files/infile"
-cat <"./minishell_tester/test_files/infile" | echo hi
-cat <"./minishell_tester/test_files/infile" | grep hello
-cat <"./minishell_tester/test_files/infile_big" | echo hi
-cat <missing
-cat <missing | cat
-cat <missing | echo oi
-cat <missing | cat <"./minishell_tester/test_files/infile"
-echo <123 <456 hi | echo 42
-ls >./minishell_tester/outfiles/outfile01
-ls >         ./minishell_tester/outfiles/outfile01
-echo hi >         ./minishell_tester/outfiles/outfile01 bye
-ls >./minishell_tester/outfiles/outfile01 >./minishell_tester/outfiles/outfile02
-ls >./minishell_tester/outfiles/outfile01 >./minishell_tester/test_files/invalid_permission
-ls >"./minishell_tester/outfiles/outfile with spaces"
-ls >"./minishell_tester/outfiles/outfile""1""2""3""4""5"
-ls >"./minishell_tester/outfiles/outfile01" >./minishell_tester/test_files/invalid_permission >"./minishell_tester/outfiles/outfile02"
-ls >./minishell_tester/test_files/invalid_permission >"./minishell_tester/outfiles/outfile01" >./minishell_tester/test_files/invalid_permission
-cat <"./minishell_tester/test_files/infile" >"./minishell_tester/outfiles/outfile01"
-echo hi >./minishell_tester/outfiles/outfile01 | echo bye
-echo hi >./minishell_tester/outfiles/outfile01 >./minishell_tester/outfiles/outfile02 | echo bye
-echo hi | echo >./minishell_tester/outfiles/outfile01 bye
-echo hi | echo bye >./minishell_tester/outfiles/outfile01 >./minishell_tester/outfiles/outfile02
-echo hi >./minishell_tester/outfiles/outfile01 | echo bye >./minishell_tester/outfiles/outfile02
-echo hi >./minishell_tester/outfiles/outfile01 >./minishell_tester/test_files/invalid_permission | echo bye
-echo hi >./minishell_tester/test_files/invalid_permission | echo bye
-echo hi >./minishell_tester/test_files/invalid_permission >./minishell_tester/outfiles/outfile01 | echo bye
-echo hi | echo bye >./minishell_tester/test_files/invalid_permission
-echo hi | >./minishell_tester/outfiles/outfile01 echo bye >./minishell_tester/test_files/invalid_permission
-echo hi | echo bye >./minishell_tester/test_files/invalid_permission >./minishell_tester/outfiles/outfile01
-cat <"./minishell_tester/test_files/infile" >./minishell_tester/test_files/invalid_permission
-cat >./minishell_tester/test_files/invalid_permission <"./minishell_tester/test_files/infile"
-cat <missing >./minishell_tester/outfiles/outfile01
-cat >./minishell_tester/outfiles/outfile01 <missing
-cat <missing >./minishell_tester/test_files/invalid_permission
-cat >./minishell_tester/test_files/invalid_permission <missing
-cat >./minishell_tester/outfiles/outfile01 <missing >./minishell_tester/test_files/invalid_permission
-ls >>./minishell_tester/outfiles/outfile01
-ls >>      ./minishell_tester/outfiles/outfile01
-ls >>./minishell_tester/outfiles/outfile01 >./minishell_tester/outfiles/outfile01
-ls >./minishell_tester/outfiles/outfile01 >>./minishell_tester/outfiles/outfile01
-ls >./minishell_tester/outfiles/outfile01 >>./minishell_tester/outfiles/outfile01 >./minishell_tester/outfiles/outfile02
-ls >>./minishell_tester/outfiles/outfile01 >>./minishell_tester/outfiles/outfile02
-ls >>./minishell_tester/test_files/invalid_permission
-ls >>./minishell_tester/test_files/invalid_permission >>./minishell_tester/outfiles/outfile01
-ls >>./minishell_tester/outfiles/outfile01 >>./minishell_tester/test_files/invalid_permission
-ls >./minishell_tester/outfiles/outfile01 >>./minishell_tester/test_files/invalid_permission >>./minishell_tester/outfiles/outfile02
-ls <missing >>./minishell_tester/test_files/invalid_permission >>./minishell_tester/outfiles/outfile02
-ls >>./minishell_tester/test_files/invalid_permission >>./minishell_tester/outfiles/outfile02 <missing
-echo hi >>./minishell_tester/outfiles/outfile01 | echo bye
-echo hi >>./minishell_tester/outfiles/outfile01 >>./minishell_tester/outfiles/outfile02 | echo bye
-echo hi | echo >>./minishell_tester/outfiles/outfile01 bye
-echo hi | echo bye >>./minishell_tester/outfiles/outfile01 >>./minishell_tester/outfiles/outfile02
-echo hi >>./minishell_tester/outfiles/outfile01 | echo bye >>./minishell_tester/outfiles/outfile02
-echo hi >>./minishell_tester/test_files/invalid_permission | echo bye
-echo hi >>./minishell_tester/test_files/invalid_permission >./minishell_tester/outfiles/outfile01 | echo bye
-echo hi | echo bye >>./minishell_tester/test_files/invalid_permission
-echo hi | echo >>./minishell_tester/outfiles/outfile01 bye >./minishell_tester/test_files/invalid_permission
-cat <minishell.h>./minishell_tester/outfiles/outfile
-cat <minishell.h|ls
-echo hello world
-echo "hello world"
-echo 'hello world'
-echo hello'world'
-echo hello""world
-echo ''
-echo "$PWD"
-echo '$PWD'
-echo "aspas ->'"
-echo "aspas -> ' "
-echo 'aspas ->"'
-echo 'aspas -> " '
-echo "> >> < * ? [ ] | ; [ ] || && ( ) & # $ \ <<"
-echo '> >> < * ? [ ] | ; [ ] || && ( ) & # $ \ <<'
-echo "exit_code ->$? user ->$USER home -> $HOME"
-echo 'exit_code ->$? user ->$USER home -> $HOME'
-echo "$"
-echo '$'
-echo $
+echo "Exécution d'une commande simple (/bin/ls)..."
+/bin/ls
+echo "Exécution de /bin/ls avec des arguments..."
+/bin/ls -l
+echo "Test de la commande echo..."
+echo salut
+echo "Test de la commande echo avec l'option -n..."
+echo -n re-salut
+echo "Vérification de la valeur de retour d'une commande..."
+/bin/ls -l
+echo "Affichage du code de retour avec echo $?"
 echo $?
-echo $?HELLO
+echo "Test d'une commande échouée..."
+/bin/ls filethatdoesntexist
+echo "Affichage du code de retour avec echo $?"
+echo $?
+echo "Test de commandes avec des guillemets doubles..."
+echo "echo \"cat lol.c | cat > lol.c\""
+echo "cat lol.c | cat > lol.c"
+echo "Test de commandes avec des guillemets simples..."
+echo "echo '$USER'"
+echo '$USER'
+echo "Affichage des variables d'environnement avec env..."
+env
+echo "Exportation d'une variable d'environnement..."
+export SALUT=salut
+echo "Vérification avec env..."
+env
+echo "Suppression d'une variable d'environnement avec unset..."
+unset SALUT
+echo "Vérification avec env..."
+env
+echo "Changement de répertoire avec cd..."
+cd src
+echo "Vérification avec /bin/ls..."
+/bin/ls
+echo "Test de cd . et cd .."
+cd .
+cd ..
+echo "Affichage du répertoire actuel avec pwd..."
 pwd
-pwd oi
-export hello
-export HELLO=123
-export A-
-export HELLO=123 A
-export HELLO="123 A-"
-export hello world
-export HELLO-=123
-export =
-export 123
-unset
-unset HELLO
-unset HELLO1 HELLO2
-unset HOME
+echo "Test de l'exécution de commandes sans chemin..."
+ls
+awk
+echo "Suppression de la variable PATH..."
 unset PATH
-unset SHELL
-cd $PWD
-cd $PWD hi 
-cd 123123
-cat "exit 123 exit 298 exit +100 exit "+100" exit +"100" exit -100 exit "-100" exit -"100" exit hello exit 42 world"
+echo "Configuration de PATH avec plusieurs répertoires..."
+export PATH=/Users/thibault/.brew/bin:/usr/local/bin/python3:/Library/Frameworks/Python.framework/Versions/3.11/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/thibault/Library/Python/3.8/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/opt/X11/bin:/Library/Apple/usr/bin:/Users/thibault/.brew/bin:/usr/local/bin/python3:/Library/Frameworks/Python.framework/Versions/3.11/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/Users/thibault/Library/Application Support/JetBrains/Toolbox/scripts:/Users/thibault/Library/Application Support/JetBrains/Toolbox/scripts:/Users/thibault/Documents/42/minishell/minishell_variable
+echo "Test de commandes avec des pipes..."
+cat eval_cmd | grep echo | wc -l
+echo "Test de la commande echo avec des variables d'environnement..."
+echo $PATH
+echo "Test de echo \"$USER\""
+echo "$USER"
+echo "Modification de la variable USER..."
+export USER=zzz
+echo "Test de echo \"'$USER'\""
+echo "'$USER'"
+echo "Test de echo '\"$USER\"'"
+echo '"$USER"'
